@@ -12,6 +12,6 @@ public class MailVO {
 	private int uno;
 	private boolean gender;
 	private String time;
-	private String atea;
+	private String area;
 	private String age;
 }
