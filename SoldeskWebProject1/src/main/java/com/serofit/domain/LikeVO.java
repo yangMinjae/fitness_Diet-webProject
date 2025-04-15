@@ -1,5 +1,13 @@
 package com.serofit.domain;
 
-public class LikeVO {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class LikeVO {
+	int uno;
+	int bno;
 }
