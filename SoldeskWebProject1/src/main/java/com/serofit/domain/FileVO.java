@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class FileVO {
-	String uuid;
-	int bno;
-	String fileName;
-	String path;
+	private String uuid;
+	private int bno;
+	private String fileName;
+	private String path;
 }

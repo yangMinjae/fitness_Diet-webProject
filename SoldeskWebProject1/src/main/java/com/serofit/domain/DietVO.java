@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class DietVO {
-	int dno;
-	int uno;
-	String title;
-	String tag;
-	String content;
-	Date regDate;
+	private int dno;
+	private int uno;
+	private String title;
+	private String tag;
+	private String content;
+	private Date regDate;
 }

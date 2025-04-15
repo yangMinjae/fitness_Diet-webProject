@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class LikeVO {
-	int uno;
-	int bno;
+	private int uno;
+	private int bno;
 }
