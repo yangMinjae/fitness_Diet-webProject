@@ -16,4 +16,7 @@ public interface UserMapper {
 	
 	// id/pw 찾기
 	public UserVO findIdPwByEmail(String email);
+	
+	// 회원 탈퇴
+	public int deleteUser(int uno);
 }
