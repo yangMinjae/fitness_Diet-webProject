@@ -3,5 +3,39 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.serofit.UserMapper">
+	<!-- 인기 게시글 가져오기, 프로필 이미지 가져오기, 회원 정보 -->
+	<select id="readNickname" parameterType="int" resultType="String">
+		SELECT nickname FROM tbl_user WHERE uno=#{uno}
+	</select>
 	
+	<!-- 회원 정보 등록 -->
+	<insert id="registerUser" parameterType="com.serofit.domain.UserVO">
+		INSERT INTO tbl_user
+		VALUES
+			(
+				#{id}
+				#{pw}
+				#{nickname}
+				#{email}
+			)
+	</insert>
+	
+	<select id="readEmail" parameterType="int" resultType="String">
+		SELECT email FROM tbl_user WHERE uno=#{uno}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="com.serofit.domain.UserVO" resultType="String">
+		SELECT email FROM tbl_user WHERE id=#{id} and pw=#{pw}
+	</select>
+	
+	<!-- id/pw 찾기 -->
+	<select id="findIdPwByEmail" parameterType="String" resultType="com.serofit.domain.UserVO">
+		SELECT id, pw FROM tbl_user WHERE email=#{email}
+	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM tbl_user WHERE uno=#{uno}
+	</delete>
 </mapper>
