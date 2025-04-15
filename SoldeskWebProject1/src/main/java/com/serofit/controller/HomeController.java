@@ -1,4 +1,4 @@
-package com.team1.controller;
+package com.serofit.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
