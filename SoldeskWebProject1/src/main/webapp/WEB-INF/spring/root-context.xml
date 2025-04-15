@@ -15,8 +15,8 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     <!-- log4jdbc -->
     <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE" />
-    <property name="username" value="scott" />
+    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.101:1522:XE" />
+    <property name="username" value="SEROFIT" />
     <property name="password" value="tiger" />
     <!-- db 계정 변경시 수정 -->
 	</bean>
