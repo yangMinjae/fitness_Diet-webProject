@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.serofit.DietMapper">
+	<!-- 식단 결과 -->
+	<insert id="insertDiet" parameterType="com.serofit.domain.DietVO">
+		INSERT INTO tbl_diet VALUES (
+			dno=seq_diet.nextval,
+			uno=#{uno},
+			title=#{title),
+			tag=#{tag},
+			content=#{content},
+			regdate=sysdate,
+			)
+	</insert>
+	
+	<!-- UNO로 식단 목록 불러오기 -->
+	<select id="selectDietByUno" resultType="com.serofit.domain.DietVO">
+		SELECT * FROM tbl_diet WHERE uno=#{uno}
+	</select>
+	
+	<!-- UNO로 식단 삭제 -->
+	<delete id="deleteDietByUno" parameterType="com.serofit.domain.DietVO">
+		DELETE tbl_diet WHERE uno=#{uno}
+	</delete>
+	
+</mapper>
