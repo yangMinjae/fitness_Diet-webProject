@@ -17,7 +17,7 @@ public interface BoardMapper {
 	public int updateLike();
 	
 	// 인기 게시글 가져오기
-	public List<BoardVO> getHotPosts();
+	public List<BoardVO> getHotPosts(int quantity);
 	
 	// 게시글 목록 불러오기
 	public List<BoardVO> getPostList();
@@ -29,4 +29,5 @@ public interface BoardMapper {
 	public int deletePostByBno();
 	
 	// 회원탈퇴 게시글 삭제
+	public int deletePostByUno();
 }
