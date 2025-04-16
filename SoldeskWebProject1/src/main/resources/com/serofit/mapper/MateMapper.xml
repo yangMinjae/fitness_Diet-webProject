@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.serofit.MateMapper">
+	<!-- 운동 메이트 찾기 -->
+	<select id="findMate" resultType="com.serofit.domain.MateVO">
+		SELECT * FROM tbl_mate
+	</select>
+	
+	<!-- 설문 결과 저장 -->
+	<insert id="insertMate" parameterType="com.serofit.domain.MateVO">
+		INSERT INTO tbl_mate VALUES (
+			#{uno},
+			#{gender},
+			#{time},
+			#{area},
+			#{age},
+			)
+	</insert>
+	
+	<!-- 회원 탈퇴 시 삭제 -->
+	<delete id="deleteMate" parameterType="int">
+		DELETE FROM tbl_mate WHERE uno=#{uno}
+	</delete>		
+</mapper>

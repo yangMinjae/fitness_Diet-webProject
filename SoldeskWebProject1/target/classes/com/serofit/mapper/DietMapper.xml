@@ -8,7 +8,7 @@
 		INSERT INTO tbl_diet VALUES (
 			seq_diet.nextval,
 			#{uno},
-			#{title),
+			#{title},
 			#{tag},
 			#{content},
 			sysdate,
