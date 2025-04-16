@@ -17,7 +17,7 @@
 	
 	<!-- UNO로 식단 목록 불러오기 -->
 	<select id="selectDietByUno" resultType="com.serofit.domain.DietVO" parameterType="com.serofit.domain.DietVO">
-		SELECT * FROM tbl_diet WHERE uno=#{uno}
+		SELECT * FROM tbl_diet WHERE uno=#{uno} ORDER BY REGDATE DESC
 	</select>
 	
 	<!-- UNO로 식단 삭제 -->

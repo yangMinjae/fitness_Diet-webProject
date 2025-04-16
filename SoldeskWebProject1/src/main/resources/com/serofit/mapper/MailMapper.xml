@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.serofit.MailMapper">
+
+	<!-- 받은 사람 기준으로 메일 불러오기 -->
+	<select id="selectByReceiver" resultType="com.serofit.domain.MailVO" parameterType="com.serofit.domain.MailVO">
+		SELECT * FROM tbl_mail WHERE receiver=#{receiver} ORDER BY REGDATE DESC
+	</select>
+	
+	<!-- 메일 보내기 -->
+	<insert id="insertMail" parameterType="com.serofit.domain.MailVO">
+		INSERT INTO tbl_mail(
+			seq_mail.nextval,
+			#{receiver},
+			#{sender},
+			#{content},
+			sysdate,
+			default
+		)
+	</insert>
+	
+	<!-- MNO로 메일 삭제 -->
+	<delete id="deleteMailByMno" parameterType="com.serofit.domain.MailVO">
+		DELETE FROM tbl_mail WHRER mno=#{mno} 
+	</delete>
+	
+	<!-- 탈퇴 시 메일 전체 삭제 -->
+	<delete id="deleteMailByUno">
+		DELETE FROM tbl_mail WHERE receiver=#{receiver} or sender=#{sender}
+	</delete>
+	
+	
+</mapper>
