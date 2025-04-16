@@ -2,16 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.serofit.UserMapper">
+<mapper namespace="com.serofit.BoardMapper">
+
+	<!-- 인기 게시글 가져오기 -->
 	<select id="getHotPosts" resultType="com.serofit.domain.BoardVO" parameterType="int">
 		<![CDATA[
 			SELECT * 
 			FROM (
 			SELECT * 
-			FROM table_board 
+			FROM tbl_board 
 			ORDER BY hit DESC, love DESC
 			)
 			WHERE ROWNUM <=#{quantity}
 		]]>
 	</select>
+	
+	<!-- 게시글 목록 불러오기 -->
+	<select id="getPostList" resultType="com.serofit.domain.BoardVO">
+		SELECT *
+		FROM tbl_board
+		ORDER BY regdate DESC
+	</select>
+	
+	<!-- 게시글 불러오기 -->
+	<select id="getPostByBno" parameterType="int" resultType="com.serofit.domain.BoardVO">
+		SELECT *
+		FROM tbl_board
+		WHERE BNO = #{bno}
+	</select>
+	
+	<!-- 조회수 업데이트 -->
+	<update id="updateHit" parameterType="int">
+		UPDATE tbl_board
+		SET hit = hit+1
+		WHERE bno = #{bno}
+	</update>
+	
+	<!-- 좋아요 업데이트 -->
+	<update id="updateLike">
+		UPDATE tbl_board
+		SET love = love+#{plOrMi}
+		WHERE bno = #{bno}
+	</update>
+	
+	<!-- 게시글 작성 -->
+	<insert id="insertPost">
+		INSERT INTO tbl_board (bno, dno, uno, title, content, regdate)
+		VALUES (
+			seq.nextval,
+			#{dno},
+			#{uno},
+			#{bvo.title},
+			#{bvo.content},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deletePostByBno">
+		DELETE FROM tbl_board
+		WHERE bno=#{bno}
+	</delete>
+	
+	<!-- 회원탈퇴 게시글 삭제 -->
+	<delete id="deletePostByBno">
+		DELETE FROM tbl_board
+		WHERE uno=#{uno}
+	</delete>
 </mapper>
