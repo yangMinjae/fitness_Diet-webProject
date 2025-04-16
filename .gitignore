@@ -1,2 +1,4 @@
 /.metadata/
 /SoldeskWebProject1/target/m2e-wtp/web-rgesources/META-INF/maven/com.team1/controller/pom.properties
+*.properties
+*.properties
