@@ -13,6 +13,5 @@ public interface DietMapper {
 	public List<DietVO> selectDietByUno(int uno);
 	
 	// UNO로 식단 삭제
-	public int deleteDietByUno(int uno);
-	
+	public int deleteDietByUno(int uno);	
 }

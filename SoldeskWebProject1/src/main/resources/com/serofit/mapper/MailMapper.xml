@@ -11,7 +11,8 @@
 	
 	<!-- 메일 보내기 -->
 	<insert id="insertMail" parameterType="com.serofit.domain.MailVO">
-		INSERT INTO tbl_mail(
+		INSERT INTO tbl_mail
+		VALUES(
 			seq_mail.nextval,
 			#{receiver},
 			#{sender},

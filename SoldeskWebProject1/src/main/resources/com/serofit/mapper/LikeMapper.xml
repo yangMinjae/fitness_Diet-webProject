@@ -3,13 +3,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.serofit.LikeMapper">
-	<!-- 좋아요 게시글, 좋아요 한 사람 찾기 -->
+	<!-- 좋아요 게시글 찾기 -->
 	<select id="findBnobyUno" parameterType="int" resultType="com.serofit.domain.LikeVO">
 		SELECT * FROM tbl_like WHERE uno=#{uno}
-	</select>
-	
-	<select id="findUnobyBno" parameterType="int" resultType="com.serofit.domain.LikeVO">
-		SELECT * FROM tbl_like WHERE bno=#{bno}
 	</select>
 	
 	<!-- 좋아요 해제 -->
@@ -17,8 +13,22 @@
 		DELETE FROM tbl_like WHERE bno=#{bno} AND uno=#{uno}
 	</delete>
 	
+	<!-- 좋아요 등록  -->
+	<insert id="insertByBnoAndUno" parameterType="com.serofit.domain.LikeVO">
+		INSERT INTO tbl_like
+		VALUES(
+			#{uno},
+			#{bno}
+		)
+	</insert>
+	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteByBno" parameterType="int">
 		DELETE FROM tbl_like WHERE bno=#{bno}
+	</delete>
+	
+	<!-- 유저탈퇴 좋아요 삭제  -->
+	<delete id="deleteByUno" parameterType="int">
+		DELETE FROM tbl_like WHERE uno=#{uno}
 	</delete>
 </mapper>

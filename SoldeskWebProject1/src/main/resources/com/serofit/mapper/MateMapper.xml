@@ -4,8 +4,8 @@
 
 <mapper namespace="com.serofit.MateMapper">
 	<!-- 운동 메이트 찾기 -->
-	<select id="findMate" resultType="com.serofit.domain.MateVO">
-		SELECT * FROM tbl_mate
+	<select id="findMate" parameterType="int" resultType="com.serofit.domain.MateVO">
+		SELECT * FROM tbl_mate WHERE uno = #{uno}
 	</select>
 	
 	<!-- 설문 결과 저장 -->

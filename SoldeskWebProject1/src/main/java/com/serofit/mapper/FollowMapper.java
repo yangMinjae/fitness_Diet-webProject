@@ -15,4 +15,7 @@ public interface FollowMapper {
 	
 	// 즐겨찾기 해제
 	public int removeFromFav(FollowVO fvo);
+	
+	// 회원 탈퇴시 팔로우 전체 삭제
+	public int deleteFollowAll(int uno);
 }

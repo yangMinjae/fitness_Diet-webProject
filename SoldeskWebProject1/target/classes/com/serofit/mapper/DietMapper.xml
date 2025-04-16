@@ -16,13 +16,12 @@
 	</insert>
 	
 	<!-- UNO로 식단 목록 불러오기 -->
-	<select id="selectDietByUno" resultType="com.serofit.domain.DietVO" parameterType="com.serofit.domain.DietVO">
+	<select id="selectDietByUno" resultType="com.serofit.domain.DietVO" parameterType="int">
 		SELECT * FROM tbl_diet WHERE uno=#{uno} ORDER BY REGDATE DESC
 	</select>
 	
 	<!-- UNO로 식단 삭제 -->
-	<delete id="deleteDietByUno" parameterType="com.serofit.domain.DietVO">
+	<delete id="deleteDietByUno" parameterType="int">
 		DELETE tbl_diet WHERE uno=#{uno}
-	</delete>
-	
+	</delete>	
 </mapper>

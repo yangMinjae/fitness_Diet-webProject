@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.serofit.UProfileMapper">
-	<!-- uuid 가져오기(인기게시글,프로필 이미지,마이페이지...) -->
+	<!-- 프로필 가져오기(UUID, 인기게시글, 프로필 이미지, 마이페이지...) -->
 	<select id="selectByUno" parameterType="int" resultType="com.serofit.domain.UProfileVO">
 		SELECT *
 			FROM tbl_uprofile 
@@ -24,4 +24,18 @@
 	<delete id="deleteProfile" parameterType="int">
 		DELETE tbl_uprofile FROM tbl_uprofile WHERE uno=#{uno}
 	</delete>
+	
+	<!-- 회원 생성시 기본 프로필생성 -->
+	<insert id="insertProfile" parameterType="com.serofit.domain.UProfileVO">
+		INSERT INTO tbl_uprofile (
+			uno, 
+			uuid,
+			mate
+		) 
+		VALUES(
+			#{uno},
+			#{uuid},
+			default
+		)
+	</insert>
 </mapper>

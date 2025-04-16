@@ -16,8 +16,7 @@ public interface BoardMapper {
 	public List<BoardVO> getHotPosts(int quantity);
 	
 	// 게시글 목록 불러오기
-	public List<BoardVO> getPostList();
-	
+	public List<BoardVO> getPostList();	
 
 	// 조회수 업데이트
 	public int updateHit(int bno);

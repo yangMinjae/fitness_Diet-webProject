@@ -21,8 +21,9 @@
 			)
 	</insert>
 	
-	<select id="readEmail" parameterType="int" resultType="String">
-		SELECT email FROM tbl_user WHERE uno=#{uno}
+	<!-- 이메일 중복 확인 -->
+	<select id="readEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM tbl_user WHERE email=#{emil}
 	</select>
 	
 	<!-- 로그인 -->

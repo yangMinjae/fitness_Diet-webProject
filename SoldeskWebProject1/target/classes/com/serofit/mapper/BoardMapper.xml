@@ -9,9 +9,9 @@
 		<![CDATA[
 			SELECT * 
 			FROM (
-			SELECT * 
-			FROM tbl_board 
-			ORDER BY hit DESC, love DESC
+				SELECT * 
+				FROM tbl_board 
+				ORDER BY hit DESC, love DESC
 			)
 			WHERE ROWNUM <=#{quantity}
 		]]>
@@ -28,7 +28,7 @@
 	<select id="getPostByBno" parameterType="int" resultType="com.serofit.domain.BoardVO">
 		SELECT *
 		FROM tbl_board
-		WHERE BNO = #{bno}
+		WHERE bno = #{bno}
 	</select>
 	
 	<!-- 조회수 업데이트 -->
@@ -47,7 +47,14 @@
 	
 	<!-- 게시글 작성 -->
 	<insert id="insertPost" parameterType="com.serofit.domain.BoardVO">
-		INSERT INTO tbl_board (bno, dno, uno, title, content, regdate)
+		INSERT INTO tbl_board (
+			bno, 
+			dno, 
+			uno, 
+			title, 
+			content, 
+			regdate
+		)
 		VALUES (
 			seq_board.nextval,
 			#{dno},

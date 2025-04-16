@@ -16,7 +16,7 @@
 	<!-- 언팔로우 -->
 	<delete id="unfollow" parameterType="com.serofit.domain.FollowVO">
 		DELETE FROM tbl_follow 
-		WHERE f_ing = #{f_ing} and f_er = #{f_er}
+		WHERE f_ing = #{f_ing} AND f_er = #{f_er}
 	</delete>
 	
 	<!-- 즐겨찾기 추가 -->
@@ -24,7 +24,7 @@
 		UPDATE tbl_follow 
 		SET
 			fav = 1
-		WHERE f_ing = #{f_ing} and f_er = #{f_er}	
+		WHERE f_ing = #{f_ing} AND f_er = #{f_er}	
 	</update>
 	
 	<!-- 즐겨찾기 해제 -->
@@ -32,6 +32,11 @@
 		UPDATE tbl_follow 
 		SET
 			fav = 0
-		WHERE f_ing = #{f_ing} and f_er = #{f_er}	
+		WHERE f_ing = #{f_ing} AND f_er = #{f_er}	
 	</update>
+	
+	<delete id="deleteFollowAll" parameterType="int">
+		DELETE FROM tbl_follow
+		WHERE f_ing = #{uno} OR f_er = #{uno}
+	</delete>
 </mapper>
