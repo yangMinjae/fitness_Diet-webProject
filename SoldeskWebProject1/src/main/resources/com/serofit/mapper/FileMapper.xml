@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.serofit.FileMapper">
 
-<!--  이미지 업로드, 수정  -->
+<!--  이미지 업로드,수정 -->
 <insert id="insertFile" parameterType="com.serofit.domain.FileVO">
 	INSERT into tbl_file 
 	VALUES
@@ -14,8 +14,32 @@
 			#{path}
 	)
 </insert>
+<!-- 프로필 사진 등록 -->
+<insert id="insertProfileFile" parameterType="com.serofit.domain.FileVO">
+	INSERT into tbl_file (uuid,filename,path)
+	VALUES
+	(
+			#{uuid},
+			#{filename},
+			#{path}
+	)
+</insert>
 <!--  이미지 삭제 -->
 <delete id="deleteFile" parameterType="int">
 	DELETE FROM tbl_file WHERE bno= #{bno]
 </delete>
+<!-- uuid 파일삭제 -->
+<delete id="deleteByUuid">
+	DELETE FROM tbl_file WHERE uuid=#{uuid}
+</delete>
+<!-- 프로필 이미지 띄우기 -->
+<select id="selectUprofileFile" resultType="com.serofit.domain.FileVO" parameterType="String">
+SELECT filename,path FROM tbl_file WHERE uuid=#{uuid}
+</select>
+<!-- 게시물에서 이미지 띄우기 -->
+<select id="selectBoardFile" resultType="com.serofit.domain.FileVO" parameterType="int">
+SELECT uuid,filename,path FROM tbl_file WHERE bno= #{bno}
+</select>
+
+
 </mapper>  
