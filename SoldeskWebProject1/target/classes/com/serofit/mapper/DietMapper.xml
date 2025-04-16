@@ -6,17 +6,17 @@
 	<!-- 식단 결과 -->
 	<insert id="insertDiet" parameterType="com.serofit.domain.DietVO">
 		INSERT INTO tbl_diet VALUES (
-			dno=seq_diet.nextval,
-			uno=#{uno},
-			title=#{title),
-			tag=#{tag},
-			content=#{content},
-			regdate=sysdate,
+			seq_diet.nextval,
+			#{uno},
+			#{title),
+			#{tag},
+			#{content},
+			sysdate,
 			)
 	</insert>
 	
 	<!-- UNO로 식단 목록 불러오기 -->
-	<select id="selectDietByUno" resultType="com.serofit.domain.DietVO">
+	<select id="selectDietByUno" resultType="com.serofit.domain.DietVO" parameterType="com.serofit.domain.DietVO">
 		SELECT * FROM tbl_diet WHERE uno=#{uno}
 	</select>
 	
