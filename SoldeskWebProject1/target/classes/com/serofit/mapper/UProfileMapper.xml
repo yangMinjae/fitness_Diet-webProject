@@ -3,14 +3,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.serofit.UProfileMapper">
-	<!-- uuid 가져오기(인기게시글,프로필 이미지) -->
-	<select id="selectUuid" parameterType="int" resultType="com.serofit.domain.FileVO">
-		SELECT uuid FROM tbl_uprofile WHERE uno=#{uno}
+	<!-- uuid 가져오기(인기게시글,프로필 이미지,마이페이지...) -->
+	<select id="selectByUno" parameterType="int" resultType="com.serofit.domain.UProfileVO">
+		SELECT *
+			FROM tbl_uprofile 
+			WHERE uno=#{uno}
 	</select>
-	<!-- 프로필 팝업창 회원정보 프로필표시 -->
-	<select id="selectProfile" resultType="com.serofit.domain.FileVO">
-		SELECT uuid,self,fav,tag FROM tbl_uprofile uno=#{uno}
-	</select>
+	
 	<!-- 프로필 수정 -->
 	<update id="updateProfile">
 		UPDATE tbl_uprofile 
@@ -20,7 +19,9 @@
 				fav=#{fav}
 			WHERE uno=#{uno}	
 	</update>
-	<!-- 마이페이지 회원정보  -->
 	
-	<!-- 친구관리 -->
+	<!-- 프로필 삭제 -->
+	<delete id="deleteProfile">
+		DELETE tbl_uprofile FROM tbl_uprofile WHERE uno=#{uno}
+	</delete>
 </mapper>
