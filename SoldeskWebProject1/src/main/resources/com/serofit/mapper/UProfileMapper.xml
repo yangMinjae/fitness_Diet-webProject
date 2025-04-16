@@ -11,7 +11,7 @@
 	</select>
 	
 	<!-- 프로필 수정 -->
-	<update id="updateProfile">
+	<update id="updateProfile" parameterType="com.serofit.domain.UProfileVO">
 		UPDATE tbl_uprofile 
 			SET uuid=#{uuid},
 				mate=#{mate},
@@ -21,7 +21,7 @@
 	</update>
 	
 	<!-- 프로필 삭제 -->
-	<delete id="deleteProfile">
+	<delete id="deleteProfile" parameterType="int">
 		DELETE tbl_uprofile FROM tbl_uprofile WHERE uno=#{uno}
 	</delete>
 </mapper>
