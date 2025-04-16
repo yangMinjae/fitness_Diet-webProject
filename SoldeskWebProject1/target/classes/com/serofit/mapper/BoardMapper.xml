@@ -46,14 +46,14 @@
 	</update>
 	
 	<!-- 게시글 작성 -->
-	<insert id="insertPost">
+	<insert id="insertPost" parameterType="com.serofit.domain.BoardVO">
 		INSERT INTO tbl_board (bno, dno, uno, title, content, regdate)
 		VALUES (
 			seq_board.nextval,
 			#{dno},
 			#{uno},
-			#{bvo.title},
-			#{bvo.content},
+			#{title},
+			#{content},
 			SYSDATE
 		)
 	</insert>

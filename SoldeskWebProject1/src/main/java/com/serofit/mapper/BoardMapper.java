@@ -24,11 +24,10 @@ public interface BoardMapper {
 	
 	// 좋아요 업데이트
 	public int updateLike(@Param("bno") int bno, @Param("plOrMi") int plOrMi);	
-	// int plOrMi -> plusOrMinus - 서비스에서 1아니면 -1을 전달
-	
+	// int plOrMi -> plusOrMinus - 서비스에서 1아니면 -1을 전달	
 	
 	// 게시글 작성
-	public int insertPost(@Param("bvo") BoardVO bvo, @Param("dno") int dno, @Param("uno") int uno);
+	public int insertPost(BoardVO bvo);
 	
 	// 게시글 삭제
 	public int deletePostByBno(int bno);
