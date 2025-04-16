@@ -1,0 +1,18 @@
+package com.serofit.mapper;
+
+import com.serofit.domain.FollowVO;
+
+public interface FollowMapper {
+	
+	// 팔로우
+	public int follow(FollowVO fvo);
+	
+	// 팔로우 취소
+	public int unFollow(FollowVO fvo);
+	
+	// 즐겨찾기 추가
+	public int addToFav(FollowVO fvo);
+	
+	// 즐겨찾기 해제
+	public int removeFromFav(FollowVO fvo);
+}

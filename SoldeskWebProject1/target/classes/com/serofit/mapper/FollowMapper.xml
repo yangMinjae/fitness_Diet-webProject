@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.serofit.FollowMapper">
+	<!-- 팔로우 -->
+	<insert id="follow" parameterType="com.serofit.domain.FollowVO">
+		INSERT INTO tbl_follow 
+		VALUES(
+			#{f_ing},
+			#{f_er},
+			DEFAULT
+		)
+	</insert>
+	
+	<!-- 언팔로우 -->
+	<delete id="unfollow" parameterType="com.serofit.domain.FollowVO">
+		DELETE FROM tbl_follow 
+		WHERE f_ing = #{f_ing} and f_er = #{f_er}
+	</delete>
+	
+	<!-- 즐겨찾기 추가 -->
+	<update id="addToFav" parameterType="com.serofit.domain.FollowVO">
+		UPDATE tbl_follow 
+		SET
+			fav = 1
+		WHERE f_ing = #{f_ing} and f_er = #{f_er}	
+	</update>
+	
+	<!-- 즐겨찾기 해제 -->
+	<update id="removeFromFav" parameterType="com.serofit.domain.FollowVO">
+		UPDATE tbl_follow 
+		SET
+			fav = 0
+		WHERE f_ing = #{f_ing} and f_er = #{f_er}	
+	</update>
+</mapper>
