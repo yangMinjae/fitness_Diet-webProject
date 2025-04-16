@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serofit.FileMapper">
+
+<!--  이미지 업로드, 수정  -->
+<insert id="insertFile" parameterType="com.serofit.domain.FileVO">
+	INSERT into tbl_file 
+	VALUES
+	(
+			#{uuid},
+			#{bno},
+			#{filename},
+			#{path}
+	)
+</insert>
+<!--  이미지 삭제 -->
+<delete id="deleteFile" parameterType="int">
+	DELETE FROM tbl_file WHERE bno= #{bno]
+</delete>
+</mapper>  
