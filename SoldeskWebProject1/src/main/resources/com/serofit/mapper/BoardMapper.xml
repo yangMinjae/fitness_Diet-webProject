@@ -49,7 +49,7 @@
 	<insert id="insertPost">
 		INSERT INTO tbl_board (bno, dno, uno, title, content, regdate)
 		VALUES (
-			seq.nextval,
+			seq_board.nextval,
 			#{dno},
 			#{uno},
 			#{bvo.title},
@@ -59,13 +59,13 @@
 	</insert>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="deletePostByBno">
+	<delete id="deletePostByBno" parameterType="int">
 		DELETE FROM tbl_board
 		WHERE bno=#{bno}
 	</delete>
 	
 	<!-- 회원탈퇴 게시글 삭제 -->
-	<delete id="deletePostByBno">
+	<delete id="deletePostByBno" parameterType="int">
 		DELETE FROM tbl_board
 		WHERE uno=#{uno}
 	</delete>
