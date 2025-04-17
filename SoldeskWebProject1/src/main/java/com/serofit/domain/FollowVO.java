@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class FollowVO {
-	private int f_ing;
-	private int f_er;
+	private int thrower;
+	private int catcher;
 	private boolean fav;
 	
 	

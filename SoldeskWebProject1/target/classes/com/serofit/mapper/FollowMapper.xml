@@ -3,12 +3,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.serofit.mapper.FollowMapper">
+	
+	<!-- 팔로잉 목록 불러오기 -->
+	<select id="getFollowList" parameterType="int" resultType="com.serofit.domain.FollowVO">
+		SELECT * 
+		FROM tbl_follow
+		WHERE thrower=#{uno}
+	</select>
+	
+	<!-- 팔로워 목록 불러오기 -->
+	<select id="getFollowerList" parameterType="int" resultType="com.serofit.domain.FollowVO">
+		SELECT * 
+		FROM tbl_follow
+		WHERE catcher=#{uno}
+	</select>
+	
+	<!-- 즐겨찾기 목록 불러오기 -->
+	<select id="getFavList" parameterType="int" resultType="com.serofit.domain.FollowVO">
+		SELECT *
+		FROM tbl_follow
+		WHERE thrower=#{uno} and fav=1
+	</select>
+	
 	<!-- 팔로우 -->
 	<insert id="follow" parameterType="com.serofit.domain.FollowVO">
 		INSERT INTO tbl_follow 
 		VALUES(
-			#{f_ing},
-			#{f_er},
+			#{thrower},
+			#{catcher},
 			DEFAULT
 		)
 	</insert>
@@ -16,7 +38,7 @@
 	<!-- 언팔로우 -->
 	<delete id="unFollow" parameterType="com.serofit.domain.FollowVO">
 		DELETE FROM tbl_follow 
-		WHERE f_ing = #{f_ing} AND f_er = #{f_er}
+		WHERE thrower = #{thrower} AND catcher = #{catcher}
 	</delete>
 	
 	<!-- 즐겨찾기 추가 -->
@@ -24,7 +46,7 @@
 		UPDATE tbl_follow 
 		SET
 			fav = 1
-		WHERE f_ing = #{f_ing} AND f_er = #{f_er}	
+		WHERE thrower = #{thrower} AND catcher = #{catcher}	
 	</update>
 	
 	<!-- 즐겨찾기 해제 -->
@@ -32,11 +54,12 @@
 		UPDATE tbl_follow 
 		SET
 			fav = 0
-		WHERE f_ing = #{f_ing} AND f_er = #{f_er}	
+		WHERE thrower = #{thrower} AND catcher = #{catcher}	
 	</update>
 	
+	<!-- 회원 탈퇴시 팔로우 전체 삭제 -->
 	<delete id="deleteFollowAll" parameterType="int">
 		DELETE FROM tbl_follow
-		WHERE f_ing = #{uno} OR f_er = #{uno}
+		WHERE thrower = #{uno} OR catcher = #{uno}
 	</delete>
 </mapper>
