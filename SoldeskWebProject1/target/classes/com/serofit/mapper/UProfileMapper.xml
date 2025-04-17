@@ -16,13 +16,14 @@
 			SET uuid=#{uuid},
 				mate=#{mate},
 				self=#{self},
-				fav=#{fav}
+				fav=#{fav},
+				tag=#{tag}
 			WHERE uno=#{uno}	
 	</update>
 	
 	<!-- 프로필 삭제 -->
 	<delete id="deleteProfile" parameterType="int">
-		DELETE tbl_uprofile FROM tbl_uprofile WHERE uno=#{uno}
+		DELETE FROM tbl_uprofile WHERE uno=#{uno}
 	</delete>
 	
 	<!-- 회원 생성시 기본 프로필생성 -->

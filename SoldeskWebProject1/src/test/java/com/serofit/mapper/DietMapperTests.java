@@ -35,15 +35,15 @@ public class DietMapperTests {
 //		System.out.println("result : " + result);
 //	}
 	
-	@Test
-	public void getSelectDietByUno() {
-		int uno = 1;
-		
-		List<DietVO> list = dmapper.selectDietByUno(uno);
-		for (DietVO dvo : list) {
-			System.out.println(dvo);
-		}
-	}
+//	@Test
+//	public void getSelectDietByUno() {
+//		int uno = 1;
+//		
+//		List<DietVO> list = dmapper.selectDietByUno(uno);
+//		for (DietVO dvo : list) {
+//			System.out.println(dvo);
+//		}
+//	}
 	
 //	@Test
 //	public void getDeleteDietByUno() {
