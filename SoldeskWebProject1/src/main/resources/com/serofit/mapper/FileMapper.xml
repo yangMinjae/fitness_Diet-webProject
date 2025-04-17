@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.serofit.FileMapper">
+<mapper namespace="com.serofit.mapper.FileMapper">
 	<!--  이미지 업로드,수정 -->
 	<insert id="insertFile" parameterType="com.serofit.domain.FileVO">
 		INSERT INTO tbl_file 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.serofit.LikeMapper">
+<mapper namespace="com.serofit.mapper.LikeMapper">
 	<!-- 좋아요 게시글 찾기 -->
 	<select id="findBnobyUno" parameterType="int" resultType="com.serofit.domain.LikeVO">
 		SELECT * FROM tbl_like WHERE uno=#{uno}

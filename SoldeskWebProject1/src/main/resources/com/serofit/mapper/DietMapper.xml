@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.serofit.DietMapper">
+<mapper namespace="com.serofit.mapper.DietMapper">
 	<!-- 식단 결과 -->
 	<insert id="insertDiet" parameterType="com.serofit.domain.DietVO">
 		INSERT INTO tbl_diet VALUES (

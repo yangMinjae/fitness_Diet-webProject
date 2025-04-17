@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.serofit.MateMapper">
+<mapper namespace="com.serofit.mapper.MateMapper">
 	<!-- 운동 메이트 찾기 -->
 	<select id="findMate" parameterType="int" resultType="com.serofit.domain.MateVO">
 		SELECT * FROM tbl_mate WHERE uno = #{uno}
