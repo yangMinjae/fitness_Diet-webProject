@@ -1,0 +1,27 @@
+// 1. 파일 경로 설정
+const CSS_FILE_PATH = '/resources/css/main.css';
+// 2. link 태그 생성
+let linkEle = document.createElement('link');
+linkEle.rel = 'stylesheet';
+linkEle.href = CSS_FILE_PATH;
+// 3. head 태그에 link 엘리먼트 추가
+document.head.appendChild(linkEle);
+
+document.querySelectorAll('button').forEach(button=>{
+	button.addEventListener("click", function(e){		
+		let name = e.target.getAttribute('class');
+
+		switch(name){
+			case 'cta-button' :
+				console.log("cta-button");
+				//location.href = '/';
+				break;
+		}
+	});
+});
+
+document.querySelectorAll('.post-card').forEach(div=>{
+	div.addEventListener("click", function(e){		
+		console.log("post-card");
+	});
+});
