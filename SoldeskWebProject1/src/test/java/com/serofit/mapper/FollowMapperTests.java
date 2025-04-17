@@ -19,32 +19,32 @@ public class FollowMapperTests {
 	
 	public void testfollow() {
 		FollowVO fvo = new FollowVO();
-		fvo.setF_er(1);
-		fvo.setF_ing(1);
+//		fvo.setF_er(1);
+//		fvo.setF_ing(1);
 		
 		log.info(fmapper.follow(fvo));
 	}
 	
 	public void testaddToFav() {
 		FollowVO fvo = new FollowVO();
-		fvo.setF_er(1);
-		fvo.setF_ing(1);
+//		fvo.setF_er(1);
+//		fvo.setF_ing(1);
 		
 		log.info(fmapper.addToFav(fvo));
 	}
 	
 	public void testremoveFromFav() {
 		FollowVO fvo = new FollowVO();
-		fvo.setF_er(1);
-		fvo.setF_ing(1);
+//		fvo.setF_er(1);
+//		fvo.setF_ing(1);
 		
 		log.info(fmapper.removeFromFav(fvo));
 	}	
 	
 	public void testunfollow() {
 		FollowVO fvo = new FollowVO();
-		fvo.setF_er(1);
-		fvo.setF_ing(1);
+//		fvo.setF_er(1);
+//		fvo.setF_ing(1);
 		
 		log.info(fmapper.unFollow(fvo));
 	}
