@@ -8,7 +8,7 @@ public interface UserMapper {
 	public String readNickname(int uno);
 	
 	// 회원 정보 등록
-	public int registerUser(UserVO uvo);
+	public int insertUser(UserVO uvo);
 	
 	// 이메일 중복 확인
 	public int validateEmail(String email);
