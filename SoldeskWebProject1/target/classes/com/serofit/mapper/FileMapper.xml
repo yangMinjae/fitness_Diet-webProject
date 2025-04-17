@@ -38,7 +38,7 @@
 	
 	<!-- 프로필 이미지 띄우기 -->
 	<select id="selectUprofileFile" resultType="com.serofit.domain.FileVO" parameterType="String">
-		SELECT filename,path FROM tbl_file WHERE uuid=#{uuid}
+		SELECT uuid,filename,path FROM tbl_file WHERE uuid=#{uuid}
 	</select>
 	
 	<!-- 게시물에서 이미지 띄우기 -->
