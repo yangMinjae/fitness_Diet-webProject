@@ -6,7 +6,7 @@ import com.serofit.domain.DietVO;
 
 public interface DietMapper {
 	
-	// 식단 결과
+	// 식단 결과 저장하기
 	public int insertDiet(DietVO dvo);
 	
 	// UNO로 식단 목록 불러오기
