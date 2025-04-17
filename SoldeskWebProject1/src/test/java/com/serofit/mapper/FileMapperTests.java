@@ -54,7 +54,7 @@ public class FileMapperTests {
 	
 	public void TestSelectUprofileFile() {
 		String uuid = "UUID-TEST";  
-	    List<FileVO> result = fmapper.selectUprofileFile(uuid);
+	    FileVO result = fmapper.selectUprofileFile(uuid);
 	    
 	    log.info(result);
 	}
