@@ -14,7 +14,7 @@
 	</insert>
 	
 	<!-- 언팔로우 -->
-	<delete id="unfollow" parameterType="com.serofit.domain.FollowVO">
+	<delete id="unFollow" parameterType="com.serofit.domain.FollowVO">
 		DELETE FROM tbl_follow 
 		WHERE f_ing = #{f_ing} AND f_er = #{f_er}
 	</delete>
