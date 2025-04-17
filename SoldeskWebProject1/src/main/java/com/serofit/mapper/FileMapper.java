@@ -15,7 +15,7 @@ public interface FileMapper {
 	public int deleteFile(int bno);
 	
 	// uuid 파일삭제
-	public String deleteByUuid(String uuid);
+	public int deleteByUuid(String uuid);
 	
 	// 프로필 이미지 띄우기
 	public List<FileVO> selectUprofileFile(String uuid);

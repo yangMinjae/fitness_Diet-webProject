@@ -10,7 +10,7 @@
 		(
 				#{uuid},
 				#{bno},
-				#{filename},
+				#{fileName},
 				#{path}
 		)
 	</insert>
@@ -21,14 +21,14 @@
 		VALUES
 		(
 				#{uuid},
-				#{filename},
+				#{fileName},
 				#{path}
 		)
 	</insert>
 	
 	<!--  이미지 삭제 -->
 	<delete id="deleteFile" parameterType="int">
-		DELETE FROM tbl_file WHERE bno= #{bno]
+		DELETE FROM tbl_file WHERE bno= #{bno}
 	</delete>
 	
 	<!-- uuid 파일삭제 -->
