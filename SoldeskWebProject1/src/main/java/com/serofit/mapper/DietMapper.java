@@ -14,4 +14,7 @@ public interface DietMapper {
 	
 	// UNO로 식단 삭제
 	public int deleteDietByUno(int uno);
+	
+	// DNO로 TAG 가져오기
+	public DietVO selectDietByDno(int dno);
 }

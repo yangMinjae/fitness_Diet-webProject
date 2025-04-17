@@ -25,4 +25,9 @@
 	<delete id="deleteDietByUno" parameterType="int">
 		DELETE tbl_diet WHERE uno=#{uno}
 	</delete>	
+	
+	<!-- DNO로 TAG 가져오기 -->
+	<select id="selectDietByDno" resultType="com.serofit.domain.DietVO" parameterType="int">
+		SELECT * FROM tbl_diet WHERE dno=#{dno}
+	</select>
 </mapper>
