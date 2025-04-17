@@ -22,28 +22,28 @@ public class DietMapperTests {
 	@Autowired
 	DietMapper dmapper;
 	
-	@Test
-	public void getInsertDiet() {
-		DietVO dvo = new DietVO();
-		
-		dvo.setUno(1);
-		dvo.setContent("테스트 컨텐츠");
-		dvo.setTag("테스트 태그");
-		dvo.setTitle("테스트 타이틀");
-		
-		int result = dmapper.insertDiet(dvo);
-		System.out.println("result : " + result);
-	}
-	
 //	@Test
-//	public void getSelectDietByUno() {
-//		int uno = 1;
+//	public void getInsertDiet() {
+//		DietVO dvo = new DietVO();
 //		
-//		List<DietVO> list = dmapper.selectDietByUno(uno);
-//		for (DietVO dvo : list) {
-//			System.out.println(dvo);
-//		}
+//		dvo.setUno(1);
+//		dvo.setContent("테스트 컨텐츠");
+//		dvo.setTag("테스트 태그");
+//		dvo.setTitle("테스트 타이틀");
+//		
+//		int result = dmapper.insertDiet(dvo);
+//		System.out.println("result : " + result);
 //	}
+	
+	@Test
+	public void getSelectDietByUno() {
+		int uno = 1;
+		
+		List<DietVO> list = dmapper.selectDietByUno(uno);
+		for (DietVO dvo : list) {
+			System.out.println(dvo);
+		}
+	}
 	
 //	@Test
 //	public void getDeleteDietByUno() {
