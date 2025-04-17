@@ -2,19 +2,19 @@ package com.serofit.mapper;
 
 import java.util.List;
 
-import com.serofit.domain.FileVO;
+import com.serofit.domain.FollowVO;
 import com.serofit.domain.FollowVO;
 
 public interface FollowMapper {
 	
 	// 팔로잉 목록 불러오기
-	public List<FileVO> getFollowList(int uno);
+	public List<FollowVO> getFollowList(int uno);
 	
 	// 팔로워 목록 불러오기
-	public List<FileVO> getFollowerList(int uno);
+	public List<FollowVO> getFollowerList(int uno);
 	
 	// 즐겨찾기 목록 불러오기
-	public List<FileVO> getFavList(int uno);
+	public List<FollowVO> getFavList(int uno);
 	
 	// 팔로우
 	public int follow(FollowVO fvo);
