@@ -13,6 +13,12 @@ public interface UserMapper {
 	// 이메일 중복 확인
 	public int validateEmail(String email);
 	
+	// 아이디 중복 확인
+	public int validateId(String id);
+	
+	// 닉네임 중복 확인
+	public int validatePw(String nickname);
+	
 	// 로그인
 	public String login(UserVO uvo);
 	
