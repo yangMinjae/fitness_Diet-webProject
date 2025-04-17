@@ -24,7 +24,7 @@
 	
 	<!-- MNO로 메일 삭제 -->
 	<delete id="deleteMailByMno" parameterType="int">
-		DELETE FROM tbl_mail WHRER mno=#{mno} 
+		DELETE FROM tbl_mail WHERE mno=#{mno} 
 	</delete>
 	
 	<!-- 탈퇴 시 메일 전체 삭제 -->
