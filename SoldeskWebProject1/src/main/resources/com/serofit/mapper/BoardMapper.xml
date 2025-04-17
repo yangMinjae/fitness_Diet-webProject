@@ -72,7 +72,7 @@
 	</delete>
 	
 	<!-- 회원탈퇴 게시글 삭제 -->
-	<delete id="deletePostByBno" parameterType="int">
+	<delete id="deletePostByUno" parameterType="int">
 		DELETE FROM tbl_board
 		WHERE uno=#{uno}
 	</delete>
