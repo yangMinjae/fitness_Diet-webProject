@@ -9,7 +9,7 @@ import com.serofit.domain.LikeVO;
 public interface LikeMapper {
 	
 	// 좋아요 게시글 찾기
-	public List<LikeVO> findBnobyUno(int uno);
+	public List<LikeVO> findBnoByUno(int uno);
 	
 	// 좋아요 해제
 	public int deleteByBnoAndUno(LikeVO lvo);

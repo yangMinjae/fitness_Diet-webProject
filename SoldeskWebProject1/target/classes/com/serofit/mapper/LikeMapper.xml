@@ -4,7 +4,7 @@
 
 <mapper namespace="com.serofit.mapper.LikeMapper">
 	<!-- 좋아요 게시글 찾기 -->
-	<select id="findBnobyUno" parameterType="int" resultType="com.serofit.domain.LikeVO">
+	<select id="findBnoByUno" parameterType="int" resultType="com.serofit.domain.LikeVO">
 		SELECT * FROM tbl_like WHERE uno=#{uno}
 	</select>
 	
