@@ -11,7 +11,7 @@
 	<jsp:include page="../layout/header.jsp" />
 	<main>
 	    <section class="section">
-	      <div class="description-box">설문 조사 설명</div>
+	      <div class="description-box">이 설문조사는 영국에서 </div>
 	      <button class="cta-button">설문 조사 페이지 이동 버튼</button>
 	    </section>
 	

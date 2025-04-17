@@ -7,11 +7,13 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
 
+// 버튼 이벤트 추가
 document.querySelectorAll('button').forEach(button=>{
 	button.addEventListener("click", function(e){		
 		let name = e.target.getAttribute('class');
 
 		switch(name){
+			// 설문 시작 버튼
 			case 'cta-button' :
 				console.log("cta-button");
 				//location.href = '/';
@@ -20,6 +22,7 @@ document.querySelectorAll('button').forEach(button=>{
 	});
 });
 
+// 인기 게시글 버튼화
 document.querySelectorAll('.post-card').forEach(div=>{
 	div.addEventListener("click", function(e){		
 		console.log("post-card");

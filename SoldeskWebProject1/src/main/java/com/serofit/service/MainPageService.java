@@ -2,7 +2,6 @@ package com.serofit.service;
 
 import java.util.List;
 
-import com.serofit.domain.BoardVO;
 import com.serofit.domain.HotBoardDTO;
 
 public interface MainPageService {

@@ -23,11 +23,12 @@ public class JshController {
 	
 	// 메인 화면 로딩시
 	@GetMapping("/main")
-	public void getNickname(Model model, int uno, int quantity) {
-		if(uno != 0) {
-			model.addAttribute("nickname", hfService.getNickname(uno));
-		}
+	public void getNickname(Model model) {
 		
-		model.addAttribute("hbList", mpService.getHotPosts(quantity));
+		/*
+		 * if(uno != 0) { model.addAttribute("nickname", hfService.getNickname(uno)); }
+		 */
+		
+		model.addAttribute("hbList", mpService.getHotPosts(4));
 	}
 }

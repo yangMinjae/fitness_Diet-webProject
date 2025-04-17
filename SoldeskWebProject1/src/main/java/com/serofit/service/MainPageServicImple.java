@@ -37,21 +37,27 @@ public class MainPageServicImple implements MainPageService{
 	@Autowired
 	DietMapper dMapper;
 	
+	// 인기 게시글 불러오기
 	@Override
 	public List<HotBoardDTO> getHotPosts(int quantity) {
-		HotBoardDTO hbDTO = new HotBoardDTO();		
+		// DTOList, DTO 생성
+		HotBoardDTO hbDTO = new HotBoardDTO();
 		List<HotBoardDTO> hbList = new ArrayList<HotBoardDTO>();
 		
+		// 인기 게시글 가져오기
 		List<BoardVO> bList = bMapper.getHotPosts(quantity);
 		
 		for (BoardVO boardVO : bList) {
+			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(boardVO.getUno());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
 			hbDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
 			
+			// 식단 태그 가져오기
 			DietVO dVO = dMapper.selectDietByDno(boardVO.getDno());
 			hbDTO.setTag(dVO.getTag());
 			
+			// DTO에 변수 설정
 			hbDTO.setNickname(uMapper.readNickname(boardVO.getUno()));
 			hbDTO.setTitle(boardVO.getTitle());
 			hbDTO.setRegdate(boardVO.getRegDate());
