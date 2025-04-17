@@ -9,7 +9,7 @@
 	</select>
 	
 	<!-- 회원 정보 등록 -->
-	<insert id="registerUser" parameterType="com.serofit.domain.UserVO">
+	<insert id="insertUser" parameterType="com.serofit.domain.UserVO">
 		INSERT INTO tbl_user
 		VALUES
 			(
