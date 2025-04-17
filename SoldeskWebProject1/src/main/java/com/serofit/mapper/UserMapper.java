@@ -10,8 +10,8 @@ public interface UserMapper {
 	// 회원 정보 등록
 	public int registerUser(UserVO uvo);
 	
-	// 회원 정보 
-	public String readEmail(int uno);
+	// 이메일 중복 확인
+	public int validateEmail(String email);
 	
 	// 로그인
 	public String login(UserVO uvo);
