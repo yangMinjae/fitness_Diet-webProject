@@ -1,0 +1,181 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0 30px;
+    background: #fff;
+    min-width: 1300px;
+    overflow-x: auto;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 리모컨 스타일 사이드바 */
+.floating-sidebar {
+    position: sticky;
+    top: 200px;
+    width: 160px;
+    min-width: 160px; 
+    flex-shrink: 0; 
+    margin-left:50px;
+    background-color: #f2dbe3;
+    padding: 20px 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    z-index: 2;
+    align-self: flex-start;
+}
+
+.floating-sidebar .menu-section {
+    background-color: #eec1d3;
+    border: none;
+    padding: 36px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.menu-subgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu-subgroup .menu-button {
+    background-color: #ddd;
+    padding: 10px 8px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+/* 메인 콘텐츠는 왼쪽 리모컨 공간을 피해 오른쪽으로 여유 있게 */
+.main-content {
+    flex: 1;
+	margin-left:15%;
+	margin-top: 90px;
+    padding: 40px;
+    min-width: 800px;
+    max-width: 800px;
+}
+
+
+/* 메인 콘텐츠 */
+.main-content {
+}
+
+/* 내 프로필 */
+.profile-section {
+    background-color: #d6f9d6;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.profile-box {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.profile-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+.profile-nickname {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    justify-content: center;
+}
+
+.profile-info input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    margin:auto;
+    color: #333;
+    border-radius: 6px;
+    width: 70%;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* 수정 버튼 */
+.edit-button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.edit-button {
+    background-color: #7c59b0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 친구 관리 */
+.friend-section {
+    background-color: #d7f6fc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.friend-subsection {
+    margin-bottom: 30px;
+}
+
+.friend-subsection h3 {
+    border-bottom: 2px solid pink;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.menu-section:active,
+.menu-button:active {
+    filter: brightness(0.9);
+    transition: filter 0.1s;
+}
+
+.edit-button:active {
+    filter: brightness(0.9);
+    transition: filter 0.1s;
+}

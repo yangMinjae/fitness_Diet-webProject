@@ -2,7 +2,10 @@ body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   background-color: #fff;
-  padding: 30px 20px;
+  padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 1060px;
 }
 
 .section {
@@ -62,4 +65,11 @@ body {
   width: 35px;
   height: 35px;
   border-radius: 50%;
+}
+main{
+  width:100%;
+  min-width: 1000px;
+  margin: 0 auto;         /* 좌우 여백 확보 + 중앙 정렬 */
+  padding: 0 20px;        /* 내부 컨텐츠 여백 */
+  box-sizing: border-box;
 }
