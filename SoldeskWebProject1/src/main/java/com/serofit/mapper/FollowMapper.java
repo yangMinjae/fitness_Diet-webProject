@@ -3,7 +3,6 @@ package com.serofit.mapper;
 import java.util.List;
 
 import com.serofit.domain.FollowVO;
-import com.serofit.domain.FollowVO;
 
 public interface FollowMapper {
 	

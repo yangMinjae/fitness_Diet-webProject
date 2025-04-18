@@ -114,27 +114,32 @@ public class MyPageServiceImpl implements MyPageService{
 	// 여기서 uno는 팔로우, 줄겨찾기 추가/해제 할 대상
 	
 	// 팔로우
+	// 컨트롤러에서 함수 사용시 fvo의 thrower에 유저 본인 uno, catcher에 선택한(팔로우할) 유저의 uno를 넣는다.
 	@Override
 	public boolean follow(FollowVO fvo) {
-		
-		return false;
+		int result = followMapper.follow(fvo);
+		return result!=0 ? true : false;
 	}
 	
 	// 언팔로우
+	// 컨트롤러에서 함수 사용시 fvo의 thrower에 유저 본인 uno, catcher에 선택한(팔로우할) 유저의 uno를 넣는다.
 	@Override
 	public boolean unfollow(FollowVO fvo) {
-		return false;
+		int result = followMapper.unFollow(fvo);
+		return result!=0 ? true : false;
 	}
 	
 	// 즐겨찾기 추가
 	@Override
 	public boolean addToFav(FollowVO fvo) {
-		return false;
+		int result = followMapper.addToFav(fvo);
+		return result!=0 ? true : false;
 	}
 	
 	// 즐겨찾기 해제
 	@Override
 	public boolean removeFromFav(FollowVO fvo) {
-		return false;
+		int result = followMapper.removeFromFav(fvo);
+		return result!=0 ? true : false;
 	}
 }
