@@ -14,6 +14,7 @@ import com.serofit.domain.UProfileVO;
 import com.serofit.mapper.BoardMapper;
 import com.serofit.mapper.DietMapper;
 import com.serofit.mapper.FileMapper;
+import com.serofit.mapper.MailMapper;
 import com.serofit.mapper.UProfileMapper;
 import com.serofit.mapper.UserMapper;
 
@@ -35,7 +36,7 @@ public class MainPageServicImple implements MainPageService{
 	UProfileMapper upMapper;
 	
 	@Autowired
-	DietMapper dMapper;
+	DietMapper dMapper;	
 	
 	// 인기 게시글 불러오기
 	@Override
@@ -65,5 +66,5 @@ public class MainPageServicImple implements MainPageService{
 		}
 		
 		return hbList;
-	}
+	}	
 }

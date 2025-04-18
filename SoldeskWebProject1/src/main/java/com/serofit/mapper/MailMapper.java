@@ -16,4 +16,7 @@ public interface MailMapper {
 	
 	// 탈퇴 시 메일 전체 삭제
 	public int deleteMailByUno(MailVO mvo); 
+	
+	// 메일 갯수 가져오기
+	public int selectMailCountBySender(int sender);
 }

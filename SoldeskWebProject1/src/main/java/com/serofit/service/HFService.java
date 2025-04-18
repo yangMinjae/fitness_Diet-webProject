@@ -10,5 +10,6 @@ public interface HFService {
 	// 프로필 닉네임 불러오기
 	public String getNickname(int uno);	
 	
-	// 메일 카운트 불러오기
+	// 메일 갯수 불러오기
+	public int selectMailCountBySender(int sender);
 }
