@@ -42,3 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		 */
 });
 
+//메일 보내기 버튼
+document.querySelectorAll('button').forEach(button=>{
+	button.addEventListener("click", function(e){		
+		let name = e.target.getAttribute('class');
+
+		switch(name){
+			case 'send-mail-btn' :
+				console.log("send-mail-btn");
+				//location.href = '/';
+				break;
+		}
+	});
+});
+

@@ -34,21 +34,7 @@
 						<span class="regdate">${mvo.regdate}</span>
 					</div>
 				</li>
-			</c:forEach>			
-			<li class="mail-item">
-				<div class="profile-icon">👤</div>
-				<div class="mail-info">
-					<span class="sender">보낸 사람2</span> <span class="preview">----------------
-						내용 미리보기2 ----------------</span>
-				</div>
-			</li>
-			<li class="mail-item">
-				<div class="profile-icon">👤</div>
-				<div class="mail-info">
-					<span class="sender">보낸 사람3</span> <span class="preview">----------------
-						내용 미리보기3 ----------------</span>
-				</div>
-			</li>
+			</c:forEach>
 		</ul>
 	</div>
 
