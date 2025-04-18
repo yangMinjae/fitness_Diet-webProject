@@ -1,0 +1,86 @@
+/* 제목 */
+.join-title {
+	font-size: 2.5rem;
+	font-weight: bold;
+	border-bottom: 3px solid #a67bc5;
+	display: inline-block;
+	padding-bottom: 10px;
+}
+
+/* 전체 section */
+section.bg-light {
+	background-color: #ffffff;
+	padding: 50px 0;
+}
+
+/* 카드 느낌 컨테이너 */
+.container-sm {
+	background-color: #eeffcc;
+	padding: 50px 40px;
+	border-radius: 12px;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+/* 폼 라벨 */
+.form-label {
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+
+/* 입력창 */
+.form-control {
+	background-color: #f7eaea;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 13px;
+	margin-bottom: 10px;
+}
+
+/* 버튼 기본 */
+.btn-primary {
+	background-color: #665c9c;
+	border: none;
+	padding: 12px 30px;
+	border-radius: 30px;
+	font-weight: bold;
+	color: white;
+	margin: 5px;
+}
+
+.btn-primary:hover {
+	background-color: #574d87;
+	opacity: 0.95;
+}
+
+/* 중복확인 버튼도 동일하게 중앙 정렬 */
+#duplicateCkBtn {
+	display: inline-block;
+	margin-top: 8px;
+	margin-bottom: 20px;
+}
+
+/* 버튼 컨테이너 중앙 정렬 */
+.form-group.text-center {
+	text-align: center;
+}
+
+/* 입력 그룹 여백 조정 */
+.form-group {
+	margin-bottom: 20px;
+}
+
+/* 중복확인 후 */
+.input-verified {
+	background-color: #f0fdf4 !important; /* 연한 초록 배경 */
+	border: 2px solid #28a745 !important; /* 부트스트랩 성공 색상 */
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%2328a745" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708 0z"/></svg>');
+
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 1rem 1rem;
+}
+
+.input-group{
+	display: flex
+}
