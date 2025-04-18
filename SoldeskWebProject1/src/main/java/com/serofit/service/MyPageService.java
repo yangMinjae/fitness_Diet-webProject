@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.serofit.domain.FileVO;
 import com.serofit.domain.FollowVO;
+import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
 import com.serofit.domain.UProfileVO;
 
@@ -19,10 +20,10 @@ public interface MyPageService {
 	// 1) 내 프로필 영역
 	
 	// 1-1)유저 프로필 세부 정보 가져오기
-	public UProfileVO getUserProfileInfo(int uno);
+	public MypageProfileDTO getUserProfileInfo(int uno);
 	
 	// 1-2) 프로필 수정 기능
-	public boolean ModifyUserProfile(UProfileVO uvo);
+	public boolean ModifyUserProfile(MypageProfileDTO mpDTO);
 	
 	//------------------------------------------------------
 	

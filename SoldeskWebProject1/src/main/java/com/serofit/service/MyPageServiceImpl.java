@@ -6,17 +6,24 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.serofit.domain.FileVO;
 import com.serofit.domain.FollowVO;
+import com.serofit.domain.MateVO;
+import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
 import com.serofit.domain.UProfileVO;
 import com.serofit.mapper.FileMapper;
 import com.serofit.mapper.FollowMapper;
+import com.serofit.mapper.MateMapper;
 import com.serofit.mapper.UProfileMapper;
 import com.serofit.mapper.UserMapper;
 
+import lombok.extern.log4j.Log4j;
+
 @Service
+@Log4j
 public class MyPageServiceImpl implements MyPageService{
 	
 	@Autowired
@@ -31,6 +38,9 @@ public class MyPageServiceImpl implements MyPageService{
 	@Autowired
 	FollowMapper followMapper;
 	// *) 공통
+	
+	@Autowired
+	MateMapper mMapper;
 	
 	// 유저 프로필 사진/닉네임 가져오기
 	@Override
@@ -48,18 +58,26 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	// 1-1)유저 프로필 세부 정보 가져오기
 	@Override
-	public UProfileVO getUserProfileInfo(int uno) {
+	public MypageProfileDTO getUserProfileInfo(int uno) {
 		UProfileVO upvo = upMapper.selectByUno(uno);
-		return upvo;
+		MateVO mvo = mMapper.findMate(uno);
+		log.warn(upvo.getSelf());
+		log.warn(mvo.getArea());
+		MypageProfileDTO mpDTO = new MypageProfileDTO(upvo, mvo);
+		
+		return mpDTO;
 	}
 	
 	// 1-2) 프로필 수정 기능
 	@Override
-	public boolean ModifyUserProfile(UProfileVO upvo) {
+	@Transactional
+	public boolean ModifyUserProfile(MypageProfileDTO mpDTO) {
 		
-		int result = upMapper.updateProfile(upvo);
+		int result1 = upMapper.updateProfile(mpDTO.getUProfileVO());
+		int result2 = mMapper.deleteMate(mpDTO.getUno());
+		int result3 = mMapper.insertMate(mpDTO.getMateVO());
 		
-		return result!=0? true : false;
+		return result1!=0&&result2!=0 &&result3!=0? true : false;
 	}
 	
 	//------------------------------------------------------
