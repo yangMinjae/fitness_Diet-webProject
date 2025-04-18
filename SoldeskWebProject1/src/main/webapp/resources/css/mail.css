@@ -1,0 +1,109 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+.mailbox-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+/* 상단 버튼과 검색바 */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.send-mail-btn {
+  background-color: #1d1d1d;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.search-box {
+  display: flex;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.search-filter {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-grow: 1;
+  border-radius: 25px;
+  overflow: hidden;
+  background-color: #eee5f4;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: transparent;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.search-btn {
+  padding: 0 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* 메일 리스트 */
+.mail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mail-item {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #aaa;
+  padding: 1rem 0;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #d7c3ec;
+  color: #4a0072;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.4rem;
+}
+
+.mail-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sender {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.preview {
+  color: #555;
+  font-size: 0.95rem;
+}

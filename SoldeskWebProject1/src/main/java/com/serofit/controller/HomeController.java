@@ -26,7 +26,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		model.addAttribute("hbList", mpService.getHotPosts(4)); // 인기 게시글 갯수 4개로 고정
-		model.addAttribute("mCount", hfService.selectMailCountBySender(1));
+		model.addAttribute("mCount", hfService.selectMailCountByReceiver(1));
 		return "/jsh/main";
 	}
 	

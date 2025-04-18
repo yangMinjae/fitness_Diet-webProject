@@ -33,7 +33,7 @@
 	</delete>
 	
 	<!-- 메일 갯수 가져오기 -->
-	<select id="selectMailCountBySender" parameterType="int" resultType="int">
-		SELECT COUNT(*) FROM tbl_mail WHERE sender=#{sender} AND hit=0
+	<select id="selectMailCountByReceiver" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM tbl_mail WHERE receiver=#{receiver} AND hit=0
 	</select>
 </mapper>

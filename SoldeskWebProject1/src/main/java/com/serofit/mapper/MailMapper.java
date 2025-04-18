@@ -18,5 +18,5 @@ public interface MailMapper {
 	public int deleteMailByUno(MailVO mvo); 
 	
 	// 메일 갯수 가져오기
-	public int selectMailCountBySender(int sender);
+	public int selectMailCountByReceiver(int receiver);
 }

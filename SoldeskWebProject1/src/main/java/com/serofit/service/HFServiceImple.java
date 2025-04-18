@@ -25,7 +25,7 @@ public class HFServiceImple implements HFService{
 	
 	// 읽지 않은 메일 불러오기
 	@Override
-	public int selectMailCountBySender(int sender) {		
-		return mMapper.selectMailCountBySender(sender);
+	public int selectMailCountByReceiver(int receiver) {		
+		return mMapper.selectMailCountByReceiver(receiver);
 	}
 }
