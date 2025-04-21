@@ -1,5 +1,7 @@
 package com.serofit.mapper;
 
+import java.util.List;
+
 import com.serofit.domain.UProfileVO;
 
 public interface UProfileMapper {
@@ -15,4 +17,7 @@ public interface UProfileMapper {
 	
 	// 회원 생성시 기본 프로필생성
 	public int insertProfile(UProfileVO upvo);
+	
+	// mate 1 인 uno 가져오기
+	public List<Integer> getUnoByMate();;
 }

@@ -43,7 +43,7 @@
 	
 	<!-- id/pw 찾기 -->
 	<select id="findIdPwByEmail" parameterType="String" resultType="com.serofit.domain.UserVO">
-		SELECT id, pw FROM tbl_user WHERE email=#{email}
+		SELECT uno, id, pw FROM tbl_user WHERE email=#{email}
 	</select>
 	
 	<!-- 회원 탈퇴 -->

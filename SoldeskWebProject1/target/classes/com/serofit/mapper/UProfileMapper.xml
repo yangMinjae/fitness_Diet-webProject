@@ -41,7 +41,7 @@
 	</insert>
 	
 	<!-- mate가 1인 uno 가져오기 -->
-	<select id="getUnoByMate" resultType="int">
-	SELECT uno FROM WHERE mate = 1
+	<select id="getUnoByMate" resultType="_int">
+	SELECT uno FROM tbl_uprofile WHERE mate = 1
 	</select>
 </mapper>
