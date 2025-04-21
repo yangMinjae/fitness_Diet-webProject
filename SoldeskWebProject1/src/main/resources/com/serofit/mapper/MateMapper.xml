@@ -22,5 +22,6 @@
 	<!-- 회원 탈퇴 시 삭제 -->
 	<delete id="deleteMate" parameterType="int">
 		DELETE FROM tbl_mate WHERE uno=#{uno}
-	</delete>		
+	</delete>	
+	
 </mapper>

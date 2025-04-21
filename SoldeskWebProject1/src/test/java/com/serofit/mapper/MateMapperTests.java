@@ -27,7 +27,7 @@ public class MateMapperTests {
 		
 		log.info(mMapper.insertMate(mvo));
 	}
-	
+	@Test
 	public void testfindMate() {
 		log.info(mMapper.findMate(1));
 	}
