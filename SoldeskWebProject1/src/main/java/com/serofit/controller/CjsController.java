@@ -52,8 +52,7 @@ public class CjsController {
 	
 	// 전체 게시글 불러오기(비동기)
 	@ResponseBody
-	@GetMapping(value ="/getAllBoardList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	
+	@GetMapping(value ="/getAllBoardList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)	
 	public List<BoardListDTO> getAllList(){
 		log.info("getAllBoardList....");
 	

@@ -158,6 +158,7 @@ function init() {
 
 // ID 중복 확인
 function validateId(){
+	
 	const id = f.mId.value;
 	fetch(`/sm/validateId/${encodeURIComponent(id)}`
 	)

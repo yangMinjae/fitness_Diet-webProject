@@ -18,7 +18,7 @@ public class SignupServiceImpl implements SignupService {
 
 	@Autowired
 	UserMapper uMapper;
-	
+
 	@Autowired
 	UProfileMapper upmapper;
 
@@ -36,22 +36,19 @@ public class SignupServiceImpl implements SignupService {
 	public int validateNickname(String nickname) {
 		return uMapper.validateNickname(nickname);
 	}
-	
+
 	@Override
 	@Transactional
 	public int insertUser(UserVO uvo) {
 		UProfileVO upvo = new UProfileVO();
-		
-		int userresult = uMapper.insertUser(uvo);
+
+		uMapper.insertUser(uvo);
 		UserVO vo = uMapper.findIdPwByEmail(uvo.getEmail());
-		if (userresult == 1) {
-			// uuid 고정 값
-			upvo.setUuid("UUID-TEST");
-			upvo.setUno(vo.getUno());
-			
-			int uuidresult = upmapper.insertProfile(upvo);
-		}
 		
-		return userresult;
+		// uuid 고정 값 변경!!!!!!!!!!!!!!!
+		upvo.setUuid("UUID-TEST");
+		upvo.setUno(vo.getUno());
+
+		return upmapper.insertProfile(upvo);
 	}
 }
