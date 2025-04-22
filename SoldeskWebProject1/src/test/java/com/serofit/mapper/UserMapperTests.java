@@ -44,7 +44,7 @@ public class UserMapperTests {
 		UserVO uvo = new UserVO();
 		uvo.setId("id");
 		uvo.setPw("pw");
-		log.info(umapper.login(uvo));
+		//log.info(umapper.login(uvo));
 	}
 	
 	public void testfindIdPwByEmail() {
