@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j;
 public class YmjController {
 	@Autowired
 	MyPageService mService;
-	
+	// -------------------------마이페이지-----------------------------------
 	@GetMapping("/myPage")
 	public void showMyPage() {
 		log.info("....forwarding to myPage....");
@@ -105,5 +105,12 @@ public class YmjController {
 		log.info("팔로우 하기");
 		boolean result = mService.follow(fvo);
 		return result? "success" : "fail";
+	}
+	// -------------------------------------------------------------------------------
+	// -------------------------------로그인------------------------------------------
+	@GetMapping("/login")
+	public void showLoginPage() {
+		log.info("....forwarding to LoginPage....");
+		
 	}
 }
