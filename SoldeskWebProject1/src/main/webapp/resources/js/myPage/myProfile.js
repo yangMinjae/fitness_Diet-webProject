@@ -10,7 +10,7 @@ let yesRadio = document.querySelector('#yesRadio');
 let noRadio = document.querySelector('#noRadio');
 
 let fav = document.querySelector('input[name="fav"]');
-let time = document.querySelector('select[name="time"]')
+let time = document.querySelector('select[name="time"]');
 let showArea = document.querySelector('#showArea');
 let self = document.querySelector('#self');
 
@@ -34,7 +34,7 @@ document.querySelectorAll('button')
 
         setToEdit();                // input 태그 및 이미지 버튼의 disabled를 풀어준다.
 
-        profileEditToSubmit(e);     // 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과 
+        profileEditToSubmit(e);     // 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과
                                     // 텍스트를 바꿔준다.
 
       }else if(pressCount==1){      // '프로필 수정'(제출 버튼)이 두번째 눌렸을 시 컨트롤러로 form을 제출
@@ -168,7 +168,7 @@ function imgClicked(){            // 이미지 버튼 클릭시 파일 업로드
 	// 후에 input[tyep="file" hidden]과 연결
 }
 
-function profileEditToSubmit(){   // 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과 
+function profileEditToSubmit(){   // 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과 텍스트를 변경
   editProfile.innerText='제출';
   editProfile.classList.remove('edit-button');
   editProfile.classList.add('submit-button');

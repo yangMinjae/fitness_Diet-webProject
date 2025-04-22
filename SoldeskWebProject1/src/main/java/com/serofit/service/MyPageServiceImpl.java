@@ -37,7 +37,6 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Autowired
 	FollowMapper followMapper;
-	// *) 공통
 	
 	@Autowired
 	MateMapper mMapper;
