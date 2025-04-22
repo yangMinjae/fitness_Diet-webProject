@@ -35,8 +35,7 @@ document.querySelectorAll('button').forEach(button=>{
 		}else if(type === 'escapeAnchovy'){
 			console.log("escapeAnchovy");
 			getBoardListByTag("멸치탈출");
-		}
-		else if(type === 'maintenance'){
+		}else if(type === 'maintenance'){
 			console.log("maintenance");
 			getBoardListByTag("유지어터");
 		}else if(type === 'Professional'){

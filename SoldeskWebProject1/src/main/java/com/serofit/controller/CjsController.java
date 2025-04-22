@@ -76,5 +76,9 @@ public class CjsController {
 		int uno = 2;
 		return blService.getPostsByLove(uno);
 	}
+	// 게시글 작성할때 식단 title 가져오기
+//	@GetMapping("/")
+//	public
+	
 	
 }

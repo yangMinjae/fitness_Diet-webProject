@@ -17,12 +17,13 @@
 
 		<!-- 카테고리 선택 -->
 		<div class="form-group">
-			<label for="category">태그</label> <select id="category">
-				<option value="다이어터">다이어터</option>
-				<option value="멸치탈출">멸치탈출</option>
-				<option value="유지어터">유지어터</option>
-				<option value="프로득근러">프로득근러</option>
-				<option value="헬스키퍼">헬스키퍼</option>
+			<label for="category">식단 선택</label> 
+			<select id="diet">
+				<option value="">식단을 선택하세요</option>
+				<c:forEach var="dvo" items="${ list}">
+					<option value="${dvo.title }"> </option>
+				</c:forEach>
+				
 			</select>
 		</div>
 
