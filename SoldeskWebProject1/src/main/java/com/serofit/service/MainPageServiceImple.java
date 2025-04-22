@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-public class MainPageServicImple implements MainPageService{
+public class MainPageServiceImple implements MainPageService{
 	@Autowired
 	UserMapper uMapper;
 	
@@ -41,14 +41,16 @@ public class MainPageServicImple implements MainPageService{
 	// 인기 게시글 불러오기
 	@Override
 	public List<HotBoardDTO> getHotPosts(int quantity) {
-		// DTOList, DTO 생성
-		HotBoardDTO hbDTO = new HotBoardDTO();
+		// DTOList
 		List<HotBoardDTO> hbList = new ArrayList<HotBoardDTO>();
 		
 		// 인기 게시글 가져오기
 		List<BoardVO> bList = bMapper.getHotPosts(quantity);
 		
 		for (BoardVO boardVO : bList) {
+			// DTO 생성
+			HotBoardDTO hbDTO = new HotBoardDTO();
+			
 			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(boardVO.getUno());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
