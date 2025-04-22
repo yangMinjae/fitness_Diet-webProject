@@ -20,7 +20,12 @@ public class MypageProfileDTO {
 	private boolean gender;
 	private String age;
 	
-	public MypageProfileDTO(UProfileVO upvo, MateVO mvo) {
+	private String nickname;
+	
+	private String fileName;
+	private String path;
+	
+	public MypageProfileDTO(UProfileVO upvo, MateVO mvo, FileVO fvo) {
 		this.tag=upvo.getTag();
 		this.self=upvo.getSelf();
 		this.fav=upvo.getFav();
@@ -32,6 +37,9 @@ public class MypageProfileDTO {
 		this.area=mvo.getArea();
 		this.gender=mvo.isGender();
 		this.age=mvo.getAge();
+		
+		this.fileName=fvo.getFileName();
+		this.path=fvo.getPath();
 	}
 	
 	public UProfileVO getUProfileVO() {
@@ -55,5 +63,13 @@ public class MypageProfileDTO {
 		mvo.setUno(uno);
 		
 		return mvo;
+	}
+	
+	public FileVO getFileVO() {
+		FileVO fvo = new FileVO();
+		fvo.setUuid(uuid);
+		fvo.setFileName(fileName);
+		fvo.setPath(path);
+		return fvo;
 	}
 }

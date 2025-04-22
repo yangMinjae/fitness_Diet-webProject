@@ -29,4 +29,7 @@ public interface FollowMapper {
 	
 	// 회원 탈퇴시 팔로우 전체 삭제
 	public int deleteFollowAll(int uno);
+	
+	// 팔로우 하려는 사람을 이미 팔로우 하고 있는지 확인
+	public int checkIfFollow(FollowVO fvo);
 }

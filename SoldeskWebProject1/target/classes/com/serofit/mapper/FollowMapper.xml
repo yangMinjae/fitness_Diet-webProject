@@ -62,4 +62,10 @@
 		DELETE FROM tbl_follow
 		WHERE thrower = #{uno} OR catcher = #{uno}
 	</delete>
+	
+	<!-- 팔로우 하려는 사람을 이미 팔로우 하고 있는지 확인  -->
+	<select id="checkIfFollow" parameterType="com.serofit.domain.FollowVO" resultType="int">
+		SELECT COUNT(*) FROM tbl_follow
+		WHERE thrower = #{thrower} and catcher = #{catcher}
+	</select>
 </mapper>
