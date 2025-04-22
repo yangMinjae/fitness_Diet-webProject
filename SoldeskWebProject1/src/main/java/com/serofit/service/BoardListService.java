@@ -17,4 +17,5 @@ public interface BoardListService {
 	// 내가 좋아요를 누른 글
 	public List<BoardListDTO> getPostsByLove(int uno);
 	
+	
 }

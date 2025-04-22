@@ -92,17 +92,31 @@ public class BoardListServiceImple implements BoardListService{
 	public List<BoardListDTO> getPostsByLove(int uno) {
 		List<BoardListDTO> allPostByLove = new ArrayList<>();
 		List<LikeVO> lvoList = lMapper.findBnoByUno(uno);
-		
+
 		for(LikeVO lvo : lvoList) {
 		int bno = lvo.getBno();
-		
+
 		BoardVO bvo = bMapper.getPostByBno(bno);
+		
+		// 여기에있는 if문은 우리가 강제로 데이터 집어넣어서 넣은것 ( db정리후 삭제)
+		if(bvo== null) {
+			System.out.println("bvo가 없음");
+			continue;
+		}
+		//////////////
 		int dno = bvo.getDno();
 		DietVO dvo = dMapper.selectDietByDno(dno);
+		
+		// 여기에있는 if문은 우리가 강제로 데이터 집어넣어서 넣은것 ( db정리후 삭제)
+		if(dvo== null) {
+			System.out.println("dvo가 없음");
+			continue;
+		}
+		/////////////
 		String nickname = uMapper.readNickname(uno);
 		
 		BoardListDTO dto = new BoardListDTO(
-				 bvo.getTitle(),
+					bvo.getTitle(),
 	                nickname,
 	                dvo.getTag(),
 	                bvo.getRegDate(),
@@ -110,11 +124,9 @@ public class BoardListServiceImple implements BoardListService{
 	                bvo.getLove()
 				);
 		allPostByLove.add(dto);
-		
-		
-		
-		
+	
 		}
 		return allPostByLove;
 	}
+	
 }

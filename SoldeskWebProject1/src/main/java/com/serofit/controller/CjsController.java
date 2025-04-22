@@ -74,7 +74,7 @@ public class CjsController {
 	@GetMapping(value = "/boardList/love", produces =MediaType.APPLICATION_JSON_UTF8_VALUE )
 	public List<BoardListDTO> getPostsByLove(){
 		
-		int uno = 1;
+		int uno = 2;
 		return blService.getPostsByLove(uno);
 	}
 	
