@@ -1,5 +1,6 @@
 package com.serofit.mapper;
 
+import com.serofit.domain.LoginDTO;
 import com.serofit.domain.UserVO;
 
 public interface UserMapper {
@@ -20,7 +21,7 @@ public interface UserMapper {
 	public int validateNickname(String nickname);
 
 	// 로그인
-	public String login(UserVO uvo);
+	public int login(LoginDTO ldto);
 
 	// id/pw 찾기
 	public UserVO findIdPwByEmail(String email);
