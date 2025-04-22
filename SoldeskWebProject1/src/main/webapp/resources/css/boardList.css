@@ -1,0 +1,73 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background-color: #f8f6f6;
+}
+
+.board-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+/* 필터 버튼 */
+.filter-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter {
+  padding: 0.6rem 1.2rem;
+  background-color: #e2e2e2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filter.active {
+  background-color: #d3cccc;
+}
+
+.write-post-btn {
+  margin-left: auto;
+  padding: 0.6rem 1.5rem;
+  background-color: #7b5fa4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 테이블 스타일 */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ede8e8;
+}
+
+.post-table th,
+.post-table td {
+  padding: 0.8rem;
+  border: 1px solid #c7bdbd;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.post-table th {
+  background-color: #ded6d6;
+  font-weight: bold;
+}
+
+.empty {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+}
