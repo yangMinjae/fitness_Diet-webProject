@@ -177,12 +177,6 @@ body {
 	background-color: #ffffff;
 }
 
-/* 수정 버튼 */
-.edit-button-wrapper {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .edit-button {
     background-color: #7c59b0;
     color: white;
@@ -210,12 +204,14 @@ body {
     margin-bottom: 15px;
 }
 
-.menu-section:active,
-.menu-button:active {
-    filter: brightness(0.9);
-    transition: filter 0.1s;
+.menu-section,
+.menu-button{
+	transition: filter 0.15s ease;
 }
-
+.menu-section:hover,
+.menu-button:hover{
+	filter: brightness(0.9);
+}
 .edit-button:active {
     filter: brightness(0.9);
     transition: filter 0.1s;
@@ -229,7 +225,7 @@ body {
 }
 
 .imgDisabled{
-	border: 2px solid #ccc;
+	border: 10px solid #ccc;
 }
 
 .imgAbled{
@@ -238,3 +234,164 @@ body {
 .profile-section h2{
 	padding: 0 0 0 35px;
 }
+.imgClickable:active {
+	filter: brightness(80%);
+}
+.submit-button {
+    background-color: #444444;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.submit-button:active {
+    filter: brightness(0.9);
+    transition: filter 0.1s;
+}
+.cancel-button{
+	background-color: #bb0000;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.cancel-button:activate{
+	filter: brightness(0.9);
+    transition: filter 0.1s;
+}
+
+.hidden{
+	display: none;
+}
+.smallProfileImg{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  box-sizing: content-box;
+}
+.listTable {
+  width: 100%;
+  border-spacing: 0 10px; /* 행 간 간격 */
+}
+/* ----------------------------목록 동적 생성시 필요 부분---------------------------- */
+.tblImgSection {
+  width: 60px;
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+
+.tblNicknameSection {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px 10px;
+  vertical-align: middle;
+  min-width: 150px;
+  width: 100%;
+}
+
+.tblBtnSection {
+  text-align: center;
+  padding: 5px 10px;
+  vertical-align: middle;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.tblFollowBtnSection {
+  text-align: center;
+  padding: 5px 10px;
+  vertical-align: middle;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.followBtnWrapper {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.followCancelBtn,
+.addFavBtn,
+.addFollowBtn,
+.favRemoveBtn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+.followCancelBtn:active,
+.addFavBtn:active,
+.addFollowBtn:active,
+.followCancelBtn:active{
+	filter: brightness(0.9);
+    transition: filter 0.1s;
+}
+.followCancelBtn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.addFavBtn {
+  background-color: #6bc1ff;
+  color: white;
+}
+.addFollowBtn{
+  background-color: #6bc1ff;
+  color: white;
+}
+.favRemoveBtn{
+  background-color: #999;
+  color: white;
+}
+/* ----------------------------목록 동적 생성시 필요 부분---------------------------- */
+
+/* ----------------------------테이블 헤더 부분---------------------------- */
+/* 테이블 헤더 전체 공통 스타일 */
+.listTable thead th {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+  color: #555;
+}
+
+/* 헤더: 프로필 이미지 칸 */
+.tblImgHeader {
+  width: 60px;
+  font-size: 14px;
+}
+
+/* 헤더: 닉네임 칸 */
+.tblNicknameHeader {
+  width: 100%;
+}
+
+/* 헤더: 버튼 칸 (즐겨찾기 해제 / 팔로우 취소 / 즐겨찾기 추가) */
+.tblBtnHeader {
+  text-align: center;
+  width: 1px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.favRemoveBtn {
+ 
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+
+  text-align: center;
+}
+/* ----------------------------테이블 헤더 부분---------------------------- */
+
