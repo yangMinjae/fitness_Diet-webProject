@@ -48,7 +48,11 @@ public class MyPageServiceImpl implements MyPageService{
 		String nickname = uMapper.readNickname(uno);
 		String uuid = upMapper.selectByUno(uno).getUuid();
 		FileVO fvo = fileMapper.selectUprofileFile(uuid);
-		return new ProfileDTO(nickname, fvo);
+		ProfileDTO pdto = new ProfileDTO();
+		pdto.setFvo(fvo);
+		pdto.setNickname(nickname);
+		pdto.setUno(uno);
+		return pdto;
 	}
 	// ProfileDTO domain패키지에 만들었습니다.
 	
@@ -61,9 +65,14 @@ public class MyPageServiceImpl implements MyPageService{
 	public MypageProfileDTO getUserProfileInfo(int uno) {
 		UProfileVO upvo = upMapper.selectByUno(uno);
 		MateVO mvo = mMapper.findMate(uno);
-		log.warn(upvo.getSelf());
-		log.warn(mvo.getArea());
-		MypageProfileDTO mpDTO = new MypageProfileDTO(upvo, mvo);
+		
+		String nickname = uMapper.readNickname(uno);
+		String uuid = upvo.getUuid();
+		FileVO fvo = fileMapper.selectUprofileFile(uuid);
+		
+		
+		MypageProfileDTO mpDTO = new MypageProfileDTO(upvo, mvo, fvo);
+		mpDTO.setNickname(nickname);
 		
 		return mpDTO;
 	}
@@ -72,8 +81,16 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	@Transactional
 	public boolean ModifyUserProfile(MypageProfileDTO mpDTO) {
+		UProfileVO uvo = upMapper.selectByUno(mpDTO.getUno());
+		mpDTO.setUuid(uvo.getUuid());
+		mpDTO.setTag(uvo.getTag());
 		
 		int result1 = upMapper.updateProfile(mpDTO.getUProfileVO());
+		
+		MateVO mvo = mMapper.findMate(mpDTO.getUno());
+		mpDTO.setAge(mvo.getAge());
+		mpDTO.setGender(mvo.isGender());
+		
 		int result2 = mMapper.deleteMate(mpDTO.getUno());
 		int result3 = mMapper.insertMate(mpDTO.getMateVO());
 		
@@ -109,6 +126,7 @@ public class MyPageServiceImpl implements MyPageService{
 		for(FollowVO fvo : followList) {
 			int followUno = fvo.getCatcher();
 			ProfileDTO pdto = getProfileSet(followUno);
+			pdto.setFav(fvo.isFav());
 			pdtoList.add(pdto);
 		}
 		return pdtoList;
@@ -123,6 +141,7 @@ public class MyPageServiceImpl implements MyPageService{
 		for(FollowVO fvo : followerList) {
 			int followerUno = fvo.getThrower();
 			ProfileDTO pdto = getProfileSet(followerUno);
+			pdto.setFav(fvo.isFav());
 			pdtoList.add(pdto);
 		}
 		return pdtoList;
@@ -135,7 +154,11 @@ public class MyPageServiceImpl implements MyPageService{
 	// 컨트롤러에서 함수 사용시 fvo의 thrower에 유저 본인 uno, catcher에 선택한(팔로우할) 유저의 uno를 넣는다.
 	@Override
 	public boolean follow(FollowVO fvo) {
-		int result = followMapper.follow(fvo);
+		int ifExist = followMapper.checkIfFollow(fvo);
+		int result=0;
+		if(ifExist==0) {
+			result = followMapper.follow(fvo);
+		}
 		return result!=0 ? true : false;
 	}
 	
