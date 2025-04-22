@@ -24,6 +24,7 @@ document
       console.log('비밀번호 찾기');
     }else if(href == 'signup'){
       console.log('회원가입');
+      location.href="/sm/signup";
     }
   })
 });
