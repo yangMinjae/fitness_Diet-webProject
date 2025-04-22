@@ -37,8 +37,8 @@
 	</select>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="com.serofit.domain.UserVO" resultType="String">
-		SELECT email FROM tbl_user WHERE id=#{id} AND pw=#{pw}
+	<select id="login" parameterType="com.serofit.domain.LoginDTO" resultType="int">
+		SELECT UNO FROM tbl_user WHERE id=#{username} AND pw=#{password}
 	</select>
 	
 	<!-- id/pw 찾기 -->
