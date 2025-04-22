@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  padding: 40px;
+}
+
+.receiver {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.receiver label {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+#friend-search {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+}
+
+.friend-list {
+  background-color: #c0d9a9;
+  max-width: 500px;
+  border: 1px solid #888;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #666;
+  cursor: pointer;
+}
+
+.friend img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.message-box {
+  background-color: #ddd;
+  padding: 30px;
+  min-height: 200px;
+}
+
+.message-box textarea {
+  width: 100%;
+  height: 100px;
+  font-size: 18px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.btn-group {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #2d2d2d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
