@@ -36,9 +36,14 @@
 		SELECT COUNT(*) FROM tbl_user WHERE nickname=#{nickname}
 	</select>
 	
-	<!-- 로그인 -->
-	<select id="login" parameterType="com.serofit.domain.LoginDTO" resultType="int">
+	<!-- uno 값 가져오기 -->
+	<select id="getUno" parameterType="com.serofit.domain.LoginDTO" resultType="int">
 		SELECT UNO FROM tbl_user WHERE id=#{username} AND pw=#{password}
+	</select>
+	
+	<!-- 유저 정보 존재 확인 -->
+	<select id="login" parameterType="com.serofit.domain.LoginDTO" resultType="int">
+		SELECT COUNT(*) FROM tbl_user WHERE id=#{username} AND pw=#{password}
 	</select>
 	
 	<!-- id/pw 찾기 -->

@@ -20,7 +20,10 @@ public interface UserMapper {
 	// 닉네임 중복 확인
 	public int validateNickname(String nickname);
 
-	// 로그인
+	// uno 값 가져오기
+	public int getUno(LoginDTO ldto);
+	
+	// 유저 정보 존재 확인
 	public int login(LoginDTO ldto);
 
 	// id/pw 찾기

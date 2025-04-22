@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.FollowVO;
+import com.serofit.domain.LoginDTO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
+import com.serofit.service.LoginService;
 import com.serofit.service.MyPageService;
 
 import lombok.extern.log4j.Log4j;
@@ -27,6 +29,9 @@ import lombok.extern.log4j.Log4j;
 public class YmjController {
 	@Autowired
 	MyPageService mService;
+	
+	@Autowired
+	LoginService lService;
 	// -------------------------마이페이지-----------------------------------
 	@GetMapping("/myPage")
 	public void showMyPage() {
@@ -113,4 +118,12 @@ public class YmjController {
 		log.info("....forwarding to LoginPage....");
 		
 	}
+	@ResponseBody
+	@PostMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String login(@RequestBody LoginDTO ldto) {
+		String result = lService.login(ldto);
+		return result!="0" ? result : "fail";
+	}
+	// -------------------------------------------------------------------------------
+	
 }
