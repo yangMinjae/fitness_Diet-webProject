@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.serofit.domain.LoginDTO;
+import com.serofit.domain.UserVO;
 import com.serofit.mapper.UserMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -13,6 +14,7 @@ import lombok.extern.log4j.Log4j;
 public class LoginServiceImpl implements LoginService{
 	@Autowired
 	UserMapper uMapper;
+	
 	public String login(LoginDTO ldto) {
 		String uno = "0";
 		if(uMapper.login(ldto)!=0) {
@@ -20,5 +22,10 @@ public class LoginServiceImpl implements LoginService{
 		}
 		log.warn("login result uno : "+uno);
 		return uno;
+	}
+	
+	@Override
+	public UserVO findID(String email) {		
+		return uMapper.findIdPwByEmail(email);
 	}
 }

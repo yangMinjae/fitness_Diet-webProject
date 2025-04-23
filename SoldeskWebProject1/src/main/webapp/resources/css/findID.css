@@ -1,0 +1,73 @@
+#findIdModal input[type="email"] {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#findIdModal button {
+	margin-top: 10px;
+	padding: 8px 16px;
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+#findIdModal button:hover {
+	background-color: #218838;
+}
+
+#findIdResult {
+	margin-top: 10px;
+	color: #333;
+}
+
+/* 기본 모달 상태 */
+#findIdModal {
+	display: none;
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 1000;
+}
+
+/* 열릴 때 */
+#findIdModal.show {
+	display: block;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* 모달 박스 애니메이션 */
+#findIdModal .modal-content {
+	background: #fff;
+	width: 400px;
+	margin: 10% auto;
+	padding: 20px;
+	border-radius: 8px;
+	position: relative;
+	animation: fadeSlideUp 0.3s ease;
+	text-align: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 애니메이션 키프레임 */
+@keyframes fadeSlideUp {
+	from {
+		transform: translateY(30px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+

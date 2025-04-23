@@ -1,0 +1,55 @@
+#resultBody {
+	margin-top: 10px;
+	font-size: 16px;
+	color: #333;
+}
+
+#resultModal .modal-content {
+	width: 350px;
+	text-align: center;
+}
+
+/* 기본 모달 설정 */
+#resultModal {
+	display: none;
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	z-index: 1000;
+}
+
+/* 표시 시 */
+#resultModal.show {
+	display: block;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* 모달 콘텐츠 애니메이션 */
+#resultModal .modal-content {
+	background: #fff;
+	width: 350px;
+	margin: 10% auto;
+	padding: 20px;
+	border-radius: 8px;
+	text-align: center;
+	position: relative;
+	animation: fadeSlideUp 0.3s ease;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 재사용 키프레임 */
+@keyframes fadeSlideUp {
+	from {
+		transform: translateY(30px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

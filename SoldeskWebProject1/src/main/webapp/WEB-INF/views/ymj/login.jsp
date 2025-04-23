@@ -25,6 +25,8 @@
 			</form>
 		</div>
 	</div>
+	<jsp:include page="../jsh/findID.jsp" />
+	<jsp:include page="../jsh/resultFindID.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 	<script type="text/javascript" src="/resources/js/login.js"></script>

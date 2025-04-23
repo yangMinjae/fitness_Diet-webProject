@@ -3,14 +3,21 @@ package com.serofit.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.MailVO;
+import com.serofit.domain.UserVO;
 import com.serofit.service.HFService;
+import com.serofit.service.LoginService;
 import com.serofit.service.MailService;
 import com.serofit.service.MainPageService;
 
@@ -28,6 +35,10 @@ public class JshController {
 	
 	@Autowired
 	MailService mService;
+	
+	@Autowired
+	LoginService lService;
+	
 	// 메인 화면 로딩시
 	@GetMapping("/main")
 	public void maimPage(Model model) {
@@ -58,5 +69,12 @@ public class JshController {
 	public String sendMail(MailVO mvo) {
 		mService.insertMail(mvo);		
 		return "redirect:/jsh/main";
+	}
+	
+	// 이메일로 아이디 비번 찾기
+	@ResponseBody
+	@GetMapping(value = "/findID", produces = MediaType.APPLICATION_JSON_VALUE)
+	public UserVO findID(String email, Model model) {	
+		return lService.findID(email);
 	}
 }
