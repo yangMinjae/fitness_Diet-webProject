@@ -8,6 +8,11 @@
 		SELECT * FROM tbl_mate WHERE uno = #{uno}
 	</select>
 	
+	<!-- 자신을 제외한 운동 메이트 찾기 -->
+	<select id="findByNotUno" parameterType="int" resultType="com.serofit.domain.MateVO">
+		SELECT * FROM tbl_mate WHERE uno != #{uno}
+	</select>
+		
 	<!-- 설문 결과 저장 -->
 	<insert id="insertMate" parameterType="com.serofit.domain.MateVO">
 		INSERT INTO tbl_mate VALUES (

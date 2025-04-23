@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MateDTO {
 	
+	private UProfileVO pvo;
 	private ProfileDTO dto;
 	private MateVO mvo;
-	private DietVO dvo;
 }

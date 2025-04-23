@@ -18,6 +18,4 @@ public interface DietMapper {
 	// DNO로 TAG 가져오기
 	public DietVO selectDietByDno(int dno);
 	
-	// UNO로 TAG 가져오기
-	public DietVO selectOneDietByUno(int uno);
 }

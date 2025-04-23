@@ -40,8 +40,8 @@
 		)
 	</insert>
 	
-	<!-- mate가 1인 uno 가져오기 -->
-	<select id="getUnoByMate" resultType="_int">
-	SELECT uno FROM tbl_uprofile WHERE mate = 1
+	<!-- tbl_uprofile 테이블에서 uno 일치와 mate가 1인 모든 데이터 가져오기 -->
+	<select id="getUnoByMate" resultType="com.serofit.domain.UProfileVO" parameterType="int">
+	SELECT * FROM tbl_uprofile WHERE uno = #{uno} AND mate = 1
 	</select>
 </mapper>

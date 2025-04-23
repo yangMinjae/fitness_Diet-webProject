@@ -1,9 +1,5 @@
 package com.serofit.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,16 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.serofit.domain.DietVO;
-import com.serofit.domain.MateDTO;
-import com.serofit.domain.MateVO;
-import com.serofit.domain.ProfileDTO;
 import com.serofit.domain.UserVO;
 import com.serofit.service.MatePageService;
-import com.serofit.service.MyPageService;
 import com.serofit.service.SignupService;
 
 import lombok.extern.log4j.Log4j;
@@ -75,27 +65,16 @@ public class SmController {
 
 	@Autowired
 	private MatePageService mpservice;
-
-	@Autowired
-	private MyPageService mservice;
-
-//	@Autowired
-//	private Diet
+	
 	// 운동 메이트 찾기 화면으로 이동
 	@GetMapping("/matePage")
 	public String matePage(Model model) {
-		List<Integer> unoList = mpservice.getUnoByMate();
-		List<MateDTO> mateList = new ArrayList<>();
-		for (int uno : unoList) {
-			MateDTO dto = new MateDTO();
-			ProfileDTO pdto = mservice.getProfileSet(uno);
-			MateVO mvo = mpservice.findMate(uno);
-//			DietVO dvo = 
-			dto.setDto(pdto);
-			dto.setMvo(mvo);
-			mateList.add(dto);
-		}
-		model.addAttribute("mateList", mateList);
+		// uno 임시 부여 
+		// , int uno 매개변수에 추가하기
+		int uno1 = 3;
+		model.addAttribute("user", mpservice.selectByUno(uno1));
+		model.addAttribute("mateList", mpservice.findMateList(uno1));
+		
 		return "/sm/matePage";
 	}
 	

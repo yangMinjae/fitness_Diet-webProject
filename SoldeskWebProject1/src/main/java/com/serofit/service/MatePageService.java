@@ -3,16 +3,22 @@ package com.serofit.service;
 import java.util.List;
 
 import com.serofit.domain.DietVO;
+import com.serofit.domain.MateDTO;
 import com.serofit.domain.MateVO;
+import com.serofit.domain.ProfileDTO;
+import com.serofit.domain.UProfileVO;
 
 public interface MatePageService {
 	
-	// mate 값이 1 인 user 전부
-	public List<Integer> getUnoByMate();
+	// uno를 제외한 mate 테이블 모든 데이터 가져오기
+	public List<MateVO> findByNotUno(int uno);
 	
-	// uno 값으로 mate 가져오기
-	public MateVO findMate(int uno);
+	// 자신을 제외한 운동 메이트 찾기
+	public UProfileVO getUnoByMate(int uno);
 	
-	// uno 값으로 diet tag 가져오기
-	public DietVO selectOneDietByUno(int uno);
+	// 운동 메이트 목록 불러오기
+	public List<MateDTO> findMateList(int uno);
+	
+	// 자신의 tag 가져오기
+	public UProfileVO selectByUno(int uno);
 }

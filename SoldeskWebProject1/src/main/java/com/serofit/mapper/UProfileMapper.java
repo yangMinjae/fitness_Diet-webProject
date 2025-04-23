@@ -18,6 +18,6 @@ public interface UProfileMapper {
 	// 회원 생성시 기본 프로필생성
 	public int insertProfile(UProfileVO upvo);
 	
-	// mate 1 인 uno 가져오기
-	public List<Integer> getUnoByMate();;
+	// tbl_uprofile 테이블에서 uno 일치와 mate가 1인 모든 데이터 가져오기
+	public UProfileVO getUnoByMate(int uno);
 }
