@@ -48,7 +48,8 @@ public class MailServiceImple implements MailService {
 	
 	@Autowired
 	FollowMapper folMapper;
-
+	
+	// 받은 메일 목록 가져오기
 	@Override
 	public List<ReceiveMailDTO> selectByReceiver(int receiver) {
 		// DTOList
@@ -66,7 +67,9 @@ public class MailServiceImple implements MailService {
 			rmDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
 
 			// DTO에 변수 설정
+			rmDTO.setUno(mvo.getSender());
 			rmDTO.setNickname(uMapper.readNickname(mvo.getSender()));
+			rmDTO.setPreview(mvo.getContent().substring(0, 15));
 			rmDTO.setContent(mvo.getContent());
 			rmDTO.setRegdate(mvo.getRegdate());
 			rmList.add(rmDTO);
@@ -75,6 +78,7 @@ public class MailServiceImple implements MailService {
 		return rmList;
 	}
 	
+	// 팔로우 목록 가져오기
 	@Override
 	public List<FollowMailDTO> getFollowList(int uno) {	
 		// DTOList

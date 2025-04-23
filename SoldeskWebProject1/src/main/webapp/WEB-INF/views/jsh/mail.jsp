@@ -25,19 +25,25 @@
 		<!-- 메일 리스트 -->
 		<ul class="mail-list">
 			<c:forEach var="mvo" items="${mList}">
-				<li class="mail-item">
+				<li class="mail-item"
+				    data-name="${mvo.nickname}"
+				    data-photo="${mvo.imgPath}"
+				    data-content="${mvo.content}"
+				    data-regdate="${mvo.regdate}"
+				    data-uno="${mvo.uno}">
 					<div class="profile-icon">👤</div>
 					<div class="mail-info">
 						<span class="sender">${mvo.nickname}</span> 
 						<span class="sender">${mvo.imgPath}</span> 
-						<span class="preview">${mvo.content}</span>
+						<span class="preview">${mvo.preview}</span>
 						<span class="regdate">${mvo.regdate}</span>
 					</div>
 				</li>
 			</c:forEach>
-		</ul>
+		</ul>			
 	</div>
-
+	
+	<jsp:include page="../jsh/mailModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/mail.js"></script>

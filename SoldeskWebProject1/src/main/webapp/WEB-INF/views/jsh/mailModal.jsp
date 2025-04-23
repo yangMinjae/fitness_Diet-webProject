@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 모달 -->
+		<div class="modal" id="mailModal">
+			<div class="modal-content">
+				<span class="close-btn">&times;</span>
+		
+				<!-- 상단: 프로필 이미지 + 이름 -->
+				<div class="modal-header">
+					<img id="profilePhoto" src="" alt="프로필 사진">
+					<h2 id="senderName"></h2>
+					<p id="regdate"></p>
+				</div>
+		
+				<!-- 메일 본문 -->
+				<div class="modal-body">
+					<p id="mailContent"></p>
+				</div>
+		
+				<!-- 답장 버튼 -->
+				<div class="modal-footer">
+					<button id="replyBtn">✉️ 답장하기</button>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

@@ -1,11 +1,14 @@
-// 1. 파일 경로 설정
-const CSS_FILE_PATH = '/resources/css/mail.css';
-// 2. link 태그 생성
-let linkEle = document.createElement('link');
-linkEle.rel = 'stylesheet';
-linkEle.href = CSS_FILE_PATH;
-// 3. head 태그에 link 엘리먼트 추가
-document.head.appendChild(linkEle);
+//-----CSS 파일 추가
+//1. 파일 경로 설정
+const CSS_FILE_PATH = ['/resources/css/mail.css', '/resources/css/mailModal.css'];
+//2. link 태그 생성
+CSS_FILE_PATH.forEach(css => {
+	let linkEle = document.createElement('link');
+	linkEle.rel = 'stylesheet';
+	linkEle.href = css;
+//3. head 태그에 link 엘리먼트 추가
+	document.head.appendChild(linkEle);	
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 	  const searchInput = document.querySelector(".search-input");
@@ -55,4 +58,31 @@ document.querySelectorAll('button').forEach(button=>{
 		}
 	});
 });
+
+// 메일 모달창
+document.querySelectorAll('.mail-item').forEach(item => {
+	item.addEventListener('click', () => {
+		const name = item.dataset.name;
+		const photo = item.dataset.photo;
+		const content = item.dataset.content;
+		const regdate = item.dataset.regdate
+
+		document.getElementById('senderName').innerText = name;
+		document.getElementById('profilePhoto').src = photo;
+		document.getElementById('mailContent').innerText = content;
+		document.getElementById('regdate').innerText = regdate;
+
+		document.getElementById('mailModal').classList.add('show');
+	});
+});
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+	document.getElementById('mailModal').classList.remove('show');
+});
+
+document.getElementById('replyBtn').addEventListener('click', () => {
+	alert("답장하기 기능을 여기에 연결하세요!");
+	// 예시: location.href = '/replyForm.do?target=' + encodeURIComponent(senderName);
+});
+
 
