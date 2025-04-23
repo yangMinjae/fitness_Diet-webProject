@@ -49,7 +49,13 @@ document.querySelectorAll('button').forEach(button=>{
 			getBoardListByLove();
 		}else if(type === 'writePostBtn'){
 			console.log("writePostBtn");
-		   location.href ='/cjs/writePost'
+			
+			const sessionUno = sessionStorage.getItem('uno'); //세션에서 받아온 uno
+				
+				
+			let senddata = 'uno=' + sessionUno; 
+			
+		   location.href ='/cjs/writeBoard?'+senddata;
 		}
 		
 	});

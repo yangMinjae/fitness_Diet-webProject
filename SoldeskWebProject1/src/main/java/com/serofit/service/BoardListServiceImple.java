@@ -56,10 +56,10 @@ public class BoardListServiceImple implements BoardListService {
 	@Override
 	public List<BoardListDTO> getPostsByTag(String tag) {
 		// 전체 게시글 목록 가져오기
-		List<BoardVO> allPosts = bMapper.getPostList();
-		List<BoardListDTO> allPostsByTag = new ArrayList<>();
+		List<BoardVO> bList = bMapper.getPostList();
+		List<BoardListDTO> dtoList = new ArrayList<>();
 
-		for (BoardVO bvo : allPosts) {
+		for (BoardVO bvo : bList) {
 			int uno = bvo.getUno(); // 게시글 작성자의 UNO 가져오기
 			int dno = bvo.getDno(); // DNO 가져오기
 			DietVO dvo = dMapper.selectDietByDno(dno);
@@ -71,11 +71,11 @@ public class BoardListServiceImple implements BoardListService {
 				BoardListDTO dto = new BoardListDTO(bvo.getTitle(), nickname, dvo.getTag(), bvo.getRegDate(),
 						bvo.getHit(), bvo.getLove());
 
-				allPostsByTag.add(dto);
+				dtoList.add(dto);
 			}
 		}
 
-		return allPostsByTag;
+		return dtoList;
 	}
 
 	@Override
