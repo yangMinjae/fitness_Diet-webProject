@@ -72,15 +72,41 @@ section.bg-light {
 
 /* 중복확인 후 */
 .input-verified {
-	background-color: #f0fdf4 !important; /* 연한 초록 배경 */
-	border: 2px solid #28a745 !important; /* 부트스트랩 성공 색상 */
-	background-image: url('data:image/svg+xml;utf8,<svg fill="%2328a745" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708 0z"/></svg>');
-
-	background-repeat: no-repeat;
-	background-position: right 0.75rem center;
-	background-size: 1rem 1rem;
+  background-color: #e9fbee !important; /* 더 확실하게 연두빛 */
+  border: 2px solid #28a745 !important; /* 더 진한 초록 테두리 */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%2328a745" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708 0z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
 }
 
 .input-group{
 	display: flex
+}
+
+/* 유효성 검사 css 실패 시 */
+.input-invalid {
+  border: 1px solid #e74c3c; /* 부드러운 빨간색 */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23e74c3c" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M1 21h22L12 2 1 21zM12 16h-1v-4h2v4zm0 4h-1v-2h2v2z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px 20px;
+  padding-right: 2.2rem; /* 아이콘 들어갈 공간 */
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.4);
+  border-radius: 4px;
+}
+
+/* 유효성 검사 css 성공 시 */
+.input-valid {
+  border: 1px dashed #5cb85c; /* 부드러운 초록색 점선 테두리 */
+  background-color: #f5fff8; /* 거의 흰색에 가까운 연한 초록 */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px 18px;
+  padding-right: 2.2rem;
+  border-radius: 6px;
+  box-shadow: 0 0 3px rgba(92, 184, 92, 0.2);
+  transition: all 0.3s ease;
 }

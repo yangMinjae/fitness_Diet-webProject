@@ -61,33 +61,30 @@ function markInvalid(input, msgBox, msg = "") {
 // --- 개별 유효성 검사 ---
 function validateField(id) {
   const value = f[id].value.trim();
-  const input = f[id];
-  const msgBox = feedback[id];
+  
+  const labels = {
+	mId : document.querySelector('input[name=mId]'),
+	mPw : document.querySelector('input[name="mPw"]'),
+	mNickname : document.querySelector('input[name="mNickname"]'),
+	mEmail : document.querySelector('input[name="mEmail"]')
+  };
 
+  const currentLabel = labels[id];
+  
+  currentLabel.classList.remove("input-invalid", "input-valid");
+  
   if (value === "") {
-    resetFeedback(input, msgBox);
     return;
   }
 
   if (regExp[id] && !regExp[id].test(value)) {
-    const message = {
-      mId: "아이디 형식이 잘못되었습니다.",
-      mPw: "비밀번호 형식이 잘못되었습니다.",
-      mNickname: "닉네임 형식이 잘못되었습니다.",
-      mEmail: "이메일 형식이 잘못되었습니다."
-    };
-    markInvalid(input, msgBox, message[id]);
+	if (id === "mPw") {
+	currentLabel.classList.add("input-verified");
+	} currentLabel.classList.add("input-invalid");
   } else {
-    const successMsg = {
-      mId: "사용 가능한 아이디입니다.",
-      mPw: "강력한 비밀번호입니다.",
-      mNickname: "올바른 닉네임입니다.",
-      mEmail: "올바른 이메일입니다."
-    };
-    markValid(input, msgBox, successMsg[id]);
+	currentLabel.classList.add("input-valid");
   }
 
-  updateButtonStates();
 }
 
 // --- 비밀번호 일치 확인 ---
