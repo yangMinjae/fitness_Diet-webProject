@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.UserVO;
@@ -41,9 +42,9 @@ public class SmController {
 	}
 
 	// 이메일 중복확인
-	@GetMapping(value = "/validateEmail/{email}")
+	@GetMapping(value = "/validateEmail")
 	@ResponseBody
-	public String validateEmail(@PathVariable String email) {
+	public String validateEmail(@RequestParam String email) {
 		return (sService.validateEmail(email) == 0) ? "true" : "false";
 	}
 

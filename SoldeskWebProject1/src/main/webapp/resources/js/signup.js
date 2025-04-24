@@ -1,265 +1,206 @@
-// css 파일 추가
+// --- CSS 파일 동적 로딩 ---
 const CSS_FILE_PATH1 = '/resources/css/signup.css';
-let linkEle1 = document.createElement('link');
-linkEle1.rel = 'stylesheet';
-linkEle1.href = CSS_FILE_PATH1;
-document.head.appendChild(linkEle1);
+const linkEle = document.createElement('link');
+linkEle.rel = 'stylesheet';
+linkEle.href = CSS_FILE_PATH1;
+document.head.appendChild(linkEle);
 
-/* ---------- 정규식 ---------------- */
-const regExpId = /^[a-z]+[0-9a-z]{3,12}$/;	// 아이디 검증 정규식
-const regExpPw = /^[0-9a-zA-Z]{8,16}$/;		// 비밀번호 검증 정규식
-const regExpName = /^[가-힣a-zA-Z]{2,12}$/;	// 이름 검증 정규식
-const regExpEmail = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;	// 이메일 검증 정규식
-const regExpNickname = /^[가-힣a-zA-Z]{2,12}$/; // 닉네임 검증 정규식
+// --- 정규식 ---
+const regExp = {
+  mId: /^[a-z]+[0-9a-z]{3,12}$/,
+  mPw: /^[0-9a-zA-Z]{8,16}$/,
+  mNickname: /^[가-힣a-zA-Z]{2,12}$/,
+  mEmail: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+};
 
-/* -------- 데이터 검증 함수 -------- */
-// 데이터 검증 완료 함수
-function validated(inputTarget, resultState, comment){
-	inputTarget.classList.add("is-valid");
-	inputTarget.classList.remove("is-invalid");
-	if(resultState){
-		resultState.classList.add("valid-feedback");
-		resultState.classList.remove("invalid-feedback");
-		comment ? 
-			resultState.innerHTML = comment : 
-				resultState.innerHTML = '' ;
-	}
-}
-// 데이터 검증 미완료 함수
-function invalidate(inputTarget, resultState, comment){
-	inputTarget.classList.remove("is-valid");
-	inputTarget.classList.add("is-invalid");
-	if(resultState){
-		resultState.classList.remove("valid-feedback");
-		resultState.classList.add("invalid-feedback");
-		comment ? 
-			resultState.innerHTML = comment : 
-				resultState.innerHTML = '' ;
-	}
-}
-// 검증 스타일 초기화 함수
-function Initialization(inputTarget, resultState){
-	inputTarget.classList.remove("is-valid");
-	inputTarget.classList.remove("is-invalid");
-	if(resultState){
-		resultState.classList.remove("valid-feedback");
-		resultState.classList.remove("invalid-feedback");
-		resultState.innerHTML = '';
-	}
-}
-/* ---------- Form 관련 요소들 ---------------- */
+// --- Form 및 상태요소 참조 ---
 const f = document.forms[0];
-const mIdValidState = document.querySelector("#mIdValidState");
-const mPwValidState = document.querySelector("#mPwValidState");
-const mPwReValidState = document.querySelector("#mPwReValidState");
-const mEmailValidState = document.querySelector("#mEmailValidState");
-const mNicknameValidState = document.querySelector("#mNicknameValidState");
-/* ---------- 함수 ---------------- */
-// 실시간 폼 유효성 검사 함수
-const checkFormValidity = () => {
-	let isValid = true;
-
-	// 아이디 검증
-	if (!regExpId.test(f.mId.value)) {
-			invalidate(f.mId, mIdValidState, "아이디 형식이 잘못되었습니다.");
-			isValid = false;
-	} else {
-			validated(f.mId, mIdValidState, "사용 가능한 아이디입니다.");
-	}
-
-	// 비밀번호 검증
-	if (!regExpPw.test(f.mPw.value)) {
-			invalidate(f.mPw, mPwValidState, "비밀번호 형식이 잘못되었습니다.");
-			isValid = false;
-	} else {
-			validated(f.mPw, mPwValidState, "강력한 비밀번호입니다.");
-			checkPwMatch();
-	}
-
-	// 이메일 검증
-	if (!regExpEmail.test(f.mEmail.value)) {
-			invalidate(f.mEmail, mEmailValidState, "이메일 형식이 잘못되었습니다.");
-			isValid = false;
-	} else {
-			validated(f.mEmail, mEmailValidState, "올바른 이메일입니다.");
-	}
-	
-	// 닉네임 검증
-	if (!regExpNickname.test(f.mNickname.value)) {
-		invalidate(f.mNickname, mNicknameValidState, "닉네임 형식이 잘못되었습니다.");
-		isValid = false;
-	} else {
-		validated(f.mNickname, mNicknameValidState, "올바른 닉네임입니다.");
-	}
-	
-	document.querySelector("#duplicateCkIdBtn").disabled = !regExpId.test(f.mId.value);
-	document.querySelector("#duplicateCkEmBtn").disabled = !regExpEmail.test(f.mEmail.value);
-	document.querySelector("#duplicateCkNnBtn").disabled = !regExpNickname.test(f.mNickname.value);
-	
-	// 가입 버튼 활성화/비활성화
-	document.querySelector("#joinBtn").disabled = !isValid;
+const feedback = {
+  mId: document.querySelector("#mIdValidState"),
+  mPw: document.querySelector("#mPwValidState"),
+  mPwRe: document.querySelector("#mPwReValidState"),
+  mEmail: document.querySelector("#mEmailValidState"),
+  mNickname: document.querySelector("#mNicknameValidState")
 };
 
-// 실시간 입력 검사
-f.mId.addEventListener('input', checkFormValidity);
-f.mPw.addEventListener('input', checkFormValidity);
-f.mPwRe.addEventListener('input', checkFormValidity);
-f.mEmail.addEventListener('input', checkFormValidity);
-f.mNickname.addEventListener('input', checkFormValidity);
-
-// 초기 상태에서 버튼 비활성화
-checkFormValidity();
-
-// 버튼들 클릭 이벤트
-document.querySelectorAll("button").forEach(btn => {
-	btn.addEventListener('click', ()=> {
-		let type = btn.getAttribute("id");
-		
-		if(type === 'duplicateCkIdBtn'){
-			// id 중복확인
-			validateId();
-		}else if(type === 'duplicateCkEmBtn'){
-			// email 중복확인
-			validateEmail();
-		}else if(type === 'duplicateCkNnBtn'){
-			// nickname 중복확인
-			validateNickname();
-		}else if(type === 'joinBtn'){
-			// 회원가입
-			join();
-		}else if(type === 'resetBtn'){
-			f.reset();
-         	["mId", "mNickname", "mEmail"].forEach(id => {
-         	    document.getElementById(id).readOnly = false;
-         	    document.getElementById(id).classList.remove("input-verified");
-         	});
-         	init();
-		}else{
-			console.log('login');
-		}
-		
-		
-	});
-});
-
-// 시작 시 형식 초기화
-init();
-
-// 형식 초기화 함수
-function init() {
-	Initialization(f.mId, mIdValidState);
- 	Initialization(f.mPw, mPwValidState);
- 	Initialization(f.mPwRe, mPwReValidState);
- 	Initialization(f.mNickname, mNicknameValidState);
- 	Initialization(f.mEmail, mEmailValidState);
+// --- 스타일 초기화 함수 ---
+function resetFeedback(input, msgBox) {
+  input.classList.remove("is-valid", "is-invalid");
+  if (msgBox) {
+    msgBox.classList.remove("valid-feedback", "invalid-feedback");
+    msgBox.innerHTML = '';
+  }
 }
 
-// ID 중복 확인
-function validateId(){
-	
-	const id = f.mId.value;
-	fetch(`/sm/validateId/${encodeURIComponent(id)}`
-	)
-	.then(response => response.text())
-	.then(result => {
-		if (result === "true") {
-			if (confirm("사용 가능한 아이디 입니다. 사용하시겠습니까?")) {
-		        document.getElementById("mId").readOnly = true;
-		        f.mId.classList.add("input-verified");
-		    }
-		}else{
-			alert("이미 존재 합니다. ");
-		}
-	})
-	.catch(err => console.error("에러 발생: ", err));
-};
+// --- 유효 / 무효 처리 ---
+function markValid(input, msgBox, msg = "") {
+  input.classList.add("is-valid");
+  input.classList.remove("is-invalid");
+  if (msgBox) {
+    msgBox.classList.add("valid-feedback");
+    msgBox.classList.remove("invalid-feedback");
+    msgBox.innerHTML = msg;
+  }
+}
 
-// Email 중복 확인
-function validateEmail(){
-	const email = f.mEmail.value;
-	fetch(`/sm/validateEmail/${encodeURIComponent(email)}`
-	)
-	.then(response => response.text())
-	.then(result => {
-		if (result === "true") {
-			if (confirm("사용 가능한 이메일 입니다. 사용하시겠습니까?")) {
-		        document.getElementById("mEmail").readOnly = true;
-		        f.mEmail.classList.add("input-verified");
-		    }
-		}else{
-			alert("이미 존재하는 이메일 입니다.");
-		}
-	})
-	.catch(err => console.error("에러 발생: ", err));
-};
+function markInvalid(input, msgBox, msg = "") {
+  input.classList.add("is-invalid");
+  input.classList.remove("is-valid");
+  if (msgBox) {
+    msgBox.classList.add("invalid-feedback");
+    msgBox.classList.remove("valid-feedback");
+    msgBox.innerHTML = msg;
+  }
+}
 
-// Nickname 중복 확인
-function validateNickname(){
-	const nickname = f.mNickname.value;
-	fetch(`/sm/validateNickname/${encodeURIComponent(nickname)}`
-	)
-	.then(response => response.text())
-	.then(result => {
-		if (result === "true") {
-			if (confirm("사용 가능한 닉네임 입니다. 사용하시겠습니까?")) {
-		        document.getElementById("mNickname").readOnly = true;
-		        f.mNickname.classList.add("input-verified");
-		    }
-		}else{
-			alert("이미 존재하는 닉네임 입니다.");
-		}
-	})
-	.catch(err => console.error("에러 발생: ", err));
-};
+// --- 개별 유효성 검사 ---
+function validateField(id) {
+  const value = f[id].value.trim();
+  const input = f[id];
+  const msgBox = feedback[id];
 
+  if (value === "") {
+    resetFeedback(input, msgBox);
+    return;
+  }
+
+  if (regExp[id] && !regExp[id].test(value)) {
+    const message = {
+      mId: "아이디 형식이 잘못되었습니다.",
+      mPw: "비밀번호 형식이 잘못되었습니다.",
+      mNickname: "닉네임 형식이 잘못되었습니다.",
+      mEmail: "이메일 형식이 잘못되었습니다."
+    };
+    markInvalid(input, msgBox, message[id]);
+  } else {
+    const successMsg = {
+      mId: "사용 가능한 아이디입니다.",
+      mPw: "강력한 비밀번호입니다.",
+      mNickname: "올바른 닉네임입니다.",
+      mEmail: "올바른 이메일입니다."
+    };
+    markValid(input, msgBox, successMsg[id]);
+  }
+
+  updateButtonStates();
+}
+
+// --- 비밀번호 일치 확인 ---
 const pw = document.getElementById("mPw");
 const pwRe = document.getElementById("mPwRe");
-const msg = document.getElementById("pwMatchMessage");
+const pwMsg = document.getElementById("pwMatchMessage");
 
 function checkPwMatch() {
-	if (pw.value === "" || pwRe.value === "") {
-		msg.textContent = "";
-		return;
-	}
+  if (pw.value === "" || pwRe.value === "") {
+    pwMsg.textContent = "";
+    resetFeedback(pw, feedback.mPw);
+    resetFeedback(pwRe, feedback.mPwRe);
+    return;
+  }
 
-	if (pw.value === pwRe.value) {
-		msg.textContent = "✅ 일치";
-		msg.style.color = "green";
-	} else {
-		msg.textContent = "❌불일치";
-		msg.style.color = "red";
-	}
+  if (pw.value === pwRe.value) {
+    pwMsg.textContent = "✅ 일치";
+    pwMsg.style.color = "green";
+  } else {
+    pwMsg.textContent = "❌ 불일치";
+    pwMsg.style.color = "red";
+  }
 }
 
-pw.addEventListener("input", checkPwMatch);
-pwRe.addEventListener("input", checkPwMatch);
+// --- 입력 이벤트 바인딩 ---
+["mId", "mPw", "mPwRe", "mNickname", "mEmail"].forEach(id => {
+  f[id].addEventListener("input", () => {
+    if (id === "mPw") {
+      checkPwMatch();
+      validateField("mPw");
+    } else if(id === "mPwRe"){
+      checkPwMatch();
+    } else{
+      validateField(id);
+    }
+  });
+});
 
-// 회원 가입
-function join(){
+// --- 버튼 상태 업데이트 ---
+function updateButtonStates() {
+  document.getElementById("duplicateCkIdBtn").disabled = !regExp.mId.test(f.mId.value);
+  document.getElementById("duplicateCkEmBtn").disabled = !regExp.mEmail.test(f.mEmail.value);
+  document.getElementById("duplicateCkNnBtn").disabled = !regExp.mNickname.test(f.mNickname.value);
+
+  const allValid = ["mId", "mPw", "mNickname", "mEmail"].every(id => regExp[id].test(f[id].value));
+  document.getElementById("joinBtn").disabled = !allValid;
+}
+
+// --- 중복 확인 함수들 ---
+function validateDuplicate(id, endpoint, label) {
+  const value = f[id].value.trim();
+  const url = id === 'mEmail' ? `/sm/validateEmail?email=${encodeURIComponent(value)}` 
+		  : `/sm/${endpoint}/${encodeURIComponent(value)}`;
 	
-	const userData = {
-			id : document.getElementById("mId").value.trim(),
-			pw : document.getElementById("mPw").value.trim(),
-			nickname : document.getElementById("mNickname").value.trim(),
-			email : document.getElementById("mEmail").value.trim()
-		};
-	
-	fetch(`/sm/insertUser`, {
-			method : 'POST',
-			headers : {
-				'Content-type' : 'application/json; charset=utf-8'
-			},
-			body : JSON.stringify(userData),
-		})
-		.then(response => response.json())
-		.then(data => {
-			
-			if(data === "false"){
-				alert("회원가입이 실패했습니다.");
-			}else{
-				alert("회원가입이 완료되었습니다.");
-				console.log("로그인 페이지로 이동");
-			}
-		})
-		.catch(err => console.log(err));
-};
+  fetch(url)
+	  .then(res => res.text())
+	  .then(result => {
+		  if (result === "true") {
+			  if (confirm(`사용 가능한 ${label}입니다. 사용하시겠습니까?`)) {
+				  f[id].readOnly = true;
+				  f[id].classList.add("input-verified");
+			  }
+		  } else {
+			  alert(`이미 존재하는 ${label}입니다.`);
+		  }
+	  })
+	  .catch(err => console.error("중복 확인 오류:", err));
+  };
+
+// --- 회원가입 요청 ---
+function join() {
+  const userData = {
+    id: f.mId.value.trim(),
+    pw: f.mPw.value.trim(),
+    nickname: f.mNickname.value.trim(),
+    email: f.mEmail.value.trim()
+  };
+
+  fetch('/sm/insertUser', {
+    method: 'POST',
+    headers: {'Content-type': 'application/json'},
+    body: JSON.stringify(userData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data === "false") {
+      alert("회원가입이 실패했습니다.");
+    } else {
+      alert("회원가입이 완료되었습니다.");
+      location.href="/sm/matePage";
+      // 이동 코드 추가 가능
+    }
+  })
+  .catch(err => console.log(err));
+}
+
+// --- 버튼 클릭 이벤트 ---
+document.querySelectorAll("button").forEach(btn => {
+  const id = btn.id;
+  btn.addEventListener("click", () => {
+    if (id === "duplicateCkIdBtn") validateDuplicate("mId", "validateId", "아이디");
+    else if (id === "duplicateCkEmBtn") validateDuplicate("mEmail", "validateEmail", "이메일");
+    else if (id === "duplicateCkNnBtn") validateDuplicate("mNickname", "validateNickname", "닉네임");
+    else if (id === "joinBtn") join();
+    else if (id === "resetBtn") {
+      f.reset();
+      ["mId", "mNickname", "mEmail"].forEach(id => {
+        f[id].readOnly = false;
+        f[id].classList.remove("input-verified");
+        resetFeedback(f[id], feedback[id]);
+      });
+      pwMsg.textContent = "";
+      resetFeedback(pw, feedback.mPw);
+      resetFeedback(pwRe, feedback.mPwRe);
+      updateButtonStates();
+    }
+  });
+});
+
+// --- 초기화 ---
+updateButtonStates();
