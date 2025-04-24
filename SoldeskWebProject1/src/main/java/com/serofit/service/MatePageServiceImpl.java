@@ -34,16 +34,19 @@ public class MatePageServiceImpl implements MatePageService{
 	@Autowired
 	MyPageService mservice;
 	
+	// uno를 제외한 mate 테이블 모든 데이터 가져오기
 	@Override
 	public List<MateVO> findByNotUno(int uno) {
 		return mMapper.findByNotUno(uno);
 	}
 	
+	// 자신을 제외한 운동 메이트 찾기
 	@Override
 	public UProfileVO getUnoByMate(int uno) {
 		return uPMapper.getUnoByMate(uno);
 	}
 	
+	// 운동 메이트 목록 불러오기
 	@Override
 	@Transactional
 	public List<MateDTO> findMateList(int uno) {
@@ -62,6 +65,7 @@ public class MatePageServiceImpl implements MatePageService{
 		return mateList;
 	}
 	
+	// 자신의 tag 가져오기
 	@Override
 	public UProfileVO selectByUno(int uno) {
 		return uPMapper.selectByUno(uno);
