@@ -22,21 +22,25 @@ public class SignupServiceImpl implements SignupService {
 	@Autowired
 	UProfileMapper upmapper;
 
+	// 아이디 중복 확인
 	@Override
 	public int validateId(String id) {
 		return uMapper.validateId(id);
 	}
 
+	// 이메일 중복 확인
 	@Override
 	public int validateEmail(String email) {
 		return uMapper.validateEmail(email);
 	}
 
+	// 닉네임 중복 확인
 	@Override
 	public int validateNickname(String nickname) {
 		return uMapper.validateNickname(nickname);
 	}
 
+	// 회원가입
 	@Override
 	@Transactional
 	public int insertUser(UserVO uvo) {
