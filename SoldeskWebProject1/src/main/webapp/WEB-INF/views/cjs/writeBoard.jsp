@@ -13,25 +13,25 @@
 	<jsp:include page="../layout/header.jsp" />
 
 	<!-- 콘텐츠 전체 컨테이너 -->
-	<div class="content-container">
-		
+	<div class="content-container">		
 		<!-- 카테고리 선택 -->
 		<form>
 			<div class="form-group">
 				<label for="category">식단 선택</label> <select id="diet">
 					<option value="">식단을 선택하세요</option>
-					<c:forEach var="dvo" items="${ dietList}">
-					
+					<c:forEach var="dvo" items="${ dietList}">					
 						<option value="${dvo.title }" data-content="${dvo.content }"
 							data-tag="${dvo.tag }">${dvo.title }</option>
 					</c:forEach>
 				</select>
 			</div>
+			
 			<!--  태그 -->
 			<div class="form-group">
 	    		<label for="tag">태그</label>
 	    		<input type="text" id="tag" name="tag" placeholder="식단을 선택하면 태그가 정해집니다"  readonly/>
 			</div>
+			
 			<!-- 제목 입력 -->
 			<div class="form-group">
 				<label for="title">제목 :</label> 
@@ -62,12 +62,12 @@
 				<button type="button" class="upload-final">⭐ 업로드</button>
 				<button type="button" class="boardList-btn">목록</button>
 				<button type="button" class="register-btn">작성 완료</button>
-			</div>
-	
-		</div>
+			</div>		
 	 	<input type="hidden" name="dno" value="${dvo.dno }">
 		<input type="hidden" name="uno" value="${dvo.uno }"> 
-	</form>
+		</form>	
+	</div>
+	
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/writeBoard.js"></script>

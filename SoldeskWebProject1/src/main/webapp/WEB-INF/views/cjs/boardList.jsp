@@ -11,8 +11,8 @@
 </head>
 <body>
 	<jsp:include page="../layout/header.jsp" />
-	<div class="board-container">
 	
+	<div class="board-container">	
 		<!-- 필터 버튼 -->
 		<div class="filter-buttons">
 			<button class="allList">전체</button>
@@ -64,8 +64,8 @@
 				</c:choose>		
 			</table>
 		</div>
-
 	</div>
+	
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/boardList.js"></script>
