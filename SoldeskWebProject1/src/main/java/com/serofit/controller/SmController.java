@@ -32,7 +32,7 @@ public class SmController {
 	public void singup() {
 		log.info("singup...");
 	}
-
+	
 	// 아이디 중복확인
 	@GetMapping(value = "/validateId/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
@@ -78,18 +78,4 @@ public class SmController {
 		return "/sm/matePage";
 	}
 	
-	// 페이징
-//	@RequestMapping("/your-endpoint")
-//	@ResponseBody
-//	public Map<String, Object> getPageData(@RequestParam("page") int page) {
-//	    int pageSize = 10;
-//	    List<Content> contentList = contentService.getContentByPage(page, pageSize);
-//	    int totalPages = contentService.getTotalPages(pageSize);
-//
-//	    Map<String, Object> response = new HashMap<>();
-//	    response.put("content", contentList);
-//	    response.put("currentPage", page);
-//	    response.put("totalPages", totalPages);
-//	    return response;
-//	}
 }

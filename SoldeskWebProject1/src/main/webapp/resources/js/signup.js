@@ -9,9 +9,7 @@ document.head.appendChild(linkEle1);
 const regExpId = /^[a-z]+[0-9a-z]{3,12}$/;	// 아이디 검증 정규식
 const regExpPw = /^[0-9a-zA-Z]{8,16}$/;		// 비밀번호 검증 정규식
 const regExpName = /^[가-힣a-zA-Z]{2,12}$/;	// 이름 검증 정규식
-const regExpEmail = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;	// 이메일
-																			// 검증
-																			// 정규식
+const regExpEmail = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;	// 이메일 검증 정규식
 const regExpNickname = /^[가-힣a-zA-Z]{2,12}$/; // 닉네임 검증 정규식
 
 /* -------- 데이터 검증 함수 -------- */

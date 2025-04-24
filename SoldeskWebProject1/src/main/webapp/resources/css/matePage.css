@@ -6,8 +6,18 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-/* 리스트 전체 */
-.mate-list {
+/* 동일 태그 리스트 전체 */
+.sendList {
+	width: 1200px;
+	max-width: 5000px; /* 훨씬 더 넓게! */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin-top: 0; /* 여백 제거 */
+}
+
+/* 그 외 태그 리스트 전체 */
+.difList {
 	width: 1200px;
 	max-width: 5000px; /* 훨씬 더 넓게! */
 	display: flex;
@@ -60,4 +70,25 @@ body {
 	align-items: rgiht;
 	color: #666;
 	font-size: 0.9rem;
+}
+
+/* 리모컨 스타일 사이드바 */
+.floating-sidebar {
+    position: sticky;
+    top: 200px;
+    width: 160px;
+    min-width: 160px; 
+    flex-shrink: 0; 
+    margin-left:50px;
+    background-color: #f2dbe3;
+    padding: 20px 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    z-index: 2;
+    align-self: flex-start;
 }
