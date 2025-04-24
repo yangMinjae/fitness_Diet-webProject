@@ -2,223 +2,125 @@ let favBody = document.querySelector('#favBody');
 let followBody = document.querySelector('#followBody');
 let followerBody = document.querySelector('#followerBody');
 
-let uno = f.uno.value;      // 시큐리티 구현시 수정
-getFavList();
-getFollowList();
-getFollowerList();
+let uno = f.elements['uVO.uno'].value;      // 시큐리티 구현시 수정
 
-function getFavList(){      // 즐겨찾기 목록을 가져와 화면에 표시해주는 함수
-  fetch('/ymj/getFavList/'+uno)
-  .then(response=>response.json())
-  .then(json=>{
-    let str = '';
-    //console.log(json);
-    json.forEach(ele => {
-      let nickName = ele.nickname;
-      let fvo = ele.fvo;
-      let fav = ele.fav;
-      let uno = ele.uno;
-      
-      str+=`<tr>
-              <td class="tblImgSection">
-                <img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg" alt="프로필">
-              </td>
-              <td class="tblNicknameSection">${nickName}</td>
-              <td class="tblFollowBtnSection">
-                    <button class="followCancelBtn" cancelFollow="${uno}">취소</button>
-              </td>
-              <td class="tblBtnSection"><button class="favRemoveBtn" cancelFav="${uno}">해제</button></td>
-            </tr>`
-      // 파일 업로드 시 img태그의 src 변경
-    });
-    favBody.innerHTML=str;
+initFriendsList();							// 최초 로드시 목록 초기화
 
-    document
-    .querySelectorAll('.followCancelBtn')
-    .forEach(ele=>{
-      ele.addEventListener('click',(e)=>{
-        let num = e.currentTarget.getAttribute('cancelFollow');
-        cancelFollow(num);
-      })
-    });
+function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, follower의 목록을 가져오는 함수
+	  const bodyMap = {
+	    fav: favBody,
+	    follow: followBody,
+	    follower: followerBody
+	  };
 
-    document
-    .querySelectorAll('.favRemoveBtn')
-    .forEach(ele=>{
-      ele.addEventListener('click',(e)=>{
-        let num = e.currentTarget.getAttribute('cancelFav');
-        removeFav(num);
-      })
-    });
-  })
-  .catch(err=>console.log(err));
+	  const urlMap = {
+	    fav: `/ymj/getFavList/${uno}`,
+	    follow: `/ymj/getFollowList/${uno}`,
+	    follower: `/ymj/getFollowerList/${uno}`
+	  };
+
+	  const bodyTarget = bodyMap[type];
+	  const url = urlMap[type];
+
+	  fetch(url)
+	    .then(res => res.json())
+	    .then(json => {
+	      let str = '';
+	      json.forEach(ele => {
+	        const { nickname, fav, uno: targetUno } = ele;
+
+	        // 즐겨찾기 된 사람은 팔로우 목록에서 제외
+	        if (type === 'follow' && (fav === true || fav === 'true' || fav === 1 || fav === '1')) return;
+
+	        str += `<tr>
+	                  <td class="tblImgSection">
+	                    <img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg" alt="프로필">
+	                  </td>
+	                  <td class="tblNicknameSection">${nickname}</td>`;
+
+	        if (type === 'fav') {
+	          str += `<td class="tblFollowBtnSection">
+	                    <button class="followCancelBtn" data-catcher="${targetUno}">취소</button>
+	                  </td>
+	                  <td class="tblBtnSection">
+	                    <button class="favRemoveBtn" data-catcher="${targetUno}">해제</button>
+	                  </td>`;
+	        } else if (type === 'follow') {
+	          str += `<td class="tblFollowBtnSection">
+	                    <button class="followCancelBtn" data-catcher="${targetUno}">취소</button>
+	                  </td>
+	                  <td class="tblFollowBtnSection">
+	                    <button class="addFavBtn" data-catcher="${targetUno}">추가</button>
+	                  </td>`;
+	        } else if (type === 'follower') {
+	          str += `<td class="tblBtnSection">
+	                    <button class="addFollowBtn" data-catcher="${targetUno}">팔로우</button>
+	                  </td>`;
+	        }
+
+	        str += `</tr>`;
+	      });
+
+	      bodyTarget.innerHTML = str;
+
+	      // 버튼 클릭 바인딩 (data-catcher 속성 사용)
+	      const bindClick = (selector, action) => {
+	        document.querySelectorAll(selector).forEach(ele => {
+	          ele.addEventListener('click', e => {
+	            const num = e.currentTarget.dataset.catcher;
+	            updateFollowOrFav(num, action);
+	          });
+	        });
+	      };
+
+	      if (type !== 'follower') bindClick('.followCancelBtn', 'cancelFollow');
+	      if (type === 'fav')       bindClick('.favRemoveBtn', 'removeFav');
+	      if (type === 'follow')    bindClick('.addFavBtn', 'addFav');
+	      if (type === 'follower')  bindClick('.addFollowBtn', 'addFollow');
+	    })
+	    .catch(err => console.log(err));
+	}
+
+function initFriendsList(){							// 목록을 초기화
+	  getList('fav');
+	  getList('follow');
+	  getList('follower');
 }
 
-function getFollowList(){      // 즐겨찾기 목록을 가져와 화면에 표시해주는 함수
-  fetch('/ymj/getFollowList/'+uno)
-  .then(response=>response.json())
-  .then(json=>{
-    let str = '';
-    //console.log(json);
-    json.forEach(ele => {
-      let nickName = ele.nickname;
-      let fvo = ele.fvo;
-      let fav = ele.fav;
-      let uno = ele.uno;
-      if(fav==false){
-        str+=
-              `<tr>
-                  <td class="tblImgSection">
-                    <img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg"
-                      alt="프로필">
-                  </td>
-                  <td class="tblNicknameSection">${nickName}</td>
-                  <td class="tblFollowBtnSection">
-                    <button class="followCancelBtn" cancelFollow="${uno}">취소</button>
-                  </td><td class="tblFollowBtnSection">
-                    <button class="addFavBtn" addFav="${uno}">추가</button>
-                  </td>
-              </tr>`;     
-      }
-      // 파일 업로드 시 img태그의 src 변경
-    });
-    followBody.innerHTML=str;
+function updateFollowOrFav(catcher, action) {		// 현재 로그인 중인 사람의 uno와, action(팔로우 추가/취소, 즐찾 추가/해제) 입력시 해당 동작을 처리       
+	  const url = `/ymj/${action}`;
+	  const methodMap = {
+	    addFollow: 'put',                           // 팔로우 추가
+	    cancelFollow: 'delete',                     // 팔로우 취소
+	    addFav: 'put',                              // 즐겨찾기 추가
+	    removeFav: 'delete'                         // 즐겨찾기 해제
+	  };
+	  const method = methodMap[action];
 
-    document
-    .querySelectorAll('.followCancelBtn')
-    .forEach(ele=>{
-      ele.addEventListener('click',(e)=>{
-        let num = e.currentTarget.getAttribute('cancelFollow');
-        cancelFollow(num);
-      })
-    });
+	  if (!method) {
+	    console.error('Invalid action:', action);
+	    return;
+	  }
 
-    document
-    .querySelectorAll('.addFavBtn')
-    .forEach(ele=>{
-      ele.addEventListener('click',(e)=>{
-        let num = e.currentTarget.getAttribute('addFav');
-        addFav(num);
-      })
-    });
+	  fetch(url, {
+	    method: method,
+	    body: JSON.stringify({
+	      thrower: uno,
+	      catcher: catcher
+	    }),
+	    headers: {
+	      'Content-Type': 'application/json; charset=utf-8'
+	    }
+	  })
+	  .then(res => res.text())
+	  .then(text => {
+	    console.log(text);
+	    
+	    if (action === 'addFollow' && text === 'fail') {
+	      alert('이미 팔로우 중인 사람입니다.');
+	    }
 
-  })
-  .catch(err=>console.log(err));
-}
-
-function getFollowerList(){      // 팔로워 목록을 가져와 화면에 표시해주는 함수
-  fetch('/ymj/getFollowerList/'+uno)
-  .then(response=>response.json())
-  .then(json=>{
-    let str = '';
-    //console.log(json);
-    json.forEach(ele => {
-      let nickName = ele.nickname;
-      let fvo = ele.fvo;
-      let fav = ele.fav;
-      let uno = ele.uno;
-      
-      str+=`<tr>
-							<td class="tblImgSection">
-                <img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg" alt="프로필"></td>
-							<td class="tblNicknameSection">${nickName}</td>
-              <td class="tblBtnSection"><button class="addFollowBtn" addFollow="${uno}">팔로우</button></button></td>
-						</tr>`
-      // 파일 업로드 시 img태그의 src 변경
-    });
-    followerBody.innerHTML=str;
-    document
-    .querySelectorAll('.addFollowBtn')
-    .forEach(ele=>{
-      ele.addEventListener('click',(e)=>{
-        let num = e.currentTarget.getAttribute('addFollow');
-        addFollow(num);
-      })
-    })
-  })
-  .catch(err=>console.log(err));
-}
-
-
-function cancelFollow(catcher){            // 팔로우 취소
-  fetch('/ymj/cancelFollow',{
-    method:'delete',
-    body:JSON.stringify({
-      thrower:uno,
-      catcher:catcher
-    }),
-    headers : {
-      'Content-Type' : 'application/json; charset:utf-8'
-    }
-  })
-  .then(res=>res.text())
-  .then(text=>{console.log(text)
-    getFavList();
-    getFollowList();
-    getFollowerList();
-  })
-  .catch(err=>console.log(err));
-}
-
-function addFollow(catcher){               // 팔로우 추가
-  fetch('/ymj/addFollow',{
-    method:'put',
-    body:JSON.stringify({
-      thrower:uno,
-      catcher:catcher
-    }),
-    headers : {
-      'Content-Type' : 'application/json; charset:utf-8'
-    }
-  })
-  .then(res=>res.text())
-  .then(text=>{console.log(text);
-    if(text=='fail'){
-      alert('이미 팔로우 중인 사람입니다.');
-    }
-    getFavList();
-    getFollowList();
-    getFollowerList();
-  })
-  .catch(err=>console.log(err));
-}
-
-function removeFav(catcher){               // 즐겨찾기 해제
-  fetch('/ymj/removeFav',{
-    method:'delete',
-    body:JSON.stringify({
-      thrower:uno,
-      catcher:catcher
-    }),
-    headers : {
-      'Content-Type' : 'application/json; charset:utf-8'
-    }
-  })
-  .then(res=>res.text())
-  .then(text=>{console.log(text)
-    getFavList();
-    getFollowList();
-    getFollowerList();
-  })
-  .catch(err=>console.log(err));
-}
-
-function addFav(catcher){                  // 즐겨찾기 추가
-  fetch('/ymj/addFav',{
-    method:'put',
-    body:JSON.stringify({
-      thrower:uno,
-      catcher:catcher
-    }),
-    headers : {
-      'Content-Type' : 'application/json; charset:utf-8'
-    }
-  })
-  .then(res=>res.text())
-  .then(text=>{console.log(text)
-    getFavList();
-    getFollowList();
-    getFollowerList();
-  })
-  .catch(err=>console.log(err));
-}
+      initFriendsList();
+	  })
+	  .catch(err => console.log(err));
+	}

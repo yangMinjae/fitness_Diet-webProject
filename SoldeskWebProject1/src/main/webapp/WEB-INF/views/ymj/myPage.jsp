@@ -25,23 +25,24 @@
 				<h2>내 프로필</h2>
 				<div class="profile-box">
 					<div class="profile-left">
-						<img src="/resources/img/tag/헬스키퍼.png" class="profile-image"
-							id="myProfileImg" alt="프로필 사진">
+						<img src="/resources/img/tag/헬스키퍼.png" class="profile-image" id="myProfileImg" alt="프로필 사진">
 						<div class="profile-nickname">닉네임</div>
 					</div>
 					<form class="profile-form" method="post">
 						<div class="form-group">
 							<label>메이트 추천 여부</label>
 							<div class="radio-group">
-								<label title="Yes 선택시 이용자님이 다른 유저의 운동메이트로 추천됩니다."><input
-									type="radio" name="mate" value="1" id="yesRadio"> Yes</label> <label
-									title="No 선택시 이용자님이 다른 유저의 운동메이트로 추천되지 않습니다."><input
-									type="radio" name="mate" value="0" id="noRadio"> No</label>
+								<label title="Yes 선택시 이용자님이 다른 유저의 운동메이트로 추천됩니다.">
+									<input type="radio" name="upVO.mate" value="1" id="yesRadio">Yes
+								</label> 
+								<label title="No 선택시 이용자님이 다른 유저의 운동메이트로 추천되지 않습니다.">
+									<input type="radio" name="upVO.mate" value="0" id="noRadio">No
+								</label>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="favSport">좋아하는 운동</label> <input type="text"
-								name="fav" id="favSport">
+							<label for="favSport">좋아하는 운동</label> 
+							<input type="text" name="upVO.fav" id="favSport">
 						</div>
 						<div class="form-group">
 							<label>지역</label>
@@ -49,7 +50,8 @@
 							<button type="button" name="searchAreaBtn">지역 검색</button>
 						</div>
 						<div class="form-group">
-							<label for="time">운동 시간대</label> <select name="time">
+							<label for="time">운동 시간대</label> 
+							<select name="mVO.time" id="time">
 								<option value="::">::</option>
 								<option value="08:00~09:59">08:00~09:59</option>
 								<option value="10:00~11:59">10:00~11:59</option>
@@ -60,13 +62,13 @@
 								<option value="20:00~21:59">20:00~21:59</option>
 								<option value="22:00~23:59">22:00~23:59</option>
 								<option value="00:00~07:59">00:00~07:59</option>
-							</select> <input type="hidden" name="uno" value="1">
+							</select> 
+							<input type="hidden" name="uVO.uno" value="1">
 							<!-- 추후수정 -->
 						</div>
 						<div class="form-group">
 							<label for="intro">자기소개</label>
-							<textarea rows="9" cols="30" name="self" maxlength="300"
-								placeholder="300자 이내 작성" id="self"></textarea>
+							<textarea rows="9" cols="30" name="upVO.self" maxlength="300" placeholder="300자 이내 작성" id="self"></textarea>
 						</div>
 					</form>
 				</div>
@@ -94,13 +96,6 @@
 								</tr>
 							</thead>
 							<tbody id="favBody">
-								<tr>
-									<td class="tblImgSection"><img
-										src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg"
-										alt="프로필"></td>
-									<td class="tblNicknameSection">닉네임</td>
-									<td class="tblBtnSection"><button class="favRemoveBtn">해제</button></td>
-								</tr>
 							</tbody>
 						</table>
 						<!-- 반복 영역 끝 -->
@@ -122,18 +117,6 @@
 									</tr>
 								</thead>
 								<tbody id="followBody">
-									<tr>
-										<td class="tblImgSection"><img
-											src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg"
-											alt="프로필"></td>
-										<td class="tblNicknameSection">닉네임</td>
-										<td class="tblFollowBtnSection">
-											<button class="followCancelBtn">취소</button>
-										</td>
-										<td class="tblFollowBtnSection">
-											<button class="addFavBtn">추가</button>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 							<!-- 반복 영역 끝 -->
@@ -154,12 +137,6 @@
 									</tr>
 								</thead>
 								<tbody id="followerBody">
-									<tr>
-										<td class="tblImgSection"><img
-											src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg"
-											alt="프로필"></td>
-										<td class="tblNicknameSection">닉네임</td>
-									</tr>
 								</tbody>
 							</table>
 							<!-- 반복 영역 끝 -->

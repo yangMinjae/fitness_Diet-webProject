@@ -62,17 +62,21 @@ public class MyPageServiceImpl implements MyPageService{
 	// 1-1)유저 프로필 세부 정보 가져오기
 	@Override
 	public MypageProfileDTO getUserProfileInfo(int uno) {
-		UProfileVO upvo = upMapper.selectByUno(uno);
-		MateVO mvo = mMapper.findMate(uno);
+		UProfileVO upVO = upMapper.selectByUno(uno);
+		MateVO mVO = mMapper.findMate(uno);
 		
 		String nickname = uMapper.readNickname(uno);
-		String uuid = upvo.getUuid();
-		FileVO fvo = fileMapper.selectUprofileFile(uuid);
+		String uuid = upVO.getUuid();
+		FileVO fVO = fileMapper.selectUprofileFile(uuid);
 		
 		
-		MypageProfileDTO mpDTO = new MypageProfileDTO(upvo, mvo, fvo);
-		mpDTO.setNickname(nickname);
-		
+		MypageProfileDTO mpDTO = new MypageProfileDTO();
+		mpDTO.setFVO(fVO);
+		mpDTO.setUpVO(upVO);
+		mpDTO.setMVO(mVO);
+		mpDTO.getUVO().setNickname(nickname);
+		mpDTO.getUVO().setUno(uno);
+		mpDTO.initMpDTO();
 		return mpDTO;
 	}
 	
@@ -80,20 +84,21 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	@Transactional
 	public boolean ModifyUserProfile(MypageProfileDTO mpDTO) {
-		UProfileVO uvo = upMapper.selectByUno(mpDTO.getUno());
-		mpDTO.setUuid(uvo.getUuid());
-		mpDTO.setTag(uvo.getTag());
+		UProfileVO upVO = upMapper.selectByUno(mpDTO.getUVO().getUno());
+		mpDTO.getUpVO().setTag(upVO.getTag());
+		mpDTO.getUpVO().setUuid(upVO.getUuid());
+		mpDTO.initMpDTO();
 		
-		int result1 = upMapper.updateProfile(mpDTO.getUProfileVO());
+		int result1 = upMapper.updateProfile(mpDTO.getUpVO());
 		
-		MateVO mvo = mMapper.findMate(mpDTO.getUno());
-		mpDTO.setAge(mvo.getAge());
-		mpDTO.setGender(mvo.isGender());
+		MateVO mVO = mMapper.findMate(mpDTO.getUVO().getUno());
+		mpDTO.getMVO().setAge(mVO.getAge());
+		mpDTO.getMVO().setGender(mVO.isGender());
 		
-		int result2 = mMapper.deleteMate(mpDTO.getUno());
-		int result3 = mMapper.insertMate(mpDTO.getMateVO());
+		int result2 = mMapper.deleteMate(mpDTO.getUVO().getUno());
+		int result3 = mMapper.insertMate(mpDTO.getMVO());
 		
-		return result1!=0&&result2!=0 &&result3!=0? true : false;
+		return result1+result2+result3>=3 ? true : false;
 	}
 	
 	//------------------------------------------------------

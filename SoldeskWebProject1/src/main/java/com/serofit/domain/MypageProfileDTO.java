@@ -1,75 +1,57 @@
 package com.serofit.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class MypageProfileDTO {
-	private String tag;
-	private String self;
-	private String fav;
-	private int uno;
-	private int mate;
-	private String uuid;
+	@JsonProperty("uVO")
+	private UserVO uVO=null;
 	
-	private String time;
-	private String area;
-	private boolean gender;
-	private String age;
+	@JsonProperty("upVO")
+	private UProfileVO upVO=null;
 	
-	private String nickname;
+	@JsonProperty("mVO")
+	private MateVO mVO=null;
 	
-	private String fileName;
-	private String path;
+	@JsonProperty("fVO")
+	private FileVO fVO=null;
 	
-	public MypageProfileDTO(UProfileVO upvo, MateVO mvo, FileVO fvo) {
-		this.tag=upvo.getTag();
-		this.self=upvo.getSelf();
-		this.fav=upvo.getFav();
-		this.uno=upvo.getUno();
-		this.mate=upvo.getMate();
-		this.uuid=upvo.getUuid();
-		
-		this.time=mvo.getTime();
-		this.area=mvo.getArea();
-		this.gender=mvo.isGender();
-		this.age=mvo.getAge();
-		
-		this.fileName=fvo.getFileName();
-		this.path=fvo.getPath();
+	public MypageProfileDTO() {
+		initMpDTO();
 	}
 	
-	public UProfileVO getUProfileVO() {
-		UProfileVO upvo = new UProfileVO();
-		upvo.setFav(fav);
-		upvo.setMate(mate);
-		upvo.setSelf(self);
-		upvo.setTag(tag);
-		upvo.setUno(uno);
-		upvo.setUuid(uuid);
-		
-		return upvo;
+	public void initMpDTO() {
+		if(uVO==null) {
+			this.uVO= new UserVO();			
+		}
+		if(upVO==null) {
+			this.upVO = new UProfileVO();			
+		}
+		if(mVO==null) {
+			this.mVO = new MateVO();
+			
+		}
+		if(fVO==null) {			
+			this.fVO = new FileVO();
+		}
+		uniformlySet();
 	}
 	
-	public MateVO getMateVO() {
-		MateVO mvo = new MateVO();
-		mvo.setAge(age);
-		mvo.setArea(area);
-		mvo.setGender(gender);
-		mvo.setTime(time);
-		mvo.setUno(uno);
-		
-		return mvo;
-	}
-	
-	public FileVO getFileVO() {
-		FileVO fvo = new FileVO();
-		fvo.setUuid(uuid);
-		fvo.setFileName(fileName);
-		fvo.setPath(path);
-		return fvo;
+	public void uniformlySet() {
+		if(uVO.getUno()!=0) {
+			this.upVO.setUno(uVO.getUno());
+			this.mVO.setUno(uVO.getUno());			
+		}
+		if(fVO.getUuid()!=null) {
+			this.upVO.setUuid(fVO.getUuid());			
+		}
+		if(upVO.getUuid()!=null) {
+			this.fVO.setUuid(upVO.getUuid());
+		}
 	}
 }

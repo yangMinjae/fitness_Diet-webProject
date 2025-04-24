@@ -18,6 +18,7 @@ import com.serofit.domain.FollowVO;
 import com.serofit.domain.LoginDTO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
+import com.serofit.domain.TestDTO;
 import com.serofit.service.LoginService;
 import com.serofit.service.MyPageService;
 
@@ -50,6 +51,7 @@ public class YmjController {
 	@PostMapping("/updateProfile")
 	public String updateProfile(MypageProfileDTO mpDTO) {
 		log.info("!!!내 프로필 수정!!!");
+		log.info("???????????????-"+mpDTO.getUVO().getUno());
 		mService.ModifyUserProfile(mpDTO);
 		
 		return "redirect:/ymj/myPage";
@@ -125,5 +127,4 @@ public class YmjController {
 		return result!="0" ? result : "fail";
 	}
 	// -------------------------------------------------------------------------------
-	
 }
