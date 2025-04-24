@@ -11,11 +11,11 @@
 	<jsp:include page="../layout/header.jsp" />
 
 	<h1 style="align-content: center;">운동메이트 찾기</h1>
-
-	<main>
-
-	<section class="mate-list">
-	<div class="form-group">필터 
+	<!-- 왼쪽 리모컨 스타일 사이드바 -->
+	<div class="floating-sidebar">
+		<button class="menu-section" id="sendTag">동일 태그</button>
+		<button class="menu-section" id="difTag">그 외 태그</button>
+	<div class="form-group"> 
 		<label for="time">운동 시간대</label> 
 		<select id="time">
 			<option value="::">:시간:</option>
@@ -50,6 +50,10 @@
 			<option value="60대">60대</option>
 		</select>
 	</div>
+	</div>
+	<main>
+
+	<section class="sendList">
 	<c:set var="check" value="false" />
 	<c:forEach var="mate" items="${mateList}">
 		<c:if test="${mate.pvo.tag eq user.tag}">
@@ -80,9 +84,10 @@
 	
 	<c:if test="${check eq false}">
 		<h1>동일한 태그를 가진 사람이 없습니다.</h1>
-		<c:set var="check" value="false"/>
 	</c:if>
+	</section>
 	
+	<section class="difList">
 	<p> 그 외 태그 ----------------------------------------------------------------</p>
 	
 	<c:forEach var="mate" items="${mateList}">
@@ -111,20 +116,6 @@
 		</c:if>
 	</c:forEach>
 	</section>
-	<!-- 페이징 -->
-	<div class="pagination">
-		<c:if test="${page > 1}">
-			<a href="?page=${page - 1}" class="page-btn">이전</a>
-		</c:if>
-
-		<c:forEach begin="1" end="${totalPages}" var="i">
-			<a href="?page=${i}" class="page-btn ${i == page ? 'active' : ''}">${i}</a>
-		</c:forEach>
-
-		<c:if test="${page < totalPages}">
-			<a href="?page=${page + 1}" class="page-btn">다음</a>
-		</c:if>
-	</div>
 	</main>
 
 	<jsp:include page="../layout/footer.jsp" />
