@@ -15,6 +15,8 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	UserMapper uMapper;
 	
+	// 로그인 함수
+	@Override
 	public String login(LoginDTO ldto) {
 		String uno = "0";
 		if(uMapper.login(ldto)!=0) {
@@ -24,6 +26,7 @@ public class LoginServiceImpl implements LoginService{
 		return uno;
 	}
 	
+	// 아이디 비밀번호 찾기
 	@Override
 	public UserVO findID(String email) {		
 		return uMapper.findIdPwByEmail(email);

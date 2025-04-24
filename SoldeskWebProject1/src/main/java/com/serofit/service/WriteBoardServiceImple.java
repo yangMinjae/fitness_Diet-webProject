@@ -14,14 +14,12 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-public class WriteBoardServiceImple implements WriteBoardService {
-	
+public class WriteBoardServiceImple implements WriteBoardService {	
 	@Autowired
 	DietMapper dMapper;
 	@Autowired
 	BoardMapper bMapper;
-	
-	
+		
 	// 유저의 식단 타이틀 리스트 가져오기
 	@Override
 	public List<DietVO> getDietTitle(int uno) {
@@ -30,6 +28,7 @@ public class WriteBoardServiceImple implements WriteBoardService {
 		
 		return dietList;
 	}
+	
 	// 게시글 작성하기
 	@Override
 	public void register(BoardVO bvo) {

@@ -5,6 +5,7 @@ import java.util.List;
 import com.serofit.domain.FileVO;
 
 public interface FileMapper {	
+	
 	// 이미지 업로드, 수정
 	public int insertFile(FileVO fvo);
 	

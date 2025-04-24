@@ -8,6 +8,7 @@ import com.serofit.domain.DietVO;
 
 
 public interface BoardListService {	
+	
 	// 게시글 목록 불러오기 
 	public List<BoardListDTO> getPostList();
 
@@ -15,7 +16,5 @@ public interface BoardListService {
 	public List<BoardListDTO> getPostsByTag(String tag);
 	
 	// 내가 좋아요를 누른 글
-	public List<BoardListDTO> getPostsByLove(int uno);
-	
-	
+	public List<BoardListDTO> getPostsByLove(int uno);	
 }

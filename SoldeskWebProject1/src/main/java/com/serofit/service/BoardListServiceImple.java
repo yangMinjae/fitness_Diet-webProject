@@ -43,8 +43,13 @@ public class BoardListServiceImple implements BoardListService {
 			String nickname = uMapper.readNickname(uno);
 			DietVO dvo = dMapper.selectDietByDno(dno);
 
-			BoardListDTO dto = new BoardListDTO(board.getTitle(), nickname, dvo.getTag(), board.getRegDate(),
-					board.getHit(), board.getLove());
+			BoardListDTO dto = new BoardListDTO(
+					board.getTitle(), 
+					nickname, dvo.getTag(), 
+					board.getRegDate(),
+					board.getHit(), 
+					board.getLove()
+					);
 
 			dtoList.add(dto);
 		}
@@ -68,8 +73,14 @@ public class BoardListServiceImple implements BoardListService {
 			if (dvo.getTag().equals(tag)) {
 				String nickname = uMapper.readNickname(uno);
 
-				BoardListDTO dto = new BoardListDTO(bvo.getTitle(), nickname, dvo.getTag(), bvo.getRegDate(),
-						bvo.getHit(), bvo.getLove());
+				BoardListDTO dto = new BoardListDTO(
+						bvo.getTitle(), 
+						nickname, 
+						dvo.getTag(), 
+						bvo.getRegDate(),
+						bvo.getHit(), 
+						bvo.getLove()
+						);
 
 				dtoList.add(dto);
 			}
@@ -77,7 +88,8 @@ public class BoardListServiceImple implements BoardListService {
 
 		return dtoList;
 	}
-
+	
+	// 본인이 좋아요한 게시글 목록 가져오기
 	@Override
 	public List<BoardListDTO> getPostsByLove(int uno) {
 		List<BoardListDTO> allPostByLove = new ArrayList<>();
@@ -118,5 +130,4 @@ public class BoardListServiceImple implements BoardListService {
 		}
 		return allPostByLove;
 	}
-
 }

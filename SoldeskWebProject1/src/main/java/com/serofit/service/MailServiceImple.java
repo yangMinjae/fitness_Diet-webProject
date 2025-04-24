@@ -61,6 +61,7 @@ public class MailServiceImple implements MailService {
 		for (MailVO mvo : mList) {
 			// DTO 생성
 			ReceiveMailDTO rmDTO = new ReceiveMailDTO();
+			
 			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(mvo.getSender());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
@@ -102,6 +103,7 @@ public class MailServiceImple implements MailService {
 		return rmList;
 	}
 	
+	// 메일 디비에 등록
 	@Override
 	public int insertMail(MailVO mvo) {		
 		return mMapper.insertMail(mvo);

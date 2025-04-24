@@ -5,6 +5,7 @@ import java.util.List;
 import com.serofit.domain.BoardVO;
 
 public interface HFService {	
+	
 	// 프로필 사진 불러오기
 	
 	// 프로필 닉네임 불러오기
