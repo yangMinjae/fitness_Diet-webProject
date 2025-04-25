@@ -13,6 +13,7 @@ document.querySelectorAll('a').forEach(a=>{
 			// 설문 시작
 			case 'testPage' :
 				console.log("testPage");
+				location.href = '/survey';
 				break;
 			// 게시판 목록
 			case 'boardPage' :

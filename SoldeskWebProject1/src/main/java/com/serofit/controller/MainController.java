@@ -100,4 +100,9 @@ public class MainController {
 		return "/user/matePage";
 	}
 	
+	// 설문 조사 페이지 이동
+	@GetMapping("/survey")
+	public String serveyPage(Model model) {
+		return "/survey/surveyPage";
+	}
 }
