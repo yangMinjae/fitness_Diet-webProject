@@ -86,7 +86,7 @@ function getUserInfo(){           						// db에서 비동기로 유저프로필
 }
 
 function fetchUserInfo(uno){      						// getUserInfo() 함수에서 쓰이는 fetch 함수
-	  fetch(`/ymj/getProfileInfo`,{
+	  fetch(`/myPage/getProfileInfo`,{
 	    method : 'post',
 	    body : uno,
 	    headers :{
@@ -177,7 +177,7 @@ function submitForm(){            						// 폼을 동기 방식으로 제출하�
   formChildArea.setAttribute('name', 'mVO.area');
   formChildArea.value=areaVal;
   f.appendChild(formChildArea);
-  f.action='/ymj/updateProfile';
+  f.action='/myPage/updateProfile';
   if(confirm('프로필을 수정하시겠습니까?')){
     f.submit();
   }

@@ -14,7 +14,7 @@ document.querySelectorAll('button').forEach(button=>{
 		
 		if (type === 'allList') {            // 전체 게시글
 
-		    fetch('/cjs/getAllBoardList')
+		    fetch('/board/getAllBoardList')
 		        .then(response => {
 		            if (!response.ok) {
 		                throw new Error(`HTTP 오류! 상태: ${response.status}`);
@@ -50,12 +50,12 @@ document.querySelectorAll('button').forEach(button=>{
 		}else if(type === 'writePostBtn'){
 			console.log("writePostBtn");
 			
-			const sessionUno = sessionStorage.getItem('uno'); //세션에서 받아온 uno
+			//const sessionUno = sessionStorage.getItem('uno'); //세션에서 받아온 uno
 				
 				
-			let senddata = 'uno=' + sessionUno; 
+			//let senddata = 'uno=' + sessionUno; 
 			
-		   location.href ='/cjs/writeBoard?'+senddata;
+		   location.href ='/board/writeBoard?uno=3';
 		}
 		
 	});
@@ -88,7 +88,7 @@ function getAllBoardList(posts) {
 
 // 태그에 맞춰서 보여주기
 function getBoardListByTag(tag) {
-	fetch(`/cjs/boardList/${tag}`)  
+	fetch(`/board/boardList/${tag}`)  
 			.then(response => {
 					if (!response.ok) {
 							throw new Error(`HTTP 오류! 상태: ${response.status}`);
@@ -107,7 +107,7 @@ function getBoardListByTag(tag) {
 
 // 좋아요 누른 게시글 
 function getBoardListByLove(uno){
-	   fetch(`/cjs/boardList/love`)
+	   fetch(`/board/boardList/love`)
        .then(response => {
            if (!response.ok) {
                throw new Error(`HTTP 오류! 상태: ${response.status}`);

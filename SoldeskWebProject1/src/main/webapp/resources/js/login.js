@@ -35,7 +35,7 @@ document
       console.log('비밀번호 찾기');
     }else if(href == 'signup'){
       console.log('회원가입');
-      location.href="/sm/signup";
+      location.href='/sign/signUp';
     }
   })
 });
@@ -56,7 +56,7 @@ btnSubmit.addEventListener('click', (e)=>{
 })
 
 function login(){
-  fetch('/ymj/login',{
+  fetch('/sign/login',{
     method : 'post',
     body:JSON.stringify({
       username : f.username.value,
@@ -72,7 +72,7 @@ function login(){
       alert('일치하는 회원정보가 존재하지 않습니다.');
     }else if(regIsNum.test(text)){
       sessionStorage.setItem('uno',text);
-      location.href='/jsh/main';
+      location.href='/'+'?uno='+sessionStorage.getItem('uno');
     }
   })
 }
@@ -98,7 +98,7 @@ document.getElementById('findIdSubmit').addEventListener('click', () => {
 		return;
 	}
 	
-	fetch('/jsh/findID?email='+email)
+	fetch('/sign/findID?email='+email)
 		.then(response => response.json())
 		.then(data => {
 			if (data != null) {

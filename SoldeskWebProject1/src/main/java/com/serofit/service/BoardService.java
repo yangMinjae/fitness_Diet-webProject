@@ -7,7 +7,7 @@ import com.serofit.domain.BoardVO;
 import com.serofit.domain.DietVO;
 
 
-public interface BoardListService {	
+public interface BoardService {	
 	
 	// 게시글 목록 불러오기 
 	public List<BoardListDTO> getPostList();

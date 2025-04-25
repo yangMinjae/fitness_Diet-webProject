@@ -30,7 +30,7 @@ document.querySelectorAll('button').forEach(btn=>{
         // 목록 페이지로 이동
         case 'list-btn' : 
             console.log("list-btn");
-            location.href = '/cjs/boardList';
+            location.href = '/board/boardList';
             break;
         // 작성완료
         case 'register-btn' : 
@@ -78,6 +78,6 @@ function register(){
 
   
   
-//  f.action= '/cjs/writeBoard';
+//  f.action= '/board/writeBoard';
 //  f.submit();
 }

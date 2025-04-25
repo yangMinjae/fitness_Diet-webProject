@@ -16,12 +16,11 @@ document.querySelectorAll('button').forEach(button=>{
 		switch(name){
 			// 전송 버튼
 			case 'btn send' :
-				console.log("btn send");
 				sendMail();
 				break;
 			// 목록 버튼
 			case 'btn close' :
-				console.log("btn close");
+				location.href = '/mailList'
 				break;
 		}
 	});
@@ -40,6 +39,6 @@ function sendMail() {
     hiddenField.setAttribute("value", select.options[select.selectedIndex].value);
     form.appendChild(hiddenField);
     
-    form.action = '/jsh/sendMail';
+    form.action = '/mail/sendMail';
     form.submit();
 }

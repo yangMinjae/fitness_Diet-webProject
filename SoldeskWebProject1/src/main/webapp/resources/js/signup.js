@@ -129,8 +129,8 @@ function checkPwMatch() {
 // --- 중복 확인 함수들 ---
 function validateDuplicate(id, endpoint, label) {
   const value = f[id].value.trim();
-  const url = id === 'mEmail' ? `/sm/validateEmail?email=${encodeURIComponent(value)}` 
-		  : `/sm/${endpoint}/${encodeURIComponent(value)}`;
+  const url = id === 'mEmail' ? `/sign/validateEmail?email=${encodeURIComponent(value)}` 
+		  : `/sign/${endpoint}/${encodeURIComponent(value)}`;
   
   if(id === 'mId' && !regExp.mId.test(f.mId.value)){
 	  alert('형식이 맞지 않습니다. (영어 소문자로 시작, 영어 + 숫자 조합 3~12 글자)');
@@ -173,12 +173,12 @@ function join() {
     email: f.mEmail.value.trim()
   };
   
-  if(!isId || !isNickname || !isEmail || !isPw){
-	  alert('정확히 입력해 주세요.');
-	  return; 
-  } 
+//  if(!isId || !isNickname || !isEmail || !isPw){
+//	  alert('정확히 입력해 주세요.');
+//	  return; 
+//  } 
   
-  fetch('/sm/insertUser', {
+  fetch('/sign/insertUser', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify(userData)
@@ -189,7 +189,7 @@ function join() {
       alert("회원가입이 실패했습니다.");
     } else {
       alert("회원가입이 완료되었습니다.");
-      location.href="/sm/matePage";
+      location.href="/login";
       // 이동 코드 추가 가능
     }
   })

@@ -8,8 +8,7 @@ document.querySelectorAll('a').forEach(a=>{
 		switch(href){
 			// 로고
 			case 'mainPage' :
-				console.log("mainPage");
-				//location.href = '/';
+				location.href = '/';
 				break;
 			// 설문 시작
 			case 'testPage' :
@@ -17,11 +16,12 @@ document.querySelectorAll('a').forEach(a=>{
 				break;
 			// 게시판 목록
 			case 'boardPage' :
-				console.log("boardPage");
+				location.href = '/boardList';
 				break;
 			// 운동 메이트 찾기
 			case 'matePage' :
-				console.log("matePage");
+				location.href = '/matePage'+'?uno=3';
+				// 추후에 uno 관련 코드 수정
 				break;
 		}
 	});
@@ -35,8 +35,7 @@ document.querySelectorAll('p').forEach(p=>{
 		switch(id){
 			// 마이페이지
 			case 'myPage' :
-				console.log("myPage");
-				//location.href = '/';
+				location.href = '/myPage';
 				break;
 			// 회원 정보 수정
 			case 'modifyPage' :
@@ -57,8 +56,8 @@ document.querySelectorAll('img').forEach(img=>{
 
 		switch(alt){
 			case 'mailPage' :
-				console.log("mailPage");
-				//location.href = '/';
+				location.href = '/mailList'+'?receiver=1';
+				// 추후에 리시버 관련 코드 수정
 				break;
 		}
 	});
@@ -71,8 +70,7 @@ document.querySelectorAll('button').forEach(button=>{
 
 		switch(name){
 			case 'login-btn' :
-				console.log("login-btn");
-				//location.href = '/';
+				location.href = '/login';
 				break;
 		}
 	});

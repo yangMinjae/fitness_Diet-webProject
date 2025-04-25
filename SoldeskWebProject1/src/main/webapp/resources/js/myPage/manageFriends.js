@@ -14,9 +14,9 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 	  };
 
 	  const urlMap = {
-	    fav: `/ymj/getFavList/${uno}`,
-	    follow: `/ymj/getFollowList/${uno}`,
-	    follower: `/ymj/getFollowerList/${uno}`
+	    fav: `/myPage/getFavList/${uno}`,
+	    follow: `/myPage/getFollowList/${uno}`,
+	    follower: `/myPage/getFollowerList/${uno}`
 	  };
 
 	  const bodyTarget = bodyMap[type];
@@ -88,7 +88,7 @@ function initFriendsList(){							// 목록을 초기화
 }
 
 function updateFollowOrFav(catcher, action) {		// 현재 로그인 중인 사람의 uno와, action(팔로우 추가/취소, 즐찾 추가/해제) 입력시 해당 동작을 처리       
-	  const url = `/ymj/${action}`;
+	  const url = `/myPage/${action}`;
 	  const methodMap = {
 	    addFollow: 'put',                           // 팔로우 추가
 	    cancelFollow: 'delete',                     // 팔로우 취소

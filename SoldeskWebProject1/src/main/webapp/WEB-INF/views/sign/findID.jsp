@@ -12,7 +12,7 @@
 		<div class="modal-content">
 			<span class="close-btn">&times;</span>
 	
-			<h2>이메일로 아이디 찾기</h2>
+			<h2>이메일로 아이디/비밀번호 찾기</h2>
 	
 			<div class="modal-body">
 				<input type="email" id="findIdEmail" placeholder="이메일 입력" required>

@@ -17,7 +17,7 @@
 				<input type="password" name="password" placeholder="비밀번호" required>
 
 				<div class="helper-links">
-					<a href="findId">아이디 찾기</a> | <a href="findPw">비밀번호 찾기</a> | <a
+					<a href="findId">아이디 / 비밀번호 찾기</a> | <a
 						href="signup">회원가입</a>
 				</div>
 
@@ -25,8 +25,8 @@
 			</form>
 		</div>
 	</div>
-	<jsp:include page="../jsh/findID.jsp" />
-	<jsp:include page="../jsh/resultFindID.jsp" />
+	<jsp:include page="findID.jsp" />
+	<jsp:include page="resultFindID.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 	<script type="text/javascript" src="/resources/js/login.js"></script>

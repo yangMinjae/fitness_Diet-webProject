@@ -43,7 +43,7 @@
 		</ul>			
 	</div>
 	
-	<jsp:include page="../jsh/mailModal.jsp" />
+	<jsp:include page="mailModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/mail.js"></script>

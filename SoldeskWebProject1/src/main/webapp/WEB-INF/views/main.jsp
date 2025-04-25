@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../layout/header.jsp" />
+	<jsp:include page="layout/header.jsp" />
 	<main>
 		<section class="section">
 			<div class="description-box">이 설문조사는 영국에서</div>
@@ -33,7 +33,7 @@
 		</section>
 	</main>
 	
-	<jsp:include page="../layout/footer.jsp" />
+	<jsp:include page="layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/main.js"></script>
 </html>

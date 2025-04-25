@@ -53,7 +53,7 @@ document.querySelectorAll('button').forEach(button=>{
 		switch(name){
 			case 'send-mail-btn' :
 				console.log("send-mail-btn");
-				//location.href = '/';
+				location.href = '/mail/sendMail';
 				break;
 		}
 	});

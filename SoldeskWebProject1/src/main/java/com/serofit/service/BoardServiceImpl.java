@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-public class BoardListServiceImple implements BoardListService {
+public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardMapper bMapper;
 	@Autowired
