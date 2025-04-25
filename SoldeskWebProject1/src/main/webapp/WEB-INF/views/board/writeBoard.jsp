@@ -20,8 +20,8 @@
 				<label for="category">식단 선택</label> <select id="diet">
 					<option value="">식단을 선택하세요</option>
 					<c:forEach var="dvo" items="${ dietList}">					
-						<option value="${dvo.title }" data-content="${dvo.content }"
-							data-tag="${dvo.tag }">${dvo.title }</option>
+						<option value="${dvo.title }" data-content="${dvo.content }" data-dno="${dvo.dno }"
+							data-tag="${dvo.tag }" >${dvo.title }</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -63,8 +63,8 @@
 				<button type="button" class="boardList-btn">목록</button>
 				<button type="button" class="register-btn">작성 완료</button>
 			</div>		
-	 	<input type="hidden" name="dno" value="${dvo.dno }">
-		<input type="hidden" name="uno" value="${dvo.uno }"> 
+	 	<input type="hidden" id="dno" name="dno" > 
+		<input type="hidden"  name="uno" value="${dietList[0].uno }"> 
 		</form>	
 	</div>
 	
