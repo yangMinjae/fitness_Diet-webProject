@@ -57,7 +57,7 @@ form input[type="checkbox"] {
   transform: scale(1.1);
 }
 
-button[type="button"] {
+button[type="submit"] {
   margin-top: 25px;
   display: inline-block;
   background-color: #007bff;
@@ -70,7 +70,7 @@ button[type="button"] {
   transition: background-color 0.3s ease;
 }
 
-button[type="button"]:hover {
+button[type="submit"]:hover {
   background-color: #0056b3;
 }
 

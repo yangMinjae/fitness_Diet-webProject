@@ -89,11 +89,11 @@
 			    <input type="number" name="dietGoal" />
 			  </label>
 			  <label>식단 조절 방식 (중복 선택):
-			    <input type="checkbox" name="dietType" value="저탄고지" /> 저탄고지
-			    <input type="checkbox" name="dietType" value="간헐적 단식" /> 간헐적 단식
-			    <input type="checkbox" name="dietType" value="칼로리 제한" /> 칼로리 제한
-			    <input type="checkbox" name="dietType" value="고단백식단" /> 고단백식단
-			    <input type="checkbox" name="dietType" value="따로 없음" /> 따로 없음
+			    <input type="radio" name="dietType" value="저탄고지" /> 저탄고지
+			    <input type="radio" name="dietType" value="간헐적 단식" /> 간헐적 단식
+			    <input type="radio" name="dietType" value="칼로리 제한" /> 칼로리 제한
+			    <input type="radio" name="dietType" value="고단백식단" /> 고단백식단
+			    <input type="radio" name="dietType" value="따로 없음" /> 따로 없음
 			  </label>
 			  <label>영양제 유무:
 			    <input type="checkbox" name="dietSupplements" value="yes" /> 섭취함
@@ -106,11 +106,11 @@
 			    </select>
 			  </label>
 			  <label>다이어트 시 어려운 점 (중복 선택):
-			    <input type="checkbox" name="dietDifficulties" value="식단 유지" /> 식단 유지
-			    <input type="checkbox" name="dietDifficulties" value="운동 지속" /> 운동 지속
-			    <input type="checkbox" name="dietDifficulties" value="식욕 조절" /> 식욕 조절
-			    <input type="checkbox" name="dietDifficulties" value="정보 부족" /> 정보 부족
-			    <input type="checkbox" name="dietDifficulties" value="심리적 요인" /> 심리적 요인
+			    <input type="radio" name="dietDifficulties" value="식단 유지" /> 식단 유지
+			    <input type="radio" name="dietDifficulties" value="운동 지속" /> 운동 지속
+			    <input type="radio" name="dietDifficulties" value="식욕 조절" /> 식욕 조절
+			    <input type="radio" name="dietDifficulties" value="정보 부족" /> 정보 부족
+			    <input type="radio" name="dietDifficulties" value="심리적 요인" /> 심리적 요인
 			  </label>
 			</section>
 			
@@ -149,9 +149,9 @@
 			
 			  <!-- ⚠️ 어려운 점 -->
 			  <label>멸치탈출 시 어려운 점 (중복 선택):
-			    <input type="checkbox" name="gainDifficulties" value="식욕 부진" /> 식욕 부진
-			    <input type="checkbox" name="gainDifficulties" value="식단 계획" /> 식단 계획
-			    <input type="checkbox" name="gainDifficulties" value="운동 루틴" /> 운동 루틴
+			    <input type="radio" name="gainDifficulties" value="식욕 부진" /> 식욕 부진
+			    <input type="radio" name="gainDifficulties" value="식단 계획" /> 식단 계획
+			    <input type="radio" name="gainDifficulties" value="운동 루틴" /> 운동 루틴
 			  </label>
 			</section>
 			
@@ -254,29 +254,18 @@
 			
 			  <!-- 🧬 관심 기저질환 -->
 			  <label>관심 기저질환 (중복 선택):
-			    <input type="checkbox" name="diseases" value="고혈압" /> 고혈압
-			    <input type="checkbox" name="diseases" value="당뇨" /> 당뇨
-			    <input type="checkbox" name="diseases" value="고지혈증" /> 고지혈증
-			    <input type="checkbox" name="diseases" value="심장병" /> 심장병
-			    <input type="checkbox" name="diseases" value="골다공증" /> 골다공증
-			    <input type="checkbox" name="diseases" value="빈혈" /> 빈혈
-			    <input type="checkbox" name="diseases" value="변비" /> 변비
-			    <input type="checkbox" name="diseases" value="통풍" /> 통풍
-			    <input type="checkbox" name="diseases" value="치주질환" /> 치주질환
-			    <input type="checkbox" name="diseases" value="신장결석" /> 신장결석
-			    <input type="checkbox" name="diseases" value="지루성 피부염" /> 지루성 피부염
-			  </label>
-			
-			  <!-- ⚖️ BMI 관련 의향 -->
-			 <!--  <label>BMI 평가 후 의향:
-			    <select name="bmiFeedback">
-			      <option value="">평균보다 높음 - 뺄래</option>
-			      <option value="높음-말래">평균보다 높음 - 말래</option>
-			      <option value="낮음-찔래">평균보다 낮음 - 찔래</option>
-			      <option value="낮음-말래">평균보다 낮음 - 말래</option>
-			    </select>
-			  </label> -->
-			
+			    <input type="radio" name="diseases" value="고혈압" /> 고혈압
+			    <input type="radio" name="diseases" value="당뇨" /> 당뇨
+			    <input type="radio" name="diseases" value="고지혈증" /> 고지혈증
+			    <input type="radio" name="diseases" value="심장병" /> 심장병
+			    <input type="radio" name="diseases" value="골다공증" /> 골다공증
+			    <input type="radio" name="diseases" value="빈혈" /> 빈혈
+			    <input type="radio" name="diseases" value="변비" /> 변비
+			    <input type="radio" name="diseases" value="통풍" /> 통풍
+			    <input type="radio" name="diseases" value="치주질환" /> 치주질환
+			    <input type="radio" name="diseases" value="신장결석" /> 신장결석
+			    <input type="radio" name="diseases" value="지루성 피부염" /> 지루성 피부염
+			  </label>			
 			  <!-- 🍺 음주 -->
 			  <label>음주 빈도:
 			    <select name="alcohol">
@@ -339,8 +328,7 @@
 				</select>
 				</label>
 			</section>
-
-			<button type="button">제출</button>
+			<button type="submit" id="testbtn">제출</button>
 		</form>
 	</div>
 
