@@ -79,7 +79,8 @@ function validateField(id) {
 
   if (regExp[id] && !regExp[id].test(value)) {
 	if (id === "mPw") {
-	currentLabel.classList.add("input-verified");
+//	currentLabel.classList.remove("input-valid")
+//	currentLabel.classList.add("input-verified");
 	} currentLabel.classList.add("input-invalid");
   } else {
 	currentLabel.classList.add("input-valid");
