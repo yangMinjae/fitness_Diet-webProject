@@ -51,15 +51,21 @@ document.getElementById("diet").addEventListener("change", function() {
 
   const content = selectedOption.getAttribute("data-content");
   const tag = selectedOption.getAttribute("data-tag");
-
+  const dno = selectedOption.getAttribute("data-dno");
+  
   console.log("본문:", content);
   console.log("태그:", tag);
-
+  console.log("식단번호:", dno);
+ 
   // 본문 
   document.getElementById("content").value = content;
   // 태그 
   document.getElementById("tag").value = tag;
+  // dno
+  document.getElementById("dno").value = dno;
 });
+	
+	
 
 // 업로드 버튼 클릭시 내용 있는지 검증
 function register(){
@@ -71,13 +77,11 @@ function register(){
     alert("식단을 선택해주세요");
     return;
   }
-  console.log(f.dno.value);
-  console.log(f.uno.value);
-  console.log(f.title.value);
-  console.log(f.content.value);
-
+//  console.log(f.dno.value);
+//  console.log(f.uno.value);
+//  console.log(f.title.value);
+//  console.log(f.content.value);
   
-  
-//  f.action= '/board/writeBoard';
-//  f.submit();
+  f.action= '/board/writeBoard';
+  f.submit();
 }
