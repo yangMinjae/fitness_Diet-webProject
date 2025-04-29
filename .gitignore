@@ -11,4 +11,4 @@ target/
 wtpwebapps/
 pom.xml.*
 release.properties
-/src/main/resources/OpenAI_apiKey.properties
+/SoldeskWebProject1/src/main/resources/OpenAI_apiKey.properties
