@@ -1,5 +1,4 @@
 /.metadata/
-/SoldeskWebProject1/target/m2e-wtp/web-resources/META-INF/maven/com.team1/controller/pom.properties
 target/
 *.class
 .settings/
@@ -12,3 +11,4 @@ target/
 wtpwebapps/
 pom.xml.*
 release.properties
+/src/main/resources/OpenAI_apiKey.properties
