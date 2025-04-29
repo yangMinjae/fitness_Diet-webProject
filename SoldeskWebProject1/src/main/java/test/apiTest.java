@@ -1,12 +1,4 @@
-package com.serofit.controller;
-
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+package test;
 
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
@@ -14,27 +6,21 @@ import com.openai.models.ChatModel;
 import com.openai.models.responses.Response;
 import com.openai.models.responses.ResponseCreateParams;
 
-import lombok.extern.log4j.Log4j;
 
-@Log4j
-@Controller
-@RequestMapping("/ymj/*")
-public class YmjController {
-	@GetMapping("/apiTest")
-	public void showApiTestPage() {
-		
-	}
-	
-	@ResponseBody
-	@PostMapping(value = "/send", produces = "text/plain; charset=UTF-8")
-	public String send(@RequestBody String prompt) {
-		
+
+// Configures using the `OPENAI_API_KEY`, `OPENAI_ORG_ID` and `OPENAI_PROJECT_ID` 
+// environment variables
+
+public class apiTest {
+	public static void main(String[] args) {
+
+        
 		OpenAIClient client = OpenAIOkHttpClient.builder()
 				.fromEnv()
 				.apiKey("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")
 				.baseUrl("https://api.openai.com/v1")
 				.build();
-		/*
+		
 		String input = "[요청사항]\r\n" + 
 				"- !!!앞뒤 설명이나 사족(예: \"알겠어요! 만들어드릴게요\") 없이, 필요한 정보만 출력할 것.!!!\r\n" + 
 				"- 식단의 이름은 <div id = \"dietName\"> 태그 안에 넣을것\r\n" + 
@@ -50,7 +36,7 @@ public class YmjController {
 				"- 요청을 여러번 할거라 식단과 식단제목은 가능하면 다양하게 바뀌면 좋겠다.\r\n" + 
 				"\r\n" + 
 				"[식단 요청사항] \r\n" + 
-				"- 이 사람은 다이어트를 원하는[20]대 [남]성이야\r\n" + 
+				"- 이 사람은 다이어트를 원하는 [20]대 [남]성이야\r\n" + 
 				"- 하루에 섭취할 칼로리는 [2200] kcal이고 이를 끼니수로 나눠서 칼로리를 적절하게 분배해서 식단을 작성해(총합만 일치하면 돼)\r\n" + 
 				"- 각 끼니의 칼로리와 탄단지가 실제 음식의 칼로리와 탄단지와 실제로 거의 일치해야해\r\n" + 
 				"- 탄단지 비율: [40:30:30]이고 모든 끼니에 적용되도록 식단을 구성할 것. (±5% 오차 허용)\r\n" + 
@@ -87,13 +73,14 @@ public class YmjController {
 				"-아보카도 30g\r\n" + 
 				"-...\r\n" + 
 				"<div id=\"diet2Recipe\">1. 재료를 준비한다. 2. 조리한다.</div>";
-		*/
+		
 		ResponseCreateParams params = ResponseCreateParams.builder()
-		        .input(prompt)
+		        .input(input)
 		        .model(ChatModel.CHATGPT_4O_LATEST)
 		        .build();
 		
 		Response response = client.responses().create(params);
-		return response.output().get(0).message().get().content().get(0).outputText().get().text();
+		System.out.println(response.output().get(0).message().get().content().get(0).outputText().get().text());
 	}
+	
 }
