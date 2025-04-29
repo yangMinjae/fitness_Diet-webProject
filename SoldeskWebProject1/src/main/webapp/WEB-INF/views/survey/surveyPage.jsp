@@ -15,8 +15,8 @@
 			<section>
 				<h2>공통 정보</h2>
 				<!-- 기존 입력 항목 -->
-				<label>키 (cm): <input type="number" name="height" required /></label>
-				<label>체중 (kg): <input type="number" name="weight" required /></label>
+				<label>키 (cm): <input type="number" name="height" min="0" required /></label>
+				<label>체중 (kg): <input type="number" name="weight" min="0" required /></label>
 				<label>나이: <select name="age">
 						<option value="10s">10대</option>
 						<option value="20s">20대</option>
@@ -44,19 +44,29 @@
 				</select>
 				</label> 
 				<label>비건 여부: 
-				<input type="radio" name="vegan" value="yes" /> 예 
-				<input type="radio" name="vegan" value="no" checked /> 아니오
+				<label><input type="radio" name="vegan" value="yes" /> 예 </label>
+				<label><input type="radio" name="vegan" value="no" checked /> 아니오</label>
 				</label>
 				<label>평소 식사 량: 
-				<input type="radio" name="hit" value="two" /> 하루 2번 
-				<input type="radio" name="hit" value="three" checked /> 하루 3번
+				<label><input type="radio" name="hit" value="two" /> 하루 2번 </label>
+				<label><input type="radio" name="hit" value="three" checked /> 하루 3번</label>
 				</label>
 				<label>선호하는 운동: 
 				<select name="favSport">
+				    	<option value="">선택하세요</option>
 						<option value="health">헬스</option>
 						<option value="bWeight">맨몸 운동</option>
 						<option value="sport">스포츠</option>
 				</select>
+				<label id="splitSelectLabel" class="hidden">
+				  운동 분할 방식:
+				  <select name="workoutSplit">
+				    <option value="0">잘 모름</option>
+				    <option value="2">2분할</option>
+				    <option value="3">3분할</option>
+				    <option value="4">4분할</option>
+				  </select>
+				</label>
 				</label> 
 				<label>선호하는 음식 (쉼표로 구분):
 				    <input type="text" name="favoriteFood" placeholder="예: 닭가슴살, 샐러드, 고구마" />
@@ -71,6 +81,20 @@
 				      <option value="1.9">매우 격렬함 (운동선수 수준)</option>
 				    </select>
 				</label>
+				<label>
+				    영양제 섭취 여부
+				  <div class="supplement-list" id="supplementList">
+				    <label><input type="checkbox" name="supplements" value="비타민 B"> 비타민 B</label>
+				    <label><input type="checkbox" name="supplements" value="비타민 D"> 비타민 D</label>
+				    <label><input type="checkbox" name="supplements" value="비타민 C"> 비타민 C</label>
+				    <label><input type="checkbox" name="supplements" value="마그네슘"> 마그네슘</label>
+				    <label><input type="checkbox" name="supplements" value="칼륨"> 칼륨</label>
+				    <label><input type="checkbox" name="supplements" value="아연"> 아연</label>
+				    <label><input type="checkbox" name="supplements" value="철분"> 철분</label>
+				    <label><input type="checkbox" name="supplements" value="오메가3"> 오메가3</label>
+				    <label><input type="checkbox" name="supplements" value="프로바이오틱스"> 프로바이오틱스</label>
+				  </div>
+			  </label>	
 				<label>운동 목적: <select name="goal" id="goalSelect">
 						<option value="">선택하세요</option>
 						<option value="diet">다이어터</option>
@@ -81,36 +105,33 @@
 				</select>
 				</label>
 			</section>
-
+			
 			<!-- 다이어터 -->
 			<section id="dietSection" class="goal-section hidden">
 			  <h3>다이어터 정보</h3>			
 			  <label>1개월 목표 감량 (kg):
-			    <input type="number" name="dietGoal" />
+			    <input type="number" name="dietGoal" min="0"/>
 			  </label>
 			  <label>식단 조절 방식 (중복 선택):
-			    <input type="radio" name="dietType" value="저탄고지" /> 저탄고지
-			    <input type="radio" name="dietType" value="간헐적 단식" /> 간헐적 단식
-			    <input type="radio" name="dietType" value="칼로리 제한" /> 칼로리 제한
-			    <input type="radio" name="dietType" value="고단백식단" /> 고단백식단
-			    <input type="radio" name="dietType" value="따로 없음" /> 따로 없음
-			  </label>
-			  <label>영양제 유무:
-			    <input type="checkbox" name="dietSupplements" value="yes" /> 섭취함
-			  </label>
+			    <label><input type="radio" name="dietType" value="저탄고지" /> 저탄고지</label>
+			    <label><input type="radio" name="dietType" value="간헐적 단식" /> 간헐적 단식</label>
+			    <label><input type="radio" name="dietType" value="칼로리 제한" /> 칼로리 제한</label>
+			    <label><input type="radio" name="dietType" value="고단백식단" /> 고단백식단</label>
+			    <label><input type="radio" name="dietType" value="따로 없음" /> 따로 없음</label>
+			  </label>						  
 			  <label>식욕 조절 능력:
 			    <select name="appetiteControl">
-			      <option value="high">상 (예: 열흘에 한 번)</option>
+			      <option value="high">상</option>
 			      <option value="medium">중</option>
 			      <option value="low">하</option>
 			    </select>
 			  </label>
-			  <label>다이어트 시 어려운 점 (중복 선택):
-			    <input type="radio" name="dietDifficulties" value="식단 유지" /> 식단 유지
-			    <input type="radio" name="dietDifficulties" value="운동 지속" /> 운동 지속
-			    <input type="radio" name="dietDifficulties" value="식욕 조절" /> 식욕 조절
-			    <input type="radio" name="dietDifficulties" value="정보 부족" /> 정보 부족
-			    <input type="radio" name="dietDifficulties" value="심리적 요인" /> 심리적 요인
+			  <label>다이어트 시 어려운 점:
+			    <label><input type="radio" name="dietDifficulties" value="식단 유지" /> 식단 유지</label>
+			    <label><input type="radio" name="dietDifficulties" value="운동 지속" /> 운동 지속</label>
+			    <label><input type="radio" name="dietDifficulties" value="식욕 조절" /> 식욕 조절</label>
+			    <label><input type="radio" name="dietDifficulties" value="정보 부족" /> 정보 부족</label>
+			    <label><input type="radio" name="dietDifficulties" value="심리적 요인" /> 심리적 요인</label>
 			  </label>
 			</section>
 			
@@ -120,7 +141,7 @@
 			
 			  <!-- 📈 구체적인 목표 -->
 			  <label>1개월 목표 증량 (kg):
-			    <input type="number" name="gainGoal" />
+			    <input type="number" name="gainGoal" min="0"/>
 			  </label>
 			
 			  <!-- 📊 증가 시도 경험 -->
@@ -142,16 +163,11 @@
 			    </select>
 			  </label>
 			
-			  <!-- 💊 영양제 유무 -->
-			  <label>영양제 유무:
-			    <input type="checkbox" name="gainSupplements" value="yes" /> 섭취함
-			  </label>
-			
 			  <!-- ⚠️ 어려운 점 -->
-			  <label>멸치탈출 시 어려운 점 (중복 선택):
-			    <input type="radio" name="gainDifficulties" value="식욕 부진" /> 식욕 부진
-			    <input type="radio" name="gainDifficulties" value="식단 계획" /> 식단 계획
-			    <input type="radio" name="gainDifficulties" value="운동 루틴" /> 운동 루틴
+			  <label>멸치탈출 시 어려운 점:
+			    <label><input type="radio" name="gainDifficulties" value="식욕 부진" /> 식욕 부진</label>
+			    <label><input type="radio" name="gainDifficulties" value="식단 계획" /> 식단 계획</label>
+			    <label><input type="radio" name="gainDifficulties" value="운동 루틴" /> 운동 루틴</label>
 			  </label>
 			</section>
 			
@@ -173,11 +189,17 @@
 			    <label>근육량 / 체지방률:
 			      <input type="text" name="strengthStats" placeholder="예: 근육량 35kg / 체지방률 18%" />
 			    </label>
-			
-			    <label>영양제 유무:
-			      <input type="checkbox" name="strengthSupplements" value="yes" /> 섭취함
-			    </label>
-			
+			    
+				<label>
+				  추천 받을 운동 분할 방식:
+				  <select name="strengthSplit">
+				    <option value="0">잘 모름</option>
+				    <option value="2">2분할</option>
+				    <option value="3">3분할</option>
+				    <option value="4">4분할</option>
+				  </select>
+				</label>
+				
 			    <label>끼니 외 간식 횟수:
 			      <select name="strengthSnacks">
 			        <option value="1">일 1회</option>
@@ -218,11 +240,17 @@
 			    <label>근육량 / 체지방률:
 			      <input type="text" name="muscleStats" placeholder="예: 근육량 33kg / 체지방률 15%" />
 			    </label>
-			
-			    <label>영양제 유무:
-			      <input type="checkbox" name="muscleSupplements" value="yes" /> 섭취함
-			    </label>
-			
+			    
+			    <label>
+				  추천 받을 운동 분할 방식:
+				  <select name="muscleSplit">
+				    <option value="0">잘 모름</option>
+				    <option value="2">2분할</option>
+				    <option value="3">3분할</option>
+				    <option value="4">4분할</option>
+				  </select>
+				</label>
+				
 			    <label>끼니 외 간식 횟수:
 			      <select name="muscleSnacks">
 			        <option value="1">일 1회</option>
@@ -254,17 +282,18 @@
 			
 			  <!-- 🧬 관심 기저질환 -->
 			  <label>관심 기저질환 (중복 선택):
-			    <input type="radio" name="diseases" value="고혈압" /> 고혈압
-			    <input type="radio" name="diseases" value="당뇨" /> 당뇨
-			    <input type="radio" name="diseases" value="고지혈증" /> 고지혈증
-			    <input type="radio" name="diseases" value="심장병" /> 심장병
-			    <input type="radio" name="diseases" value="골다공증" /> 골다공증
-			    <input type="radio" name="diseases" value="빈혈" /> 빈혈
-			    <input type="radio" name="diseases" value="변비" /> 변비
-			    <input type="radio" name="diseases" value="통풍" /> 통풍
-			    <input type="radio" name="diseases" value="치주질환" /> 치주질환
-			    <input type="radio" name="diseases" value="신장결석" /> 신장결석
-			    <input type="radio" name="diseases" value="지루성 피부염" /> 지루성 피부염
+			  <div class="diseases-list" id="diseasesList">
+			    <label><input type="checkbox" name="diseases" value="고혈압" /> 고혈압</label>
+			    <label><input type="checkbox" name="diseases" value="당뇨" /> 당뇨</label>
+			    <label><input type="checkbox" name="diseases" value="고지혈증" /> 고지혈증</label>
+			    <label><input type="checkbox" name="diseases" value="심장병" /> 심장병</label>
+			    <label><input type="checkbox" name="diseases" value="골다공증" /> 골다공증</label>
+			    <label><input type="checkbox" name="diseases" value="빈혈" /> 빈혈</label>
+			    <label><input type="checkbox" name="diseases" value="변비" /> 변비</label>
+			    <label><input type="checkbox" name="diseases" value="통풍" /> 통풍</label>
+			    <label><input type="checkbox" name="diseases" value="치주질환" /> 치주질환</label>
+			    <label><input type="checkbox" name="diseases" value="신장결석" /> 신장결석</label>
+			    <label><input type="checkbox" name="diseases" value="지루성 피부염" /> 지루성 피부염</label>
 			  </label>			
 			  <!-- 🍺 음주 -->
 			  <label>음주 빈도:
@@ -278,7 +307,7 @@
 			
 			  <!-- 🚬 흡연 -->
 			  <label>하루 평균 흡연 (갑 수):
-			    <input type="number" name="smoking" placeholder="예: 0.5" />
+			    <input type="number" name="smoking" min="0" placeholder="예: 0.5" />
 			  </label>
 			
 			  <!-- 😴 수면 -->

@@ -29,6 +29,15 @@ document.getElementById("goalSelect").addEventListener("change", function () {
   }
 });
 
+document.querySelector('select[name="favSport"]').addEventListener('change', function() {
+	  const splitSelect = document.getElementById('splitSelectLabel');
+	  if (this.value === 'health') {
+	    splitSelect.classList.remove('hidden'); // 헬스 선택하면 보이기
+	  } else {
+	    splitSelect.classList.add('hidden'); // 다른 운동이면 숨기기
+	  }
+});
+
 //프로득근러 하위 섹션 분기 처리
 document.getElementById("proGoalTypeSelect").addEventListener("change", function () {
   const type = this.value;
@@ -49,7 +58,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 
 	// 음식 리스트 파싱 처리
 	const foodList = data.favoriteFood ? data.favoriteFood.split(',').map(f => f.trim()).filter(Boolean) : [];
-	
+	console.log(data.workoutSplit);
 	// 공통 질문 데이터
 	/*foodList.forEach(function(food) {
 		console.log(food);		
@@ -63,13 +72,15 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 	console.log(data.favSport);
 	console.log(data.activityLevel);
 	console.log(data.goal);*/
-	
+	const selectedSupplements = formData.getAll('supplements');
+	selectedSupplements.forEach(function(supplement) {
+		console.log(supplement);
+	})
 	switch(data.goal){
 		// 다이어터 데이터
 		case 'diet' :
 			console.log(data.dietGoal);
 			console.log(data.dietType);
-			console.log(data.dietSupplements);
 			console.log(data.appetiteControl);
 			console.log(data.dietDifficulties);
 			break;
@@ -78,7 +89,6 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			console.log(data.gainGoal);
 			console.log(data.gainExperience);
 			console.log(data.gainSnacks);
-			console.log(data.gainSupplements);
 			console.log(data.gainDifficulties);
 			break;
 		// 프로 득근러 데이터
@@ -87,7 +97,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			if(data.proGoalType === 'strength'){
 				// 스트랭스 강화
 				console.log(data.strengthStats);
-				console.log(data.strengthSupplements);
+				console.log(data.strengthSplit);
 				console.log(data.strengthSnacks);
 				console.log(data.strengthScoops);
 				console.log(data.liftFocus);
@@ -95,7 +105,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			}else{
 				// 근육 성장
 				console.log(data.muscleStats);
-				console.log(data.muscleSupplements);
+				console.log(data.muscleSplit);
 				console.log(data.muscleSnacks);
 				console.log(data.muscleScoops);
 				console.log(data.muscleType);
@@ -103,7 +113,10 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			break;
 		// 헬스 키퍼
 		case 'health' :
-			console.log(data.diseases);
+			const selectedDiseases = formData.getAll('diseases');
+			selectedDiseases.forEach(function(diseases) {
+				console.log(diseases);
+			})
 			console.log(data.alcohol);
 			console.log(data.smoking);
 			console.log(data.sleep);
