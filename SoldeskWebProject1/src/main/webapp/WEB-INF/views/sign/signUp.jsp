@@ -18,8 +18,7 @@
 
 			<form class="needs-validation" novalidate>
 				<div class="form-group">
-					<label class="form-label mt-4" for="mId">아이디</label> <small
-						class="invalid-feedback" id="mIdValidState"></small>
+					<label class="form-label mt-4" for="mId">아이디</label>
 				</div>
 				<div class="input-group">
 					<input type="text" class="form-control" id="mId" name="mId"
@@ -35,21 +34,17 @@
 					<label class="form-label mt-4" for="mPw">비밀번호</label> <input
 						type="password" class="form-control" id="mPw" name="mPw"
 						placeholder="영어 소문자, 대문자, 숫자 8~16 글자">
-					<div class="invalid-feedback" id="mPwValidState"></div>
 				</div>
 
 				<div class="form-group">
 					<label class="form-label mt-4" for="mPwRe">비밀번호 재확인</label> <input
 						type="password" class="form-control" id="mPwRe" name="mPwRe">
-					<small id="pwMatchMessage" class="form-text"></small>
-					<div class="invalid-feedback" id="mPwReValidState"></div>
 				</div>
 
 				<div class="form-group">
 					<label class="form-label mt-4" for="mName">닉네임</label> <input
 						type="text" class="form-control" id="mNickname" name="mNickname"
-						maxlength="12" placeholder="한글, 영어 2~12 글자"> <small
-						class="invalid-feedback" id="mNicknameValidState"></small>
+						maxlength="12" placeholder="한글, 영어 2~12 글자">
 				</div>
 
 				<!-- 중복확인 버튼을 아래로 내리고 큰 버튼 스타일 적용 -->
@@ -61,8 +56,7 @@
 				<div class="form-group">
 					<label class="form-label mt-4" for="mEmail">이메일</label> <input
 						type="text" class="form-control" id="mEmail" name="mEmail"
-						placeholder="@ 포함 전체 이메일"> <small class="invalid-feedback"
-						id="mEmailValidState"></small>
+						placeholder="@ 포함 전체 이메일"> 
 				</div>
 
 				<!-- 중복확인 버튼을 아래로 내리고 큰 버튼 스타일 적용 -->
