@@ -70,4 +70,16 @@ public class MatePageServiceImpl implements MatePageService{
 	public UProfileVO selectByUno(int uno) {
 		return uPMapper.selectByUno(uno);
 	}
+	
+	// 운동 메이트 클릭 시 프로필 가져오기
+	public MateDTO findProfile(int uno){
+		MateDTO ProfileList = new MateDTO();
+		
+		ProfileList.setMvo(mMapper.findProfile(uno));
+		ProfileList.setDto(mservice.getProfileSet(uno));
+		ProfileList.setPvo(uPMapper.selectByUno(uno));
+		System.out.println("메이트페이지 서비스 임플 : " + ProfileList);
+		
+		return ProfileList; 
+	}
 }

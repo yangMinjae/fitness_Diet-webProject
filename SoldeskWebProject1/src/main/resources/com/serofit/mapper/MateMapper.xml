@@ -29,4 +29,8 @@
 		DELETE FROM tbl_mate WHERE uno=#{uno}
 	</delete>	
 	
+	<!-- 운동 메이트 클릭 시 프로필 가져오기 -->
+	<select id="findProfile" parameterType="int" resultType="com.serofit.domain.MateVO">
+		SELECT * FROM tbl_mate WHERE uno = #{uno}
+	</select>
 </mapper>

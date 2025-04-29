@@ -75,10 +75,15 @@ genderFilter.addEventListener("change", applyFilters);
 ageFilter.addEventListener("change", applyFilters);
 });
 
-
 //프로필 선택 시 모달 창
 document.querySelectorAll('.mate-item').forEach( a => {
-	a.addEventListener('click', b =>{
-		console.log('modal');
+	a.addEventListener('click', (b) =>{
+		const uno = a.querySelector('.uno').textContent.trim();
+		fetch('/findProfile?uno=' + uno, {
+		  })
+		  .then(res => res.text())
+		  .then(data => {
+			  document.getElementById('find-profile-modal').classList.add('show');
+		  });
 	});
 });

@@ -21,4 +21,7 @@ public interface MatePageService {
 	
 	// 자신의 tag 가져오기
 	public UProfileVO selectByUno(int uno);
+	
+	// 운동 메이트 클릭 시 프로필 가져오기
+	public MateDTO findProfile(int uno);
 }

@@ -78,6 +78,7 @@
 					<span class="userArea">지역 : </span>${mate.mvo.area} &emsp; 
 					<span class="userAge">나이 : </span>${mate.mvo.age}
 				</span>
+				<span class="uno" hidden="true">${mate.mvo.uno}</span>
 			</div>
 		</c:if>
 	</c:forEach>
@@ -111,13 +112,15 @@
 					</c:if> &emsp; 
 					<span class="userArea">지역 : </span>${mate.mvo.area} &emsp; 
 					<span class="userAge">나이 : </span>${mate.mvo.age}
+					<span class="uno" hidden="true">${mate.mvo.uno}</span>
 				</span>
 			</div>
 		</c:if>
 	</c:forEach>
 	</section>
 	</main>
-
+	
+	<jsp:include page="profile.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 	<script type="text/javascript" src="/resources/js/matePage.js"></script>
 </body>

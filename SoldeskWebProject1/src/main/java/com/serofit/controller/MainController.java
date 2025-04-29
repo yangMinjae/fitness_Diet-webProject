@@ -1,5 +1,6 @@
 package com.serofit.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -11,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.BoardListDTO;
+import com.serofit.domain.MateDTO;
+import com.serofit.domain.ProfileDTO;
 import com.serofit.service.BoardService;
 import com.serofit.service.HFService;
 import com.serofit.service.MailService;
@@ -87,7 +91,6 @@ public class MainController {
 		return "/board/boardList";
 	}
 	
-	
 	// 운동 메이트 찾기 화면으로 이동
 	@GetMapping("/matePage")
 	public String matePage(Model model, int uno) {
@@ -98,6 +101,20 @@ public class MainController {
 		model.addAttribute("mateList", mtpService.findMateList(uno1));
 	
 		return "/user/matePage";
+	}
+	
+	// 운동 메이트 찾기 화면에서 유저 프로필 불러오기
+	@GetMapping("/findProfile")
+	@ResponseBody
+	public String findProfile(Model model, @RequestParam int uno) {
+		model.addAttribute("profile", mtpService.findProfile(uno));
+		// 리스트에 담긴 애들 유저 프로필 다 들고와
+		// 모델에 담아
+		// jsp에 그러면 유저프로필리스트 라는게 있을꺼잖아
+		// js 에서 리스트 중 하나 눌렀을때
+		// 유저프로필리스트에서 찾아서 보여주면 끝!
+		System.out.println(mtpService.findProfile(uno));
+		return "/user/profile";
 	}
 	
 	// 설문 조사 페이지 이동

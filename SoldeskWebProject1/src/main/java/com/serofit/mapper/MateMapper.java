@@ -2,6 +2,7 @@ package com.serofit.mapper;
 
 import java.util.List;
 
+import com.serofit.domain.MateDTO;
 import com.serofit.domain.MateVO;
 
 public interface MateMapper {
@@ -18,4 +19,6 @@ public interface MateMapper {
 	// 회원 탈퇴시 메이트 삭제
 	public int deleteMate(int uno);
 	
+	// 운동 메이트 클릭 시 프로필 가져오기
+	public MateVO findProfile(int uno);
 }
