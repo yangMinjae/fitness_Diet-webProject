@@ -15,7 +15,7 @@
 			<c:if test="${not empty bvDTO}">
 				<h1 class="post-title">${bvDTO.title}</h1>
 				<div class="post-meta">
-					<span>${bvDTO.nickname}</span> | <span>${bvDTO.regdate}</span> | <span class="tag">${bvDTO.tag}</span>
+					<span>${bvDTO.nickname}</span> | <span class="tag">${bvDTO.tag}</span> |<span>${bvDTO.regdate}</span>
 				</div>
 				<div class="post-stats">
 					조회: <span>${bvDTO.hit}</span> | 추천: <span>${bvDTO.love}</span>

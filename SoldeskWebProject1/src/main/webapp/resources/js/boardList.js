@@ -126,9 +126,10 @@ function getBoardListByLove(uno){
 document.querySelectorAll('a').forEach(a=>{
 	a.addEventListener("click", function(e){
 		e.preventDefault();
-		
-		let href = e.target.getAttribute('href');
+		if(e.target.getAttribute("title") === 'title'){
+			let href = e.target.getAttribute('href');
 
-		location.href="/board/boardView?bno="+href;
+			location.href="/board/boardView?bno="+href;
+		}
 	});
 });
