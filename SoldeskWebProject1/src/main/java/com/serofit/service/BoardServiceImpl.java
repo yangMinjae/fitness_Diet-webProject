@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.serofit.domain.BoardListDTO;
 import com.serofit.domain.BoardVO;
+import com.serofit.domain.BoardViewDTO;
 import com.serofit.domain.DietVO;
 import com.serofit.domain.LikeVO;
 import com.serofit.domain.UserVO;
@@ -45,10 +47,12 @@ public class BoardServiceImpl implements BoardService {
 
 			BoardListDTO dto = new BoardListDTO(
 					board.getTitle(), 
-					nickname, dvo.getTag(), 
+					nickname, 
+					dvo.getTag(), 
 					board.getRegDate(),
 					board.getHit(), 
-					board.getLove()
+					board.getLove(),
+					board.getBno()
 					);
 
 			dtoList.add(dto);
@@ -79,7 +83,8 @@ public class BoardServiceImpl implements BoardService {
 						dvo.getTag(), 
 						bvo.getRegDate(),
 						bvo.getHit(), 
-						bvo.getLove()
+						bvo.getLove(),
+						bvo.getBno()
 						);
 
 				dtoList.add(dto);
@@ -123,11 +128,50 @@ public class BoardServiceImpl implements BoardService {
 					dvo.getTag(),
 					bvo.getRegDate(), 
 					bvo.getHit(),
-					bvo.getLove()
+					bvo.getLove(),
+					bvo.getBno()
 					);
 			
 			allPostByLove.add(dto);
 		}
 		return allPostByLove;
+	}
+	
+	@Override
+	public BoardViewDTO getPost(int bno) {
+		BoardVO bvo = bMapper.getPostByBno(bno);
+		
+		BoardViewDTO bvDTO = new BoardViewDTO(
+				bvo.getTitle(),
+				uMapper.readNickname(bvo.getUno()), 
+				dMapper.selectDietByDno(bvo.getDno()).getTag(),
+				bvo.getContent(), 
+				bvo.getRegDate(), 
+				bvo.getHit(), 
+				bvo.getLove(),
+				bvo.getUno(),
+				bvo.getBno());
+		return bvDTO;
+	}
+	
+	@Transactional
+	@Override
+	public int increaseLove(LikeVO lvo) {
+		
+		lMapper.insertByBnoAndUno(lvo);
+		return bMapper.updateLike(lvo.getBno(), 1);
+	}
+	
+	@Transactional
+	@Override
+	public int deletePost(int bno) {
+		
+		lMapper.deleteByBno(bno);		
+		return bMapper.deletePostByBno(bno);
+	}
+	
+	@Override
+	public int increaseHit(int bno) {
+		return bMapper.updateHit(bno);
 	}
 }

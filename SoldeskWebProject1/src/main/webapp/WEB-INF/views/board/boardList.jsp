@@ -43,7 +43,7 @@
 							<c:forEach var= "bdto" items="${ list}">
 								<tr>  
 									<td> 
-										<a href="${bdto.title }"> ${bdto.title }</a> [#${bdto.tag}]
+										<a href="${bdto.bno}"> ${bdto.title }</a> [#${bdto.tag}]
 									</td>
 									<td> ${bdto.nickname }</td>         
 									<td><fmt:formatDate value="${bdto.regdate}" pattern="yyyy-MM-dd" /></td>

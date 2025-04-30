@@ -122,3 +122,13 @@ function getBoardListByLove(uno){
            console.error("좋아요 누른 게시글 불러오기 실패:", error);
        });
 }
+
+document.querySelectorAll('a').forEach(a=>{
+	a.addEventListener("click", function(e){
+		e.preventDefault();
+		
+		let href = e.target.getAttribute('href');
+
+		location.href="/board/boardView?bno="+href;
+	});
+});

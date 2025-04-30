@@ -10,32 +10,41 @@
 </head>
 <body>
 	<header>
-		<div class="logo">
-			<a href="mainPage">SeroFit</a>
-		</div>
-		<nav class="nav">
-			<a href="testPage">테스트</a> 
-			<span>|</span> 
-			<a href="boardPage">게시판</a>
-			<span>|</span> 
-			<a href="matePage">운동메이트</a>
-		</nav>
-		<div class="right-icons">
-			<img src="https://img.icons8.com/material-sharp/24/000000/new-post.png"	alt="mailPage" />
-			<c:if test="${not empty mCount}">
-	        	${mCount}
-	      	</c:if>
-			<div class="dropdown">
-				<img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png"	alt="프로필" />
-				<c:if test="${not empty nickname}">
-	        		${nickname}
-	        	</c:if>
-				<div class="dropdown-content">
-					<p id="myPage">My page</p>
-					<p id="modifyPage">회원 정보 수정</p>
-					<p id="logout">로그아웃</p>
-				</div>
-			</div>
-			<button class="login-btn">로그인버튼</button>
-		</div>
-	</header>
+  <div class="logo">
+    <a href="mainPage">SeroFit</a>
+  </div>
+
+  <nav class="nav">
+    <a href="testPage">테스트</a> 
+    <span class="divider">|</span> 
+    <a href="boardPage">게시판</a>
+    <span class="divider">|</span> 
+    <a href="matePage">운동메이트</a>
+  </nav>
+
+  <div class="right-icons">
+    <!-- 메일 아이콘과 카운트 -->
+    <div class="mail">
+      <img src="https://img.icons8.com/material-sharp/24/000000/new-post.png" alt="mail" />
+      <c:if test="${not empty mCount}">
+        <span class="count">${mCount}</span>
+      </c:if>
+    </div>
+
+    <!-- 유저 프로필 + 닉네임 -->
+    <div class="dropdown user">
+      <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" alt="profile" />
+      <c:if test="${not empty nickname}">
+        <span class="nickname">${nickname}</span>
+      </c:if>
+      <div class="dropdown-content">
+        <p id="myPage">My page</p>
+        <p id="modifyPage">회원 정보 수정</p>
+        <p id="logout">로그아웃</p>
+      </div>
+    </div>
+
+    <!-- 로그인 버튼 -->
+    <button class="login-btn">로그인버튼</button>
+  </div>
+</header>

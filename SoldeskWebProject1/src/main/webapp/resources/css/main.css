@@ -1,75 +1,99 @@
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #fff;
-  padding: 0 30px;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fb; /* 살짝 어두운 배경으로 통일감 */
+  color: #222;
+}
+
+main {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
   box-sizing: border-box;
-  min-width: 1060px;
 }
 
+/* 강조 섹션 */
 .section {
-  background-color: #ddd;
-  padding: 40px;
+  background-color: #ffffff;
+  padding: 60px 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
+/* 소개 박스 */
 .description-box {
-  background-color: #a9dea7;
-  margin: 0 auto 20px;
-  padding: 30px;
-  max-width: 600px;
+  background-color: #e6f5eb;  /* 연한 민트 배경 + 텍스트 대비 ↑ */
+  padding: 40px;
+  max-width: 720px;
+  margin: 0 auto 32px;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  color: #222;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.04);
 }
 
+/* CTA 버튼 */
 .cta-button {
-  background-color: #665e72;
+  background-color: #00A86B; /* 채도 강한 녹색 */
   color: white;
-  padding: 12px 30px;
+  padding: 14px 36px;
   border: none;
-  border-radius: 30px;
-  font-size: 1rem;
+  border-radius: 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
+.cta-button:hover {
+  background-color: #008c5a;
+}
+
+/* 인기 포스트 */
 .popular-posts {
-  background-color: #ddd;
-  padding: 30px;
+  padding: 40px 0;
 }
 
 .popular-posts h2 {
-  text-align: left;
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+  color: #1d1d1d;
 }
 
+/* 카드 */
 .post-card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  text-align: left;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
 }
 
 .post-card h3 {
   margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #1f1f1f;
 }
 
 .post-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-size: 0.9rem;
-  color: #555;
+  color: #666;
 }
 
 .post-meta img {
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-}
-main{
-  width:100%;
-  min-width: 1000px;
-  margin: 0 auto;         /* 좌우 여백 확보 + 중앙 정렬 */
-  padding: 0 20px;        /* 내부 컨텐츠 여백 */
-  box-sizing: border-box;
+  object-fit: cover;
 }

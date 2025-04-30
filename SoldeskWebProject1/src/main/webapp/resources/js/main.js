@@ -16,7 +16,7 @@ document.querySelectorAll('button').forEach(button=>{
 			// 설문 시작 버튼
 			case 'cta-button' :
 				console.log("cta-button");
-				//location.href = '/';
+				location.href = '/survey';
 				break;
 		}
 	});
