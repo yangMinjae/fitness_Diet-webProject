@@ -8,6 +8,9 @@ linkEle.href = CSS_FILE_PATH;
 document.head.appendChild(linkEle);
 
 const form = document.forms[0];
+const textarea = form.content;
+const charCount = document.getElementById('char-count');
+const MAX_LENGTH = 500;
 
 document.querySelectorAll('button').forEach(button=>{
 	button.addEventListener("click", function(e){		
@@ -42,3 +45,13 @@ function sendMail() {
     form.action = '/mail/sendMail';
     form.submit();
 }
+
+textarea.addEventListener('input', function () {
+  const content = textarea.value;
+
+  if (content.length > MAX_LENGTH) {
+    textarea.value = content.slice(0, MAX_LENGTH); // 초과 시 자동 잘림
+  }
+
+  charCount.textContent = textarea.value.length;
+});

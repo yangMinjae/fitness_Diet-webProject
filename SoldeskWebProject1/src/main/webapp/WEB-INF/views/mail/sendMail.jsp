@@ -24,6 +24,10 @@
 			<div class="message-box">
 				<textarea id="message" name="content" placeholder="전달할 내용"></textarea>
 			</div>
+			
+			<div class="text-limit-info">
+			  <span id="char-count">0</span>/500자
+			</div>
 	
 			<div class="btn-group">
 				<button type="button" class="btn send">전송</button>

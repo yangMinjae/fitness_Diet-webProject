@@ -29,7 +29,8 @@ public class MailController {
 	// 메일 보내기
 	@PostMapping("/sendMail")
 	public String sendMail(MailVO mvo) {
+		System.out.println(mvo);
 		mService.insertMail(mvo);		
-		return "redirect:/mail";
+		return "redirect:/mailList";
 	}
 }
