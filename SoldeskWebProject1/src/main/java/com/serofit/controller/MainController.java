@@ -47,6 +47,7 @@ public class MainController {
 	// 서버 구동 시 mainPage
 	@GetMapping()
 	public String home(Locale locale, Model model, @RequestParam(value = "uno", defaultValue = "1") String uno) {
+		log.info("main!!!!!");
 		model.addAttribute("hbList", mpService.getHotPosts(4)); // 인기 게시글 갯수 4개로 고정
 		if(uno != null) {
 			model.addAttribute("nickname", hfService.getNickname(Integer.parseInt(uno)));

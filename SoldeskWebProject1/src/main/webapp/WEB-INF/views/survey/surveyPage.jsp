@@ -112,7 +112,7 @@
 			  <label>1개월 목표 감량 (kg):
 			    <input type="number" name="dietGoal" min="0"/>
 			  </label>
-			  <label>식단 조절 방식 (중복 선택):
+			  <label>식단 조절 방식 :
 			    <label><input type="radio" name="dietType" value="저탄고지" /> 저탄고지</label>
 			    <label><input type="radio" name="dietType" value="간헐적 단식" /> 간헐적 단식</label>
 			    <label><input type="radio" name="dietType" value="칼로리 제한" /> 칼로리 제한</label>

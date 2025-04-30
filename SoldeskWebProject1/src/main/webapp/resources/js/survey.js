@@ -52,9 +52,11 @@ document.getElementById("proGoalTypeSelect").addEventListener("change", function
 });
 
 document.getElementById("surveyForm").addEventListener("submit", function (e) {
-  e.preventDefault();    
-  const formData = new FormData(this);
+	e.preventDefault();    
+  	const formData = new FormData(this);
 	const data = Object.fromEntries(formData.entries());
+	setupLimitedCheckboxGroup("supplements", 3);
+	setupLimitedCheckboxGroup("diseases", 3);
 
 	// 음식 리스트 파싱 처리
 	const foodList = data.favoriteFood ? data.favoriteFood.split(',').map(f => f.trim()).filter(Boolean) : [];
@@ -131,3 +133,18 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 	};
 	
 });
+
+function setupLimitedCheckboxGroup(groupName, maxCount) {
+	  const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+	  
+	  checkboxes.forEach(cb => {
+	    cb.addEventListener('change', () => {
+	      const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+	      
+	      if (checkedCount > maxCount) {
+	        cb.checked = false;
+	        alert(`최대 ${maxCount}개까지만 선택할 수 있습니다.`);
+	      }
+	    });
+	  });
+}
