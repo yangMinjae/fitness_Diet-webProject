@@ -1,5 +1,6 @@
 
 let isBlock = false;
+let style = document.querySelector('.dropdown-content').style;
 
 // 헤더 A 태그 버튼화
 document.querySelectorAll('a').forEach(a=>{
@@ -28,6 +29,8 @@ document.querySelectorAll('a').forEach(a=>{
 				// 추후에 uno 관련 코드 수정
 				break;
 		}
+		
+		init();
 	});
 });
 
@@ -50,6 +53,8 @@ document.querySelectorAll('p').forEach(p=>{
 				console.log("logout");
 				break;
 		}
+		
+		init();
 	});
 });
 
@@ -64,7 +69,6 @@ document.querySelectorAll('img').forEach(img=>{
 				// 추후에 리시버 관련 코드 수정
 				break;
 			case 'profile' :
-				let style = document.querySelector('.dropdown-content').style;
 				if(isBlock){
 					style.display = "none";
 					isBlock = false;
@@ -87,5 +91,12 @@ document.querySelectorAll('button').forEach(button=>{
 				location.href = '/login';
 				break;
 		}
+		
+		init();
 	});
 });
+
+function init() {
+	style.display = "none";
+	isBlock = false;
+}
