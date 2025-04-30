@@ -1,3 +1,6 @@
+
+let isBlock = false;
+
 // 헤더 A 태그 버튼화
 document.querySelectorAll('a').forEach(a=>{
 	a.addEventListener("click", function(e){
@@ -59,6 +62,16 @@ document.querySelectorAll('img').forEach(img=>{
 			case 'mailPage' :
 				location.href = '/mailList'+'?receiver=1';
 				// 추후에 리시버 관련 코드 수정
+				break;
+			case 'profile' :
+				let style = document.querySelector('.dropdown-content').style;
+				if(isBlock){
+					style.display = "none";
+					isBlock = false;
+				}else{
+					style.display = "block";
+					isBlock = true;
+				}
 				break;
 		}
 	});
