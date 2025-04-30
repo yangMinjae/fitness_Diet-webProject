@@ -1,25 +1,25 @@
-/* === 기본 구조 === */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   padding: 18px 5%;
-  background-color: #ffffff;
+  background-color: #fff;
   border-bottom: 1px solid #eee;
   position: relative;
   z-index: 100;
   box-sizing: border-box;
 }
 
-/* === 로고 === */
+/* 로고 */
 .logo a {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #333;
   text-decoration: none;
+  color: #333;
 }
 
-/* === 중앙 메뉴 정렬 === */
+/* 가운데 메뉴 */
 .nav {
   position: absolute;
   left: 50%;
@@ -32,16 +32,10 @@ header {
   white-space: nowrap;
 }
 
-.divider, .nav span {
-  color: #ccc;
-  font-weight: normal;
-}
-
 .nav a {
   text-decoration: none;
   color: #333;
   transition: color 0.25s ease, border-bottom 0.25s ease;
-  padding-bottom: 2px;
   position: relative;
 }
 
@@ -49,7 +43,7 @@ header {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -4px;
   width: 0%;
   height: 2px;
   background-color: #6C63FF;
@@ -64,14 +58,18 @@ header {
   width: 100%;
 }
 
-/* === 오른쪽 아이콘 영역 === */
+.divider {
+  color: #ccc;
+}
+
+/* 오른쪽 영역 */
 .right-icons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* 메일 아이콘 + 숫자 */
+/* 메일 */
 .mail {
   display: flex;
   align-items: center;
@@ -80,7 +78,12 @@ header {
   color: #333;
 }
 
-/* 유저 + 닉네임 */
+.mail img {
+  width: 20px;
+  height: 20px;
+}
+
+/* 유저 */
 .user {
   display: flex;
   align-items: center;
@@ -92,19 +95,19 @@ header {
 }
 
 .nickname {
-  max-width: 160px;
+  max-width: 120px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-/* 드롭다운 메뉴 */
+/* 드롭다운 */
 .dropdown-content {
   display: none;
   position: absolute;
   top: 120%;
   right: 0;
-  background-color: #ffffff;
+  background-color: #fff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 12px 0;
@@ -115,8 +118,8 @@ header {
 .dropdown-content p {
   padding: 10px 20px;
   margin: 0;
-  color: #333;
   font-size: 0.95rem;
+  color: #333;
   transition: background 0.2s ease;
 }
 
@@ -128,9 +131,9 @@ header {
   display: block;
 }
 
-/* === 로그인 버튼 === */
+/* 로그인 버튼 */
 .login-btn {
-  background-color: #00A86B;
+  background-color: #6C63FF;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -142,8 +145,25 @@ header {
 }
 
 .login-btn:hover {
-  background-color: #008c5a;
+  background-color: #584be0;
 }
+
+/* 반응형 처리 */
+@media (max-width: 960px) {
+  .nickname {
+    display: none;
+  }
+
+  .login-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .right-icons {
+    gap: 10px;
+  }
+}
+
 
 /* Footer Modernized */
 footer {
