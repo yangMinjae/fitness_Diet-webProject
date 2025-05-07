@@ -15,15 +15,12 @@ document.querySelectorAll('button').forEach(btn=>{
 	    let type =btn.getAttribute('class');
 	    
       switch(type) {
-        // 파일 업로드는 아직 
+        // 파일 업로드
         case 'upload-button' :
             console.log("upload-button");
+            openFile();
             break;
-        // 구상이 제대로 되지 않았으니
-        case 'upload-button' : 
-            console.log("upload-button");
-            break;
-        // 정리 후에 어떻게든 해야지
+        // 
         case 'upload-final' : 
             console.log("upload-final");
             break;
@@ -57,9 +54,9 @@ document.getElementById("diet").addEventListener("change", function() {
   console.log("태그:", tag);
   console.log("식단번호:", dno);
  
-  // 본문 
-  document.getElementById("content").value = content;
-  // 태그 
+  // 본문
+  document.getElementById("content").innerHTML = content;
+  // 태그
   document.getElementById("tag").value = tag;
   // dno
   document.getElementById("dno").value = dno;
@@ -69,6 +66,10 @@ document.getElementById("diet").addEventListener("change", function() {
 
 // 업로드 버튼 클릭시 내용 있는지 검증
 function register(){
+ 
+  const html = document.getElementById('content').innerHTML;
+  document.getElementById('hiddenContent').value = html;
+  
   if(!f.title.value){
     alert("제목을 입력해주세요");
     return;
@@ -77,11 +78,44 @@ function register(){
     alert("식단을 선택해주세요");
     return;
   }
-//  console.log(f.dno.value);
-//  console.log(f.uno.value);
-//  console.log(f.title.value);
-//  console.log(f.content.value);
   
+  f.method= "post";
   f.action= '/board/writeBoard';
   f.submit();
 }
+// 이미지 업로드 버튼 클릭시 파일 탐색기 연결
+function openFile(){
+  document.getElementById('imageInput').click();
+}
+
+// 파일 선택 시 이미지버튼 생성
+function createImageButton(event){
+  const files = event.target.files;
+  const container = document.getElementById('imageButton');
+
+  Array.from(files).forEach((file) => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imageSrc = e.target.result;
+
+      // 이미지 버튼 만들기
+      const button = document.createElement('img');
+      button.src = imageSrc;
+      button.className = 'imageButton';
+      button.dataset.img = imageSrc;
+
+
+      button.addEventListener('click', function () {
+    	  const contentDiv = document.getElementById('content');
+    	  contentDiv.innerHTML += `<img src="${this.dataset.img}" alt="이미지">`;
+    	  console.log("이미지 버튼 눌림")
+      });
+
+      container.appendChild(button);
+    };
+
+    reader.readAsDataURL(file);
+  });
+  
+} 
+document.getElementById('imageInput').addEventListener('change', createImageButton);

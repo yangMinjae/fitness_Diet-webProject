@@ -20,8 +20,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/cjs/")
 public class CjsController {
 	
-	@Autowired
-	private BoardService blService; 	
+//	@Autowired
+//	private BoardService blService; 	
 	@Autowired
 	private WriteBoardService wbService;
 		
@@ -40,6 +40,7 @@ public class CjsController {
 			log.info("Register...." + bvo);
 			
 			wbService.register(bvo);
-			return "redirect:/board/boardList";
+			return "redirect:/boardList";
 		}
+		
 }

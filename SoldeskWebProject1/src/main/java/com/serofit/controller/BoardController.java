@@ -81,7 +81,7 @@ public class BoardController {
 		log.info("Register...." + bvo);
 		
 		wbService.register(bvo);
-		return "redirect:/board/boardList";
+		return "redirect:/boardList";
 	}
 	
 	// 게시글 자세히 보기

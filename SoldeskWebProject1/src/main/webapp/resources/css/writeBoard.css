@@ -90,3 +90,20 @@ textarea {
   background-color: #222;
   color: #fff;
 }
+#imageInput {
+    display: none;
+}
+.imageButton {
+  width: 80px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  margin: 5px;
+  border-radius: 4px;
+}
+#content img {
+  max-width: 25%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+}
+
