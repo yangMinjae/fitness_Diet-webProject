@@ -24,4 +24,7 @@ public interface MatePageService {
 	
 	// 운동 메이트 클릭 시 프로필 가져오기
 	public MateDTO findProfile(int uno);
+	
+	// 팔로우 하려는 사람을 이미 팔로우 하고 있는지 확인
+	public int checkIfFollow(int uno, int uno1);
 }

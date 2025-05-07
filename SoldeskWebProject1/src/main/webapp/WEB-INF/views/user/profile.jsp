@@ -1,47 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<!-- 프로필 모달 -->
-	<div class="modal" id="find-profile-modal">
-		<div class="profile-section">
-			<h2>내 프로필</h2>
-			<div class="profile-box">
-				<div class="profile-left">
-					<img src="/resources/img/tag/헬스키퍼.png" class="profile-image" id="myProfileImg" alt="프로필 사진">
-					<!-- 추후 수정 -->
-					<div class="profile-nickname">닉네임</div>
-					<span id="nickname">${profile.dto.nickname}]</span>
-				</div>
-				<form class="profile-form" method="post">
-					<div class="form-group">
-						<label for="favSport">좋아하는 운동</label>
-						<span id="fav">${profile.pvo.fav}</span>
-					</div>
-					<div class="form-group">
-						<label>지역</label>
-						<div id="area">${profile.mvo.area}</div>
-					</div>
-					<div class="form-group">
-						<label for="time">운동 시간대</label> 
-						<span id="time">${profile.mvo.time}</span>
-					</div>
-					<div class="form-group">
-						<label for="intro">자기소개</label>
-						<span id="self">${profile.pvo.self}</span>
-					</div>
-				</form>
-			</div>
-			<div class="edit-button-wrapper">
-				<button class="follow-button" id="follow">팔로우</button>
-				<button class="mail-button" id="mail">메일 발송</button>
-			</div>
-		</div>
+	<div class="profile-modal-content" id="profile-modal-content">
+	    <h2 class="profile-title">
+	        <span class="nickname">${profile.dto.nickname}</span>
+	    </h2>
+	    <div class="profile-body">
+	        <div class="profile-left">
+	            <div class="profile-img-box">
+	            	<!-- 이미지 경로 설정 !!!!!!!!!! profile.dto.fvo.등등 --> 
+	                <img src="/resources/img/tag/헬스키퍼.png" class="profile-image" id="myProfileImg" alt="프로필 사진">
+	            </div>
+	            <c:choose>
+				    <c:when test="${result == 1}">
+				        <button class="follow-btn following" id="following">팔로잉</button>
+				    </c:when>
+				    <c:otherwise>
+				        <button class="follow-btn follow" id="follow">팔로우</button>
+				    </c:otherwise>
+				</c:choose>
+	        </div>
+	        <div class="profile-right">
+				<ul class="profile-info-list">
+				    <li data-label="성별 ">${profile.mvo.gender ? '남자' : '여자'}</li>
+				    <li data-label="운동 시간대 ">${profile.mvo.time}</li>
+				    <li data-label="연령대 ">${profile.mvo.age}</li>
+				    <li data-label="지역 ">${profile.mvo.area}</li>
+				    <li data-label="태그 ">${profile.pvo.tag}</li>
+				    <span class="uno" hidden="true">${profile.mvo.uno}</span>
+				</ul>
+	        </div>
+	    </div>
+	    <div class="modal-actions">
+	        <button class="send-msg-btn">쪽지보내기</button>
+	        <button class="close-modal-btn">닫기</button>
+	    </div>
 	</div>
 </body>
+	<script type="text/javascript" src="/resources/js/matePage.js"></script>
 </html>

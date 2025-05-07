@@ -1,15 +1,20 @@
-const CSS_FILE_PATH = '/resources/css/matePage.css';
-let linkEle = document.createElement('link');
-linkEle.rel = 'stylesheet';
-linkEle.href = CSS_FILE_PATH;
-document.head.appendChild(linkEle);
+//-----CSS 파일 추가
+//1. 파일 경로 설정
+const CSS_FILE_PATH = ['/resources/css/matePage.css', '/resources/css/profile.css'];
+//2. link 태그 생성
+CSS_FILE_PATH.forEach(css => {
+	let linkEle = document.createElement('link');
+	linkEle.rel = 'stylesheet';
+	linkEle.href = css;
+//3. head 태그에 link 엘리먼트 추가
+	document.head.appendChild(linkEle);
+});
 
 // 스크롤 관련 코드
 let sendList = document.querySelector('.sendList')
 let difList = document.querySelector('.difList');
 
-document.querySelectorAll('button')
-.forEach(ele=>{
+document.querySelectorAll('button').forEach(ele=>{
   ele.addEventListener('click',(e)=>{
     let btnId = e.currentTarget.getAttribute('id');
     
@@ -40,50 +45,120 @@ document.addEventListener("DOMContentLoaded", function () {
 	const ageFilter = document.getElementById("age");
 	const mateItems = document.querySelectorAll(".mate-item");
 	
-function applyFilters() {
-	const selectedTime = timeFilter.value;
-	const selectedGender = genderFilter.value;
-	const selectedAge = ageFilter.value;
+	function applyFilters() {
+		const selectedTime = timeFilter.value;
+		const selectedGender = genderFilter.value;
+		const selectedAge = ageFilter.value;
+	
+		mateItems.forEach(item => {
+		   const itemTime = item.dataset.time;
+		   const itemGender = item.dataset.gender;
+		   const itemAge = item.dataset.age;
+		   let gender = '';
+		   
+		   if(itemGender === 'true'){
+		    gender = 'men';
+		   }else{
+		    gender = 'women';
+		   }
+		   
+		   const matchTime = (selectedTime === "::" || selectedTime === "" || itemTime === selectedTime);
+		   const matchGender = (selectedGender === "::" || selectedGender === "" || gender === selectedGender);
+		   const matchAge = (selectedAge === "::" || selectedAge === "" || itemAge === selectedAge);
+	
+		   if (matchTime && matchGender && matchAge) {
+		     item.style.display = "block";
+		   } else {
+		     item.style.display = "none";
+		   }
+		});
+	  };
 
-	mateItems.forEach(item => {
-	   const itemTime = item.dataset.time;
-	   const itemGender = item.dataset.gender;
-	   const itemAge = item.dataset.age;
-	   let gender = '';
-	   
-	   if(itemGender === 'true'){
-	    gender = 'men';
-	   }else{
-	    gender = 'women';
-	   }
-	   
-	   const matchTime = (selectedTime === "::" || selectedTime === "" || itemTime === selectedTime);
-	   const matchGender = (selectedGender === "::" || selectedGender === "" || gender === selectedGender);
-	   const matchAge = (selectedAge === "::" || selectedAge === "" || itemAge === selectedAge);
+	// 이벤트 연결
+	timeFilter.addEventListener("change", applyFilters);
+	genderFilter.addEventListener("change", applyFilters);
+	ageFilter.addEventListener("change", applyFilters);
 
-	   if (matchTime && matchGender && matchAge) {
-	     item.style.display = "block";
-	   } else {
-	     item.style.display = "none";
-	   }
+	// 초기화 함수
+	const resetBtn = document.getElementById("resetBtn");
+	resetBtn.addEventListener("click", function() {
+	  // 필터 select 박스 모두 기본값으로 초기화
+	  timeFilter.selectedIndex = 0;
+	  genderFilter.selectedIndex = 0;
+	  ageFilter.selectedIndex = 0;
+	  
+	  applyFilters();
 	});
-  }
-
-// 이벤트 연결
-timeFilter.addEventListener("change", applyFilters);
-genderFilter.addEventListener("change", applyFilters);
-ageFilter.addEventListener("change", applyFilters);
+  
 });
+
 
 //프로필 선택 시 모달 창
-document.querySelectorAll('.mate-item').forEach( a => {
-	a.addEventListener('click', (b) =>{
-		const uno = a.querySelector('.uno').textContent.trim();
-		fetch('/findProfile?uno=' + uno, {
-		  })
-		  .then(res => res.text())
-		  .then(data => {
-			  document.getElementById('find-profile-modal').classList.add('show');
-		  });
+document.addEventListener("DOMContentLoaded", function () {
+	document.querySelectorAll('.mate-item').forEach( a => {
+		a.addEventListener('click', (b) =>{
+			const uno = a.querySelector('.uno').textContent.trim();
+			
+			fetch('/mate/findProfile?uno=' + uno + '&uno1=3', {
+			  })
+			  .then(res => res.text())
+			  .then(data => {
+				  document.getElementById('find-profile-modal').innerHTML = data;
+				  document.getElementById('find-profile-modal').classList.add('show');
+			  });
+		});
 	});
 });
+
+// 팔로우 버튼
+document.addEventListener('click', (e) =>{
+	if (e.target.classList.contains('close-modal-btn')) {
+		document.getElementById('find-profile-modal').classList.remove('show')};
+		
+	if (e.target.classList.contains('follow-btn')){
+		const uno = document.querySelector('#profile-modal-content .uno').textContent.trim();
+		const isFollowing = e.target.id === 'following';
+		// uno1 수정 필요 !!!!!!
+		fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${uno}&uno1=3`, {
+			method : 'POST',
+			headers: {'Content-Type': 'application/json'}
+		})
+		.then(res => res.text())
+		.then(data => {
+			const bool = data.trim() === '<Boolean>true</Boolean>';
+			if (isFollowing && bool) {
+				// 언팔 성공 → 버튼을 팔로우 상태로 변경
+	            e.target.id = 'follow';
+	            e.target.textContent = '팔로우';
+	            e.target.classList.remove('following');
+	            e.target.classList.add('follow');
+			} else {
+				// 팔로우 성공 → 버튼을 팔로잉 상태로 변경
+	            e.target.id = 'following';
+	            e.target.textContent = '팔로잉';
+	            e.target.classList.remove('follow');
+	            e.target.classList.add('following');
+			}
+		})
+	}
+});
+
+//닫기 버튼 누르면 닫기
+
+//모달 닫기 (ESC 키)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.getElementById('find-profile-modal').classList.remove('show');
+    }
+});
+
+//모달 외부 클릭 시 닫기
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('find-profile-modal');
+    const content = document.querySelector('.profile-modal-content');
+    if (modal.classList.contains('show') && !content.contains(e.target) && e.target.id === 'find-profile-modal') {
+        modal.classList.remove('show');
+    }
+});
+
+

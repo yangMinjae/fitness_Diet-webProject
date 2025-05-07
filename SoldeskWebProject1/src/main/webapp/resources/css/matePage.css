@@ -1,29 +1,65 @@
 /* 전체 가운데 정렬 */
-body {
-	display: flex;
+body.mate-page {
 	flex-direction: column;
 	align-items: center;
 	font-family: Arial, sans-serif;
 }
 
-/* 동일 태그 리스트 전체 */
-.sendList {
-	width: 1200px;
-	max-width: 5000px; /* 훨씬 더 넓게! */
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	margin-top: 0; /* 여백 제거 */
+.mate-main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 40px; /* 사이드바와 메인 간격 */
 }
 
-/* 그 외 태그 리스트 전체 */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 내부 h1, 박스들 가운데 정렬 */
+}
+
+.mate-title {
+    text-align: center;
+    margin: 50px auto -250px auto; /* 아래 마진을 16px로 줄임 !!!!!!!!!!!!!!!!!!!!*/
+    font-size: 2.2rem;
+    font-weight: bold;
+    width: 100%;
+    display: block;
+}
+
+main h1 {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+/* sendList, difList 간격 유지 (20px) */
+.sendList, .difList {
+    align-items: center;
+    margin-left: 0;
+    gap: 20px;
+}
+
+/* sendList 위쪽 마진 없애고 difList 위쪽 마진 20px 유지 */
+.sendList {
+    width: 1200px;
+    max-width: 5000px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 0;
+}
+
 .difList {
-	width: 1200px;
-	max-width: 5000px; /* 훨씬 더 넓게! */
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	margin-top: 20px;
+    width: 1200px;
+    max-width: 5000px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 /* 각 아이템 */
@@ -76,39 +112,68 @@ body {
 .floating-sidebar {
     position: sticky;
     top: 200px;
-    width: 160px;
-    min-width: 160px; 
+    width: 200px; /* 기존 160px → 200px으로 확대 */
+    min-width: 200px;
     flex-shrink: 0; 
-    margin-left:50px;
-    background-color: #f2dbe3;
-    padding: 20px 10px;
+    margin-left: 50px;
+    background-color: #FAF9F6;
+    padding: 30px 20px; /* 패딩을 더 넉넉하게 */
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    gap: 10px; /* 기존 간격 유지 */
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
     box-sizing: border-box;
     z-index: 2;
     align-self: flex-start;
 }
 
-/* 기본 모달 상태 */
-#find-profile-modal {
-	display: none;
-	position: fixed;
-	top: 0; left: 0;
-	width: 100%; height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.3s ease;
-	z-index: 1000;
+/* 리모컨 내부 버튼 스타일 */
+.floating-sidebar .menu-section,
+.floating-sidebar button {
+    background-color: #27AE60; /* 민트 그린 */
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
 }
 
-/* 열릴 때 */
-#find-profile-modal.show {
-	display: block;
-	opacity: 1;
-	pointer-events: auto;
+.floating-sidebar .menu-section:hover,
+.floating-sidebar button:hover {
+    background-color: #1E8449; /* 진한 민트 그린 */
 }
+
+/* select 박스 스타일 (필터) */
+.floating-sidebar select {
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid #D6EAF8;
+    background-color: white;
+    font-size: 1rem;
+    color: #34495E; /* 네이비 */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    text-align-last: center;
+}
+
+.floating-sidebar select:focus {
+    outline: none;
+    border-color: #27AE60; /* 민트 그린 포커스 */
+    box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
+}
+
+.floating-sidebar .form-group label {
+    display: block;      /* 블록 요소로 만들어 너비 전체 차지 */
+    text-align: center;  /* 텍스트 가운데 정렬 */
+    font-weight: 600;    /* 라벨 강조 (선택 사항) */
+    margin-bottom: 6px;  /* 라벨과 select 간 간격 */
+    color: #34495E;      /* 네이비 계열 텍스트 색상 (기존 테마와 맞게) */
+    font-size: 1rem;     /* 적당한 크기 */
+}
+
