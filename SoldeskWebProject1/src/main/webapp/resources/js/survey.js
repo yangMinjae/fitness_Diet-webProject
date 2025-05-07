@@ -29,7 +29,7 @@ document.getElementById("goalSelect").addEventListener("change", function () {
   }
 });
 
-document.querySelector('select[name="favSport"]').addEventListener('change', function() {
+document.querySelector('select[name="cDTO.favSport"]').addEventListener('change', function() {
 	  const splitSelect = document.getElementById('splitSelectLabel');
 	  if (this.value === 'health') {
 	    splitSelect.classList.remove('hidden'); // 헬스 선택하면 보이기
@@ -51,40 +51,81 @@ document.getElementById("proGoalTypeSelect").addEventListener("change", function
   }
 });
 
+setupLimitedCheckboxGroup("cDTO.supplements", 3);
+setupLimitedCheckboxGroup("diseases", 3);
+
 document.getElementById("surveyForm").addEventListener("submit", function (e) {
 	e.preventDefault();    
+	const form = this;
   	const formData = new FormData(this);
 	const data = Object.fromEntries(formData.entries());
-	setupLimitedCheckboxGroup("supplements", 3);
-	setupLimitedCheckboxGroup("diseases", 3);
 
 	// 음식 리스트 파싱 처리
 	const foodList = data.favoriteFood ? data.favoriteFood.split(',').map(f => f.trim()).filter(Boolean) : [];
-	console.log(data.workoutSplit);
+	console.log(data['cDTO.workoutSplit']);
 	// 공통 질문 데이터
-	/*foodList.forEach(function(food) {
+	foodList.forEach(function(food) {
 		console.log(food);		
 	});
-	console.log(data.height);
-	console.log(data.weight);
-	console.log(data.gender);
-	console.log(data.workoutTime);
-	console.log(data.vegan);
-	console.log(data.hit);
-	console.log(data.favSport);
-	console.log(data.activityLevel);
-	console.log(data.goal);*/
-	const selectedSupplements = formData.getAll('supplements');
+	if(!data['cDTO.gender']){
+		alert("성별을 선택해주세요");
+		form.elements["cDTO.gender"].focus();
+		return;
+	}
+	if(!data['cDTO.area']){
+		alert("지역을 선택해주세요");
+		form.elements["cDTO.area"].focus();
+		return;
+	}
+	if(!data['cDTO.workoutTime']){
+		alert("운동 시간대를 선택해주세요");
+		form.elements["cDTO.workoutTime"].focus();
+		return;
+	}
+	if(!data['cDTO.favSport']){
+		alert("선호하는 운동을 선택해 주세요");
+		form.elements["cDTO.favSport"].focus();
+		return;
+	}
+	if(!data['cDTO.activityLevel']){
+		alert("활동수준을 선택해 주세요");
+		form.elements["cDTO.activityLevel"].focus();
+		return;
+	}
+	if(!data['cDTO.recipeComplexity']){
+		alert("레시피 복잡도를 선택해 주세요");
+		form.elements["cDTO.recipeComplexity"].focus();
+		return;
+	}
+	if(!data['cDTO.goal']){
+		alert("운동목적을 선택해 주세요");
+		form.elements["cDTO.goal"].focus();
+		return;
+	}
+	
+	const selectedSupplements = formData.getAll('cDTO.supplements');
 	selectedSupplements.forEach(function(supplement) {
 		console.log(supplement);
 	})
-	switch(data.goal){
+	switch(data['cDTO.goal']){
 		// 다이어터 데이터
 		case 'diet' :
-			console.log(data.dietGoal);
-			console.log(data.dietType);
-			console.log(data.appetiteControl);
-			console.log(data.dietDifficulties);
+			if(!data.dietGoal){
+				alert('감량목표를 입력해주세요');
+				form.elements['dietGoal'].focus();
+				return;
+			}
+			if(!data.appetiteControl){
+				alert('식욕 조절 능력을 선택해주세요');
+				form.elements['appetiteControl'].focus();
+				return;
+			}
+//			console.log(data.dietGoal);
+//			console.log(data.dietType);
+//			console.log(data.appetiteControl);
+//			console.log(data.dietDifficulties);
+			form.action = "/survey/submitDiet";
+			form.submit();
 			break;
 		// 멸치 탈출 데이터
 		case 'gain' : 
