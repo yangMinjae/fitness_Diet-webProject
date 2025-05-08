@@ -10,37 +10,41 @@
 <body>
 	<jsp:include page="layout/header.jsp" />
 	<main>
-		<section class="section">
-			<h3>설문 조사</h3>		
-			<div class="category">
-			    <div class="category-item">
-			      <img src="/resources/img/dite.jpg" alt="식단 이미지" class="category-image">
-			      <h3>식단</h3>
-			      <p>사용자의 목표에 맞는 최적의 식단을 추천합니다. 건강한 식습관을 유지하고, 필요한 영양소를 충족할 수 있도록 도와드립니다.</p>
-			    </div>
-			
-			    <div class="category-item">
-			      <img src="/resources/img/health.jpg" alt="운동 이미지" class="category-image">
-			      <h3>운동</h3>
-			      <p>선호하는 운동 종류에 맞춰 운동 계획을 제시합니다. 운동 강도와 빈도를 조정하여 목표 달성을 돕습니다.</p>
-			    </div>
-			
-			    <div class="category-item">
-			      <img src="/resources/img/advice.jpg" alt="조언 이미지" class="category-image">
-			      <h3>조언</h3>
-			      <p>건강 관리와 운동에 관한 유용한 팁과 조언을 제공합니다. 올바른 자세와 기술로 더 나은 결과를 얻을 수 있습니다.</p>
-			    </div>
-			  </div>
-			<!-- <div class="description-box">	
-			  
-			</div> -->
-			<button class="cta-button">설문 조사 페이지 이동 버튼</button>
+		<h2 class="section-title">설문조사</h2>
+		<section class="section survey-gallery">
+		  <div class="image-grid">
+		    <div class="image-box">
+		      <img src="/resources/img/ditecat.jpg" alt="식단 이미지">
+		      <div class="overlay">
+		        <h4>식단</h4>
+		        <p>사용자의 목표에 맞는 최적의 식단을 추천합니다. 건강한 식습관을 유지하고, 필요한 영양소를 충족할 수 있도록 도와드립니다.</p>
+		      </div>
+		    </div>
+		    <div class="image-box">
+		      <img src="/resources/img/healthcat.jpg" alt="운동 이미지">
+		      <div class="overlay">
+		        <h4>운동</h4>
+		        <p>선호하는 운동 종류에 맞춰 운동 계획을 제시합니다. 운동 강도와 빈도를 조정하여 목표 달성을 돕습니다</p>
+		      </div>
+		    </div>
+		    <div class="image-box">
+		      <img src="/resources/img/advicecat.jpg" alt="조언 이미지">
+		      <div class="overlay">
+		        <h4>조언</h4>
+		        <p>건강 관리와 운동에 관한 유용한 팁과 조언을 제공합니다. 올바른 자세와 기술로 더 나은 결과를 얻을 수 있습니다.</p>
+		      </div>
+		    </div>
+		  </div>
+		
+		  <button class="cta-button">설문 조사 페이지 이동</button>
 		</section>
+
+
 		<section class="section">
 		  <!-- 운동메이트 찾기 기능 (왼쪽에 이미지, 오른쪽에 설명) -->
 		  <div class="mate-finding">
 		    <div class="mate-finding-item">
-		      <img src="/resources/img/mate.jpg" alt="운동메이트 찾기 이미지" class="mate-image left">
+		      <img src="/resources/img/matecat.jpg" alt="운동메이트 찾기 이미지" class="mate-image left">
 		      <div class="mate-text">
 		        <h3>운동메이트 찾기</h3>
 		        <p>이 기능은 사용자의 사는 지역, 선호하는 운동, 나이대에 맞춰 최적의 운동 메이트를 찾아주는 서비스입니다. 운동을 함께 할 친구를 찾고 싶다면, 이 기능을 통해 적합한 파트너를 만날 수 있습니다.</p>
@@ -55,7 +59,7 @@
 		        <h3>게시판</h3>
 		        <p>게시판은 운동 목적에 따라 구분되어 있습니다. 각 게시글은 회원들이 제공받은 식단을 토대로 한 운동 결과나 반응을 공유하는 공간입니다. 여러분의 경험을 나누고 다른 사람들의 피드백을 받을 수 있습니다.</p>
 		      </div>
-		      <img src="/resources/img/board.jpg" alt="게시판 이미지" class="board-image right">
+		      <img src="/resources/img/boardcat.jpg" alt="게시판 이미지" class="board-image right">
 		    </div>
 		  </div>
 		</section>
