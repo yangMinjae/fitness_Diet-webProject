@@ -33,4 +33,6 @@ public interface BoardMapper {
 	
 	// 회원탈퇴 게시글 삭제
 	public int deletePostByUno(int uno);
+	
+	
 }

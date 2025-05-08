@@ -24,12 +24,12 @@
 				<section class="post-content">${bvDTO.content}</section>
 			
 				<div class="icon-bar">
-					<button type="button" class="icon-btn" id="like-btn" bno="${bvDTO.bno}">❤️</button>
-					<button type="button" class="icon-btn" id="list-btn">☰</button>
-					<button type="button" class="icon-btn" id="prev-btn" bList='${bList}' bno="${bvDTO.bno}">&lt;</button>
-					<button type="button" class="icon-btn" id="next-btn" bList='${bList}' bno="${bvDTO.bno}">&gt;</button>
-					<button type="button" class="icon-btn" id="edit-btn" bno="${bvDTO.bno}">✏️</button>
-					<button type="button" class="icon-btn" id="delete-btn" bno="${bvDTO.bno}">🗑️</button>
+					<button type="button" class="icon-btn" id="like-btn" bno="${bvDTO.bno}" title="좋아요">❤️</button>
+					<button type="button" class="icon-btn" id="list-btn" title="목록" >☰</button>
+					<button type="button" class="icon-btn" id="prev-btn" bList='${bList}' bno="${bvDTO.bno}" title="이전 게시글">&lt;</button>
+					<button type="button" class="icon-btn" id="next-btn" bList='${bList}' bno="${bvDTO.bno}" title="다음 게시글">&gt;</button>
+					<button type="button" class="icon-btn" id="edit-btn" bno="${bvDTO.bno}" title="수정하기">✏️</button>
+					<button type="button" class="icon-btn" id="delete-btn" bno="${bvDTO.bno}" title="삭제">🗑️</button>
 				</div>
 			</c:if>		
 		</main>

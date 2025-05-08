@@ -62,3 +62,10 @@ body {
 .icon-btn:hover {
   color: #333;
 }
+.uploadedImg {
+	max-width: 25%;
+	height: auto;
+	margin: 8px 0;
+	vertical-align: top; 
+	display: inline-block;
+}

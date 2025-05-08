@@ -1,109 +1,117 @@
 .content-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Noto Sans KR', sans-serif;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .form-group {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
 }
 
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+input[type="text"], select, textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 14px;
 }
 
 .content-input {
-  width: 100%;
-  height: 300px;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  resize: vertical;
-  box-sizing: border-box;
-  background-color: #f9f9f9;
+	width: 100%;
+	height: 300px;
+	padding: 12px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	resize: vertical;
+	box-sizing: border-box;
+	background-color: #f9f9f9;
 }
 
-
 .button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
 }
 
 .upload-button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 12px 0;
-  background-color: #222;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
+	flex: 1;
+	margin: 0 5px;
+	padding: 12px 0;
+	background-color: #222;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
 }
 
 textarea {
-  resize: vertical;
+	resize: vertical;
 }
 
 .action-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
 }
 
 .action-buttons button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 12px;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+	flex: 1;
+	margin: 0 5px;
+	padding: 12px;
+	font-size: 14px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
 }
 
 .upload-final {
-  background-color: #444;
-  color: #fff;
+	background-color: #444;
+	color: #fff;
 }
 
 .list-btn {
-  background-color: #aaa;
-  color: #fff;
+	background-color: #aaa;
+	color: #fff;
 }
 
 .complete-btn {
-  background-color: #222;
-  color: #fff;
+	background-color: #222;
+	color: #fff;
 }
+
 #imageInput {
-    display: none;
+	display: none;
 }
+
 .imageButton {
-  width: 80px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  margin: 5px;
-  border-radius: 4px;
+	width: 80px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	margin: 5px;
+	border-radius: 4px;
 }
+#content {
+	min-height: 200px;
+	max-height: 300px; 
+	overflow-y:auto; 
+	border: 1px solid #ccc;
+	padding: 10px
+}
+
 #content img {
-  max-width: 25%;
-  height: auto;
-  display: block;
-  margin: 10px 0;
+	max-width: 25%;
+	height: auto;
+	margin: 8px 0;
+	vertical-align: top; 
+	display: inline-block;
 }
 

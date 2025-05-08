@@ -43,8 +43,7 @@
 				<label for="content">본문</label>
 				<div class="form-group">
 					<div id="content" name="content" class="content-input"
-						contenteditable="true"
-						style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+						contenteditable="true">
 					</div>
 				</div>
 				<textarea id="hiddenContent" name="content" style="display: none;"></textarea>
@@ -66,7 +65,6 @@
 
 			<!-- 하단 액션 버튼 영역 -->
 			<div class="action-buttons">
-				<button type="button" class="upload-final">⭐ 업로드</button>
 				<button type="button" class="boardList-btn">목록</button>
 				<button type="button" class="register-btn">작성 완료</button>
 			</div>
