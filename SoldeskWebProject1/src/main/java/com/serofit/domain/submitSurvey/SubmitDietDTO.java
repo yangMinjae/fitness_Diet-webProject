@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubmitDietDTO {
-	private SubmitCommonDTO cDTO;
+public class SubmitDietDTO extends AbstractSubmitDTO{
 	private int dietGoal;
 	private String dietType;
 	private String appetiteControl;

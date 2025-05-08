@@ -74,9 +74,9 @@
 				<label>
 					선호하는 운동 : <select name="cDTO.favSport">
 						<option value="">-- 선택하세요 --</option>
-						<option value="health">헬스</option>
-						<option value="bWeight">맨몸 운동</option>
-						<option value="sport">스포츠</option>
+						<option value="헬스">헬스</option>
+						<option value="맨몸 운동">맨몸 운동</option>
+						<option value="스포츠">스포츠</option>
 					</select>
 				</label>
 				<label id="splitSelectLabel" class="hidden"> 운동 분할 방식 : 
@@ -127,11 +127,11 @@
 					운동 목적 : 
 					<select name="cDTO.goal" id="goalSelect">
 						<option value="">-- 선택하세요 --</option>
-						<option value="diet">다이어터</option>
-						<option value="gain">멸치탈출</option>
-						<option value="pro">프로득근러</option>
-						<option value="health">헬스키퍼</option>
-						<option value="maintain">유지어터</option>
+						<option value="다이어트">다이어터</option>
+						<option value="멸치탈출">멸치탈출</option>
+						<option value="근성장/스트렝스강화">프로득근러</option>
+						<option value="건강유지">헬스키퍼</option>
+						<option value="체중유지">유지어터</option>
 					</select>
 				</label>
 			</section>
@@ -152,9 +152,9 @@
 					식욕 조절 능력: 
 					<select name="appetiteControl">
 						<option value="">-- 선택하세요 --</option>
-						<option value="high">상</option>
-						<option value="medium">중</option>
-						<option value="low">하</option>
+						<option value="상">상</option>
+						<option value="중">중</option>
+						<option value="하">하</option>
 					</select>
 				</label>
 				<section>
@@ -211,8 +211,8 @@
 				<label>목표 유형: 
 					<select name="proGoalType" id="proGoalTypeSelect">
 						<option value="">-- 선택하세요 --</option>
-						<option value="strength">스트랭스 강화</option>
-						<option value="muscle">근육 성장</option>
+						<option value="스트렝스 강화">스트랭스 강화</option>
+						<option value="근육 성장">근육 성장</option>
 					</select>
 				</label>
 

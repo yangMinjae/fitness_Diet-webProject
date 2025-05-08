@@ -1,14 +1,18 @@
 package com.serofit.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.openai.models.beta.assistants.AssistantUpdateParams.Model;
+import com.serofit.domain.submitSurvey.AbstractSubmitDTO;
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
 import com.serofit.service.SurveyService;
 
@@ -23,15 +27,17 @@ public class SurveyController {
 	SurveyService sService;
 	
 	@PostMapping("/submitDiet")
-	public String processDietResult(SubmitDietDTO dDto, RedirectAttributes redirectAttributes) {
-		boolean result = sService.updateMateTbl(dDto);
+	public String processDietResult(SubmitDietDTO dDTO, RedirectAttributes redirectAttributes) {
+		boolean result = sService.updateMateTbl(dDTO);
 		System.out.println("메이트 테이블 수정 결과 : "+result);
-		redirectAttributes.addFlashAttribute(dDto);
-		return "redirect:/goToSurveyResult";
+		redirectAttributes.addFlashAttribute("DTO",dDTO);
+		return "redirect:/survey/resultPage";
 	}
-	@GetMapping("/goToSurveyResult")
-	public String gotoSurveyResultPage(@ModelAttribute("dDto") SubmitDietDTO dDto, Model model) {
-		//sService.
+	@GetMapping("/resultPage")
+	public String gotoSurveyResultPage(@ModelAttribute("DTO") AbstractSubmitDTO DTO, Model model) {
+		model.addAttribute("goal", DTO.getCDTO().getGoal());
+		Map<String,String> result = sService.makeAiGeneratedData(DTO);
+		model.addAttribute("result", result);
 	    return "/survey/surveyResult";
 	}
 
@@ -53,6 +59,10 @@ public class SurveyController {
 	@PostMapping("/submitMaintain")
 	public String processMaintainResult(Model model) {
 		return "";
+	}
+	@GetMapping("/surveyResultTest")
+	public void surveyResultTest() {
+		
 	}
 	
 }

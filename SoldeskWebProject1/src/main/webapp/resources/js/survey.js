@@ -11,19 +11,19 @@ document.getElementById("goalSelect").addEventListener("change", function () {
   sections.forEach((sec) => sec.classList.add("hidden"));
 
   switch (goal) {
-    case "diet":
+    case "다이어트":
       document.getElementById("dietSection").classList.remove("hidden");
       break;
-    case "gain":
+    case "멸치탈출":
       document.getElementById("gainSection").classList.remove("hidden");
       break;
-    case "pro":
+    case "근성장/스트렝스강화":
       document.getElementById("proSection").classList.remove("hidden");
       break;
-    case "health":
+    case "건강유지":
       document.getElementById("healthSection").classList.remove("hidden");
       break;
-    case "maintain":
+    case "체중유지":
       document.getElementById("maintainSection").classList.remove("hidden");
       break;
   }
@@ -31,7 +31,7 @@ document.getElementById("goalSelect").addEventListener("change", function () {
 
 document.querySelector('select[name="cDTO.favSport"]').addEventListener('change', function() {
 	  const splitSelect = document.getElementById('splitSelectLabel');
-	  if (this.value === 'health') {
+	  if (this.value === '헬스') {
 	    splitSelect.classList.remove('hidden'); // 헬스 선택하면 보이기
 	  } else {
 	    splitSelect.classList.add('hidden'); // 다른 운동이면 숨기기
@@ -44,9 +44,9 @@ document.getElementById("proGoalTypeSelect").addEventListener("change", function
   document.getElementById("proStrengthSection").classList.add("hidden");
   document.getElementById("proMuscleSection").classList.add("hidden");
 
-  if (type === "strength") {
+  if (type === "스트렝스 강화") {
     document.getElementById("proStrengthSection").classList.remove("hidden");
-  } else if (type === "muscle") {
+  } else if (type === "근육 성장") {
     document.getElementById("proMuscleSection").classList.remove("hidden");
   }
 });
@@ -109,7 +109,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 	})
 	switch(data['cDTO.goal']){
 		// 다이어터 데이터
-		case 'diet' :
+		case '다이어트' :
 			if(!data.dietGoal){
 				alert('감량목표를 입력해주세요');
 				form.elements['dietGoal'].focus();
@@ -128,16 +128,16 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			form.submit();
 			break;
 		// 멸치 탈출 데이터
-		case 'gain' : 
+		case '멸치탈출' : 
 			console.log(data.gainGoal);
 			console.log(data.gainExperience);
 			console.log(data.gainSnacks);
 			console.log(data.gainDifficulties);
 			break;
 		// 프로 득근러 데이터
-		case 'pro' :
+		case '근성장/스트렝스강화' :
 			console.log(data.proGoalType);
-			if(data.proGoalType === 'strength'){
+			if(data.proGoalType === '스트렝스 강화'){
 				// 스트랭스 강화
 				console.log(data.strengthStats);
 				console.log(data.strengthSplit);
@@ -155,7 +155,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			}			
 			break;
 		// 헬스 키퍼
-		case 'health' :
+		case '건강유지' :
 			const selectedDiseases = formData.getAll('diseases');
 			selectedDiseases.forEach(function(diseases) {
 				console.log(diseases);
@@ -165,7 +165,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			console.log(data.sleep);
 			break;
 		// 유지 어터
-		case 'maintain' : 
+		case '체중유지' : 
 			console.log(data.outFood);
 			console.log(data.otherFood);
 			console.log(data.notFood);

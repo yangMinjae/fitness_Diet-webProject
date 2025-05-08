@@ -1,0 +1,110 @@
+/* surveyResult.css */
+
+/* 공통 폰트 및 배경 */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fff9f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* 전체 컨테이너 */
+#mainBlock {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* 각 영역 박스 */
+.details {
+  background-color: #fef6ff;
+  border: 2px dashed #ddb6f2;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 2px 2px 8px rgba(220, 180, 255, 0.3);
+}
+
+/* 소제목 - 제목처럼 보이게 */
+.subheadings {
+  font-size: 26px;
+  font-weight: 800;
+  color: #7a32cc;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* 파티션 제목 */
+.partitionTitles {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ff6e96;
+  margin: 10px 0;
+}
+
+/* 운동 리스트 */
+.schedule {
+  list-style-type: "🏋️ ";
+  padding-left: 28px;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #444;
+}
+
+/* 조언 텍스트 */
+#advice {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  background-color: #e6f9ff;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 5px solid #00aaff;
+}
+
+/* 식단 제목 */
+#dietTitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff884d;
+  margin-bottom: 20px;
+}
+
+/* 식단 이름 */
+.dietName {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e34f4f;
+  margin-top: 20px;
+}
+
+/* 영양 정보 */
+.dietNutrition {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* 식재료 목록 */
+.dietIngredient {
+  list-style-type: "🥗 ";
+  padding-left: 25px;
+  margin-bottom: 10px;
+}
+
+/* 조리 순서 */
+.dietRecipe {
+  list-style-type: decimal;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* 치팅밀 음식 제목 */
+.cheatingMeal {
+  font-size: 18px;
+  font

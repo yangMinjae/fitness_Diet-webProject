@@ -22,7 +22,7 @@ public class DietUtilCalculator {
 	ratioMap.put("근성장", "50:25:25");
 	}
 	
-	private int totalCal;
+	private int totalCal=0;
 	
 	public int getTotalCal() {
 		return totalCal;
@@ -32,13 +32,13 @@ public class DietUtilCalculator {
 		double bmr = cDTO.isGender()?
 				66.5+(13.75*cDTO.getWeight())+(5.003*cDTO.getHeight())-(6.755*cDTO.getAge()) :
 					655.1+(9.563*cDTO.getWeight())+(1.850*cDTO.getHeight())-(4.676*cDTO.getAge());
-				
+		this.totalCal = (int)(bmr*cDTO.getActivityLevel()-dietGoal*256.67);		
 	}
 	public void setTotalCalExpert() {
 		
 	}
 	
-	private double[] getIntRatio(String param) {
+	private double[] getDoubleRatio(String param) {
 		String[] ratio = ratioMap.get(param).split(":");
 		double[] result = new double[3];
 		for (int i = 0; i < result.length; i++) {
@@ -47,6 +47,17 @@ public class DietUtilCalculator {
 		return result;
 	}
 	public String[] getNutrientsGram(String param) {
-		return null;
+		// 탄단지 비율에 따라 탄단지 그램수를 반환한다.
+		// 매개변수로는 저탄고지, 고단백 식단등 탄단지 비율에 영향을 주는 타입 이름을 문자열로 받는다.
+		double[] ratio = getDoubleRatio(param);
+		String[] result = new String[3];
+		for (int i = 0; i < result.length; i++) {
+			if(i==2) {
+				result[i]=(int)(totalCal*ratio[i]/9)+"";
+			}else {
+				result[i]=(int)(totalCal*ratio[i]/4)+"";
+			}
+		}
+		return result;
 	}
 }

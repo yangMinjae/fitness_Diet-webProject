@@ -1,9 +1,11 @@
 package com.serofit.service;
 
-import com.serofit.domain.submitSurvey.SubmitDietDTO;
+import java.util.Map;
+
+import com.serofit.domain.submitSurvey.AbstractSubmitDTO;
 
 public interface SurveyService {
-	public boolean updateMateTbl(SubmitDietDTO dDto);
-	public String makeScript(String goal, String type, SubmitDietDTO dDto);
-	public String getResultFromAI(String prompt);
+	public boolean updateMateTbl(AbstractSubmitDTO aDTO);
+	public Map<String, String> makeAiGeneratedData(AbstractSubmitDTO aDTO);
+	public Map<String,String> requestToApi(Map<String, String> prompts);
 }

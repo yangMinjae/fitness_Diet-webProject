@@ -1,5 +1,5 @@
 package com.serofit.domain.submitSurvey;
 
-public class SubmitProDTO {
+public class SubmitProDTO extends AbstractSubmitDTO{
 
 }
