@@ -28,3 +28,16 @@ document.querySelectorAll('.post-card').forEach(div=>{
 		console.log("post-card");
 	});
 });
+
+const thumbnails = document.querySelectorAll('.thumb');
+const mainImg = document.getElementById('main-image');
+const mainTitle = document.getElementById('main-title');
+const mainDesc = document.getElementById('main-desc');
+
+thumbnails.forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    mainImg.src = thumb.src;
+    mainTitle.textContent = thumb.getAttribute('data-title');
+    mainDesc.textContent = thumb.getAttribute('data-desc');
+  });
+});
