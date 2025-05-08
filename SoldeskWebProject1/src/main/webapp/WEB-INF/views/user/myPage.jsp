@@ -146,8 +146,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<jsp:include page="../user/region.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
+<script type="text/javascript" src="/resources/js/region.js"></script>
 <script type="text/javascript" src="/resources/js/myPage/myProfile.js"></script>
 <script type="text/javascript" src="/resources/js/myPage/manageFriends.js"></script>
 <script type="text/javascript" src="/resources/js/myPage/scrollAction.js"></script>
