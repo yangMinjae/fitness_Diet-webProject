@@ -17,8 +17,8 @@ body {
 /* 사이드바 전체 박스 */
 .floating-sidebar {
   position: fixed;
-  top: 120px; /* 브라우저 상단에서의 거리 */
-  left: 40px; /* 왼쪽 고정 위치 */
+  top: 125px; /* 브라우저 상단에서의 거리 */
+  left: 80px; /* 왼쪽 고정 위치 */
   width: 180px;
   padding: 24px 16px;
   background-color: #e4f4ec; /* 민트 */
@@ -70,9 +70,9 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 40px;
-  max-width: 800px;
-  margin: 90px auto 40px auto; /* 상단 여백 + 좌우 auto로 중앙 정렬 */
+  padding: 0px 40px;
+  max-width: 1000px;
+  margin: 50px auto 40px auto; /* 상단 여백 + 좌우 auto로 중앙 정렬 */
   box-sizing: border-box;
 }
 
@@ -85,7 +85,7 @@ body {
   border-radius: 20px;
   margin-bottom: 40px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  max-width: 900px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
@@ -238,13 +238,25 @@ button {
 }
 
 /* 목록 부분 */
+.friend-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  background-color: #eef9f4; /* 더 옅은 민트톤 */
+  color: black;
+  border-left: 6px solid #b7e3d6; /* 조금 더 은은한 포인트 컬러 */
+  border-radius: 6px;
+  box-shadow: none; /* 그림자 제거로 심플하게 */
+  font-weight: 600;
+}
+
 .profile-section {
   background-color: #f2fdf2; /* 파스텔 민트 그린톤 */
   padding: 40px;
   border-radius: 24px;
   margin-bottom: 40px;
   box-sizing: border-box;
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }

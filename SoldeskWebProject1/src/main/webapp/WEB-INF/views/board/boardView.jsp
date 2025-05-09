@@ -25,12 +25,8 @@
 			    <div class="post-meta-right">
 			      	조회 : <span>${bvDTO.hit}</span> | 추천 : <span>${bvDTO.love}</span>
 			    </div>
-			  </div>
-			
-			  <div class="post-content">
-			    ${bvDTO.content}
-			  </div>
-			  			
+			  </div>			
+			  <div class="post-content">${bvDTO.content}</div>			  			
 			  <div class="icon-bar">
 			    <button type="button" class="icon-btn" id="like-btn" bno="${bvDTO.bno}" title="좋아요">❤️</button>
 					<button type="button" class="icon-btn" id="list-btn" title="목록" >☰</button>

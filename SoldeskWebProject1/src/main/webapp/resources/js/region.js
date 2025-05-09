@@ -58,6 +58,23 @@ const searchInput = document.getElementById("searchInput");
 
 let selectedDo = '';
 
+// 모달 열기 함수
+function openModal() {
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden"; // ✨ body 스크롤 방지
+  
+  // ✅ 초기화 처리
+  searchInput.value = "";
+  siListElem.innerHTML = "";
+  document.querySelectorAll("#doList .item").forEach(i => i.classList.remove("active"));
+  selectedDo = "";
+}
+// 모달 닫기 함수
+function closeModal() {
+  modal.style.display = "none";
+  document.body.style.overflow = ""; // ✨ 원상복구
+}
+
 Object.keys(regionData).forEach(doName => {
   const item = document.createElement("div");
   item.textContent = doName;
@@ -97,7 +114,7 @@ function renderSiList(siList, doName) {
     siItem.className = "item";
     siItem.onclick = () => {
         document.getElementById("showArea").textContent = `${doName} ${si}`;
-      modal.style.display = "none";
+        closeModal();
     };
     siListElem.appendChild(siItem);
   });
@@ -118,13 +135,13 @@ function renderGlobalResults(list) {
 	    item.className = "item";
 	    item.onclick = () => {
 	        document.getElementById("showArea").textContent = `${doName} ${si}`;
-	      modal.style.display = "none";
+	        closeModal();
 	    };
 	    siListElem.appendChild(item);
 	  });
 }
 
-// 닫기 버튼
+// 모달 닫기
 closeBtn.onclick = () => {
-  modal.style.display = "none";
+	closeModal();
 };

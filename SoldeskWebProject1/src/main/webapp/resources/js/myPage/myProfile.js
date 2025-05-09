@@ -19,7 +19,7 @@ let firstPressed = true;       							// 프로필 수정 관련 제어를 위�
 initProfile();                   						// 초기셋팅 : input 태그들, 이미지 버튼 비활성화
                           								// db에서 비동기로 유저프로필 및 메이트 데이터 가져와서 화면에 표시
 f.searchAreaBtn.addEventListener("click", function() {
-	document.getElementById("regionModal").style.display = "flex";
+	openModal();
 });
 
 document.querySelectorAll('.edit-button-wrapper button')

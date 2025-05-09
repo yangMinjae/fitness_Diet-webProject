@@ -88,14 +88,14 @@ body {
   padding: 1rem;
   margin-bottom: 10px;
   border-radius: 12px;
-  background-color: #fbeee6;  /* ✔️ 연그레이 / 중립톤 */
+  background-color: #fdf4ef;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .mail-item:hover {
-  background-color: #f5e3d7;  /* ✔️ hover 시 더 진한 회색 */
+  background-color: #fbeee6;
 }
 
 .profile-icon {
