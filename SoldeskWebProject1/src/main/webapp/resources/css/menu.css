@@ -163,7 +163,12 @@ header {
 
 
 /* Footer Modernized */
+
 footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #f4f8f4;
   padding: 24px 5%;
   border-top: 1px solid #eee;

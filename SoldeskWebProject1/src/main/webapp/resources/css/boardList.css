@@ -1,73 +1,115 @@
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
-  background-color: #f8f6f6;
+  background-color: #f4f8f4; /* 그대로 유지 */
+  color: #333;
 }
 
 .board-container {
-  width: 90%;
+  width: 95%;
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 60px auto;
+  padding: 40px 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
 /* 필터 버튼 */
 .filter-buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.filter {
-  padding: 0.6rem 1.2rem;
-  background-color: #e2e2e2;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.filter.active {
-  background-color: #d3cccc;
-}
-
-.write-post-btn {
-  margin-left: auto;
-  padding: 0.6rem 1.5rem;
-  background-color: #7b5fa4;
-  color: white;
+.filter-buttons button {
+  padding: 10px 18px;
+  background-color: #e1f0e1;  /* 연한 민트 */
+  color: #3c4a3e;
   border: none;
   border-radius: 20px;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.filter-buttons button:hover {
+  background-color: #c8e5c8;  /* hover: 진한 민트 */
+}
+
+.filter-buttons .active {
+  background-color: #a0dca0;  /* 활성화 상태 */
+  color: #1c3121;
+}
+
+/* 게시글 작성 버튼 */
+.writePostBtn {
+  margin-left: auto;
+  background-color: #6ac56d;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.writePostBtn:hover {
+  background-color: #57ab5a;
 }
 
 /* 테이블 스타일 */
 .table-wrapper {
   overflow-x: auto;
+  border-radius: 12px;
 }
 
 .post-table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: #ede8e8;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.post-table thead {
+  background-color: #eaf3ea;  /* 테이블 헤더 연한 민트 느낌 */
 }
 
 .post-table th,
 .post-table td {
-  padding: 0.8rem;
-  border: 1px solid #c7bdbd;
+  padding: 1rem;
   text-align: center;
   font-size: 0.95rem;
+  border-bottom: 1px solid #d9e6d9;  /* 부드러운 테두리 */
 }
 
 .post-table th {
-  background-color: #ded6d6;
   font-weight: bold;
+  color: #3b4d40;
 }
 
+.post-table td a {
+  color: #111;                 /* ✔️ 더 진한 검정색 */
+  font-weight: 600;            /* ✔️ 더 두껍게 */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-table td a:hover {
+  color: #4a6b4e;              /* ✔️ hover 시 약한 초록으로 포인트 */
+  text-decoration: underline;
+}
 .empty {
   text-align: center;
   padding: 2rem;
-  color: #999;
+  color: #888;
 }
