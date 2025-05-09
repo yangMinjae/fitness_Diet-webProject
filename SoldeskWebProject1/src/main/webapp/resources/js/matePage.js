@@ -1,6 +1,6 @@
 //-----CSS 파일 추가
 //1. 파일 경로 설정
-const CSS_FILE_PATH = ['/resources/css/matePage.css', '/resources/css/profile.css'];
+const CSS_FILE_PATH = ['/resources/css/matePage.css', '/resources/css/profile.css', '/resources/css/sendMailModal.css'];
 //2. link 태그 생성
 CSS_FILE_PATH.forEach(css => {
 	let linkEle = document.createElement('link');
@@ -111,10 +111,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 팔로우 버튼
-document.addEventListener('click', (e) =>{
+document.addEventListener('click', (e) =>{	
+	if (e.target.classList.contains('close-btn')) {
+		document.getElementById('mailModal').classList.remove('show')};
+		
 	if (e.target.classList.contains('close-modal-btn')) {
 		document.getElementById('find-profile-modal').classList.remove('show')};
+	
+	if (e.target.classList.contains('send-msg-btn')) {
+		const mailInput = document.getElementById('mailInput');
+		const charCount = document.getElementById('charCount');
 		
+		// 초기화
+		initMailModalContent();
+		initMailModalEvent();
+		document.getElementById('mailModal').classList.add('show');
+	}
+	
 	if (e.target.classList.contains('follow-btn')){
 		const uno = document.querySelector('#profile-modal-content .uno').textContent.trim();
 		const isFollowing = e.target.id === 'following';
@@ -143,11 +156,10 @@ document.addEventListener('click', (e) =>{
 	}
 });
 
-//닫기 버튼 누르면 닫기
-
 //모달 닫기 (ESC 키)
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+	const sendModal = document.getElementById('mailModal');
+    if (e.key === 'Escape' && !sendModal.classList.contains('show')) {
         document.getElementById('find-profile-modal').classList.remove('show');
     }
 });
@@ -161,4 +173,21 @@ document.addEventListener('click', (e) => {
     }
 });
 
+
+// 메일 초기화 함수
+function initMailModalContent(){
+	mailInput.value = '';
+	charCount.textContent = `${mailInput.value.length} / 300`;
+}
+
+// 글자 수 제한 함수
+function initMailModalEvent() {
+
+    if (mailInput && charCount) {
+        mailInput.addEventListener('input', () => {
+            const length = mailInput.value.length;
+            charCount.textContent = `${length} / 300`;
+        });
+    }
+}
 
