@@ -5,6 +5,7 @@ body {
   color: #333;
 }
 
+/* 설문조사 섹션 */
 .section-title {
   padding-top: 50px;
   text-align: center;
@@ -14,7 +15,6 @@ body {
   color: #4d5a63;
 }
 
-/* 설문조사 이미지 섹션 */
 .survey-gallery {
   width: 100%;
   background-color: #f4f8f4;
@@ -156,51 +156,7 @@ body {
 .board-item .board-text { order: 1; }
 .board-item .board-image { order: 2; }
 
-/* 인기 게시글 */
-.popular-posts {
-  padding: 40px 0;
-}
-
-.popular-posts h2 {
-  font-size: 1.7rem;
-  margin-bottom: 20px;
-  color: #4d5a63;
-}
-
-.post-card {
-  background-color: #ffffff;
-  border-radius: 14px;
-  padding: 28px;
-  margin-bottom: 24px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
-}
-
-.post-card:hover {
-  transform: translateY(-6px);
-}
-
-.post-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2rem;
-  color: #4d5a63;
-}
-
-.post-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: #888;
-}
-
-.post-meta img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
+/* 태그 설명  세션*/
 .interactive-gallery {
   max-width: 1400px;              /* ✅ 최대 너비 지정 */
   margin: 60px auto;              /* ✅ 자동 가운데 정렬 */
@@ -268,3 +224,86 @@ body {
   line-height: 1.6;
 }
 
+/* 인기 게시글 세션 */
+.popular-posts {
+  padding: 60px 5vw;
+  background-color: #eaf7ec;
+  border-top: 2px solid #d0e8d0;
+  border-bottom: 2px solid #d0e8d0;
+}
+
+.popular-posts h2 {
+  font-size: 1.8rem;
+  margin-bottom: 32px;
+  color: #4d5a63;
+  text-align: center;
+}
+
+.popular-posts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;        /* ✅ 수직 정렬 */
+  justify-content: space-between;
+  width: calc(25% - 15px);
+  min-height: 260px;
+  padding: 28px 24px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.post-card h3 {
+  font-size: 1.4rem;
+  margin: 0 0 12px;
+  color: #3b4d40;
+}
+
+.post-card p {
+  font-size: 1rem;
+  color: #6a7a6a;
+  line-height: 1.5;
+  flex: 1;                      /* ✅ 내용 영역 유동적 */
+  margin-bottom: 12px;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.post-meta img {
+  width: 32px;               /* ✅ 더 작게 */
+  height: 32px;
+  border-radius: 50%;        /* ✅ 완전한 원형 */
+  object-fit: cover;
+  background-color: #e0f0e0; /* ✅ 여백 있을 경우 깔끔한 배경 */
+}
+
+@media (max-width: 1024px) {
+  .post-card {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .post-card {
+    width: 100%;
+  }
+}

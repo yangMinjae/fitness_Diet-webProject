@@ -83,18 +83,20 @@
 		</section>
 		
 		<section class="popular-posts">
-			<h2>인기 게시글</h2>
-			<c:forEach var="hbdto" items="${hbList}">
-				<div class="post-card">
-					<h3>${hbdto.title}</h3>
-					<p>${hbdto.tag}</p>
-					<div class="post-meta">
-						<img src="https://img.icons8.com/ios-filled/50/000000/user-female-circle.png" alt="프로필" />
-						<span>${hbdto.nickname}</span> · 
-						<span>${hbdto.regdate}</span>
-					</div>
-				</div>
-			</c:forEach>
+		  <h2>인기 게시글</h2>
+		  <div class="popular-posts-wrapper">
+		    <c:forEach var="hbdto" items="${hbList}">
+		      <div class="post-card">
+		        <h3>${hbdto.title}</h3>
+		        <p>${hbdto.tag}</p>
+		        <div class="post-meta">
+		          <img src="/resources/img/tag/다이어터.png" alt="프로필" />
+		          <span>${hbdto.nickname}</span> · 
+		          <span>${hbdto.regdate}</span>
+		        </div>
+		      </div>
+		    </c:forEach>
+		  </div>
 		</section>
 	</main>
 	

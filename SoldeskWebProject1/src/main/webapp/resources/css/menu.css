@@ -128,10 +128,6 @@ header {
   background-color: #f0f0f0;
 }
 
-/* .dropdown:hover .dropdown-content {
-  display: block;
-} */
-
 /* 로그인 버튼 */
 .login-btn {
   background-color: #6C63FF;
@@ -168,7 +164,7 @@ header {
 
 /* Footer Modernized */
 footer {
-  background-color: #fafafa;
+  background-color: #f4f8f4;
   padding: 24px 5%;
   border-top: 1px solid #eee;
   font-size: 0.9rem;
