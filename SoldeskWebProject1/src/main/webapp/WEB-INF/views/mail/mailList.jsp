@@ -31,7 +31,9 @@
 				    data-content="${mvo.content}"
 				    data-regdate="${mvo.regdate}"
 				    data-uno="${mvo.uno}">
-					<div class="profile-icon">👤</div>
+					<div class="profile-icon">
+						<img src="/resources/img/tag/다이어터.png" alt="프로필" />
+					</div>
 					<div class="mail-info">
 						<span class="sender">${mvo.nickname}</span> 
 						<span class="sender">${mvo.imgPath}</span> 

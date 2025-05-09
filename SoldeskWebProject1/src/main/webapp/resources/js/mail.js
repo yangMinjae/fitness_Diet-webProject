@@ -68,7 +68,6 @@ document.querySelectorAll('.mail-item').forEach(item => {
 		const regdate = item.dataset.regdate
 
 		document.getElementById('senderName').innerText = name;
-		document.getElementById('profilePhoto').src = photo;
 		document.getElementById('mailContent').innerText = content;
 		document.getElementById('regdate').innerText = regdate;
 

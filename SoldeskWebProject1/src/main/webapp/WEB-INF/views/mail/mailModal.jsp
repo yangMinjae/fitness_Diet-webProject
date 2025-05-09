@@ -14,10 +14,15 @@
 		
 				<!-- 상단: 프로필 이미지 + 이름 -->
 				<div class="modal-header">
-					<img id="profilePhoto" src="" alt="프로필 사진">
-					<h2 id="senderName"></h2>
-					<p id="regdate"></p>
+				  <img id="profilePhoto" src="/resources/img/tag/다이어터.png" alt="프로필 사진">
+				  <div class="header-main">
+				    <h2 id="senderName"></h2>
+				  </div>
+				  <div class="header-date">
+				    <p id="regdate"></p>
+				  </div>
 				</div>
+
 		
 				<!-- 메일 본문 -->
 				<div class="modal-body">

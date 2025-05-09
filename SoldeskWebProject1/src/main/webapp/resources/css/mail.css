@@ -1,13 +1,19 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f8f9fb;
+  background-color: #f4f8f4;
   margin: 0;
+  color: #333;
 }
 
 .mailbox-container {
-  width: 90%;
+  width: 95%;
   max-width: 1000px;
-  margin: 2rem auto;
+  margin: 60px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
 /* 상단 버튼과 검색바 */
@@ -20,13 +26,19 @@ body {
 }
 
 .send-mail-btn {
-  background-color: #1d1d1d;
+  background-color: #6ac56d;
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 24px;
   font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-mail-btn:hover {
+  background-color: #57ab5a;
 }
 
 .search-box {
@@ -35,28 +47,23 @@ body {
   flex-grow: 1;
 }
 
-.search-filter {
-  padding: 0.5rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
-}
-
 .input-wrapper {
   display: flex;
   flex-grow: 1;
-  border-radius: 25px;
+  border-radius: 30px;
   overflow: hidden;
-  background-color: #eee5f4;
+  background-color: #eaf3ea;
+  border: 1px solid #c8dfc8;
 }
 
 .search-input {
   flex-grow: 1;
-  padding: 0.5rem 1rem;
+  padding: 10px 16px;
   border: none;
   background-color: transparent;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   outline: none;
+  color: #333;
 }
 
 .search-btn {
@@ -64,6 +71,7 @@ body {
   background: none;
   border: none;
   font-size: 1.2rem;
+  color: #4d774d;
   cursor: pointer;
 }
 
@@ -77,22 +85,38 @@ body {
 .mail-item {
   display: flex;
   align-items: center;
-  border-top: 1px solid #aaa;
-  padding: 1rem 0;
+  padding: 1rem;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #fbeee6;  /* ✔️ 연그레이 / 중립톤 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mail-item:hover {
+  background-color: #f5e3d7;  /* ✔️ hover 시 더 진한 회색 */
 }
 
 .profile-icon {
-  width: 40px;
-  height: 40px;
-  background-color: #d7c3ec;
-  color: #4a0072;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;               /* ✔️ 동그랗게 */
+  overflow: hidden;                 /* ✔️ 이미지 넘침 방지 */
+  background-color: #ecd5c3;        /* ✔️ 배경 없을 때 예비색 */
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
-  font-size: 1.4rem;
 }
+
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                /* ✔️ 비율 맞춰서 자르기 */
+  display: block;
+}
+
 
 .mail-info {
   display: flex;
@@ -100,14 +124,19 @@ body {
 }
 
 .sender {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 0.3rem;
+  color: #333;
 }
 
 .preview {
   color: #555;
   font-size: 0.95rem;
+  line-height: 1.4;
 }
 
-
-
+.regdate {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 4px;
+}
