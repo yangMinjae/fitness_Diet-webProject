@@ -1,179 +1,287 @@
-/* 전체 가운데 정렬 */
-body.mate-page {
-	flex-direction: column;
-	align-items: center;
-	font-family: Arial, sans-serif;
+/* 전체 영역 */
+.mate-slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 40px auto;
+  height: 200px;
 }
 
-.mate-main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 40px; /* 사이드바와 메인 간격 */
+/* 공통 섹션 */
+.mate-scroll-section {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 20px 40px;
+  height: 100%;
+  align-items: center;
 }
 
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 내부 h1, 박스들 가운데 정렬 */
+.mate-scroll-section::-webkit-scrollbar {
+  display: none;
 }
 
-.mate-title {
-    text-align: center;
-    margin: 50px auto -250px auto; /* 아래 마진을 16px로 줄임 !!!!!!!!!!!!!!!!!!!!*/
-    font-size: 2.2rem;
-    font-weight: bold;
-    width: 100%;
-    display: block;
-}
-
-main h1 {
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-/* sendList, difList 간격 유지 (20px) */
-.sendList, .difList {
-    align-items: center;
-    margin-left: 0;
-    gap: 20px;
-}
-
-/* sendList 위쪽 마진 없애고 difList 위쪽 마진 20px 유지 */
-.sendList {
-    width: 1200px;
-    max-width: 5000px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 0;
-}
-
-.difList {
-    width: 1200px;
-    max-width: 5000px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-/* 각 아이템 */
+/* 개별 카드 */
 .mate-item {
-	width: 100%; /* 전체 너비의 2/3 정도 차지하도록 */
-	display: flex;
-	align-items: center;
-	padding: 16px 20px;
-	border: 1px solid #ddd;
-	border-radius: 12px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
-	transition: background 0.2s;
+  flex: 0 0 180px;
+  height: 180px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
 }
 
-/* 호버 효과 */
-.mate-item:hover {
-	background-color: #f8f8f8;
-}
-
-/* 유저 이미지 */
 .user-icon {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	object-fit: cover;
-	margin-right: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ❗원본 비율 유지하고 빈 곳 생기면 여백 */
+  border-radius: 0;    /* ❗둥글게 제거 */
+  padding: 10px;       /* 💡안쪽 여백으로 카드와 구분 */
 }
 
-/* 닉네임 스타일 */
-.nickname {
-	font-size: 1.2rem;
-	font-weight: bold;
-	margin-right: 12px;
+/* 좌우 커서 */
+.mate-scroll-section.scroll-left {
+  cursor: w-resize;
+}
+.mate-scroll-section.scroll-right {
+  cursor: e-resize;
 }
 
-/* 타이틀 스타일 */
-.title {
-	font-weight : bold;
+/* 섹션 제목 스타일 */
+.scroll-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4d5a63;
+  margin: 20px auto 10px;
 }
 
-/* 내용 미리보기 */
-.preview {
-	align-items: rgiht;
-	color: #666;
-	font-size: 0.9rem;
+/* 필터 전체 감싸는 컨테이너 */
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-/* 리모컨 스타일 사이드바 */
-.floating-sidebar {
-    position: sticky;
-    top: 200px;
-    width: 200px; /* 기존 160px → 200px으로 확대 */
-    min-width: 200px;
-    flex-shrink: 0; 
-    margin-left: 50px;
-    background-color: #FAF9F6;
-    padding: 30px 20px; /* 패딩을 더 넉넉하게 */
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px; /* 기존 간격 유지 */
-    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
-    box-sizing: border-box;
-    z-index: 2;
-    align-self: flex-start;
+/* 가로로 나열된 필터 */
+.filters-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
-/* 리모컨 내부 버튼 스타일 */
-.floating-sidebar .menu-section,
-.floating-sidebar button {
-    background-color: #27AE60; /* 민트 그린 */
-    color: white;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+.filters-row select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cfe4d1;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #34495e;
 }
 
-.floating-sidebar .menu-section:hover,
-.floating-sidebar button:hover {
-    background-color: #1E8449; /* 진한 민트 그린 */
+/* 초기화 버튼 정 중앙 */
+.reset-btn-wrap {
+  display: flex;
+  justify-content: center;
 }
 
-/* select 박스 스타일 (필터) */
-.floating-sidebar select {
-    width: 100%;
-    padding: 6px 8px;
-    border-radius: 8px;
-    border: 1px solid #D6EAF8;
-    background-color: white;
-    font-size: 1rem;
-    color: #34495E; /* 네이비 */
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-    text-align-last: center;
+.reset-btn-wrap button {
+  background-color: #6ac56d;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.floating-sidebar select:focus {
-    outline: none;
-    border-color: #27AE60; /* 민트 그린 포커스 */
-    box-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
+.reset-btn-wrap button:hover {
+  background-color: #5da258;
 }
 
-.floating-sidebar .form-group label {
-    display: block;      /* 블록 요소로 만들어 너비 전체 차지 */
-    text-align: center;  /* 텍스트 가운데 정렬 */
-    font-weight: 600;    /* 라벨 강조 (선택 사항) */
-    margin-bottom: 6px;  /* 라벨과 select 간 간격 */
-    color: #34495E;      /* 네이비 계열 텍스트 색상 (기존 테마와 맞게) */
-    font-size: 1rem;     /* 적당한 크기 */
+/* ✅ 제목 정중앙 정렬 */
+.mate-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4d5a63;
+  margin: 20px 0 20px;
 }
 
+/* ✅ 스크롤 카드 섹션을 정중앙 + 고정 폭 */
+.mate-slider-wrapper {
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.mate-scroll-section {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 10px;
+  height: 220px;
+  justify-content: flex-start;
+}
+
+/* ✅ 카드 크기 정확히 4개 보이게 설정 */
+.mate-item {
+  flex: 0 0 220px;
+  height: 200px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.mate-item:hover {
+  transform: scale(1.05);
+}
+
+.mate-scroll-section::-webkit-scrollbar {
+  display: none;
+}
+
+/* 카드 하단 음영 오버레이 */
+.mate-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f4f8f4 100%);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 전체 오버레이 */
+.scroll-guide-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* 중앙 컨텐츠 */
+.scroll-guide-content {
+  text-align: center;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  animation: zoomIn 0.6s ease;
+}
+
+/* 마우스 아이콘 애니메이션 */
+.scroll-mouse-icon {
+  margin-bottom: 20px;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+/* 안내 문구 */
+.scroll-guide-text {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* 확인 버튼 */
+#scrollGuideConfirm {
+  background-color: #6ac56d;
+  color: #fff;
+  padding: 10px 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#scrollGuideConfirm:hover {
+  background-color: #5da258;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes zoomIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* 오버레이 정보 */
+.mate-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.mate-overlay p {
+  margin: 2px 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mate-overlay .nickname {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.mate-overlay .tag {
+  color: #6ac56d;
+  font-weight: 600;
+}
+
+/* 호버 시 오버레이 등장 */
+.mate-item:hover .mate-overlay {
+  opacity: 1;
+}

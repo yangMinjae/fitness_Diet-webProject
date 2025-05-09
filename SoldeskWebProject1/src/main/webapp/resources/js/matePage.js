@@ -191,3 +191,60 @@ function initMailModalEvent() {
     }
 }
 
+// 스크롤
+document.addEventListener("DOMContentLoaded", () => {
+	  const scrollSections = document.querySelectorAll(".mate-scroll-section");
+
+	  scrollSections.forEach(section => {
+	    const scrollStep = () => {
+	      const card = section.querySelector(".mate-item");
+	      return card ? card.offsetWidth + 20 : 240; // 카드 너비 + gap
+	    };
+
+	    let isScrolling = false;
+
+	    section.addEventListener("wheel", (e) => {
+	      e.preventDefault();
+
+	      if (isScrolling) return;
+	      isScrolling = true;
+
+	      const delta = e.deltaY;
+	      const step = scrollStep();
+
+	      section.scrollBy({
+	        left: delta > 0 ? step : -step,
+	        behavior: "smooth"
+	      });
+
+	      setTimeout(() => {
+	        isScrolling = false;
+	      }, 300); // 애니메이션 지속 시간과 맞춤
+	    }, { passive: false });
+
+	    // 마우스 위치에 따라 커서 변경 (선택적)
+	    section.addEventListener("mousemove", (e) => {
+	      const rect = section.getBoundingClientRect();
+	      const x = e.clientX - rect.left;
+	      const width = rect.width;
+
+	      section.classList.toggle("scroll-left", x < width * 0.25);
+	      section.classList.toggle("scroll-right", x > width * 0.75);
+	    });
+	  });
+	});
+
+// 애니메이션 확인 버튼
+document.addEventListener("DOMContentLoaded", () => {
+	  const guideOverlay = document.getElementById("scrollGuideOverlay");
+	  const guideButton = document.getElementById("scrollGuideConfirm");
+
+	  // 2초 후에 안내 모달 띄우기
+	  setTimeout(() => {
+	    guideOverlay.style.display = "flex";
+	  }, 500); // 조정 가능
+
+	  guideButton.addEventListener("click", () => {
+	    guideOverlay.style.display = "none";
+	  });
+	});
