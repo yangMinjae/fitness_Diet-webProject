@@ -47,7 +47,7 @@
 						<div class="form-group">
 							<label>지역</label>
 							<div id="showArea">충청도</div>
-							<button type="button" name="searchAreaBtn">지역 검색</button>
+							<button class="hidden" type="button" name="searchAreaBtn" id="searchArea">지역 검색</button>
 						</div>
 						<div class="form-group">
 							<label for="time">운동 시간대</label> 
@@ -74,7 +74,7 @@
 				</div>
 				<div class="edit-button-wrapper">
 					<button class="edit-button" id="editProfile">프로필 수정</button>
-					<button class="cancel-button" id="cancelEdit">취소</button>
+					<button class="cancel-button hidden" id="cancelEdit">취소</button>
 				</div>
 			</div>
 
@@ -90,9 +90,9 @@
 							<thead>
 								<tr>
 									<th class="tblImgHeader">프로필</th>
-									<th class="tblNicknameHeader"></th>
-									<th class="tblBtnHeader">팔로우 취소</th>
-									<th class="tblBtnHeader">즐겨찾기 해제</th>
+									<th class="tblNicknameHeader">닉네임</th>
+									<th class="tblBtnHeader">팔로우</th>
+									<th class="tblBtnHeader">즐겨찾기</th>
 								</tr>
 							</thead>
 							<tbody id="favBody">
@@ -111,9 +111,9 @@
 								<thead>
 									<tr>
 										<th class="tblImgHeader">프로필</th>
-										<th class="tblNicknameHeader"></th>
-										<th class="tblBtnHeader">팔로우 취소</th>
-										<th class="tblBtnHeader">즐겨찾기 추가</th>
+										<th class="tblNicknameHeader">닉네임</th>
+										<th class="tblBtnHeader">팔로우</th>
+										<th class="tblBtnHeader">즐겨찾기</th>
 									</tr>
 								</thead>
 								<tbody id="followBody">
@@ -133,7 +133,8 @@
 								<thead>
 									<tr>
 										<th class="tblImgHeader">프로필</th>
-										<th class="tblNicknameHeader"></th>
+										<th class="tblNicknameHeader">닉네임</th>										
+										<th class="tblBtnHeader">팔로우</th>
 									</tr>
 								</thead>
 								<tbody id="followerBody">

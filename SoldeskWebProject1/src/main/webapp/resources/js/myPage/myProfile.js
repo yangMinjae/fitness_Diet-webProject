@@ -11,6 +11,7 @@ let showArea = document.querySelector('#showArea');
 let myProfileImg = document.querySelector('#myProfileImg');
 let cancelEdit = document.querySelector('#cancelEdit');
 let editProfile = document.querySelector('#editProfile');
+let searchArea = document.querySelector('#searchArea');
 let f = document.forms[0];
 
 let firstPressed = true;       							// 프로필 수정 관련 제어를 위한 변수
@@ -104,7 +105,6 @@ function fetchUserInfo(uno){      						// getUserInfo() 함수에서 쓰이는 
 	    let yesRadio = document.querySelector('#yesRadio');
 	    let noRadio = document.querySelector('#noRadio');
 	    let nickName =document.querySelector('.profile-nickname');
-	    console.log(json);
 	    nickName.textContent=json.uVO.nickname;
 
 	    if(json.upVO.mate=='0'){
@@ -132,6 +132,7 @@ function profileEditToSubmit(){   						// 화면상 표시되는 '프로필 수
 	  editProfile.classList.remove('edit-button');
 	  editProfile.classList.add('submit-button');
 	  cancelEdit.classList.remove('hidden');
+	  searchArea.classList.remove('hidden');
 	}
 
 	function submitToProfileEdit(){   					// '제출'버튼의 스타일을 다시 '프로필 수정' 버튼으로 변경
@@ -139,6 +140,7 @@ function profileEditToSubmit(){   						// 화면상 표시되는 '프로필 수
 	  editProfile.classList.remove('submit-button');
 	  editProfile.classList.add('edit-button');
 	  cancelEdit.classList.add('hidden');
+	  searchArea.classList.add('hidden');
 	}
 	
 //-------------------------------------------------------------
