@@ -8,7 +8,7 @@
 </head>
 <body>
 	<jsp:include page="../layout/header.jsp" />
-
+	<jsp:include page="loadingModal.jsp"></jsp:include>
 	<div class="container">
 		<h1>라이프스타일 설문조사</h1>
 		<form id="surveyForm" method="post">
@@ -127,11 +127,11 @@
 					운동 목적 : 
 					<select name="cDTO.goal" id="goalSelect">
 						<option value="">-- 선택하세요 --</option>
-						<option value="다이어트">다이어터</option>
-						<option value="멸치탈출">멸치탈출</option>
-						<option value="근성장/스트렝스강화">프로득근러</option>
-						<option value="건강유지">헬스키퍼</option>
-						<option value="체중유지">유지어터</option>
+						<option value="다이어트">다이어트</option>
+						<option value="멸치 탈출">멸치 탈출</option>
+						<option value="프로 득근러">근육 성장/스트렝스 강화</option>
+						<option value="건강 유지">건강 유지</option>
+						<option value="체중 유지">체중 유지</option>
 					</select>
 				</label>
 			</section>

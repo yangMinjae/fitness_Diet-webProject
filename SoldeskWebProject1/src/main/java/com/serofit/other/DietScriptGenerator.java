@@ -58,7 +58,7 @@ public class DietScriptGenerator {
 			"[식단 요청사항]\r\n" + 
 			"-대상: {goal}를 원하는 {age}세 {gender}성.\r\n" + 
 			"-식단 수: {NofDiets} 끼니.\r\n" + 
-			"-하루 섭취 탄단지 총량: 탄수화물 {carbo}g, 단백질 {protein}g, 지방 {fat} - {dietType}식단g\r\n" + 
+			"-하루 섭취 탄단지 총량: 탄수화물 {carbo}g, 단백질 {protein}g, 지방 {fat}g - {dietType}식단\r\n" + 
 			"-비건식 여부: {isVegan}\r\n" + 
 			"-다이어트 중 부족할 수 있는 탄단지 이외의 영양소를 고려해 식단을 짜되, 현재 {supplements}영양제를 이미 복용하므로 굳이 고려하려 하지 않아도됨.\r\n" + 
 			"-선호하는 음식 {favFoods}을 참고해 취향을 추측하고 이를 반영한 메뉴를 선정할 것.(메뉴를 굳이 그대로 식단에 넣을 필요는 없음)\r\n" + 
@@ -164,25 +164,25 @@ public class DietScriptGenerator {
 	
 	public String getDietScript() {
 		String result = dietScript
-				.replace("{goal}", dDTO.getCDTO().getGoal())
-		        .replace("{age}", dDTO.getCDTO().getAge()+"")
-		        .replace("{gender}", dDTO.getCDTO().isGender()?"남":"여")
-		        .replace("{NofDiets}", dDTO.getCDTO().getHit()+"");
+				.replace("{goal}", dDTO.getcDTO().getGoal())
+		        .replace("{age}", dDTO.getcDTO().getAge()+"")
+		        .replace("{gender}", dDTO.getcDTO().isGender()?"남":"여")
+		        .replace("{NofDiets}", dDTO.getcDTO().getHit()+"");
 		
 		DietUtilCalculator cal = new DietUtilCalculator();
-		cal.setTotalCalNormalCase(dDTO.getCDTO(), dDTO.getDietGoal());
+		cal.setTotalCalNormalCase(dDTO.getcDTO(), dDTO.getDietGoal());
 		String[] nutrients = cal.getNutrientsGram(dDTO.getDietType());
 		result = result
 				.replace("{carbo}", nutrients[0])
 				.replace("{protein}", nutrients[1])
 		        .replace("{fat}", nutrients[2])
 		        .replace("{dietType}", dDTO.getDietType())
-		        .replace("{isVegan}", dDTO.getCDTO().getVegan()=="yes" ? "비건" : "비비건")
-		        .replace("{supplements}", Arrays.toString(dDTO.getCDTO().getSupplements()))
-		        .replace("{favFoods}", Arrays.toString(dDTO.getCDTO().getFavoriteFood()));
-		if(dDTO.getCDTO().getRecipeComplexity().equals("low")) {
+		        .replace("{isVegan}", dDTO.getcDTO().getVegan()=="yes" ? "비건" : "비비건")
+		        .replace("{supplements}", Arrays.toString(dDTO.getcDTO().getSupplements()))
+		        .replace("{favFoods}", Arrays.toString(dDTO.getcDTO().getFavoriteFood()));
+		if(dDTO.getcDTO().getRecipeComplexity().equals("low")) {
 			result = result.replace("{isGoodCook}", complex);
-		}else if(dDTO.getCDTO().getRecipeComplexity().equals("high")) {
+		}else if(dDTO.getcDTO().getRecipeComplexity().equals("high")) {
 			result = result.replace("{isGoodCook}", notComplex);
 		}
 		return result;
@@ -190,20 +190,20 @@ public class DietScriptGenerator {
 	
 	public String getRoutineScript() { 
 		String result;
-		if(dDTO.getCDTO().getFavSport().equals("헬스")) {
+		if(dDTO.getcDTO().getFavSport().equals("헬스")) {
 			result = healthRoutineScript
-					.replace("{age}",dDTO.getCDTO().getAge()+"")
-					.replace("{goal}",dDTO.getCDTO().getGoal())
-					.replace("{gender}", dDTO.getCDTO().isGender()?"남":"여")
-					.replace("{favSport}", dDTO.getCDTO().getFavSport())
-					.replace("{workoutSplit}", dDTO.getCDTO().getWorkoutSplit()+"");
+					.replace("{age}",dDTO.getcDTO().getAge()+"")
+					.replace("{goal}",dDTO.getcDTO().getGoal())
+					.replace("{gender}", dDTO.getcDTO().isGender()?"남":"여")
+					.replace("{favSport}", dDTO.getcDTO().getFavSport())
+					.replace("{workoutSplit}", dDTO.getcDTO().getWorkoutSplit()+"");
 		}
 		else {
 			result = etcRoutineScript
-					.replace("{age}",dDTO.getCDTO().getAge()+"")
-					.replace("{goal}",dDTO.getCDTO().getGoal())
-					.replace("{gender}", dDTO.getCDTO().isGender()?"남":"여")
-					.replace("{favSport}", dDTO.getCDTO().getFavSport());
+					.replace("{age}",dDTO.getcDTO().getAge()+"")
+					.replace("{goal}",dDTO.getcDTO().getGoal())
+					.replace("{gender}", dDTO.getcDTO().isGender()?"남":"여")
+					.replace("{favSport}", dDTO.getcDTO().getFavSport());
 			
 		}
 		return result; 
@@ -233,7 +233,7 @@ public class DietScriptGenerator {
 	public String getAdviceScript() {
 		String result;
 		result = adviceScript
-				.replace("{goal}", dDTO.getCDTO().getGoal())
+				.replace("{goal}", dDTO.getcDTO().getGoal())
 				.replace("{difficulties}", dDTO.getDietDifficulties());
 		return result;
 	}

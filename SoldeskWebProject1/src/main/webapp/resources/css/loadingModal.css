@@ -1,0 +1,63 @@
+#loadingModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(245, 243, 255, 0.9); /* 연보라 파스텔 */
+  z-index: 9999;
+}
+
+/* 모달 중앙 영역 */
+.modal-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.modal-content {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* 로딩 스피너 */
+.spinner {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px auto;
+  border: 10px solid #ddd;
+  border-top: 10px solid #a3d5ff;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+/* 깜빡이는 텍스트 */
+.loading-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #666;
+  animation: blink 1.5s infinite;
+}
+
+/* 애니메이션 정의 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}

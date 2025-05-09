@@ -4,9 +4,12 @@
 body {
   font-family: 'Noto Sans KR', sans-serif;
   background-color: #fff9f4;
-  margin: 0;
-  padding: 0;
   color: #333;
+}
+
+html, body{
+	margin: 0;
+    padding: 0;
 }
 
 /* 전체 컨테이너 */
@@ -18,6 +21,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+  margin-top:0;
 }
 
 /* 각 영역 박스 */
@@ -28,6 +32,8 @@ body {
   padding: 24px;
   margin-bottom: 30px;
   box-shadow: 2px 2px 8px rgba(220, 180, 255, 0.3);
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 /* 소제목 - 제목처럼 보이게 */
@@ -106,5 +112,35 @@ body {
 
 /* 치팅밀 음식 제목 */
 .cheatingMeal {
-  font-size: 18px;
-  font
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+div.reason {
+    margin-bottom: 20px;
+}
+
+/* 우상단 인쇄 버튼 */
+#printBtn {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #7a32cc;
+  color: white;
+  font-size: 24px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#printBtn:hover {
+  background-color: #5a1ba8;
+}

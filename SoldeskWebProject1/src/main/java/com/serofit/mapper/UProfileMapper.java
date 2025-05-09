@@ -3,6 +3,7 @@ package com.serofit.mapper;
 import java.util.List;
 
 import com.serofit.domain.UProfileVO;
+import com.serofit.domain.UpdateTagDTO;
 
 public interface UProfileMapper {
 	
@@ -20,4 +21,7 @@ public interface UProfileMapper {
 	
 	// tbl_uprofile 테이블에서 uno 일치와 mate가 1인 모든 데이터 가져오기
 	public UProfileVO getUnoByMate(int uno);
+	
+	// tag 수정
+	public int updateTag(UpdateTagDTO uDTO);
 }

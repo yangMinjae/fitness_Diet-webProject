@@ -1,9 +1,16 @@
 // --- CSS 파일 동적 로딩 ---
 const CSS_FILE_PATH1 = '/resources/css/survey.css';
-const linkEle = document.createElement('link');
-linkEle.rel = 'stylesheet';
-linkEle.href = CSS_FILE_PATH1;
-document.head.appendChild(linkEle);
+const linkEle1 = document.createElement('link');
+linkEle1.rel = 'stylesheet';
+linkEle1.href = CSS_FILE_PATH1;
+document.head.appendChild(linkEle1);
+//------모달 css 로딩------
+const CSS_FILE_PATH2 = '/resources/css/loadingModal.css';
+const linkEle2 = document.createElement('link');
+linkEle2.rel = 'stylesheet';
+linkEle2.href = CSS_FILE_PATH2;
+document.head.appendChild(linkEle2);
+//-----------------------
 
 document.getElementById("goalSelect").addEventListener("change", function () {
   const goal = this.value;
@@ -14,16 +21,16 @@ document.getElementById("goalSelect").addEventListener("change", function () {
     case "다이어트":
       document.getElementById("dietSection").classList.remove("hidden");
       break;
-    case "멸치탈출":
+    case "멸치 탈출":
       document.getElementById("gainSection").classList.remove("hidden");
       break;
-    case "근성장/스트렝스강화":
+    case "프로 득근러":
       document.getElementById("proSection").classList.remove("hidden");
       break;
-    case "건강유지":
+    case "건강 유지":
       document.getElementById("healthSection").classList.remove("hidden");
       break;
-    case "체중유지":
+    case "체중 유지":
       document.getElementById("maintainSection").classList.remove("hidden");
       break;
   }
@@ -56,13 +63,11 @@ setupLimitedCheckboxGroup("diseases", 3);
 
 document.getElementById("surveyForm").addEventListener("submit", function (e) {
 	e.preventDefault();    
-	const form = this;
-  	const formData = new FormData(this);
+	let form = this;
+	let formData = new FormData(this);
 	const data = Object.fromEntries(formData.entries());
-
 	// 음식 리스트 파싱 처리
 	const foodList = data.favoriteFood ? data.favoriteFood.split(',').map(f => f.trim()).filter(Boolean) : [];
-	console.log(data['cDTO.workoutSplit']);
 	// 공통 질문 데이터
 	foodList.forEach(function(food) {
 		console.log(food);		
@@ -120,22 +125,20 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 				form.elements['appetiteControl'].focus();
 				return;
 			}
-//			console.log(data.dietGoal);
-//			console.log(data.dietType);
-//			console.log(data.appetiteControl);
-//			console.log(data.dietDifficulties);
-			form.action = "/survey/submitDiet";
-			form.submit();
+			for (const [key, value] of formData.entries()) {
+				  console.log(`${key} → ${value}`);
+				}
+			fetchFunc(formData,'submitDiet');
 			break;
 		// 멸치 탈출 데이터
-		case '멸치탈출' : 
+		case '멸치 탈출' : 
 			console.log(data.gainGoal);
 			console.log(data.gainExperience);
 			console.log(data.gainSnacks);
 			console.log(data.gainDifficulties);
 			break;
 		// 프로 득근러 데이터
-		case '근성장/스트렝스강화' :
+		case '프로 득근러' :
 			console.log(data.proGoalType);
 			if(data.proGoalType === '스트렝스 강화'){
 				// 스트랭스 강화
@@ -155,7 +158,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			}			
 			break;
 		// 헬스 키퍼
-		case '건강유지' :
+		case '건강 유지' :
 			const selectedDiseases = formData.getAll('diseases');
 			selectedDiseases.forEach(function(diseases) {
 				console.log(diseases);
@@ -165,7 +168,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			console.log(data.sleep);
 			break;
 		// 유지 어터
-		case '체중유지' : 
+		case '체중 유지' : 
 			console.log(data.outFood);
 			console.log(data.otherFood);
 			console.log(data.notFood);
@@ -188,4 +191,34 @@ function setupLimitedCheckboxGroup(groupName, maxCount) {
 	      }
 	    });
 	  });
+}
+
+//로딩 모달 표시
+function showLoadingModal() {
+  document.getElementById("loadingModal").style.display = "block";
+}
+
+// 로딩 모달 숨김
+function hideLoadingModal() {
+  document.getElementById("loadingModal").style.display = "none";
+}
+
+function fetchFunc(f,param){
+	showLoadingModal();
+	console.log(f);
+	fetch(`/survey/${param}`,{
+		method:'POST',
+		body: JSON.stringify(Object.fromEntries(f.entries())),
+		headers:{
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}
+	})
+	.then(res=>res.text())
+	.then(text=>{
+		console.log(text);
+		hideLoadingModal();
+		alert('설문이 완료되었습니다.')
+		window.open("/survey/surveyResultPage", "_blank");
+		location.href='/';		
+	})
 }

@@ -44,4 +44,10 @@
 	<select id="getUnoByMate" resultType="com.serofit.domain.UProfileVO" parameterType="int">
 	SELECT * FROM tbl_uprofile WHERE uno = #{uno} AND mate = 1
 	</select>
+	
+	<update id="updateTag" parameterType="com.serofit.domain.UpdateTagDTO">
+		UPDATE tbl_uprofile
+			SET tag=#{tag}
+			WHERE uno=#{uno}
+	</update>
 </mapper>
