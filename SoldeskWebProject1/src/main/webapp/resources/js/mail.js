@@ -84,4 +84,10 @@ document.getElementById('replyBtn').addEventListener('click', () => {
 	// 예시: location.href = '/replyForm.do?target=' + encodeURIComponent(senderName);
 });
 
+//모달 닫기 (ESC 키)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.getElementById('mailModal').classList.remove('show');
+    }
+});
 

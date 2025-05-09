@@ -118,8 +118,8 @@
 		</section>
 		</main>
 	</div>
-	
 	<jsp:include page="../layout/footer.jsp" />
 	<script type="text/javascript" src="/resources/js/matePage.js"></script>
+	<script type="text/javascript" src="/resources/js/profileModal.js"></script>
 </body>
 </html>

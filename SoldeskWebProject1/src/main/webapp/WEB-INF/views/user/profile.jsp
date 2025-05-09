@@ -41,6 +41,7 @@
 	        <button class="close-modal-btn">닫기</button>
 	    </div>
 	</div>
+	<jsp:include page="sendMailModal.jsp" />
 </body>
 	<script type="text/javascript" src="/resources/js/matePage.js"></script>
 </html>

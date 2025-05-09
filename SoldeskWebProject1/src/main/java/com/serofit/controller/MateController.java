@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.LoginDTO;
+import com.serofit.domain.MailVO;
 import com.serofit.domain.UserVO;
 import com.serofit.mapper.FollowMapper;
 import com.serofit.service.LoginService;
+import com.serofit.service.MailService;
 import com.serofit.service.MatePageService;
 import com.serofit.service.SignupService;
 
@@ -33,7 +35,10 @@ public class MateController {
 	@Autowired
 	FollowMapper fMapper;
 	
-	// 운동 메이트 찾기 화면에서 유저 프로필 불러오기
+	@Autowired
+	MailService mService;
+	
+	// 운동 메이트 찾기 화면에서 유저 프로필 불러오기(모달 띄우기)
 	@GetMapping("/findProfile")
 	public String findProfile(Model model, @RequestParam int uno, @RequestParam int uno1) {
 		// 팔로우를 하고 있는지 확인
@@ -42,10 +47,10 @@ public class MateController {
 		// 클릭한 사람의 정보 가져오기
 		model.addAttribute("profile", mtpService.findProfile(uno));
 		
-		System.out.println(uno);
 		return "/user/profile";
 	};
 	
+	// 팔로우 취소 시 
 	@PostMapping("/unfollow")
 	@ResponseBody
 	public boolean unfollow(int uno, int uno1) {
@@ -58,6 +63,7 @@ public class MateController {
 		return fMapper.unFollow(fvo) == 1;
 	}
 	
+	// 팔로우 시
 	@PostMapping("/follow")
 	@ResponseBody
 	public boolean follow(int uno, int uno1) {
@@ -68,5 +74,17 @@ public class MateController {
 		// 팔로우 당하는 사람
 		fvo.setCatcher(uno);
 		return fMapper.follow(fvo) == 1;
+	}
+	
+	@PostMapping("/sendMsg")
+	@ResponseBody
+	public String sendMsg(int uno, int uno1, String content) {
+		MailVO mvo = new MailVO();
+		
+		mvo.setReceiver(uno);
+		mvo.setSender(uno1);
+		mvo.setContent(content);
+		
+		return mService.insertMail(mvo) == 1 ? "true" : "false";
 	}
 }
