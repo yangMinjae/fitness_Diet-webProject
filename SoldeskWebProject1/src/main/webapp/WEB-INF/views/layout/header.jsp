@@ -46,3 +46,4 @@
 			<button class="login-btn">로그인</button>
 		</div>
 	</header>
+	<main>
