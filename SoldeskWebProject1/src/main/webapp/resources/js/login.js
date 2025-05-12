@@ -40,20 +40,20 @@ document
   })
 });
 
-btnSubmit.addEventListener('click', (e)=>{
-  console.log('로그인 버튼');
-  if(!regExpId.test(f.username.value)){
-    alert('올바른 형식의 아이디를 입력해주세요\n(숫자와 영소문자로만 구성된 3~12자)');
-    f.username.focus();
-    return;
-  }
-  if(!regExpPw.test(f.password.value)){
-    alert('올바른 형식의 비밀번호를 입력해주세요\n(숫자와 영문자로만 구성된 8~16자)');
-    f.password.focus();
-    return;
-  }
-  login();
-})
+//btnSubmit.addEventListener('click', (e)=>{
+//  console.log('로그인 버튼');
+//  if(!regExpId.test(f.username.value)){
+//    alert('올바른 형식의 아이디를 입력해주세요\n(숫자와 영소문자로만 구성된 3~12자)');
+//    f.username.focus();
+//    return;
+//  }
+//  if(!regExpPw.test(f.password.value)){
+//    alert('올바른 형식의 비밀번호를 입력해주세요\n(숫자와 영문자로만 구성된 8~16자)');
+//    f.password.focus();
+//    return;
+//  }
+//  //login();
+//})
 
 function login(){
   fetch('/sign/login',{

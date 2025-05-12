@@ -33,6 +33,7 @@ public class SignController {
 	@ResponseBody
 	@PostMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String login(@RequestBody LoginDTO ldto) {
+		System.out.println("???");
 		String result = lService.login(ldto);
 		return result!="0" ? result : "fail";
 	}
@@ -69,7 +70,7 @@ public class SignController {
 	}
 
 	// 회원가입
-	@PostMapping("/insertUser")
+	@PostMapping(value = "/insertUser", consumes = "application/json", produces = "text/plain; charset=utf-8")
 	@ResponseBody
 	public String insertUser(@RequestBody UserVO uvo) {
 		return (sService.insertUser(uvo) == 0) ? "true" : "false";

@@ -1,10 +1,12 @@
 package com.serofit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.serofit.domain.FileVO;
+import com.serofit.domain.LoginDTO;
 import com.serofit.domain.UProfileVO;
 import com.serofit.domain.UserVO;
 import com.serofit.mapper.UProfileMapper;
@@ -21,7 +23,10 @@ public class SignupServiceImpl implements SignupService {
 
 	@Autowired
 	UProfileMapper upmapper;
-
+	
+	@Autowired
+	PasswordEncoder pwEncoder;
+	
 	// 아이디 중복 확인
 	@Override
 	public int validateId(String id) {
@@ -45,13 +50,12 @@ public class SignupServiceImpl implements SignupService {
 	@Transactional
 	public int insertUser(UserVO uvo) {
 		UProfileVO upvo = new UProfileVO();
-
+		uvo.setPw(pwEncoder.encode(uvo.getPw()));
 		uMapper.insertUser(uvo);
-		UserVO vo = uMapper.findIdPwByEmail(uvo.getEmail());
-		
+		uMapper.insertAuth(uvo.getUno());
 		// uuid 고정 값 변경!!!!!!!!!!!!!!!
 		upvo.setUuid("UUID-TEST");
-		upvo.setUno(vo.getUno());
+		upvo.setUno(uvo.getUno());
 
 		return upmapper.insertProfile(upvo);
 	}

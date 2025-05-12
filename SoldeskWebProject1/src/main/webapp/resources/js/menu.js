@@ -30,7 +30,7 @@ document.querySelectorAll('a').forEach(a=>{
 				break;
 		}
 		
-		init();
+		initMenu();
 	});
 });
 
@@ -54,7 +54,7 @@ document.querySelectorAll('p').forEach(p=>{
 				break;
 		}
 		
-		init();
+		initMenu();
 	});
 });
 
@@ -92,11 +92,11 @@ document.querySelectorAll('button').forEach(button=>{
 				break;
 		}
 		
-		init();
+		initMenu();
 	});
 });
 
-function init() {
+function initMenu() {
 	style.display = "none";
 	isBlock = false;
 }

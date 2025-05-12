@@ -31,5 +31,11 @@ public interface UserMapper {
 
 	// 회원 탈퇴
 	public int deleteUser(int uno);
+	
+	// 로그인 데이터 받아오기
+	public UserVO read(String id);
+	
+	// 회원 가입 시 권한 설정
+	public int insertAuth(int uno);
 
 }

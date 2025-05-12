@@ -77,6 +77,6 @@
 		</div>
 	</section>
 	<jsp:include page="../layout/footer.jsp" />
-	<script type="text/javascript" src="/resources/js/signup.js"></script>
 </body>
+	<script type="text/javascript" src="/resources/js/signup.js"></script>
 </html>

@@ -10,28 +10,43 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-    <!-- log4jdbc -->
-    <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.101:1522:XE" />
-    <property name="username" value="SEROFIT" />
-    <property name="password" value="tiger" />
-    <!-- db 계정 변경시 수정 -->
+		<!-- log4jdbc -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@192.168.0.101:1522:XE" />
+		<property name="username" value="SEROFIT" />
+		<property name="password" value="tiger" />
+		<!-- db 계정 변경시 수정 -->
 	</bean>
 
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-	    <constructor-arg ref="hikariConfig" />
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
 	</bean>
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	    <property name="dataSource" ref="dataSource" />
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<mybatis-spring:scan base-package="com.serofit.mapper"/>
-	
-	<context:component-scan base-package="com.serofit.service"></context:component-scan>
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	    <property name="locations" value="classpath:OpenAI_apiKey.properties" />
+	<mybatis-spring:scan
+		base-package="com.serofit.mapper" />
+
+	<context:component-scan
+		base-package="com.serofit.service"></context:component-scan>
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations"
+			value="classpath:OpenAI_apiKey.properties" />
 	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven />
 </beans>

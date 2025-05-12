@@ -10,10 +10,13 @@
 	
 	<!-- 회원 정보 등록 -->
 	<insert id="insertUser" parameterType="com.serofit.domain.UserVO">
+		<selectKey keyProperty="uno" resultType="int" order="BEFORE">
+			SELECT seq_user.nextval FROM dual
+		</selectKey>
 		INSERT INTO tbl_user
 		VALUES
 			(
-				seq_user.nextval,
+				#{uno},
 				#{id},
 				#{pw},
 				#{nickname},
@@ -55,4 +58,35 @@
 	<delete id="deleteUser" parameterType="int">
 		DELETE FROM tbl_user WHERE uno=#{uno}
 	</delete>
+	
+	<!-- 로그인 데이터 받아오기 -->
+	<select id="read" parameterType="String" resultMap="userMap">
+		SELECT 
+			tbl_user.*, auth.auth 
+		FROM 
+			tbl_user LEFT JOIN tbl_auth auth
+		ON 
+			tbl_user.uno=auth.uno
+		WHERE 
+			tbl_user.id=#{id}
+	</select>
+	
+	<resultMap type="com.serofit.domain.UserVO" id="userMap">
+		<result property="uno" column="uno"/>
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="nickname" column="nickname"/>
+		<result property="email" column="email"/>
+		<collection property="authList" resultMap="authMap"></collection>				
+	</resultMap>
+	
+	<resultMap type="com.serofit.domain.AuthVO" id="authMap">
+		<result property="uno" column="uno"/>
+		<result property="auth" column="auth"/> 
+	</resultMap>
+	
+	<!-- 회원 가입 시 권한 설정 -->
+	<insert id="insertAuth" parameterType="int">
+		INSERT INTO tbl_auth VALUES(#{uno}, 'user')
+	</insert>
 </mapper>

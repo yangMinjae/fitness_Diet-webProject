@@ -21,14 +21,6 @@ const regExp = {
 
 // --- Form 및 상태요소 참조 ---
 const f = document.forms[0];
-const feedback = {
-  mId: document.querySelector("#mIdValidState"),
-  mPw: document.querySelector("#mPwValidState"),
-  mPwRe: document.querySelector("#mPwReValidState"),
-  mEmail: document.querySelector("#mEmailValidState"),
-  mNickname: document.querySelector("#mNicknameValidState")
-};
-
 
 // --- 개별 유효성 검사 ---
 function validateField(id) {
@@ -109,16 +101,20 @@ function validateDuplicate(id, endpoint, label) {
   const url = id === 'mEmail' ? `/sign/validateEmail?email=${encodeURIComponent(value)}` 
 		  : `/sign/${endpoint}/${encodeURIComponent(value)}`;
   
+  console.log(value);
   if(id === 'mId' && !regExp.mId.test(f.mId.value)){
 	  alert('형식이 맞지 않습니다. (영어 소문자로 시작, 영어 + 숫자 조합 3~12 글자)');
+	  return;
   }
   
   if(id === 'mEmail' && !regExp.mEmail.test(f.mEmail.value)){
 	  alert('형식이 맞지 않습니다. (@ 포함 전체 이메일)');
+	  return;
   }
   
   if(id === 'mNickname' && !regExp.mNickname.test(f.mNickname.value)){
 	  alert('형식이 맞지 않습니다. (한글, 영어 2~12 글자)');
+	  return;
   }
 	
   fetch(url)
@@ -165,10 +161,10 @@ function join() {
   
   fetch('/sign/insertUser', {
     method: 'POST',
-    headers: {'Content-type': 'application/json'},
+    headers: {'Content-type': 'application/json; charset=utf-8'},
     body: JSON.stringify(userData)
   })
-  .then(res => res.json())
+  .then(res => res.text())
   .then(data => {
     if (data === "false") {
       alert("회원가입이 실패했습니다.");
@@ -183,8 +179,9 @@ function join() {
 
 // --- 버튼 클릭 이벤트 ---
 document.querySelectorAll("button").forEach(btn => {
-  const id = btn.id;
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+	const id = btn.id;
+	
     if (id === "duplicateCkIdBtn") validateDuplicate("mId", "validateId", "아이디");
     else if (id === "duplicateCkEmBtn") validateDuplicate("mEmail", "validateEmail", "이메일");
     else if (id === "duplicateCkNnBtn") validateDuplicate("mNickname", "validateNickname", "닉네임");

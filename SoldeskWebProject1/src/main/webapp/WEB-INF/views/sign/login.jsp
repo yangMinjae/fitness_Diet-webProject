@@ -12,7 +12,7 @@
 		<div class="login-container">
 			<h1 class="login-title">로그인</h1>
 
-			<form class="login-form" action="loginProcess.jsp" method="post">
+			<form class="login-form" action="/login" method="post">
 				<input type="text" name="username" placeholder="아이디" required>
 				<input type="password" name="password" placeholder="비밀번호" required>
 
@@ -21,7 +21,8 @@
 						href="signup">회원가입</a>
 				</div>
 
-				<input type="button" class="login-submit" value="로그인">
+				<input type="submit" class="login-submit" value="로그인">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 			</form>
 		</div>
 	</div>
