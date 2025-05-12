@@ -1,21 +1,20 @@
 /* 전체 영역 */
 .mate-slider-wrapper {
-  width: 100%;
+  width: 960px;
+  margin: 0 auto;
   overflow: hidden;
-  position: relative;
-  margin: 40px auto;
-  height: 200px;
 }
 
 /* 공통 섹션 */
 .mate-scroll-section {
   display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
   scroll-behavior: smooth;
   gap: 20px;
-  padding: 20px 40px;
-  height: 100%;
-  align-items: center;
+  padding: 10px;
+  height: 220px;
+  justify-content: flex-start;
 }
 
 .mate-scroll-section::-webkit-scrollbar {
@@ -24,25 +23,31 @@
 
 /* 개별 카드 */
 .mate-item {
-  flex: 0 0 180px;
-  height: 180px;
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  flex: 0 0 220px;
+  height: 220px;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease;
   cursor: pointer;
   position: relative;
 }
 
+.mate-item:hover {
+  transform: scale(1.05);
+}
+
+/* 카드 이미지 */
 .user-icon {
   width: 100%;
-  height: 100%;
-  object-fit: contain; /* ❗원본 비율 유지하고 빈 곳 생기면 여백 */
-  border-radius: 0;    /* ❗둥글게 제거 */
-  padding: 10px;       /* 💡안쪽 여백으로 카드와 구분 */
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 0;
 }
 
 /* 좌우 커서 */
@@ -53,7 +58,7 @@
   cursor: e-resize;
 }
 
-/* 섹션 제목 스타일 */
+/* 섹션 제목 */
 .scroll-title {
   text-align: center;
   font-size: 1.5rem;
@@ -62,7 +67,7 @@
   margin: 20px auto 10px;
 }
 
-/* 필터 전체 감싸는 컨테이너 */
+/* 필터 영역 */
 .filter-container {
   display: flex;
   flex-direction: column;
@@ -70,7 +75,6 @@
   margin-bottom: 20px;
 }
 
-/* 가로로 나열된 필터 */
 .filters-row {
   display: flex;
   gap: 16px;
@@ -85,12 +89,6 @@
   background-color: #fff;
   font-size: 1rem;
   color: #34495e;
-}
-
-/* 초기화 버튼 정 중앙 */
-.reset-btn-wrap {
-  display: flex;
-  justify-content: center;
 }
 
 .reset-btn-wrap button {
@@ -108,7 +106,7 @@
   background-color: #5da258;
 }
 
-/* ✅ 제목 정중앙 정렬 */
+/* 제목 */
 .mate-title {
   text-align: center;
   font-size: 2rem;
@@ -117,61 +115,7 @@
   margin: 20px 0 20px;
 }
 
-/* ✅ 스크롤 카드 섹션을 정중앙 + 고정 폭 */
-.mate-slider-wrapper {
-  width: 960px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.mate-scroll-section {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 20px;
-  padding: 10px;
-  height: 220px;
-  justify-content: flex-start;
-}
-
-/* ✅ 카드 크기 정확히 4개 보이게 설정 */
-.mate-item {
-  flex: 0 0 220px;
-  height: 200px;
-  border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease;
-}
-
-.mate-item:hover {
-  transform: scale(1.05);
-}
-
-.mate-scroll-section::-webkit-scrollbar {
-  display: none;
-}
-
-/* 카드 하단 음영 오버레이 */
-.mate-item::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 35px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f4f8f4 100%);
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* 전체 오버레이 */
+/* 스크롤 가이드 오버레이 */
 .scroll-guide-overlay {
   position: fixed;
   top: 0;
@@ -187,7 +131,6 @@
   animation: fadeIn 0.6s ease forwards;
 }
 
-/* 중앙 컨텐츠 */
 .scroll-guide-content {
   text-align: center;
   background: #fff;
@@ -197,20 +140,17 @@
   animation: zoomIn 0.6s ease;
 }
 
-/* 마우스 아이콘 애니메이션 */
 .scroll-mouse-icon {
   margin-bottom: 20px;
   animation: bounce 1.4s infinite ease-in-out;
 }
 
-/* 안내 문구 */
 .scroll-guide-text {
   font-size: 1.2rem;
   margin-bottom: 16px;
   color: #333;
 }
 
-/* 확인 버튼 */
 #scrollGuideConfirm {
   background-color: #6ac56d;
   color: #fff;
@@ -281,7 +221,45 @@
   font-weight: 600;
 }
 
-/* 호버 시 오버레이 등장 */
 .mate-item:hover .mate-overlay {
   opacity: 1;
+}
+
+.scroll-guide-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.scroll-guide-buttons button {
+  background-color: #6ac56d;
+  color: #fff;
+  padding: 10px 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-guide-buttons button:hover {
+  background-color: #5da258;
+}
+
+.empty-message {
+  display: none;
+  text-align: center;
+  font-weight: bold;
+  color: #555;
+  margin-top: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#sendEmptyMessage.empty-message {
+  margin-bottom: 236px;
+}
+
+#difEmptyMessage.empty-message {
+  margin-bottom: 30px;
 }

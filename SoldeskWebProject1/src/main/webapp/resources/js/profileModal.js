@@ -30,11 +30,5 @@ document.addEventListener('click', (e) =>{
 	}
 });
 
-//모달 닫기 (ESC 키)
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        document.getElementById('mailModal').classList.remove('show');
-    }
-});
 
 

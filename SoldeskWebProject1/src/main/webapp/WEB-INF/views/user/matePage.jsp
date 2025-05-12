@@ -27,7 +27,10 @@
 			  </svg>
 			</div>
 		    <p class="scroll-guide-text">휠을 위아래로 움직이면 옆으로 이동할 수 있어요!</p>
-		    <button id="scrollGuideConfirm">확인</button>
+		    <div class="scroll-guide-buttons">
+			  <button id="scrollGuideNever">다시 보지 않기</button>
+			  <button id="scrollGuideConfirm">확인</button>
+			</div>
 		  </div>
 		</div>
 		<div class="filter-container">
@@ -60,66 +63,37 @@
 		      <option value="50대">50대</option>
 		      <option value="60대">60대</option>
 		    </select>
+	  		<div class="reset-btn-wrap">
+	    		<button type="button" id="resetBtn">초기화</button>
+	  		</div>
 		  </div>
-
-  		<div class="reset-btn-wrap">
-    		<button type="button" id="resetBtn">초기화</button>
-  		</div>
 		</div>
-		<h2 class="scroll-title">동일 태그</h2>
-		
-		<div class="mate-slider-wrapper">
+		<h2 class="scroll-title"></h2>
+		<div id="sendEmptyMessage" class="empty-message">
+		  조건에 만족하는 사람이 없습니다.
+		</div>
+		<div id="sendWrapper" class="mate-slider-wrapper">
 			<section class="mate-scroll-section sendList">
 			<c:set var="check" value="false" />
 			<c:forEach var="mate" items="${mateList}">
-				<c:if test="${mate.pvo.tag eq user.tag}">
-					<c:set var="check" value="true" />
-					<div id="eqTag" class="mate-item" data-time="${mate.mvo.time}"
-									data-gender="${mate.mvo.gender}" data-age="${mate.mvo.age}">
-						<!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
-						<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" /> 
-						<div class="mate-overlay">
-						  <p class="nickname">${mate.dto.nickname}</p>
-						  <p class="tag">#${mate.pvo.tag}</p>
-						  <p>성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
-						  <p>나이 : ${mate.mvo.age}</p>
-						  <p>운동시간대 : ${mate.mvo.time}</p>
-						  <p>지역 : ${mate.mvo.area}</p>
-						</div>
-						<span class="uno" hidden="true">${mate.mvo.uno}</span>
+				<c:set var="check" value="true" />
+				<div id="eqTag" class="mate-item" data-time="${mate.mvo.time}"
+								data-gender="${mate.mvo.gender}" data-age="${mate.mvo.age}">
+					<!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
+					<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" /> 
+					<div class="mate-overlay">
+					  <p class="nickname">${mate.dto.nickname}</p>
+					  <p class="tag">#${mate.pvo.tag}</p>
+					  <p>성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
+					  <p>나이 : ${mate.mvo.age}</p>
+					  <p>운동시간대 : ${mate.mvo.time}</p>
+					  <p>지역 : ${mate.mvo.area}</p>
 					</div>
-				</c:if>
+					<span class="uno" hidden="true">${mate.mvo.uno}</span>
+					<span class="tag" hidden="true">${mate.pvo.tag}</span>
+					<span class="uaerTag" hidden="true">${user.tag}</span>
+				</div>
 			</c:forEach>
-			
-			<c:if test="${check eq false}">
-				<h1>동일한 태그를 가진 사람이 없습니다.</h1>
-			</c:if>
-			</section>
-		</div>
-		
-		<h2 class="scroll-title">그 외 태그</h2>
-		<div class="mate-slider-wrapper">
-			<section class="mate-scroll-section difList">
-				<c:forEach var="mate" items="${mateList}">
-					<c:if test="${mate.pvo.tag ne user.tag}">
-						<div id="eqTag" class="mate-item" data-time="${mate.mvo.time}"
-									data-gender="${mate.mvo.gender}" data-age="${mate.mvo.age}">
-						<!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
-						<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" /> 
-						<div class="mate-overlay">
-						  <p class="nickname">${mate.dto.nickname}</p>
-						  <p class="tag">#${mate.pvo.tag}</p>
-						  <p>성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
-						  <p>나이 : ${mate.mvo.age}</p>
-						  <p>운동시간대 : ${mate.mvo.time}</p>
-						  <p>지역 : ${mate.mvo.area}</p>
-						</div>
-						<span class="uno" hidden="true">${mate.mvo.uno}</span>
-					</div>
-					</c:if>
-				</c:forEach>
-			</section>
-		</div>
 		</main>
 	</div>
 	<jsp:include page="../layout/footer.jsp" />
