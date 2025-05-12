@@ -9,9 +9,8 @@ public interface WriteBoardService {
 	
 	// 유저의 식단 타이틀 리스트 가져오기
 	public List<DietVO> getDietTitle(int uno);
-	
-	// 이미지 업로드(이게 진짜 빡일것같은데)
-	
+
 	// 게시글 삽입
 	public void register(BoardVO bvo);
+
 }

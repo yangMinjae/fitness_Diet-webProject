@@ -23,9 +23,7 @@ public class WriteBoardServiceImple implements WriteBoardService {
 	// 유저의 식단 타이틀 리스트 가져오기
 	@Override
 	public List<DietVO> getDietTitle(int uno) {
-		
 		List<DietVO> dietList = dMapper.selectDietByUno(uno);
-		
 		return dietList;
 	}
 	

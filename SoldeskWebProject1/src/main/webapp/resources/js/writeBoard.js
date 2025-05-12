@@ -84,6 +84,47 @@ function register() {
 function openFile() {
   document.getElementById('imageInput').click();
 }
+// 이미지 리사이즈 후 base64로 변환
+function resizeImage(file, maxWidth, maxHeight, callback) {
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const img = new Image();
+    img.onload = function () {
+      // 리사이즈된 canvas 생성
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // 이미지 비율 계산
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+      } else {
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      // 이미지를 canvas에 그리기
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // 리사이즈된 이미지를 Base64로 변환
+      const resizedBase64 = canvas.toDataURL(file.type);
+      callback(resizedBase64);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
 
 // 파일 선택 시 이미지버튼 생성
 function createImageButton(event) {
@@ -91,16 +132,13 @@ function createImageButton(event) {
   const container = document.getElementById('imageButton');
 
   Array.from(files).forEach((file) => {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const imageSrc = e.target.result;
-
+    // 리사이즈 후 Base64로 변환
+    resizeImage(file, 500, 500, function (resizedBase64) {
       // 이미지 버튼 만들기
       const button = document.createElement('img');
-      button.src = imageSrc;
+      button.src = resizedBase64;  // 리사이즈된 이미지의 Base64 사용
       button.className = 'imageButton';
-      button.dataset.img = imageSrc;
-
+      button.dataset.img = resizedBase64;  // Base64 이미지 저장
 
       button.addEventListener('click', function () {
         const imgUrl = this.dataset.img;
@@ -109,12 +147,11 @@ function createImageButton(event) {
       });
 
       container.appendChild(button);
-    };
-
-    reader.readAsDataURL(file);
+    });
   });
-
 }
+
+
 // 커서 위치에 이미지 삽입함수
 function insertImgAtCursor(imgUrl) {
   const selection = document.getSelection();
@@ -122,6 +159,7 @@ function insertImgAtCursor(imgUrl) {
   const range = selection.getRangeAt(0);
 
   const contentDiv = document.getElementById('content');
+  
   // content 안에만 이미지 삽입
   if (!contentDiv.contains(range.startContainer)) return;
 

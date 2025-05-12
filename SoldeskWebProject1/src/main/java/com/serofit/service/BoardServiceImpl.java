@@ -45,15 +45,8 @@ public class BoardServiceImpl implements BoardService {
 			String nickname = uMapper.readNickname(uno);
 			DietVO dvo = dMapper.selectDietByDno(dno);
 
-			BoardListDTO dto = new BoardListDTO(
-					board.getTitle(), 
-					nickname, 
-					dvo.getTag(), 
-					board.getRegDate(),
-					board.getHit(), 
-					board.getLove(),
-					board.getBno()
-					);
+			BoardListDTO dto = new BoardListDTO(board.getTitle(), nickname, dvo.getTag(), board.getRegDate(),
+					board.getHit(), board.getLove(), board.getBno());
 
 			dtoList.add(dto);
 		}
@@ -77,15 +70,8 @@ public class BoardServiceImpl implements BoardService {
 			if (dvo.getTag().equals(tag)) {
 				String nickname = uMapper.readNickname(uno);
 
-				BoardListDTO dto = new BoardListDTO(
-						bvo.getTitle(), 
-						nickname, 
-						dvo.getTag(), 
-						bvo.getRegDate(),
-						bvo.getHit(), 
-						bvo.getLove(),
-						bvo.getBno()
-						);
+				BoardListDTO dto = new BoardListDTO(bvo.getTitle(), nickname, dvo.getTag(), bvo.getRegDate(),
+						bvo.getHit(), bvo.getLove(), bvo.getBno());
 
 				dtoList.add(dto);
 			}
@@ -93,7 +79,7 @@ public class BoardServiceImpl implements BoardService {
 
 		return dtoList;
 	}
-	
+
 	// 본인이 좋아요한 게시글 목록 가져오기
 	@Override
 	public List<BoardListDTO> getPostsByLove(int uno) {
@@ -123,53 +109,52 @@ public class BoardServiceImpl implements BoardService {
 			String nickname = uMapper.readNickname(uno);
 
 			BoardListDTO dto = new BoardListDTO(
-					bvo.getTitle(),
+					bvo.getTitle(), 
 					nickname, 
-					dvo.getTag(),
+					dvo.getTag(), 
 					bvo.getRegDate(), 
 					bvo.getHit(),
-					bvo.getLove(),
-					bvo.getBno()
-					);
-			
+					bvo.getLove(), 
+					bvo.getBno());
+
 			allPostByLove.add(dto);
 		}
 		return allPostByLove;
 	}
-	
+
 	@Override
 	public BoardViewDTO getPost(int bno) {
 		BoardVO bvo = bMapper.getPostByBno(bno);
-		
+
 		BoardViewDTO bvDTO = new BoardViewDTO(
 				bvo.getTitle(),
-				uMapper.readNickname(bvo.getUno()), 
+				uMapper.readNickname(bvo.getUno()),
 				dMapper.selectDietByDno(bvo.getDno()).getTag(),
-				bvo.getContent(), 
-				bvo.getRegDate(), 
-				bvo.getHit(), 
+				bvo.getContent(),
+				bvo.getRegDate(),
+				bvo.getHit(),
 				bvo.getLove(),
 				bvo.getUno(),
 				bvo.getBno());
 		return bvDTO;
 	}
-	
+
 	@Transactional
 	@Override
 	public int increaseLove(LikeVO lvo) {
-		
+
 		lMapper.insertByBnoAndUno(lvo);
 		return bMapper.updateLike(lvo.getBno(), 1);
 	}
-	
+
 	@Transactional
 	@Override
 	public int deletePost(int bno) {
-		
-		lMapper.deleteByBno(bno);		
+
+		lMapper.deleteByBno(bno);
 		return bMapper.deletePostByBno(bno);
 	}
-	
+
 	@Override
 	public int increaseHit(int bno) {
 		return bMapper.updateHit(bno);
