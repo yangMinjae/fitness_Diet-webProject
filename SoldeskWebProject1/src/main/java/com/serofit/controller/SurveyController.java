@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
 import com.serofit.domain.submitSurvey.SubmitGainDTO;
@@ -48,13 +47,17 @@ public class SurveyController {
 	    return "/survey/surveyResultPage";
 	}
 
-	@PostMapping("/submitGain")
-	public String processGainResult(SubmitGainDTO gDTO, RedirectAttributes redirectAttributes) {
-		boolean result = sService.updateTbl(gDTO);
-		System.out.println("메이트 테이블 수정 결과 : "+result);
-		redirectAttributes.addFlashAttribute("DTO",gDTO);
-		return "redirect:/survey/resultPage";
-	}
+//	@PostMapping(value = "/submitDiet", consumes = "application/json;charset=UTF-8",produces = "text/plain;charset=UTF-8")
+//	@ResponseBody
+//	public String processGainResult(@RequestBody SubmitGainDTO gDTO, HttpSession session) {
+//		log.warn(gDTO);
+//		boolean result = sService.updateTbl(gDTO);
+//		System.out.println("테이블 수정 결과 : "+result);
+//		Map<String,String> aiResult = sService.makeAiGeneratedData(gDTO);
+//		session.setAttribute("result", aiResult);
+//		session.setAttribute("goal", gDTO.getcDTO().getGoal());
+//		return "ok";
+//	}
 
 	@PostMapping("/submitPro")
 	public String processProResult(Model model) {

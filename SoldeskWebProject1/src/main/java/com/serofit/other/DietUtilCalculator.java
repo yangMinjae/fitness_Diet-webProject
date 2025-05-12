@@ -29,10 +29,14 @@ public class DietUtilCalculator {
 	}
 	
 	public void setTotalCalNormalCase(SubmitCommonDTO cDTO, int dietGoal) {
+		dietGoal = cDTO.getGoal().equals("다이어트")?dietGoal*(-1):dietGoal;
 		double bmr = cDTO.isGender()?
 				66.5+(13.75*cDTO.getWeight())+(5.003*cDTO.getHeight())-(6.755*cDTO.getAge()) :
 					655.1+(9.563*cDTO.getWeight())+(1.850*cDTO.getHeight())-(4.676*cDTO.getAge());
-		this.totalCal = (int)(bmr*cDTO.getActivityLevel()-dietGoal*256.67);		
+		this.totalCal = (int)bmr;
+		if(cDTO.getGoal().equals("다이어트")||cDTO.getGoal().equals("멸치 탈출")) {			
+			this.totalCal = (int)(bmr*cDTO.getActivityLevel()+dietGoal*256.67);		
+		}
 	}
 	public void setTotalCalExpert() {
 		

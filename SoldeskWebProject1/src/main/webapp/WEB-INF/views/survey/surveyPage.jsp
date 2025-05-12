@@ -140,7 +140,7 @@
 			<section id="dietSection" class="goal-section hidden">
 				<h3>다이어터 정보</h3>
 				<label>1개월 목표 감량 (kg): <input type="number" name="dietGoal"
-					min="1" max="5" />
+					min="1" max="5"/>
 				</label>
 				<section>
 					식단 조절 방식 : 
@@ -173,21 +173,23 @@
 
 				<!-- 📈 구체적인 목표 -->
 				<label>1개월 목표 증량 (kg): 
-					<input type="number" name="gainGoal" min="0" />
+					<input type="number" name="gainGoal" min="1" max="3"/>
 				</label>
 
 				<!-- 📊 증가 시도 경험 -->
 				<label>증가 시도 경험: 
 					<select name="gainExperience">
-						<option value="있다">유의미한 증가 경험 있다</option>
-						<option value="없다">없다</option>
-						<option value="복귀">증가는 했지만 원상복귀</option>
+						<option value="">-- 선택하세요 --</option>
+						<option value="유의미한 체중 증가 경험이 있다">유의미한 체중 증가 경험 있다</option>
+						<option value="유의미한 체중 증가 경험이 없다.">유의미한 체중 증가 경험이 없다.</option>
+						<option value="체중 증가 경험이 있지만 다시 줄었다.">체중 증가 경험이 있지만 다시 줄었다.</option>
 					</select>
 				</label>
 
 				<!-- 🍪 간식 횟수 -->
 				<label>끼니 외 간식 횟수: 
 					<select name="gainSnacks">
+						<option value="">-- 선택하세요 --</option>
 						<option value="0">일 0회</option>
 						<option value="1">일 1회</option>
 						<option value="2">일 2회</option>
@@ -196,10 +198,10 @@
 				</label>
 
 				<!-- ⚠️ 어려운 점 -->
-				<section>멸치탈출 시 어려운 점: 
+				<section>체중 증가 시 어려운 점: 
 					<label><input type="radio" name="gainDifficulties" value="식욕 부진" /> 식욕 부진</label> 
-					<label><input type="radio" name="gainDifficulties" value="식단 계획" /> 식단 계획</label> 
-					<label><input type="radio" name="gainDifficulties" value="운동 루틴" /> 운동 루틴</label>
+					<label><input type="radio" name="gainDifficulties" value="식단 유지가 어렵다." /> 식단 유지가 어렵다.</label> 
+					<label><input type="radio" name="gainDifficulties" value="운동 루틴을 따르는게 어렵다." /> 운동 루틴을 따르는게 어렵다.</label>
 				</section>
 			</section>
 

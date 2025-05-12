@@ -132,10 +132,27 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			break;
 		// 멸치 탈출 데이터
 		case '멸치 탈출' : 
-			console.log(data.gainGoal);
-			console.log(data.gainExperience);
-			console.log(data.gainSnacks);
-			console.log(data.gainDifficulties);
+			if(!data.gainGaol){
+				alert('증량목표를 입력해주세요');
+				form.elements['gainGoal'].focus();
+				return;
+			}
+			if(!data.gainExperience){
+				alert('증가 시도 경험란을 입력해 주세요');
+				form.elements['gainExperience'].focus();
+				return;
+			}
+			if(!data.gainSnacks){
+				alert('끼니 외 간식 횟수를 입력해 주세요');
+				form.elements['gainSnacks'].focus();
+				return;
+			}
+			if(!data.gainDifficulties){
+				alert('체중 증가 시 어려운 점을 입력해 주세요');
+				form.elements['gainDifficulities'].focus();
+				return;
+			}
+			fetchFunc(formData,'submitGain');
 			break;
 		// 프로 득근러 데이터
 		case '프로 득근러' :
