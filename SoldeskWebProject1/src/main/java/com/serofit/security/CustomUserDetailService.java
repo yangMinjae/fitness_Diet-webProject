@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.serofit.domain.UserVO;
+import com.serofit.mapper.MailMapper;
 import com.serofit.mapper.UserMapper;
 import com.serofit.security.domain.CustomUser;
 
@@ -19,12 +20,15 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Autowired
 	UserMapper uMapper;
 	
+	@Autowired
+	MailMapper mMapper;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.warn("load user by userName : "+username);
 		UserVO uvo = uMapper.read(username);
-		
+		int mailCount = mMapper.selectMailCountByReceiver(uvo.getUno());
 		log.warn("member mapper : "+uvo);
-		return uvo == null ? null : new CustomUser(uvo);
+		return uvo == null ? null : new CustomUser(uvo, mailCount);
 	}
 }

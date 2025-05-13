@@ -10,7 +10,7 @@ document.head.appendChild(linkEle);
 const form = document.forms[0];
 const textarea = form.content;
 const charCount = document.getElementById('char-count');
-const MAX_LENGTH = 500;
+const MAX_LENGTH = 300;
 
 document.querySelectorAll('button').forEach(button=>{
 	button.addEventListener("click", function(e){		

@@ -16,7 +16,6 @@ document.querySelectorAll('a').forEach(a=>{
 				break;
 			// 설문 시작
 			case 'testPage' :
-				console.log("testPage");
 				location.href = '/survey';
 				break;
 			// 게시판 목록
@@ -25,7 +24,7 @@ document.querySelectorAll('a').forEach(a=>{
 				break;
 			// 운동 메이트 찾기
 			case 'matePage' :
-				location.href = '/matePage'+'?uno=3';
+				location.href = '/matePage';
 				// 추후에 uno 관련 코드 수정
 				break;
 		}
@@ -65,8 +64,7 @@ document.querySelectorAll('img').forEach(img=>{
 
 		switch(alt){
 			case 'mailPage' :
-				location.href = '/mailList'+'?receiver=1';
-				// 추후에 리시버 관련 코드 수정
+				location.href = '/mailList';
 				break;
 			case 'profile' :
 				if(isBlock){

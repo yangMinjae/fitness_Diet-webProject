@@ -70,7 +70,11 @@ public class MailServiceImple implements MailService {
 			// DTO에 변수 설정
 			rmDTO.setUno(mvo.getSender());
 			rmDTO.setNickname(uMapper.readNickname(mvo.getSender()));
-			rmDTO.setPreview(mvo.getContent().substring(0, 15));
+			if(mvo.getContent().length() > 15) {
+				rmDTO.setPreview(mvo.getContent().substring(0, 15));
+			}else {
+				rmDTO.setPreview(mvo.getContent());
+			}
 			rmDTO.setContent(mvo.getContent());
 			rmDTO.setRegdate(mvo.getRegdate());
 			rmList.add(rmDTO);

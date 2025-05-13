@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,17 +37,21 @@
 					</div>
 					<div class="mail-info">
 						<span class="sender">${mvo.nickname}</span> 
-						<span class="sender">${mvo.imgPath}</span> 
 						<span class="preview">${mvo.preview}</span>
 						<span class="regdate">${mvo.regdate}</span>
 					</div>
-				</li>
+				</li>				
+				<span class="uno" hidden="true">${mvo.uno}</span>					
+				<sec:authentication var="uno" property="principal.uno" />
+				<span class="userUno" hidden="true">${uno}</span>
 			</c:forEach>
 		</ul>			
 	</div>
 	
-	<jsp:include page="mailModal.jsp" />
+	<jsp:include page="mailModal.jsp" />	
+	<jsp:include page="../user/sendMailModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/mail.js"></script>
+<script type="text/javascript" src="/resources/js/profileModal.js"></script>
 </html>

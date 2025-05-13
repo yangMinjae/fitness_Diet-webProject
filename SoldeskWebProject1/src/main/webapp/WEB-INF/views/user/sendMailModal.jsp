@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- 모달 -->
-		<div class="modal" id="mailModal">
+		<div class="modal" id="sendmailModal">
 			<div class="modal-content">
 				<span class="close-btn">&times;</span>
 		

@@ -26,17 +26,19 @@
 				<img
 					src="https://img.icons8.com/material-sharp/24/000000/new-post.png"
 					alt="mailPage" />
-				<c:if test="${not empty mCount}">
-					<span class="count">${mCount}</span>
-				</c:if>
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication var="mailCount" property="principal.mailCount" />
+					<span class="count">${mailCount}</span>
+				</sec:authorize>
 			</div>
 
 			<div class="dropdown user">
 				<img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png"
 					alt="profile" />
-				<c:if test="${not empty nickname}">
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication var="nickname" property="principal.nickname" />					
 					<span class="nickname">${nickname}</span>
-				</c:if>
+				</sec:authorize>
 				<div class="dropdown-content">
 					<p id="myPage">My page</p>
 					<p id="modifyPage">회원 정보 수정</p>

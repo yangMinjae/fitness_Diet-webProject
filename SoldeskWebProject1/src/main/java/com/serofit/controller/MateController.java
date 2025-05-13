@@ -40,9 +40,9 @@ public class MateController {
 	
 	// 운동 메이트 찾기 화면에서 유저 프로필 불러오기(모달 띄우기)
 	@GetMapping("/findProfile")
-	public String findProfile(Model model, @RequestParam int uno, @RequestParam int uno1) {
+	public String findProfile(Model model, @RequestParam int uno, @RequestParam int userUno) {
 		// 팔로우를 하고 있는지 확인
-		model.addAttribute("result", mtpService.checkIfFollow(uno, uno1));
+		model.addAttribute("result", mtpService.checkIfFollow(uno, userUno));
 		
 		// 클릭한 사람의 정보 가져오기
 		model.addAttribute("profile", mtpService.findProfile(uno));
@@ -53,10 +53,10 @@ public class MateController {
 	// 팔로우 취소 시 
 	@PostMapping("/unfollow")
 	@ResponseBody
-	public boolean unfollow(int uno, int uno1) {
+	public boolean unfollow(int uno, int userUno) {
 		FollowVO fvo = new FollowVO();
 		// 언팔을 하려고 하는 사람
-		fvo.setThrower(uno1);
+		fvo.setThrower(userUno);
 		
 		// 언팔을 당하는 사람
 		fvo.setCatcher(uno);
@@ -66,23 +66,24 @@ public class MateController {
 	// 팔로우 시
 	@PostMapping("/follow")
 	@ResponseBody
-	public boolean follow(int uno, int uno1) {
+	public boolean follow(int uno, int userUno) {
 		FollowVO fvo = new FollowVO();
 		// 팔로우 하려고 하는 사람
-		fvo.setThrower(uno1);
+		fvo.setThrower(userUno);
 		
 		// 팔로우 당하는 사람
 		fvo.setCatcher(uno);
 		return fMapper.follow(fvo) == 1;
 	}
 	
+	// 쪽지 보내기
 	@PostMapping("/sendMsg")
 	@ResponseBody
-	public String sendMsg(int uno, int uno1, String content) {
+	public String sendMsg(int uno, int userUno, String content) {
 		MailVO mvo = new MailVO();
 		
 		mvo.setReceiver(uno);
-		mvo.setSender(uno1);
+		mvo.setSender(userUno);
 		mvo.setContent(content);
 		
 		return mService.insertMail(mvo) == 1 ? "true" : "false";

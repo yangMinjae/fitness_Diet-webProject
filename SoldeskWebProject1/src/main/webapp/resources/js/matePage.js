@@ -87,7 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll('.mate-item').forEach(a => {
 		a.addEventListener('click', () => {
 			const uno = a.querySelector('.uno').textContent.trim();
-			fetch('/mate/findProfile?uno=' + uno + '&uno1=3')
+			const userUno = a.querySelector('.userUno').textContent.trim();
+			
+			fetch('/mate/findProfile?uno=' + uno + '&userUno=' + userUno)
 				.then(res => res.text())
 				.then(data => {
 					document.getElementById('find-profile-modal').innerHTML = data;
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // 팔로우 버튼 및 모달 동작
 document.addEventListener('click', (e) => {
 	if (e.target.classList.contains('close-btn')) {
-		const modal = document.getElementById('mailModal');
+		const modal = document.getElementById('sendmailModal');
 		if (modal) modal.classList.remove('show');
 	}
 	if (e.target.classList.contains('close-modal-btn')) {
@@ -111,12 +113,14 @@ document.addEventListener('click', (e) => {
 		const charCount = document.getElementById('charCount');
 		initMailModalContent();
 		initMailModalEvent();
-		document.getElementById('mailModal').classList.add('show');
+		document.getElementById('sendmailModal').classList.add('show');
 	}
 	if (e.target.classList.contains('follow-btn')) {
 		const uno = document.querySelector('#profile-modal-content .uno').textContent.trim();
+		const userUno = document.querySelector('.userUno').textContent.trim();
 		const isFollowing = e.target.id === 'following';
-		fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${uno}&uno1=3`, {
+		
+		fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${uno}&userUno=${userUno}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' }
 		})
@@ -147,7 +151,7 @@ function closeScrollGuideOverlay() {
 document.addEventListener("keydown", (e) => {
 	const guideOverlay = document.getElementById("scrollGuideOverlay");
 	const guideButton = document.getElementById("scrollGuideConfirm");
-	const sendModal = document.getElementById("mailModal");
+	const sendModal = document.getElementById("sendmailModal");
 	const profileModal = document.getElementById("find-profile-modal");
 
 	if (e.key === "Escape") {

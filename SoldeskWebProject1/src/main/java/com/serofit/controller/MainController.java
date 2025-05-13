@@ -44,16 +44,9 @@ public class MainController {
 	
 	// 서버 구동 시 mainPage
 	@GetMapping()
-	public String home(Locale locale, Model model, Authentication authentication) {
+	public String home(Locale locale, Model model) {
 		log.info("main!!!!!");
-		model.addAttribute("hbList", mpService.getHotPosts(4)); // 인기 게시글 갯수 4개로 고정
-		
-		if(authentication != null) {
-			CustomUser customUser = (CustomUser) authentication.getPrincipal();
-			
-			model.addAttribute("nickname", hfService.getNickname(customUser.getUvo().getUno()));
-			model.addAttribute("mCount", hfService.selectMailCountByReceiver(customUser.getUvo().getUno()));
-		}
+		model.addAttribute("hbList", mpService.getHotPosts(4)); // 인기 게시글 갯수 4개로 고정		 
 		
 		return "main";
 	}
@@ -70,6 +63,7 @@ public class MainController {
 	@GetMapping("/myPage")
 	public String showMyPage() {
 		log.info("....forwarding to myPage....");
+		
 		return "/user/myPage";
 	}
 	
@@ -79,7 +73,8 @@ public class MainController {
 	public String mailPage(Model model, Authentication authentication) {		
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		
-		model.addAttribute("mList", mService.selectByReceiver(customUser.getUvo().getUno()));
+		model.addAttribute("mList", mService.selectByReceiver(customUser.getUno()));
+		System.out.println(mService.selectByReceiver(customUser.getUno()));
 		return "/mail/mailList";
 	}
 	
@@ -102,9 +97,9 @@ public class MainController {
 	public String matePage(Model model, Authentication authentication) {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		
-		model.addAttribute("user", mtpService.selectByUno(customUser.getUvo().getUno()));
-		model.addAttribute("mateList", mtpService.findMateList(customUser.getUvo().getUno()));
-	
+		model.addAttribute("user", mtpService.selectByUno(customUser.getUno()));
+		model.addAttribute("mateList", mtpService.findMateList(customUser.getUno()));
+			
 		return "/user/matePage";
 	}
 	

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,8 +64,8 @@
 								<option value="22:00~23:59">22:00~23:59</option>
 								<option value="00:00~07:59">00:00~07:59</option>
 							</select> 
-							<input type="hidden" name="uVO.uno" value="1">
-							<!-- 추후수정 -->
+							<sec:authentication var="uno" property="principal.uno" />
+							<input type="hidden" name="uVO.uno" value="${uno}">
 						</div>
 						<div class="form-group">
 							<label for="intro">자기소개</label>

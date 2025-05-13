@@ -16,6 +16,7 @@ import lombok.Getter;
 public class CustomUser extends User{
 	
 	private UserVO uvo;
+	private int mailCount;
 
 	 public CustomUser() {
 	        super("anonymous", "anonymous", new ArrayList<>());
@@ -25,7 +26,7 @@ public class CustomUser extends User{
 		super(username, password, authorities);
 	}
 	
-	public CustomUser(UserVO uvo) {
+	public CustomUser(UserVO uvo, int mailCount) {
 		super(uvo.getId(),
 				uvo.getPw(),
 				uvo.getAuthList()
@@ -35,6 +36,19 @@ public class CustomUser extends User{
 				)
 				.collect(Collectors.toList())
 				);
-		this.uvo=uvo;
+		this.uvo = uvo;
+		this.mailCount = mailCount;
+	}
+	
+	public int getUno() {
+		return this.uvo.getUno();
+	}
+	
+	public String getNickname() {
+		return this.uvo.getNickname();
+	}
+	
+	public int getMailCount() {
+		return this.mailCount;
 	}
 }

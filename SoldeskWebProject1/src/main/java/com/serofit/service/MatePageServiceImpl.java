@@ -58,6 +58,7 @@ public class MatePageServiceImpl implements MatePageService{
 		List<MateDTO> mateList = new ArrayList<>();
 		for (MateVO mvo : mMapper.findByNotUno(uno)) {
 			MateDTO dto = new MateDTO();
+			
 			if (uPMapper.getUnoByMate(mvo.getUno()) != null) {
 				dto.setMvo(mvo);
 				dto.setPvo(uPMapper.getUnoByMate(mvo.getUno()));

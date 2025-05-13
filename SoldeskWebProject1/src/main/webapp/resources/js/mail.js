@@ -1,6 +1,6 @@
 //-----CSS 파일 추가
 //1. 파일 경로 설정
-const CSS_FILE_PATH = ['/resources/css/mail.css', '/resources/css/mailModal.css'];
+const CSS_FILE_PATH = ['/resources/css/mail.css', '/resources/css/mailModal.css', '/resources/css/sendMailModal.css'];
 //2. link 태그 생성
 CSS_FILE_PATH.forEach(css => {
 	let linkEle = document.createElement('link');
@@ -80,14 +80,20 @@ document.querySelector('.close-btn').addEventListener('click', () => {
 });
 
 document.getElementById('replyBtn').addEventListener('click', () => {
-	alert("답장하기 기능을 여기에 연결하세요!");
-	// 예시: location.href = '/replyForm.do?target=' + encodeURIComponent(senderName);
+	document.getElementById('mailInput').value = '';
+	document.getElementById('sendmailModal').classList.add('show');
 });
 
 //모달 닫기 (ESC 키)
 document.addEventListener('keydown', (e) => {
+	const sendModal = document.getElementById("sendmailModal");
+	
     if (e.key === 'Escape') {
-        document.getElementById('mailModal').classList.remove('show');
+    	if(!sendModal || !sendModal.classList.contains("show")){
+    		document.getElementById('mailModal').classList.remove('show');	
+    	}
+    	else{
+    		document.getElementById('sendmailModal').classList.remove('show');	
+    	}
     }
 });
-

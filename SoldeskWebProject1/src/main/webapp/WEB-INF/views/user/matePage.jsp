@@ -91,7 +91,9 @@
 					</div>
 					<span class="uno" hidden="true">${mate.mvo.uno}</span>
 					<span class="tag" hidden="true">${mate.pvo.tag}</span>
-					<span class="uaerTag" hidden="true">${user.tag}</span>
+					<span class="userTag" hidden="true">${user.tag}</span>		
+					<span class="userUno" hidden="true">${user.uno}</span>
+					
 				</div>
 			</c:forEach>
 		</main>

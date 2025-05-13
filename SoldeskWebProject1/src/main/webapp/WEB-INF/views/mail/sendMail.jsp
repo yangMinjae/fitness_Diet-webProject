@@ -15,6 +15,7 @@
 			<div class="receiver">
 				<label for="friend-search">받는 사람 :</label> 
 				<select id="friend-search">
+					<option value=""></option>
 					<c:forEach var="rmdto" items="${rmdtoList}">					
 						<option value="${rmdto.receiver}">${rmdto.nickname}</option>
 					</c:forEach>
@@ -26,7 +27,7 @@
 			</div>
 			
 			<div class="text-limit-info">
-			  <span id="char-count">0</span>/500자
+			  <span id="char-count">0</span>/300자
 			</div>
 	
 			<div class="btn-group">
@@ -41,5 +42,4 @@
 </body>
 
 <script type="text/javascript" src="/resources/js/sendMail.js"></script>
-
 </html>
