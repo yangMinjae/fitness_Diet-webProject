@@ -13,7 +13,7 @@
 		<h1>라이프스타일 설문조사</h1>
 		<form id="surveyForm" method="post">
 			<section>
-			<input type="hidden" name="cDTO.uno" value="1">
+			<input type="hidden" name="cDTO.uno" value="4">
 				<h2>공통 정보</h2>
 				<!-- 기존 입력 항목 -->
 
@@ -94,11 +94,25 @@
 				<label>주당 운동 횟수 및 활동수준 : 
 					<select name="cDTO.activityLevel">
 						<option value="">-- 선택하세요 --</option>
-						<option value="1.2">아주 낮음 (거의 운동 없음)</option>
-						<option value="1.375">가벼운 운동 (주 1~3회)</option>
-						<option value="1.55">중간 활동 (주 3~5회)</option>
-						<option value="1.725">높은 활동 (주 6~7회)</option>
-						<option value="1.9">매우 격렬함 (운동선수 수준)</option>
+						<option value="1.2">
+						운동이나 산책 없이 대부분 앉아서 생활합니다. 신체 활동이 매우 적습니다.
+						</option>
+						
+						<option value="1.375">
+						주 1~3회 걷기, 요가, 스트레칭 등 가벼운 활동을 가끔 합니다.
+						</option>
+						
+						<option value="1.55">
+						주 3~5회 헬스, 유산소, 수영 등 규칙적으로 운동합니다.
+						</option>
+						
+						<option value="1.725">
+						주 6~7일 고강도 운동을 꾸준히 수행하며, 운동이 일상에 가깝습니다.
+						</option>
+						
+						<option value="1.9">
+						하루 2회 이상 고강도 운동을 하거나, 체력 소모가 많은 일을 합니다.
+						</option>
 					</select>
 				</label>
 				<section>
@@ -220,12 +234,12 @@
 
 				<!-- 🎯 스트랭스 강화 -->
 				<div id="proStrengthSection" class="hidden">
-					<label>근육량 / 체지방률: 
-						<input type="text" name="strengthStats" placeholder="예: 근육량 35kg / 체지방률 18%" />
+					<label>체지방률(%): 
+						<input type="number" name="strengthStats" max="99" min="1" />
 					</label> 
 					<label> 추천 받을 운동 분할 방식: 
 						<select name="strengthSplit">
-							<option value="0">잘 모름</option>
+							<option value="3">잘 모름</option>
 							<option value="2">2분할</option>
 							<option value="3">3분할</option>
 							<option value="4">4분할</option>
@@ -233,13 +247,15 @@
 					</label> 
 					<label>끼니 외 간식 횟수: 
 						<select name="strengthSnacks">
+							<option value="">-- 선택하세요 --</option>
 							<option value="1">일 1회</option>
 							<option value="2">일 2회</option>
 							<option value="3">일 3회</option>
 						</select>
 					</label> 
-					<label>보충제 스쿱 수: 
+					<label>보충제 스쿱 수 ( 보충제 영양성분 - 탄/단/지 은 식단에서 차감 ): 
 						<select name="strengthScoops">
+							<option value="">-- 선택하세요 --</option>
 							<option value="1">1 스쿱</option>
 							<option value="2">2 스쿱</option>
 							<option value="3">3 스쿱</option>
@@ -247,14 +263,16 @@
 					</label> 
 					<label>강화 종목: 
 						<select name="liftFocus">
-							<option value="bench">벤치</option>
-							<option value="deadlift">데드</option>
-							<option value="squat">스쿼트</option>
-							<option value="unknown">딱히 없음</option>
+							<option value="">-- 선택하세요 --</option>
+							<option value="벤치 프레스">벤치 프레스</option>
+							<option value="데드 리프트">데드 리프트</option>
+							<option value="스쿼트">스쿼트</option>
+							<option value="정해지지 않음">딱히 없음</option>
 						</select>
 					</label> 
 					<label>주당 휴식일: 
 						<select name="restDays">
+							<option value="">-- 선택하세요 --</option>
 							<option value="0">주 0회</option>
 							<option value="1">주 1회</option>
 							<option value="2">주 2회</option>
@@ -322,6 +340,7 @@
 				<!-- 🍺 음주 -->
 				<label>음주 빈도: 
 					<select name="alcohol">
+						<option value="">-- 선택하세요 --</option>
 						<option value="없음">없음</option>
 						<option value="월 1회">월 1회</option>
 						<option value="주 1회">주 1회</option>
@@ -331,12 +350,13 @@
 
 				<!-- 🚬 흡연 -->
 				<label>하루 평균 흡연 (갑 수): 
-					<input type="number" name="smoking" min="0" placeholder="예: 0.5" />
+					<input type="number" name="smoking" min="0" placeholder="예: 0.5" max="2" step="0.1" />
 				</label>
 
 				<!-- 😴 수면 -->
 				<label>하루 평균 수면 시간: 
 					<select name="sleep">
+						<option value="">-- 선택하세요 --</option>
 						<option value="6시간 미만">6시간 미만</option>
 						<option value="6~8시간">6~8시간</option>
 						<option value="8시간 이상">8시간 이상</option>
@@ -348,34 +368,38 @@
 				<h3>유지어터 정보</h3>
 				<label>외식 및 배달 음식 빈도: 
 					<select name="outFood">
-						<option value="자주">자주</option>
-						<option value="주 1 ~ 2회">주 1 ~ 2회</option>
-						<option value="거의 없음">거의 없음</option>
-						<option value="없음">없음</option>
+						<option value="">-- 선택하세요 --</option>
+						<option value="주 3회 이상 먹">주 3회 이상</option>
+						<option value="주 1 ~ 2회 먹">주 1 ~ 2회</option>
+						<option value="월 1 ~ 2회 먹">월 1 ~ 2회</option>
+						<option value="거의 먹지 않">거의 먹지 않음</option>
 					</select>
 				</label> 
 				<label>간식 및 음료 섭취 빈도: 
 					<select name="otherFood">
-						<option value="자주">자주</option>
-						<option value="가끔">가끔</option>
-						<option value="거의 없음">거의 없음</option>
-						<option value="없음">없음</option>
+						<option value="">-- 선택하세요 --</option>
+						<option value="자주 먹">자주</option>
+						<option value="가끔 먹">가끔</option>
+						<option value="거의 먹지않">거의 먹지 않음</option>
+						<option value="먹지않">먹지 않음</option>
 					</select>
 				</label> 
 				<label>폭식 이나 끼니를 거르는 빈도: 
 					<select name="notFood">
-						<option value="자주">자주</option>
-						<option value="가끔">가끔</option>
-						<option value="거의 없음">거의 없음</option>
-						<option value="없음">없음</option>
+						<option value="">-- 선택하세요 --</option>
+						<option value="자주 있다">자주</option>
+						<option value="가끔 있다">가끔</option>
+						<option value="거의 없다">거의 없음</option>
+						<option value="없다">없음</option>
 					</select>
 				</label> 
 				<label>체중 유지가 어려운 점: 
 					<select name="challenge">
-						<option value="stress">스트레스</option>
-						<option value="travel">여행</option>
-						<option value="party">회식/외식</option>
-						<option value="nothing">없음</option>
+						<option value="">-- 선택하세요 --</option>
+						<option value="스트레스">스트레스</option>
+						<option value="의지 문제">의지 문제</option>
+						<option value="회식/외식">회식/외식</option>
+						<option value="없다">없음</option>
 					</select>
 				</label>
 			</section>

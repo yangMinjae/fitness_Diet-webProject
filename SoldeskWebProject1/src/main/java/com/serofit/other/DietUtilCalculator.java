@@ -1,5 +1,6 @@
 package com.serofit.other;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +8,9 @@ import com.serofit.domain.submitSurvey.SubmitCommonDTO;
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
 
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @NoArgsConstructor
 public class DietUtilCalculator {
 	private static Map<String, String> ratioMap = new HashMap<String, String>();
@@ -16,8 +19,8 @@ public class DietUtilCalculator {
 	ratioMap.put("칼로리 제한", "40:30:30");
 	ratioMap.put("고단백식단", "35:40:25");
 	ratioMap.put("멸치 탈출", "50:25:25");
-	ratioMap.put("유지어터","40:30:30");
-	ratioMap.put("헬스키퍼","40:30:30");
+	ratioMap.put("체중 유지","40:30:30");
+	ratioMap.put("건강 유지","40:30:30");
 	ratioMap.put("스트렝스", "45:30:25");
 	ratioMap.put("근성장", "50:25:25");
 	}
@@ -30,13 +33,11 @@ public class DietUtilCalculator {
 	
 	public void setTotalCalNormalCase(SubmitCommonDTO cDTO, int dietGoal) {
 		dietGoal = cDTO.getGoal().equals("다이어트")?dietGoal*(-1):dietGoal;
-		double bmr = cDTO.isGender()?
-				66.5+(13.75*cDTO.getWeight())+(5.003*cDTO.getHeight())-(6.755*cDTO.getAge()) :
-					655.1+(9.563*cDTO.getWeight())+(1.850*cDTO.getHeight())-(4.676*cDTO.getAge());
-		this.totalCal = (int)bmr;
-		if(cDTO.getGoal().equals("다이어트")||cDTO.getGoal().equals("멸치 탈출")) {			
-			this.totalCal = (int)(bmr*cDTO.getActivityLevel()+dietGoal*256.67);		
-		}
+		double bmr = cDTO.isGender()
+			    ? 88.362 + (13.397 * cDTO.getWeight()) + (4.799 * cDTO.getHeight()) - (5.677 * cDTO.getAge())
+			    : 447.593 + (9.247 * cDTO.getWeight()) + (3.098 * cDTO.getHeight()) - (4.330 * cDTO.getAge());
+		this.totalCal = (int)(bmr*cDTO.getActivityLevel()+dietGoal*256.67);	
+		log.warn(totalCal);
 	}
 	public void setTotalCalExpert() {
 		
@@ -62,6 +63,7 @@ public class DietUtilCalculator {
 				result[i]=(int)(totalCal*ratio[i]/4)+"";
 			}
 		}
+		System.out.println("!!!!!"+Arrays.toString(result));
 		return result;
 	}
 }

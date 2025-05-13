@@ -132,7 +132,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			break;
 		// 멸치 탈출 데이터
 		case '멸치 탈출' : 
-			if(!data.gainGaol){
+			if(!data.gainGoal){
 				alert('증량목표를 입력해주세요');
 				form.elements['gainGoal'].focus();
 				return;
@@ -159,12 +159,40 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 			console.log(data.proGoalType);
 			if(data.proGoalType === '스트렝스 강화'){
 				// 스트랭스 강화
-				console.log(data.strengthStats);
-				console.log(data.strengthSplit);
-				console.log(data.strengthSnacks);
-				console.log(data.strengthScoops);
-				console.log(data.liftFocus);
-				console.log(data.restDays);
+				if(!data.strengthStats){
+					alert("체지방률을 입력해주세요");
+					form.elements['strengthStats'].focus();
+					return;
+				}
+
+				
+				if(!data.strengthSnacks){
+					alert("끼니 외 간식 횟수를 선택해주세요");
+					form.elements['strengthSnacks'].focus();
+					return;
+				}
+				if(!data.strengthScoops){
+					alert("보충제 스쿱 수를 선택해주세요");
+					form.elements['strengthScoops'].focus();
+					return;					
+				}
+				if(!data.liftFocus){
+					alert("강화 종목을 선택해주세요");
+					form.elements['liftFocus'].focus();
+					return;			
+				}
+				if(!data.restDays){
+					alert("주당 휴식일을 선택해주세요");
+					form.elements['restDays'].focus();
+					return;		
+				}
+				form.elements["cDTO.favSport"].value="헬스";
+				form.elements["cDTO.workoutSplit"].value=data.strengthSplit;	
+				
+				console.log(form.elements["cDTO.favSport"].value);
+				console.log(form.elements["cDTO.workoutSplit"].value);
+				formData = new FormData(this);
+				fetchFunc(formData,'submitStrength');
 			}else{
 				// 근육 성장
 				console.log(data.muscleStats);
@@ -177,19 +205,50 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 		// 헬스 키퍼
 		case '건강 유지' :
 			const selectedDiseases = formData.getAll('diseases');
-			selectedDiseases.forEach(function(diseases) {
-				console.log(diseases);
-			})
-			console.log(data.alcohol);
-			console.log(data.smoking);
-			console.log(data.sleep);
+			if(selectedDiseases.length===0){
+				alert('관심 기저질환을 최소 한개이상 선택해 주세요');
+				return;
+			}
+			if(!data.alcohol){
+				alert('음주 빈도를 선택해주세요');
+				form.elements['alcohol'].focus();
+				return;
+			}
+			if(!data.smoking){
+				alert('하루 평균 흡연량을 입력해 주세요');
+				form.elements['smoking'].focus();
+				return;
+			}
+			if(!data.sleep){
+				alert('하루 평균 수면시간을 선택해 주세요')
+				form.elements['sleep'].focus();
+				return;
+			}
+			fetchFunc(formData,'submitHealth');
 			break;
 		// 유지 어터
 		case '체중 유지' : 
-			console.log(data.outFood);
-			console.log(data.otherFood);
-			console.log(data.notFood);
-			console.log(data.challenge);
+			if(!data.outFood){
+				alert('외식 및 배달 음식 빈도를 선택해주세요');
+				form.elements['outFood'].focus();
+				return;
+			}
+			if(!data.otherFood){
+				alert('간식 및 음료 섭취 빈도를 선택해주세요');
+				form.elements['otherFood'].focus();
+				return;
+			}
+			if(!data.notFood){
+				alert('폭식이나 끼니를 거르는 빈도를 선택해주세요');
+				form.elements['notFood'].focus();
+				return;
+			}
+			if(!data.challenge){
+				alert('체중 유지가 어려운 점을 선택해주세요');
+				form.elements['challenge'].focus();
+				return;
+			}
+			fetchFunc(formData,'submitMaintain');
 			break;
 	};
 	
@@ -223,9 +282,16 @@ function hideLoadingModal() {
 function fetchFunc(f,param){
 	showLoadingModal();
 	console.log(f);
+	
+	const sendData = Object.fromEntries(f.entries());
+	sendData['cDTO.supplements'] = f.getAll('cDTO.supplements');
+	if(param=='submitHealth'){
+		sendData['diseases'] = f.getAll('diseases');
+	}
+	
 	fetch(`/survey/${param}`,{
 		method:'POST',
-		body: JSON.stringify(Object.fromEntries(f.entries())),
+		body: JSON.stringify(sendData),
 		headers:{
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}

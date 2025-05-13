@@ -23,18 +23,18 @@ public class DietScriptGenerator {
 		this.dDTO = dDTO;
 	}
 
-	private final String instruction =
+	private final String INSTRUCTION =
 			"You are a backend HTML API that receives JSON instructions and only responds with raw HTML <div> tags — no comments, no preambles, no code fences, no explanations, no summaries. You must output only the requested HTML in raw format and nothing else. You are not a chatbot or a helper.\r\n";
 	
-	private final String complex = 
+	private final String COMPLEX = 
 			"-요리에 자신있는 사람이기 때문에 요리 난이도와 레시피 복잡도가 높아도 괜찮음\r\n";
 	
-	private final String notComplex = 
+	private final String NOT_COMPLEX = 
 			"-요리를 안하는 사람이기 때문에 요리시간 15분이내, 재료는 5개 이내, 소스는 가능하면 시판 사용\r\n" + 
-			"-조리가 간편해 졌지만, 여전히 탄단지 그램수, 칼로리수는 정확히 지키도록 재료 조정할것\r\n";
+			"-조리가 간편해 졌지만, 여전히 탄단지 그램수는 정확히 지키도록 재료 조정할것\r\n";
 	
 	private String dietScript =
-			instruction+ 
+			INSTRUCTION+ 
 			
 			"[요청사항]\r\n" + 
 			"-식단 이름은 <div id = \"dietTitle\"> 태그 안에 넣을 것.\r\n" + 
@@ -53,7 +53,7 @@ public class DietScriptGenerator {
 			"-필요한 경우 탄단지 값 충족을 위해 소량의 재료 추가 또는 중량(g)을 조정할것\r\n" + 
 			"-너무 비싸거나 한국 마트에서 구하기 어려운 재료는 사용하지 말 것.\r\n" + 
 			"-닭가슴살뿐만 아니라 소고기(안심, 우둔살 등), 돼지고기(목살, 앞다리살 등), 오리, 콩, 두부 등 다양한 저지방 고단백질 식품을 활용할 것.\r\n" + 
-			"{isGoodCook}\r\n"+
+			"{isGoodCook}\n"+
 			
 			"[식단 요청사항]\r\n" + 
 			"-대상: {goal}를 원하는 {age}세 {gender}성.\r\n" + 
@@ -95,7 +95,7 @@ public class DietScriptGenerator {
 			"</ol>";
 	
 	private String healthRoutineScript = 
-			instruction+
+			INSTRUCTION+
 			
 			"이 사람은 {age}세 {goal}를 원하는 {gender}성이고 선호하는 운동은 {favSport}야.  \r\n" + 
 			"분할은 {workoutSplit}분할이야.  \r\n" + 
@@ -117,7 +117,7 @@ public class DietScriptGenerator {
 			"- 조언 파트에 요일은 개인 스케줄에 따라 조절 가능하다고 표시해주기.";
 	
 	private String etcRoutineScript = 
-			instruction+
+			INSTRUCTION+
 			"이 사람은 {age}세 {goal}를 원하는 {gender}성이고 ,선호하는 운동은 {favSport}야.  \r\n" + 
 			"주어진 정보를 고려해 적절한 운동 루틴을 추천해줘.\r\n" +
 			"\r\n" + 
@@ -136,7 +136,7 @@ public class DietScriptGenerator {
 			;
 	
 	private String cheatingMealScript = 
-			instruction + 
+			INSTRUCTION + 
 			
 			"[요청사항]\r\n" + 
 			"이사람은 식욕 조절 능력이 {appetiteControl}인 사람이야 {frequency} 에 한번 치팅을 할건데, 치팅시 다이어트를 크게 방해 하지 않는 음식 4가지 정도만 추천해줘.\r\n" + 
@@ -150,11 +150,11 @@ public class DietScriptGenerator {
 			;
 	
 	private String adviceScript =
-			instruction +
+			INSTRUCTION +
 			
 			"[요청사항]\r\n" + 
 			"이 사람은 {goal}가 어려운 이유를 {difficulties}이라고 대답했어.\r\n" + 
-			"다이어트 성공을 위한 조언과 추천 등을 해줘\r\n" + 
+			"건강한 목표 달성을 위한 조언과 추천 등을 해줘\r\n" + 
 			"\r\n" + 
 			"[조건]\r\n" + 
 			"- !!!앞뒤 설명이나 사족(예: \"알겠어요! 만들어드릴게요\") 없이, 필요한 정보만 출력할 것.!!!\r\n" + 
@@ -181,9 +181,9 @@ public class DietScriptGenerator {
 		        .replace("{supplements}", Arrays.toString(dDTO.getcDTO().getSupplements()))
 		        .replace("{favFoods}", Arrays.toString(dDTO.getcDTO().getFavoriteFood()));
 		if(dDTO.getcDTO().getRecipeComplexity().equals("low")) {
-			result = result.replace("{isGoodCook}", complex);
+			result = result.replace("{isGoodCook}", NOT_COMPLEX);
 		}else if(dDTO.getcDTO().getRecipeComplexity().equals("high")) {
-			result = result.replace("{isGoodCook}", notComplex);
+			result = result.replace("{isGoodCook}", COMPLEX);
 		}
 		return result;
 	}

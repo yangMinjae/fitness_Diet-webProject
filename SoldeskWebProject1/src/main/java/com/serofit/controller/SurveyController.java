@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
 import com.serofit.domain.submitSurvey.SubmitGainDTO;
+import com.serofit.domain.submitSurvey.SubmitHealthDTO;
+import com.serofit.domain.submitSurvey.SubmitMaintainDTO;
+import com.serofit.domain.submitSurvey.SubmitMuscleDTO;
+import com.serofit.domain.submitSurvey.SubmitStrengthDTO;
 import com.serofit.service.SurveyService;
 
 import lombok.extern.log4j.Log4j;
@@ -32,7 +36,7 @@ public class SurveyController {
 	@PostMapping(value = "/submitDiet", consumes = "application/json;charset=UTF-8",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processDietResult(@RequestBody SubmitDietDTO dDTO, HttpSession session) {
-		log.warn(dDTO);
+		log.warn(dDTO.getcDTO());
 		boolean result = sService.updateTbl(dDTO);
 		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(dDTO);
@@ -47,31 +51,70 @@ public class SurveyController {
 	    return "/survey/surveyResultPage";
 	}
 
-//	@PostMapping(value = "/submitDiet", consumes = "application/json;charset=UTF-8",produces = "text/plain;charset=UTF-8")
-//	@ResponseBody
-//	public String processGainResult(@RequestBody SubmitGainDTO gDTO, HttpSession session) {
-//		log.warn(gDTO);
-//		boolean result = sService.updateTbl(gDTO);
-//		System.out.println("테이블 수정 결과 : "+result);
-//		Map<String,String> aiResult = sService.makeAiGeneratedData(gDTO);
-//		session.setAttribute("result", aiResult);
-//		session.setAttribute("goal", gDTO.getcDTO().getGoal());
-//		return "ok";
-//	}
+	@PostMapping(value = "/submitGain", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String processGainResult(@RequestBody SubmitGainDTO gDTO, HttpSession session) {
+		log.warn(gDTO);
+		boolean result = sService.updateTbl(gDTO);
+		System.out.println("테이블 수정 결과 : "+result);
+		Map<String,String> aiResult = sService.makeAiGeneratedData(gDTO);
+		session.setAttribute("result", aiResult);
+		session.setAttribute("goal", gDTO.getcDTO().getGoal());
+		return "ok";
+	}
 
-	@PostMapping("/submitPro")
+	@PostMapping("/submitStrength")
 	public String processProResult(Model model) {
 		return "";
 	}
 
-	@PostMapping("/submitHealth")
-	public String processHealthResult(Model model) {
-		return "";
+	@PostMapping(value = "/submitHealth", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String processHealthResult(@RequestBody SubmitHealthDTO hDTO, HttpSession session) {
+		log.warn(hDTO);
+		boolean result = sService.updateTbl(hDTO);
+		System.out.println("테이블 수정 결과 : "+result);
+		Map<String,String> aiResult = sService.makeAiGeneratedData(hDTO);
+		session.setAttribute("result", aiResult);
+		session.setAttribute("goal", hDTO.getcDTO().getGoal());
+		return "ok";
 	}
 
-	@PostMapping("/submitMaintain")
-	public String processMaintainResult(Model model) {
-		return "";
+	@PostMapping(value = "/submitMaintain", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String processMaintainResult(@RequestBody SubmitMaintainDTO mDTO, HttpSession session) {
+		log.warn(mDTO);
+		boolean result = sService.updateTbl(mDTO);
+		System.out.println("테이블 수정 결과 : "+result);
+		Map<String,String> aiResult = sService.makeAiGeneratedData(mDTO);
+		session.setAttribute("result", aiResult);
+		session.setAttribute("goal", mDTO.getcDTO().getGoal());
+		return "ok";
+	}
+	
+	@PostMapping(value = "/submitStrength", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String processStrengthResult(@RequestBody SubmitStrengthDTO sDTO, HttpSession session) {
+		log.warn(sDTO);
+		log.warn(sDTO.getcDTO());
+//		boolean result = sService.updateTbl(sDTO);
+//		System.out.println("테이블 수정 결과 : "+result);
+//		Map<String,String> aiResult = sService.makeAiGeneratedData(sDTO);
+//		session.setAttribute("result", aiResult);
+//		session.setAttribute("goal", sDTO.getcDTO().getGoal());
+		return "ok";
+	}
+	
+	@PostMapping(value = "/submitMuscle", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String processMuscleResult(@RequestBody SubmitMuscleDTO mDTO, HttpSession session) {
+		log.warn(mDTO);
+		boolean result = sService.updateTbl(mDTO);
+		System.out.println("테이블 수정 결과 : "+result);
+		Map<String,String> aiResult = sService.makeAiGeneratedData(mDTO);
+		session.setAttribute("result", aiResult);
+		session.setAttribute("goal", mDTO.getcDTO().getGoal());
+		return "ok";
 	}
 	@GetMapping("/resultTest")
 	public void surveyResultTest() {
