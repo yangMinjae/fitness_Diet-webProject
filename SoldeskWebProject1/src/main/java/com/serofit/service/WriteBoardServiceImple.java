@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.serofit.domain.BoardVO;
+import com.serofit.domain.BoardViewDTO;
 import com.serofit.domain.DietVO;
 import com.serofit.mapper.BoardMapper;
 import com.serofit.mapper.DietMapper;
+import com.serofit.mapper.UserMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -19,6 +21,8 @@ public class WriteBoardServiceImple implements WriteBoardService {
 	DietMapper dMapper;
 	@Autowired
 	BoardMapper bMapper;
+	@Autowired
+	UserMapper uMapper;
 		
 	// 유저의 식단 타이틀 리스트 가져오기
 	@Override
@@ -33,5 +37,23 @@ public class WriteBoardServiceImple implements WriteBoardService {
 		
 		bMapper.insertPost(bvo);
 
+	}
+	// 게시글 수정 시 기존 게시글 내용 가져오기
+	@Override
+	public BoardViewDTO getBoard(int bno) {
+		BoardVO bvo = bMapper.getPostByBno(bno);
+		
+		BoardViewDTO bvdto = new BoardViewDTO(
+				bvo.getTitle(),
+				uMapper.readNickname(bvo.getUno()),
+				dMapper.selectDietByDno(bvo.getDno()).getTag(),
+				bvo.getContent(),
+				bvo.getRegDate(),
+				bvo.getHit(),
+				bvo.getLove(),
+				bvo.getUno(),
+				bvo.getBno());
+		
+		return bvdto;
 	}
 }

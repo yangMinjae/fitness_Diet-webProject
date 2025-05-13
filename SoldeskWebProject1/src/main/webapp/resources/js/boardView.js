@@ -9,6 +9,8 @@ document.head.appendChild(linkEle);
 
 const form = document.forms[0];
 
+let f= document.forms[0];
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('like-btn').addEventListener('click', function(e){
 	  let bno = e.target.getAttribute("bno");
@@ -30,7 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('edit-btn').addEventListener('click', () => {
-    alert('수정 페이지로 이동합니다.');
+//    alert('수정 페이지로 이동합니다.');
+	  const uno=71;
+	  const bno = f.bno.value;
+	  location.href = '/board/updateBoard?uno='+uno+'&bno='+bno
   });
   
   document.getElementById('list-btn').addEventListener('click', () => {

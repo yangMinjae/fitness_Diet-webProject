@@ -7,6 +7,10 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
 
+//const form = document.forms[0];
+let f= document.forms[0];
+
+
 //버튼 이벤트 추가
 document.querySelectorAll('button').forEach(button=>{
 	button.addEventListener("click", function(e){		
@@ -50,12 +54,13 @@ document.querySelectorAll('button').forEach(button=>{
 		}else if(type === 'writePostBtn'){
 			console.log("writePostBtn");
 			
-			//const sessionUno = sessionStorage.getItem('uno'); //세션에서 받아온 uno
-				
-				
-			//let senddata = 'uno=' + sessionUno; 
-			
-		   location.href ='/board/writeBoard?uno=3';
+//			const sessionUno = sessionStorage.getItem('uno'); //세션에서 받아온 uno
+//			const formUno = f.uno.value;	
+//		    location.href ='/board/writeBoard?uno=' + formUno;			
+//			let senddata = 'uno=' + sessionUno; 		
+//		    location.href ='/board/writeBoard?uno=' + sessionUno;
+
+			   location.href ='/board/writeBoard?uno=' + 71;
 		}
 		
 	});
