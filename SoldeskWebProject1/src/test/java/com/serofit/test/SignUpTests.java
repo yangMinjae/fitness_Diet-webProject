@@ -46,6 +46,6 @@ public class SignUpTests {
 			upvo.setUuid("UUID-TEST");
 			upvo.setUno(uvo.getUno());
 			upmapper.insertProfile(upvo); 			
-		}			
-	}
+		}		
+	}	
 }

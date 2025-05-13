@@ -12,9 +12,15 @@ import com.serofit.domain.UpdateTagDTO;
 import com.serofit.domain.ValTagEnum;
 import com.serofit.domain.submitSurvey.AbstractSubmitDTO;
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
+import com.serofit.domain.submitSurvey.SubmitGainDTO;
+import com.serofit.domain.submitSurvey.SubmitHealthDTO;
+import com.serofit.domain.submitSurvey.SubmitMaintainDTO;
 import com.serofit.mapper.MateMapper;
 import com.serofit.mapper.UProfileMapper;
 import com.serofit.other.DietScriptGenerator;
+import com.serofit.other.GainScriptGenerator;
+import com.serofit.other.HealthScriptGenerator;
+import com.serofit.other.MaintainScriptGenerator;
 
 import lombok.extern.log4j.Log4j;
 
@@ -89,10 +95,31 @@ public class SurveyServiceImpl implements SurveyService {
 
 		case "멸치 탈출":
 			
+			GainScriptGenerator gsg = new GainScriptGenerator((SubmitGainDTO)aDTO);
+			prompts.put(DIET,gsg.getDietScript());
+			prompts.put(ROUTINE,gsg.getRoutineScript());
+			prompts.put(ADVICE,gsg.getAdviceScript());
+			
+			result = requestToApi(prompts);
 			break;
 			
+		case "체중 유지":
+			
+			MaintainScriptGenerator msg = new MaintainScriptGenerator((SubmitMaintainDTO)aDTO);
+			prompts.put(DIET,msg.getDietScript());
+			prompts.put(ROUTINE,msg.getRoutineScript());
+			prompts.put(ADVICE,msg.getAdviceScript());
+			
+			result = requestToApi(prompts);
+			break;
 		case "건강 유지":
 			
+			HealthScriptGenerator hsg = new HealthScriptGenerator((SubmitHealthDTO)aDTO);
+			prompts.put(DIET,hsg.getDietScript());
+			prompts.put(ROUTINE,hsg.getRoutineScript());
+			prompts.put(ADVICE,hsg.getAdviceScript());
+			
+			result = requestToApi(prompts);
 			break;
 			
 		case "프로 득근러":
@@ -107,8 +134,6 @@ public class SurveyServiceImpl implements SurveyService {
 		Map<String,String> result = new LinkedHashMap<String, String>();
 		
 		for (String key : prompts.keySet()) {
-//			System.out.println(prompts.get(key));
-//			System.out.println("-------------------------------------------");
 			result.put(key,aService.getResult(prompts.get(key)));
 		}
 		

@@ -92,16 +92,8 @@ public abstract class AbstractSubmitDTO {
     }
 
     @JsonProperty("cDTO.supplements")
-    public void setSupplements(String raw) {
-        // 체크박스 여러 개일 경우 여러 번 호출됨 → 누적 저장
-        String[] current = getOrCreateCDTO().getSupplements();
-        if (current == null) {
-            getOrCreateCDTO().setSupplements(new String[]{raw});
-        } else {
-            String[] merged = Arrays.copyOf(current, current.length + 1);
-            merged[current.length] = raw;
-            getOrCreateCDTO().setSupplements(merged);
-        }
+    public void setSupplements(String[] raw) {
+        getOrCreateCDTO().setSupplements(raw);
     }
 
     @JsonProperty("cDTO.recipeComplexity")

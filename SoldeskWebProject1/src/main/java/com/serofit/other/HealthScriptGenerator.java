@@ -3,25 +3,25 @@ package com.serofit.other;
 import java.util.Arrays;
 
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
-import com.serofit.domain.submitSurvey.SubmitGainDTO;
+import com.serofit.domain.submitSurvey.SubmitHealthDTO;
 
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class GainScriptGenerator {
+public class HealthScriptGenerator {
 	
-	private SubmitGainDTO gDTO = null;
+	private SubmitHealthDTO hDTO = null;
 	
-	public GainScriptGenerator() {
+	public HealthScriptGenerator() {
 	
 	}
 	
-	public GainScriptGenerator(SubmitGainDTO gDTO) {
-		this.gDTO=gDTO;
+	public HealthScriptGenerator(SubmitHealthDTO hDTO) {
+		this.hDTO=hDTO;
 	}
 	
-	public void setgDTO(SubmitGainDTO gDTO) {
-		this.gDTO = gDTO;
+	public void setgDTO(SubmitHealthDTO hDTO) {
+		this.hDTO = hDTO;
 	}
 
 	private final String INSTRUCTION =
@@ -41,27 +41,26 @@ public class GainScriptGenerator {
 			"[요청사항]\r\n" + 
 			"-식단 이름은 <div id = \"dietTitle\"> 태그 안에 넣을 것.\r\n" + 
 			"-식단 이름은 재밌고 독특하며 식단의 특성을 반영하는 이름으로 작성할 것.\r\n" + 
-			"-각 끼니/간식은 (아침,점심,저녁, 간식1, 간식2 등) <div id=\"diet1\">, <div id=\"diet2\">, ... dietN 형태로 출력할 것 class는 dietName로 통일.\r\n" + 						//*
-			"-각 끼니/간식의 탄단지는 <div id=\"diet1Nutrition\">, <div id=\"diet2Nutrition\">, ... 형태로 출력할 것. class는 dietNutrition으로 통일\r\n" + 					//*
-			"-각 끼니/간식의 재료는 g 단위로 id가 dietNIngredient(N은 끼니의 넘버와 일치 시키기)인 ul 형태로 출력할 것. 각 세부 항목은 li에 넣을것. class는 dietIngredient로 통일\r\n" + 			//*
-			"-각 끼니/간식의 레시피는 id가 dietNRecipe(N은 끼니의 넘버와 일치 시키기)인 ol 형태로 출력할 것. 각 순서 항목은 li에 넣을것. class는 dietRecipe로 통일\r\n" + 						//*
+			"-각 끼니는(아침,점심,저녁) <div id=\"diet1\">, <div id=\"diet2\">, ... dietN 형태로 출력할 것 class는 dietName로 통일.\r\n" + 						//*
+			"-각 끼니는 <div id=\"diet1Nutrition\">, <div id=\"diet2Nutrition\">, ... 형태로 출력할 것. class는 dietNutrition으로 통일\r\n" + 					//*
+			"-각 끼니는 g 단위로 id가 dietNIngredient(N은 끼니의 넘버와 일치 시키기)인 ul 형태로 출력할 것. 각 세부 항목은 li에 넣을것. class는 dietIngredient로 통일\r\n" + 			//*
+			"-각 끼니는 id가 dietNRecipe(N은 끼니의 넘버와 일치 시키기)인 ol 형태로 출력할 것. 각 순서 항목은 li에 넣을것. class는 dietRecipe로 통일\r\n" + 						//*
 			"-모든 메인 요리뿐만 아니라 소스나 드레싱(예: 타히니 소스, 발사믹 드레싱 등)도 직접 만들 수 있도록 레시피를 상세히 작성할 것.\r\n" + 
 			"-소스나 드레싱에 들어가는 재료와 그 중량(g), 만드는 방법을 함께 명시할 것. (단, 시판 제품 사용하는 경우 생략 가능)\r\n" + 
-			"-끼니/간식 이름, 레시피, 재료 외에 다른 문장은 작성하지 말 것.\r\n" + 																								//*
+			"-끼니 이름, 레시피, 재료 외에 다른 문장은 작성하지 말 것.\r\n" + 																								//*
 			"-요청을 여러 번 할 예정이므로 식단 이름과 구성은 다양하게 바뀌도록 할 것.\r\n" + 
 			"-재료별 중량(g)을 반드시 명시할 것.\r\n" + 
 			"-식단의 탄단지(g)는 100g당 재료의 영양정보를 참고하고, 중량을 고려하여 정확히 계산할 것. \r\n" + 
 			"-탄단지 정확성 확보를 최우선으로 할 것.\r\n" + 
 			"-필요한 경우 탄단지 값 충족을 위해 소량의 재료 추가 또는 중량(g)을 조정할것\r\n" + 
 			"-너무 비싸거나 한국 마트에서 구하기 어려운 재료는 사용하지 말 것.\r\n" + 
-			"-다양한 재료를 활용하고, 다이어터가 아니기에 탄단지 맞추기 위해서 (고칼로리 포함) 다양한 재료 사용을 허용함\r\n" + 																		//*
-			"{isGoodCook}"+
-			"-칼로리는 끼니가 간식보다 많이 높게 비율을 설정해줘. 간식은 말그대로 간식\r\n"+
-			"\r\n"+
+			"-닭가슴살뿐 아니라 다양한 단백질원을 활용할것\r\n" + 																		//*
+			"{isGoodCook}\r\n"+																				//*
 			
 			"[식단 요청사항]\r\n" + 
 			"-대상: {goal}를 원하는 {age}세 {gender}성.\r\n" + 
-			"-식단 수: {NofDiets} 끼니, {NofSnacks}회의 간식\r\n" + 
+			"-식단 수: {NofDiets} 끼니\r\n" + 
+			"-이 사람은 {diseases}질환을 갖고 있거나 음식을 통해 예방/개선하고 싶어. 고려해서 식단을 짜줘.\r\n"+
 			"-하루 섭취 탄단지 총량: 탄수화물 {carbo}g, 단백질 {protein}g, 지방 {fat}g\r\n" + 
 			"-비건식 여부: {isVegan}\r\n" + 
 			//"-다이어트 중 부족할 수 있는 탄단지 이외의 영양소를 고려해 식단을 짜되, 현재 {supplements}영양제를 이미 복용하므로 굳이 고려하려 하지 않아도됨.\r\n" + 
@@ -157,8 +156,11 @@ public class GainScriptGenerator {
 			INSTRUCTION +
 			
 			"[요청사항]\r\n" + 
-			"이 사람은 {goal}가 어려운 이유를 {difficulties}이라고 답했고, {gainExperience}라고 했다.\r\n" +							//* 
-			"건강한 목표 달성을 위한 충고/조언을 해줘\r\n"+
+			"이 사람은 {goal}를 원하는 {diseases} 질환을 예방 혹은 치료/개선 하고 싶은사람이야\r\n" +												//* 
+			"음주 빈도는 {alcohol}\r\n" +
+			"하루 평균 흡연량은 {smoking}갑\r\n"+
+			"일평균 수면시간은 {sleep}시간이야.\r\n"+
+			"건강한 목표 달성을 위한 조언, 충고를 해줘"+
 			"\r\n" + 
 			"[조건]\r\n" + 
 			"- !!!앞뒤 설명이나 사족(예: \"알겠어요! 만들어드릴게요\") 없이, 필요한 정보만 출력할 것.!!!\r\n" + 
@@ -168,24 +170,24 @@ public class GainScriptGenerator {
 	
 	public String getDietScript() {
 		String result = dietScript
-				.replace("{goal}", gDTO.getcDTO().getGoal())
-		        .replace("{age}", gDTO.getcDTO().getAge()+"")
-		        .replace("{gender}", gDTO.getcDTO().isGender()?"남":"여")
-		        .replace("{NofDiets}", gDTO.getcDTO().getHit()+"")
-		        .replace("{NofSnacks}", gDTO.getGainSnacks()+"");
+				.replace("{goal}", hDTO.getcDTO().getGoal())
+		        .replace("{age}", hDTO.getcDTO().getAge()+"")
+		        .replace("{gender}", hDTO.getcDTO().isGender()?"남":"여")
+		        .replace("{NofDiets}", hDTO.getcDTO().getHit()+"");
 		
 		DietUtilCalculator cal = new DietUtilCalculator();
-		cal.setTotalCalNormalCase(gDTO.getcDTO(), gDTO.getGainGoal());
-		String[] nutrients = cal.getNutrientsGram(gDTO.getcDTO().getGoal());
+		cal.setTotalCalNormalCase(hDTO.getcDTO(), 0);
+		String[] nutrients = cal.getNutrientsGram(hDTO.getcDTO().getGoal());
 		result = result
 				.replace("{carbo}", nutrients[0])
 				.replace("{protein}", nutrients[1])
 		        .replace("{fat}", nutrients[2])
-		        .replace("{isVegan}", gDTO.getcDTO().getVegan()=="yes" ? "비건" : "비비건")
-		        .replace("{favFoods}", Arrays.toString(gDTO.getcDTO().getFavoriteFood()));
-		if(gDTO.getcDTO().getRecipeComplexity().equals("low")) {
+		        .replace("{isVegan}", hDTO.getcDTO().getVegan()=="yes" ? "비건" : "비비건")
+		        .replace("{favFoods}", Arrays.toString(hDTO.getcDTO().getFavoriteFood()))
+		        .replace("{diseases}", Arrays.toString(hDTO.getDiseases()));
+		if(hDTO.getcDTO().getRecipeComplexity().equals("low")) {
 			result = result.replace("{isGoodCook}", NOT_COMPLEX);
-		}else if(gDTO.getcDTO().getRecipeComplexity().equals("high")) {
+		}else if(hDTO.getcDTO().getRecipeComplexity().equals("high")) {
 			result = result.replace("{isGoodCook}", COMPLEX);
 		}
 		return result;
@@ -195,20 +197,20 @@ public class GainScriptGenerator {
 	
 	public String getRoutineScript() { 
 		String result;
-		if(gDTO.getcDTO().getFavSport().equals("헬스")) {
+		if(hDTO.getcDTO().getFavSport().equals("헬스")) {
 			result = healthRoutineScript
-					.replace("{age}",gDTO.getcDTO().getAge()+"")
-					.replace("{goal}",gDTO.getcDTO().getGoal())
-					.replace("{gender}", gDTO.getcDTO().isGender()?"남":"여")
-					.replace("{favSport}", gDTO.getcDTO().getFavSport())
-					.replace("{workoutSplit}", gDTO.getcDTO().getWorkoutSplit()+"");
+					.replace("{age}",hDTO.getcDTO().getAge()+"")
+					.replace("{goal}",hDTO.getcDTO().getGoal())
+					.replace("{gender}", hDTO.getcDTO().isGender()?"남":"여")
+					.replace("{favSport}", hDTO.getcDTO().getFavSport())
+					.replace("{workoutSplit}", hDTO.getcDTO().getWorkoutSplit()+"");
 		}
 		else {
 			result = etcRoutineScript
-					.replace("{age}",gDTO.getcDTO().getAge()+"")
-					.replace("{goal}",gDTO.getcDTO().getGoal())
-					.replace("{gender}", gDTO.getcDTO().isGender()?"남":"여")
-					.replace("{favSport}", gDTO.getcDTO().getFavSport());
+					.replace("{age}",hDTO.getcDTO().getAge()+"")
+					.replace("{goal}",hDTO.getcDTO().getGoal())
+					.replace("{gender}", hDTO.getcDTO().isGender()?"남":"여")
+					.replace("{favSport}", hDTO.getcDTO().getFavSport());
 			
 		}
 		return result; 
@@ -217,9 +219,11 @@ public class GainScriptGenerator {
 	public String getAdviceScript() {
 		String result;
 		result = adviceScript
-				.replace("{goal}", gDTO.getcDTO().getGoal())
-				.replace("{difficulties}", gDTO.getGainDifficulties())
-				.replace("{gainExperience}", gDTO.getGainExperience());
+				.replace("{goal}", hDTO.getcDTO().getGoal())
+				.replace("{diseases}", Arrays.toString(hDTO.getDiseases()))
+				.replace("{alcohol}", hDTO.getAlcohol())
+				.replace("{smoking}", hDTO.getSmoking()+"")
+				.replace("{sleep}", hDTO.getSleep());
 		return result;
 	}
 	 
