@@ -73,7 +73,7 @@ public class SignController {
 	@PostMapping(value = "/insertUser", consumes = "application/json", produces = "text/plain; charset=utf-8")
 	@ResponseBody
 	public String insertUser(@RequestBody UserVO uvo) {
-		return (sService.insertUser(uvo) == 0) ? "true" : "false";
+		return (sService.insertUser(uvo) >= 1) ? "true" : "false";
 	}
 	
 	// 이메일로 아이디 비번 찾기
