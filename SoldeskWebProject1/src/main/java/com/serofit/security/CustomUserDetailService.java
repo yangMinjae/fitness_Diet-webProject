@@ -22,9 +22,9 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.warn("load user by userName : "+username);
-		UserVO vo = uMapper.read(username);
+		UserVO uvo = uMapper.read(username);
 		
-		log.warn("member mapper : "+vo);
-		return vo==null?null:new CustomUser(vo);
+		log.warn("member mapper : "+uvo);
+		return uvo == null ? null : new CustomUser(uvo);
 	}
 }

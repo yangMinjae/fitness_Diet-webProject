@@ -30,13 +30,14 @@ public class SignController {
 	@Autowired
 	SignupService sService;
 	
-	@ResponseBody
-	@PostMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String login(@RequestBody LoginDTO ldto) {
-		System.out.println("???");
-		String result = lService.login(ldto);
-		return result!="0" ? result : "fail";
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE) public
+	 * String login(@RequestBody LoginDTO ldto) { System.out.println("???");
+	 * //String result = lService.login(ldto); return result!="0" ? result : "fail";
+	 * }
+	 */
 	
 	// ---------------------------------회원가입-----------------------------------------
 

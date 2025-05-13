@@ -90,6 +90,9 @@ document.querySelectorAll('button').forEach(button=>{
 			case 'login-btn' :
 				location.href = '/login';
 				break;
+			case 'logout-btn' :
+				location.href = '/customLogout';
+				break;
 		}
 		
 		initMenu();

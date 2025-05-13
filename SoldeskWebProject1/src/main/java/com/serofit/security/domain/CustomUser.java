@@ -1,5 +1,6 @@
 package com.serofit.security.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -16,9 +17,14 @@ public class CustomUser extends User{
 	
 	private UserVO uvo;
 
+	 public CustomUser() {
+	        super("anonymous", "anonymous", new ArrayList<>());
+	 }
+	
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
+	
 	public CustomUser(UserVO uvo) {
 		super(uvo.getId(),
 				uvo.getPw(),

@@ -56,7 +56,7 @@ document
 //})
 
 function login(){
-  fetch('/sign/login',{
+ /* fetch('/sign/login',{
     method : 'post',
     body:JSON.stringify({
       username : f.username.value,
@@ -74,7 +74,7 @@ function login(){
       sessionStorage.setItem('uno',text);
       location.href='/'+'?uno='+sessionStorage.getItem('uno');
     }
-  })
+  })*/
 }
 
 //회원 가입 모달 닫기

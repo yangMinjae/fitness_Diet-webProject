@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.serofit.domain.BoardListDTO;
-
+import com.serofit.security.domain.CustomUser;
 import com.serofit.service.BoardService;
 import com.serofit.service.HFService;
 import com.serofit.service.MailService;
@@ -43,14 +44,17 @@ public class MainController {
 	
 	// 서버 구동 시 mainPage
 	@GetMapping()
-	public String home(Locale locale, Model model, @RequestParam(value = "uno", defaultValue = "1") String uno) {
+	public String home(Locale locale, Model model, Authentication authentication) {
 		log.info("main!!!!!");
 		model.addAttribute("hbList", mpService.getHotPosts(4)); // 인기 게시글 갯수 4개로 고정
-		if(uno != null) {
-			model.addAttribute("nickname", hfService.getNickname(Integer.parseInt(uno)));
-			model.addAttribute("mCount", hfService.selectMailCountByReceiver(Integer.parseInt(uno)));
+		
+		if(authentication != null) {
+			CustomUser customUser = (CustomUser) authentication.getPrincipal();
+			
+			model.addAttribute("nickname", hfService.getNickname(customUser.getUvo().getUno()));
+			model.addAttribute("mCount", hfService.selectMailCountByReceiver(customUser.getUvo().getUno()));
 		}
-
+		
 		return "main";
 	}
 	
@@ -62,6 +66,7 @@ public class MainController {
 	}
 	
 	// 마이페이지 이동
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myPage")
 	public String showMyPage() {
 		log.info("....forwarding to myPage....");
@@ -69,10 +74,12 @@ public class MainController {
 	}
 	
 	// 메일 목록 화면
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/mailList")
-	public String mailPage(Model model) {
+	public String mailPage(Model model, Authentication authentication) {		
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		
-		model.addAttribute("mList", mService.selectByReceiver(1));
+		model.addAttribute("mList", mService.selectByReceiver(customUser.getUvo().getUno()));
 		return "/mail/mailList";
 	}
 	
@@ -90,20 +97,28 @@ public class MainController {
 	}
 	
 	// 운동 메이트 찾기 화면으로 이동
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/matePage")
-	public String matePage(Model model, int uno) {
-		// uno 임시 부여 
-		// , int uno 매개변수에 추가하기
-		int uno1 = 3;
-		model.addAttribute("user", mtpService.selectByUno(uno1));
-		model.addAttribute("mateList", mtpService.findMateList(uno1));
+	public String matePage(Model model, Authentication authentication) {
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		
+		model.addAttribute("user", mtpService.selectByUno(customUser.getUvo().getUno()));
+		model.addAttribute("mateList", mtpService.findMateList(customUser.getUvo().getUno()));
 	
 		return "/user/matePage";
 	}
 	
 	// 설문 조사 페이지 이동
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/survey")
 	public String serveyPage(Model model) {
 		return "/survey/surveyPage";
+	}
+	
+	// 로그아웃 시 메인페이지
+	@GetMapping("/customLogout")
+	public String logoutGET() {
+		log.info("custom Logout");
+		return "/";
 	}
 }
