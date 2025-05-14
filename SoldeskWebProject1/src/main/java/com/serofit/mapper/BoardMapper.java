@@ -28,11 +28,16 @@ public interface BoardMapper {
 	// 게시글 작성
 	public int insertPost(BoardVO bvo);
 	
+	// 게시글 수정
+	public int updatePost(BoardVO bvo);
+	
 	// 게시글 삭제
 	public int deletePostByBno(int bno);
 	
 	// 회원탈퇴 게시글 삭제
 	public int deletePostByUno(int uno);
+	
+
 	
 	
 }

@@ -38,31 +38,27 @@ document.querySelectorAll('button').forEach(btn => {
 // 선택된 식단의 정보 가져오기
 document.getElementById("diet").addEventListener("change", function () {
   const selectDiet = this.value;
-  console.log("선택한 식단 번호 (dno):" + selectDiet);
+  console.log("식단 이름:" + selectDiet);
 
   const selectedOption = this.options[this.selectedIndex];
 
   const content = selectedOption.getAttribute("data-content");
   const tag = selectedOption.getAttribute("data-tag");
   const dno = selectedOption.getAttribute("data-dno");
-
-  console.log("본문:", content);
-  console.log("태그:", tag);
-  console.log("식단번호:", dno);
-
+  const uno = selectedOption.getAttribute("data-uno");
+  
   // 본문
   document.getElementById("content").innerHTML = content;
   // 태그
   document.getElementById("tag").value = tag;
   // dno
   document.getElementById("dno").value = dno;
+  // uno
+  document.getElementById("uno").value = uno;
 });
 
-
-
-// 업로드 버튼 클릭시 내용 있는지 검증
+// 업로드 버튼 클릭시 내용 있는지 검증 + 게시글 작성 완료
 function register() {
-
   const html = document.getElementById('content').innerHTML;
   document.getElementById('hiddenContent').value = html;
   
@@ -74,16 +70,20 @@ function register() {
 	  	alert("제목을 입력해주세요");
 	  	return;
   }
-
-
-  f.method = "post";
-  f.action = '/board/writeBoard';
+  
+ if(f.bno != null){
+	 f.action = '/cjs/updateBoard';
+ }else{
+	 f.action = '/board/writeBoard';
+ }
   f.submit();
 }
+
 // 이미지 업로드 버튼 클릭시 파일 탐색기 연결
 function openFile() {
   document.getElementById('imageInput').click();
 }
+
 // 이미지 리사이즈 후 base64로 변환
 function resizeImage(file, maxWidth, maxHeight, callback) {
   const reader = new FileReader();

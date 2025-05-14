@@ -15,13 +15,17 @@
 	<!-- 콘텐츠 전체 컨테이너 -->
 	<div class="content-container">
 		<!-- 카테고리 선택 -->
-		<form>
+		<form method="post">
 			<div class="form-group">
-				<label for="category">식단 선택</label> <select id="diet">
+				<label for="category">식단 선택</label> 
+				<select id="diet" name="diet"
+					<c:if test="${not empty board}">disabled</c:if>>
 					<option value="">식단을 선택하세요</option>
-					<c:forEach var="dvo" items="${ dietList}">
-						<option value="${dvo.title }" data-content="${dvo.content }"
-							data-dno="${dvo.dno }" data-tag="${dvo.tag }">${dvo.title }</option>
+					<c:forEach var="dvo" items="${dietList}">
+						<option value="${dvo.title}" data-content="${dvo.content}"
+							data-dno="${dvo.dno}" data-tag="${dvo.tag}" data-uno="${dvo.uno}"
+							<c:if test="${not empty board && board.tag eq dvo.tag}">selected="selected"</c:if>>
+							${dvo.title}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -29,24 +33,24 @@
 			<!--  태그 -->
 			<div class="form-group">
 				<label for="tag">태그</label> <input type="text" id="tag" name="tag"
-					placeholder="식단을 선택하면 태그가 정해집니다" readonly />
+					placeholder="식단을 선택하면 태그가 정해집니다" readonly
+					value="${board.tag != null ? board.tag : '' }" />
 			</div>
 
 			<!-- 제목 입력 -->
 			<div class="form-group">
 				<label for="title">제목 :</label> <input type="text" id="title"
-					name="title" placeholder="제목을 입력하세요" />
+					name="title" placeholder="제목을 입력하세요"
+					value="${board.title != null ? board.title : '' }" />
 			</div>
 
 			<!-- 본문 입력 -->
 			<div class="form-group">
 				<label for="content">본문</label>
 				<div class="form-group">
-					<div id="content" name="content" class="content-input"
-						contenteditable="true">
-					</div>
+					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value="${board.content}" escapeXml="false" /></div>
 				</div>
-				<textarea id="hiddenContent" name="content" style="display: none;"></textarea>
+				<textarea id="hiddenContent" name="content" style="display: none;"><c:out value="${board.content}" escapeXml="false" /></textarea>
 			</div>
 
 			<!-- 이미지 업로드 버튼 영역 -->
@@ -67,9 +71,19 @@
 			<div class="action-buttons">
 				<button type="button" class="boardList-btn">목록</button>
 				<button type="button" class="register-btn">작성 완료</button>
+
 			</div>
-			<input type="hidden" id="dno" name="dno"> <input
-				type="hidden" name="uno" value="${dietList[0].uno }">
+			<!--  식단선택할때 dno 가져오는 용도 -->
+			<c:if test="${empty board}">				
+				<input type="hidden" id="dno" name="dno">
+				<input type="hidden" id="uno" name="uno">
+			</c:if>>
+			
+			<c:if test="${not empty board}">				
+				<input type="hidden" id="bno" name="bno" value="${board.bno}">
+				<input type="hidden" id="dno" name="dno" value="${board.dno}">
+				<input type="hidden" id="uno" name="uno" value="${board.uno}">
+			</c:if>>
 		</form>
 	</div>
 

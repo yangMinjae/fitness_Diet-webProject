@@ -19,4 +19,5 @@ public class BoardViewDTO {
 	int love;
 	int uno;
 	int bno;
+	int dno;
 }

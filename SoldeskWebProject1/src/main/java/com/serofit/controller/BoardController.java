@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.serofit.domain.BoardListDTO;
 import com.serofit.domain.BoardVO;
+import com.serofit.domain.BoardViewDTO;
 import com.serofit.domain.DietVO;
 import com.serofit.domain.LikeVO;
 import com.serofit.service.BoardService;
@@ -75,6 +76,8 @@ public class BoardController {
 		model.addAttribute("dietList", dvoList);
 		return "/board/writeBoard";
 	}
+	
+	
 	// 게시글 등록
 	@PostMapping("/writeBoard")
 	public String register(BoardVO bvo) {
@@ -84,6 +87,7 @@ public class BoardController {
 		return "redirect:/boardList";
 	}
 	
+
 	// 게시글 자세히 보기
 	@GetMapping("/boardView")
 	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response) {
@@ -132,6 +136,20 @@ public class BoardController {
 		
 		return lvo.getBno();
 	}
+	
+
+	// 게시글 수정 페이지로 이동
+	@GetMapping("/updateBoard")
+	public String updateBoard(int uno,int bno,Model model) {
+		log.info("writePost .... " + uno);
+		BoardViewDTO bvdto = wbService.getBoard(bno);
+		List<DietVO> dvoList = wbService.getDietTitle(uno);
+		model.addAttribute("board",bvdto);
+		model.addAttribute("dietList", dvoList);
+		return "board/writeBoard";
+	}
+	
+
 	
 	// 게시글 삭제
 	@PostMapping("/boardView/delete")

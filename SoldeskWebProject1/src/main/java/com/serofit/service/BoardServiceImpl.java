@@ -44,9 +44,15 @@ public class BoardServiceImpl implements BoardService {
 			int dno = board.getDno();
 			String nickname = uMapper.readNickname(uno);
 			DietVO dvo = dMapper.selectDietByDno(dno);
-
-			BoardListDTO dto = new BoardListDTO(board.getTitle(), nickname, dvo.getTag(), board.getRegDate(),
-					board.getHit(), board.getLove(), board.getBno());
+			
+			BoardListDTO dto = new BoardListDTO(
+					board.getTitle(),
+					nickname, 
+					dvo.getTag(), 
+					board.getRegDate(),
+					board.getHit(), 
+					board.getLove(), 
+					board.getBno());
 
 			dtoList.add(dto);
 		}
@@ -62,16 +68,22 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardListDTO> dtoList = new ArrayList<>();
 
 		for (BoardVO bvo : bList) {
-			int uno = bvo.getUno(); // 게시글 작성자의 UNO 가져오기
-			int dno = bvo.getDno(); // DNO 가져오기
+			int uno = bvo.getUno(); 
+			int dno = bvo.getDno(); 
 			DietVO dvo = dMapper.selectDietByDno(dno);
 
 			// 태그로 필터링
 			if (dvo.getTag().equals(tag)) {
 				String nickname = uMapper.readNickname(uno);
 
-				BoardListDTO dto = new BoardListDTO(bvo.getTitle(), nickname, dvo.getTag(), bvo.getRegDate(),
-						bvo.getHit(), bvo.getLove(), bvo.getBno());
+				BoardListDTO dto = new BoardListDTO(
+						bvo.getTitle(), 
+						nickname, 
+						dvo.getTag(), 
+						bvo.getRegDate(),
+						bvo.getHit(),
+						bvo.getLove(), 
+						bvo.getBno());
 
 				dtoList.add(dto);
 			}
@@ -135,8 +147,17 @@ public class BoardServiceImpl implements BoardService {
 				bvo.getHit(),
 				bvo.getLove(),
 				bvo.getUno(),
-				bvo.getBno());
+				bvo.getBno(),
+				bvo.getDno()
+				);
 		return bvDTO;
+	}
+	// 게시글 수정
+	@Override
+	public int updatePost(BoardVO bvo) {
+		
+		int result = bMapper.updatePost(bvo);
+		return result;
 	}
 
 	@Transactional

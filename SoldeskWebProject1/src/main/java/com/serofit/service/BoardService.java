@@ -26,6 +26,9 @@ public interface BoardService {
 	// 게시글 좋아요 증가
 	public int increaseLove(LikeVO lvo);
 	
+	// 게시글 수정
+	public int updatePost(BoardVO bvo);
+	
 	// 게시글 삭제
 	public int deletePost(int bno);
 	

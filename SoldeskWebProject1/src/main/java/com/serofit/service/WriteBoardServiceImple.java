@@ -52,7 +52,9 @@ public class WriteBoardServiceImple implements WriteBoardService {
 				bvo.getHit(),
 				bvo.getLove(),
 				bvo.getUno(),
-				bvo.getBno());
+				bvo.getBno(),
+				bvo.getDno()
+				);
 		
 		return bvdto;
 	}

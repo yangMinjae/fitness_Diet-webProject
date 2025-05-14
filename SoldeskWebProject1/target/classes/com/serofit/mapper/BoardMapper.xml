@@ -65,6 +65,16 @@
 		)
 	</insert>
 	
+	<!--  게시글 수정  -->
+	<update id="updatePost" parameterType="com.serofit.domain.BoardVO">
+		UPDATE tbl_board
+			SET 
+			title = #{title},
+			content = #{content},
+			regdate=sysdate 
+		WHERE bno = #{bno}
+	</update>
+	
 	<!-- 게시글 삭제 -->
 	<delete id="deletePostByBno" parameterType="int">
 		DELETE FROM tbl_board
