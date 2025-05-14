@@ -124,6 +124,13 @@ public class BoardController {
 		model.addAttribute("bList", jsonBList);
 		return "/board/boardView";
 	}
+	// 게시글 수정
+	@PostMapping("/updateBoard")
+	public String updatePost(BoardVO bvo ) {
+		log.info("updatePost...." );
+		bService.updatePost(bvo);
+		return "redirect:/boardList";
+	}
 	
 	// 게시글 좋아요 증가
 	@ResponseBody

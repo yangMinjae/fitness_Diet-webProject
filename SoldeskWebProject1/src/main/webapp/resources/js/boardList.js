@@ -59,8 +59,8 @@ document.querySelectorAll('button').forEach(button=>{
 //		    location.href ='/board/writeBoard?uno=' + formUno;			
 //			let senddata = 'uno=' + sessionUno; 		
 //		    location.href ='/board/writeBoard?uno=' + sessionUno;
-
-			   location.href ='/board/writeBoard?uno=' + 71;
+             
+		    location.href ='/board/writeBoard?uno=' + 71;
 		}
 		
 	});

@@ -17,17 +17,14 @@ document.querySelectorAll('button').forEach(btn => {
     switch (type) {
       // 파일 업로드
       case 'upload-button':
-        console.log("upload-button");
         openFile();
         break;
       // 목록 페이지로 이동
       case 'boardList-btn':
-        console.log("boardList-btn");
         location.href = '/boardList';
         break;
       // 작성완료
       case 'register-btn':
-        console.log("upload-btn");
         register();
         break;
     }
@@ -72,7 +69,7 @@ function register() {
   }
   
  if(f.bno != null){
-	 f.action = '/cjs/updateBoard';
+	 f.action = '/board/updateBoard';
  }else{
 	 f.action = '/board/writeBoard';
  }
@@ -143,7 +140,6 @@ function createImageButton(event) {
       button.addEventListener('click', function () {
         const imgUrl = this.dataset.img;
         insertImgAtCursor(imgUrl);
-        console.log("이미지 버튼 눌림")
       });
 
       container.appendChild(button);

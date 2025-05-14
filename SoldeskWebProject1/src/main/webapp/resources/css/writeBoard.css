@@ -1,117 +1,169 @@
+.writeBoard-body {
+  background-color: #f4f8f4;
+  color: #333;
+}
+/* 공통 컨테이너 스타일 */
 .content-container {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
-	font-family: 'Noto Sans KR', sans-serif;
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px 5vw;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
+/* 폼 그룹 */
 .form-group {
-	margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 label {
-	display: block;
-	margin-bottom: 8px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #4d5a63;
 }
 
-input[type="text"], select, textarea {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	font-size: 14px;
+/* 입력 필드 */
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccd5cc;
+  border-radius: 8px;
+  background-color: #f9fdf9;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
 }
 
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #6ac56d;
+  outline: none;
+}
+
+/* 콘텐츠 입력창 */
 .content-input {
-	width: 100%;
-	height: 300px;
-	padding: 12px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	resize: vertical;
-	box-sizing: border-box;
-	background-color: #f9f9f9;
+  min-height: 300px;
+  resize: vertical;
 }
 
-.button-group {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 20px;
+/* 버튼 그룹 */
+.button-group,
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.upload-button,
+.action-buttons button {
+  flex: 1;
+  padding: 14px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .upload-button {
-	flex: 1;
-	margin: 0 5px;
-	padding: 12px 0;
-	background-color: #222;
-	color: #fff;
-	border: none;
-	border-radius: 6px;
-	font-size: 14px;
-	cursor: pointer;
+  background-color: #6ac56d;
+  color: white;
+  margin-button: 15px;
 }
 
-textarea {
-	resize: vertical;
-}
-
-.action-buttons {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 30px;
-}
-
-.action-buttons button {
-	flex: 1;
-	margin: 0 5px;
-	padding: 12px;
-	font-size: 14px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-}
-
-.upload-final {
-	background-color: #444;
-	color: #fff;
-}
-
-.list-btn {
-	background-color: #aaa;
-	color: #fff;
+.upload-button:hover {
+  background-color: #5da258;
 }
 
 .complete-btn {
-	background-color: #222;
-	color: #fff;
+  background-color: #4d5a63;
+  color: #fff;
 }
 
-#imageInput {
+.complete-btn:hover {
+  background-color: #3c494e;
+}
+
+.list-btn {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.list-btn:hover {
+  background-color: #bbb;
+}
+#imageInput{
 	display: none;
 }
 
+/* 이미지 버튼 */
 .imageButton {
-	width: 80px;
-	cursor: pointer;
-	border: 1px solid #ccc;
-	margin: 5px;
-	border-radius: 4px;
+  width: 100px;
+  padding: 10px;
+  background-color: #f4f8f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  margin-top: 15px;
 }
+.image-wrapper {
+  min-height: 20px;
+  margin-bottom: 20px;
+}
+.imageButton:hover {
+  border-color: #6ac56d;
+}
+
+/* 미리보기 콘텐츠 */
 #content {
-	min-height: 200px;
-	max-height: 300px; 
-	overflow-y:auto; 
-	border: 1px solid #ccc;
-	padding: 10px
+  min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccd5cc;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f9fdf9;
 }
 
 #content img {
-	max-width: 25%;
-	height: auto;
-	margin: 8px 0;
-	vertical-align: top; 
-	display: inline-block;
+  max-width: 25%;
+  height: auto;
+  margin: 8px;
+  vertical-align: top;
+  display: inline-block;
+  border-radius: 8px;
 }
-
+.readonly-box {
+  min-height: 120px;
+  padding: 12px;
+  background-color: #f9fdf9;
+  border: 1px solid #ccd5cc;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+}
+.boardList-btn{
+  background-color: #6ac56d;
+  color: white;
+  margin-button: 15px;
+}
+.register-btn{
+  background-color: #6ac56d;
+  color: white;
+  margin-button: 15px;
+}

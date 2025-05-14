@@ -7,11 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+<title>Serofit 게시글 작성</title>
 </head>
-<body>
+<body class="writeBoard-body">
 	<jsp:include page="../layout/header.jsp" />
-
+	
 	<!-- 콘텐츠 전체 컨테이너 -->
 	<div class="content-container">
 		<!-- 카테고리 선택 -->
@@ -57,33 +57,34 @@
 			<div class="button-group">
 				<button type="button" class="upload-button">이미지 업로드</button>
 			</div>
+			
 			<input type="file" id="imageInput" accept="image/*">
 			<!-- 이미지 버튼이 생길 영역 -->
+			<div class="image-wrapper">
 			<div id="imageButton"></div>
-
+			</div>
 			<!-- 사용법 및 주의사항 입력 -->
 			<div class="form-group">
-				<label for="description">사용 방법 설명 및 주의 사항</label>
-				<textarea id="description" rows="5" placeholder="설명을 입력하세요"></textarea>
+  				<label for="descriptionBox">사용 방법 설명 및 주의 사항</label>
+ 				<div id="descriptionBox" class="readonly-box">☆ 이미지 파일만 업로드 할수 있습니다. <br>☆ 이미지 업로드 버튼 클릭  >  이미지 선택  >  생성된 이미지버튼 클릭<br>☆ 이미지는 키보드커서 위치에 삽입됩니다.<br>☆ 10MB 이상의 이미지를 삽입 시 이미지의 화질이 저하될수 있습니다.</div>
 			</div>
 
 			<!-- 하단 액션 버튼 영역 -->
 			<div class="action-buttons">
 				<button type="button" class="boardList-btn">목록</button>
 				<button type="button" class="register-btn">작성 완료</button>
-
 			</div>
 			<!--  식단선택할때 dno 가져오는 용도 -->
 			<c:if test="${empty board}">				
 				<input type="hidden" id="dno" name="dno">
 				<input type="hidden" id="uno" name="uno">
-			</c:if>>
+			</c:if>
 			
 			<c:if test="${not empty board}">				
 				<input type="hidden" id="bno" name="bno" value="${board.bno}">
 				<input type="hidden" id="dno" name="dno" value="${board.dno}">
 				<input type="hidden" id="uno" name="uno" value="${board.uno}">
-			</c:if>>
+			</c:if>
 		</form>
 	</div>
 

@@ -49,13 +49,13 @@ public class CjsController {
 			return "redirect:/boardList";
 		}
 		
-		// 게시글 수정
-		@PostMapping("/updateBoard")
-		public String updatePost(BoardVO bvo ) {
-			System.out.println("inininin");
-			log.info("updatePost...." );
-			bService.updatePost(bvo);
-			return "redirect:/boardList";
-		}
+//		// 게시글 수정
+//		@PostMapping("/updateBoard")
+//		public String updatePost(BoardVO bvo ) {
+//			System.out.println("inininin");
+//			log.info("updatePost...." );
+//			bService.updatePost(bvo);
+//			return "redirect:/boardList";
+//		}
 
 }
