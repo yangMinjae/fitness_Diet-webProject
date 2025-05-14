@@ -1,112 +1,176 @@
-/* 제목 */
-.join-title {
-	font-size: 2.5rem;
-	font-weight: bold;
-	border-bottom: 3px solid #a67bc5;
-	display: inline-block;
-	padding-bottom: 10px;
+/* 기본 레이아웃 및 타이틀 등은 그대로 유지 */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #f4f8f4;
+  color: #000;
 }
 
-/* 전체 section */
 section.bg-light {
-	background-color: #ffffff;
-	padding: 50px 0;
+  background-color: transparent;
+  padding: 80px 0;
 }
 
-/* 카드 느낌 컨테이너 */
 .container-sm {
-	background-color: #eeffcc;
-	padding: 50px 40px;
-	border-radius: 12px;
-	max-width: 600px;
-	margin: 0 auto;
+  background-color: #eaf7ec;  /* 연베이지 카드 박스 */
+  padding: 60px 50px;
+  border-radius: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
 }
 
-/* 폼 라벨 */
+.join-title {
+  font-size: 2.7rem;
+  font-weight: bold;
+  color: black;
+  border-bottom: 3px solid #9d94c3;
+  padding-bottom: 12px;
+  display: inline-block;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
 .form-label {
-	font-weight: 600;
-	margin-bottom: 6px;
+  flex: 0 0 70px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
 }
 
-/* 입력창 */
+/* field-wrapper: input과 버튼을 같은 줄에 배치 */
+.field-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;  /* 버튼이 나타날 때 좌측 여백을 부드럽게 줌 */
+}
+
+/* 인풋 필드는 기본적으로 전체 공간 사용 */
 .form-control {
-	background-color: #f7eaea;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	padding: 13px;
-	margin-bottom: 10px;
+  flex: 1;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  transition: all 0.4s ease;
+  box-sizing: border-box;
 }
 
-/* 버튼 기본 */
+.form-control:focus {
+  border-color: #8cbf94;
+  outline: none;
+  box-shadow: 0 0 5px rgba(140, 191, 148, 0.3);
+}
+
+/* 중복확인 버튼: 초기 상태에선 너비 0, 여백 0, 투명도 0로 설정하여 레이아웃은 차지하되 보이지 않음 */
+.duplicate-btn {
+  flex: 0 0 auto;
+  width: 0;
+  opacity: 0;
+  padding: 0;
+  margin-left: 0;
+  background-color: #8cbf94;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+/* 버튼 등장 시: 버튼의 고정 너비(예: 90px)와 여백을 부여하여 input 필드가 자연스럽게 줄어듦 */
+.duplicate-btn.show-btn {
+  width: 90px;
+  opacity: 1;
+  padding: 12px 18px;
+  margin-left: 12px;
+}
+  
+.duplicate-btn:hover {
+  background-color: #7aa97d;
+}
+
+.input-no-btn {
+  margin-right: 10px; /* 버튼 너비 + gap 에 맞춰서 보정 */
+}
+
+/* 하단 버튼 그룹 */
+.form-group.text-center {
+  text-align: center;
+  margin-top: 50px;
+}
+
 .btn-primary {
-	background-color: #665c9c;
-	border: none;
-	padding: 12px 30px;
-	border-radius: 30px;
-	font-weight: bold;
-	color: white;
-	margin: 5px;
+  background-color: #8cbf94;
+  color: #fff;
+  padding: 14px 36px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 28px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 6px;
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-	background-color: #574d87;
-	opacity: 0.95;
+  background-color: #7aa97d;
+  transform: translateY(-2px);
 }
 
-/* 중복확인 버튼도 동일하게 중앙 정렬 */
-#duplicateCkBtn {
-	display: inline-block;
-	margin-top: 8px;
-	margin-bottom: 20px;
-}
-
-/* 버튼 컨테이너 중앙 정렬 */
-.form-group.text-center {
-	text-align: center;
-}
-
-/* 입력 그룹 여백 조정 */
-.form-group {
-	margin-bottom: 20px;
-}
-
-/* 중복확인 후 */
+/* 유효성 시각 피드백 (입력창 상태표시) */
 .input-verified {
-  background-color: #e9fbee !important; /* 더 확실하게 연두빛 */
-  border: 2px solid #28a745 !important; /* 더 진한 초록 테두리 */
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%2328a745" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708 0z"/></svg>');
+  background-color: #e4f7ea !important;
+  border: 2px solid #4cae4c !important;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%234cae4c" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708 0z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1rem 1rem;
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
+  padding-right: 2.2rem;
+  border-radius: 6px;
 }
 
-.input-group{
-	display: flex
-}
-
-/* 유효성 검사 css 실패 시 */
 .input-invalid {
-  border: 1px solid #e74c3c; /* 부드러운 빨간색 */
+  background-color: #fff5f5;
+  border: 1px solid #d66b6b;
+  box-shadow: 0 0 4px rgba(214, 107, 107, 0.3);
   background-image: url('data:image/svg+xml;utf8,<svg fill="%23e74c3c" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M1 21h22L12 2 1 21zM12 16h-1v-4h2v4zm0 4h-1v-2h2v2z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 20px 20px;
-  padding-right: 2.2rem; /* 아이콘 들어갈 공간 */
-  box-shadow: 0 0 5px rgba(231, 76, 60, 0.4);
-  border-radius: 4px;
-}
-
-/* 유효성 검사 css 성공 시 */
-.input-valid {
-  border: 1px dashed #5cb85c; /* 부드러운 초록색 점선 테두리 */
-  background-color: #f5fff8; /* 거의 흰색에 가까운 연한 초록 */
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 18px 18px;
   padding-right: 2.2rem;
   border-radius: 6px;
-  box-shadow: 0 0 3px rgba(92, 184, 92, 0.2);
-  transition: all 0.3s ease;
+}
+
+.input-valid {
+  border: 1px dashed #8cbf94;
+  background-color: #f5fff8;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(92, 184, 92, 0.2);
+  padding-right: 2.2rem;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .duplicate-btn,
+  .btn-primary {
+    width: 100%;
+  }
 }

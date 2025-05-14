@@ -16,7 +16,7 @@
 		</div>
 
 		<nav class="nav">
-			<a href="testPage">테스트</a> <span class="divider">|</span> <a
+			<a href="testPage">설문조사</a> <span class="divider">|</span> <a
 				href="boardPage">게시판</a> <span class="divider">|</span> <a
 				href="matePage">운동메이트</a>
 		</nav>

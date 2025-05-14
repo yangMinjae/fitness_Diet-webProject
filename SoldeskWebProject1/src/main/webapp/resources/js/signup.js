@@ -10,6 +10,9 @@ let isNickname = false;
 let isEmail = false;
 let isPw = false;
 
+const idCheckBtn = document.getElementById("duplicateCkIdBtn");
+const nickCheckBtn = document.getElementById("duplicateCkNnBtn");
+const emailCheckBtn = document.getElementById("duplicateCkEmBtn");
 // --- 정규식 ---
 const regExp = {
 		// 아이디 6자, 닉네임으로 바꾸기
@@ -35,9 +38,23 @@ function validateField(id) {
 
   const currentLabel = labels[id];
   
+  switch(id){
+  	case 'mId' : 
+  	  idCheckBtn.classList.toggle("show-btn", value);
+  		break;
+  	case 'mNickname' : 
+  	  nickCheckBtn.classList.toggle("show-btn", value);
+  		break;
+  	case 'mEmail' : 
+  	  emailCheckBtn.classList.toggle("show-btn", value);
+  		break;
+  }
+  
+  
   currentLabel.classList.remove("input-invalid", "input-valid");
   
   if (value === "") {
+	  
 	  currentLabel.classList.remove("input-invalid");
 	  currentLabel.classList.remove("input-valid");
 	  currentLabel.classList.remove("input-verified");
