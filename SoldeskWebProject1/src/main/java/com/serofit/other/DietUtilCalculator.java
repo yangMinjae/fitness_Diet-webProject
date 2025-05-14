@@ -4,8 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.serofit.domain.submitSurvey.AbstractSubmitDTO;
 import com.serofit.domain.submitSurvey.SubmitCommonDTO;
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
+import com.serofit.domain.submitSurvey.SubmitMuscleDTO;
+import com.serofit.domain.submitSurvey.SubmitStrengthDTO;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -21,8 +24,8 @@ public class DietUtilCalculator {
 	ratioMap.put("멸치 탈출", "50:25:25");
 	ratioMap.put("체중 유지","40:30:30");
 	ratioMap.put("건강 유지","40:30:30");
-	ratioMap.put("스트렝스", "45:30:25");
-	ratioMap.put("근성장", "50:25:25");
+	ratioMap.put("스트렝스 강화", "45:30:25");
+	ratioMap.put("근육 성장", "50:25:25");
 	}
 	
 	private int totalCal=0;
@@ -39,8 +42,10 @@ public class DietUtilCalculator {
 		this.totalCal = (int)(bmr*cDTO.getActivityLevel()+dietGoal*256.67);	
 		log.warn(totalCal);
 	}
-	public void setTotalCalExpert() {
-		
+	public void setTotalCalExpert(AbstractSubmitDTO aDTO) {
+		int dietSurplus=aDTO.getSurplus();
+		double bmr = aDTO.getcDTO().getWeight()*(1-aDTO.getcDTO().getFatRatio()/100.0)*21.6+370;
+		this.totalCal = (int)(bmr*aDTO.getcDTO().getActivityLevel()+dietSurplus);
 	}
 	
 	private double[] getDoubleRatio(String param) {
@@ -63,7 +68,24 @@ public class DietUtilCalculator {
 				result[i]=(int)(totalCal*ratio[i]/4)+"";
 			}
 		}
-		System.out.println("!!!!!"+Arrays.toString(result));
+		return result;
+	}
+	public String[] getNutrientsGram(AbstractSubmitDTO aDTO) {
+		// 탄단지 비율에 따라 탄단지 그램수를 반환한다.
+		// 매개변수로는 저탄고지, 고단백 식단등 탄단지 비율에 영향을 주는 타입 이름을 문자열로 받는다.
+		double[] ratio = getDoubleRatio(aDTO.getcDTO().getNGoal());
+		int nOfScoops = aDTO.getcDTO().getNOfScoops();
+		String[] result = new String[3];
+		for (int i = 0; i < result.length; i++) {
+			if(i==2) {
+				result[i]=(int)(totalCal*ratio[i]/9-2*nOfScoops)+"";
+			}else if(i==0){
+				result[i]=(int)(totalCal*ratio[i]/4-2*nOfScoops)+"";
+			}else {
+				result[i]=(int)(totalCal*ratio[i]/4-22*nOfScoops)+"";				
+			}
+		}
+	
 		return result;
 	}
 }

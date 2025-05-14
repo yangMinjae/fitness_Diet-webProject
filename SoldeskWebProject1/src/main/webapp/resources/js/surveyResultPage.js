@@ -1,5 +1,5 @@
 
-
+let f = document.forms[0];
 document.addEventListener("DOMContentLoaded", () => {
   const divs = document.querySelectorAll(".dietNutrition");
 
@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
   .forEach(ele=>{
 	  insertSubheading(ele);
   })
+  document.querySelectorAll('.details')[0].setAttribute('id','dietDetail');
+  setDietTbl();
 });
 
 function insertSubheading(div){
@@ -66,4 +68,30 @@ document.getElementById("printBtn").addEventListener("click", () => {
 
 	  html2pdf().set(opt).from(element).save();
 	});
+function fetchDiet(formA){
+  const formData = new FormData(formA);
 
+  // 콘솔에 폼 데이터 출력
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
+  fetch('/survey/insertDiet',{
+    method:'put',
+    body:JSON.stringify(Object.fromEntries(formData.entries())),
+    headers:{
+      'Content-Type':'application/json; charset=utf-8'
+    }
+  })
+  .then(res=>res.text())
+  .then(text=>console.log(text))
+  .catch(err=>console.log(err));
+}
+function initSurveyResult(){
+  f.title.value = document.querySelector("#dietTitle").textContent;
+  f.content.value = document.querySelector('#mainBlock').innerHTML;
+}
+
+function setDietTbl(){
+  initSurveyResult();
+  fetchDiet(f);
+}

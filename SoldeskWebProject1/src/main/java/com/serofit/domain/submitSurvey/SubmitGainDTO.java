@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class SubmitGainDTO extends AbstractSubmitDTO{
 	private int gainGoal;
 	private String gainExperience;
-	private int gainSnacks;
 	private String gainDifficulties;
 }

@@ -11,10 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.serofit.domain.DietVO;
+import com.serofit.domain.ValTagEnum;
 import com.serofit.domain.submitSurvey.SubmitDietDTO;
 import com.serofit.domain.submitSurvey.SubmitGainDTO;
 import com.serofit.domain.submitSurvey.SubmitHealthDTO;
@@ -36,12 +39,11 @@ public class SurveyController {
 	@PostMapping(value = "/submitDiet", consumes = "application/json;charset=UTF-8",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processDietResult(@RequestBody SubmitDietDTO dDTO, HttpSession session) {
-		log.warn(dDTO.getcDTO());
 		boolean result = sService.updateTbl(dDTO);
 		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(dDTO);
 		session.setAttribute("result", aiResult);
-		session.setAttribute("goal", dDTO.getcDTO().getGoal());
+		session.setAttribute("goal", ValTagEnum.toLabel(dDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 	@GetMapping("/surveyResultPage")
@@ -54,71 +56,63 @@ public class SurveyController {
 	@PostMapping(value = "/submitGain", consumes = "application/json",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processGainResult(@RequestBody SubmitGainDTO gDTO, HttpSession session) {
-		log.warn(gDTO);
 		boolean result = sService.updateTbl(gDTO);
 		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(gDTO);
 		session.setAttribute("result", aiResult);
-		session.setAttribute("goal", gDTO.getcDTO().getGoal());
+		session.setAttribute("goal", ValTagEnum.toLabel(gDTO.getcDTO().getGoal()));
 		return "ok";
-	}
-
-	@PostMapping("/submitStrength")
-	public String processProResult(Model model) {
-		return "";
 	}
 
 	@PostMapping(value = "/submitHealth", consumes = "application/json",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processHealthResult(@RequestBody SubmitHealthDTO hDTO, HttpSession session) {
-		log.warn(hDTO);
 		boolean result = sService.updateTbl(hDTO);
 		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(hDTO);
 		session.setAttribute("result", aiResult);
-		session.setAttribute("goal", hDTO.getcDTO().getGoal());
+		session.setAttribute("goal", ValTagEnum.toLabel(hDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 
 	@PostMapping(value = "/submitMaintain", consumes = "application/json",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processMaintainResult(@RequestBody SubmitMaintainDTO mDTO, HttpSession session) {
-		log.warn(mDTO);
 		boolean result = sService.updateTbl(mDTO);
 		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(mDTO);
 		session.setAttribute("result", aiResult);
-		session.setAttribute("goal", mDTO.getcDTO().getGoal());
+		session.setAttribute("goal", ValTagEnum.toLabel(mDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 	
 	@PostMapping(value = "/submitStrength", consumes = "application/json",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processStrengthResult(@RequestBody SubmitStrengthDTO sDTO, HttpSession session) {
-		log.warn(sDTO);
-		log.warn(sDTO.getcDTO());
-//		boolean result = sService.updateTbl(sDTO);
-//		System.out.println("테이블 수정 결과 : "+result);
-//		Map<String,String> aiResult = sService.makeAiGeneratedData(sDTO);
-//		session.setAttribute("result", aiResult);
-//		session.setAttribute("goal", sDTO.getcDTO().getGoal());
+		boolean result = sService.updateTbl(sDTO);
+		System.out.println("테이블 수정 결과 : "+result);
+		Map<String,String> aiResult = sService.makeAiGeneratedData(sDTO);
+		session.setAttribute("result", aiResult);
+		session.setAttribute("goal", ValTagEnum.toLabel(sDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 	
 	@PostMapping(value = "/submitMuscle", consumes = "application/json",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processMuscleResult(@RequestBody SubmitMuscleDTO mDTO, HttpSession session) {
-		log.warn(mDTO);
 		boolean result = sService.updateTbl(mDTO);
 		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(mDTO);
 		session.setAttribute("result", aiResult);
-		session.setAttribute("goal", mDTO.getcDTO().getGoal());
+		session.setAttribute("goal", ValTagEnum.toLabel(mDTO.getcDTO().getGoal()));
 		return "ok";
 	}
-	@GetMapping("/resultTest")
-	public void surveyResultTest() {
-		
+	@PutMapping(value = "/insertDiet", consumes = "application/json", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String insertDiet(@RequestBody DietVO dvo) {
+		log.warn(dvo);
+		sService.insertDiet(dvo);
+	    return "저장 완료";
 	}
 	
 }

@@ -6,6 +6,10 @@ import java.util.Arrays;
 public abstract class AbstractSubmitDTO {
 
     private SubmitCommonDTO cDTO = new SubmitCommonDTO();
+    
+    
+    private int surplus;
+    private String nOrsScript;
 
     public SubmitCommonDTO getcDTO() {
         return cDTO;
@@ -105,4 +109,48 @@ public abstract class AbstractSubmitDTO {
     public void setGoal(String raw) {
         getOrCreateCDTO().setGoal(raw);
     }
+    
+    @JsonProperty("cDTO.nOfSnacks")
+    public void setSnacks(int raw) {
+        getOrCreateCDTO().setNOfSnacks(raw);
+    }
+    
+    @JsonProperty("cDTO.fatRatio")
+    public void setFatRatio(int raw) {
+        getOrCreateCDTO().setFatRatio(raw);
+    }
+    
+    @JsonProperty("cDTO.nOfScoops")
+    public void setScoops(int raw) {
+        getOrCreateCDTO().setNOfScoops(raw);
+    }
+    
+    @JsonProperty("cDTO.restDays")
+    public void setRestDays(int raw) {
+        getOrCreateCDTO().setRestDays(raw);;
+    }
+    
+    @JsonProperty("cDTO.nGoal")
+    public void setNGoal(String raw) {
+    	getOrCreateCDTO().setNGoal(raw);
+    }
+
+	public int getSurplus() {
+		return surplus;
+	}
+
+	public void setSurplus(int surplus) {
+		this.surplus = surplus;
+	}
+
+	public String getnOrsScript() {
+		return nOrsScript;
+	}
+
+	public void setnOrsScript(String nOrsScript) {
+		this.nOrsScript = nOrsScript;
+	}
+	
+	
+    
 }

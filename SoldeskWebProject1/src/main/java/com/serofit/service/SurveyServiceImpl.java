@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.serofit.domain.DietVO;
 import com.serofit.domain.MateVO;
 import com.serofit.domain.UpdateTagDTO;
 import com.serofit.domain.ValTagEnum;
@@ -15,12 +16,14 @@ import com.serofit.domain.submitSurvey.SubmitDietDTO;
 import com.serofit.domain.submitSurvey.SubmitGainDTO;
 import com.serofit.domain.submitSurvey.SubmitHealthDTO;
 import com.serofit.domain.submitSurvey.SubmitMaintainDTO;
+import com.serofit.mapper.DietMapper;
 import com.serofit.mapper.MateMapper;
 import com.serofit.mapper.UProfileMapper;
 import com.serofit.other.DietScriptGenerator;
 import com.serofit.other.GainScriptGenerator;
 import com.serofit.other.HealthScriptGenerator;
 import com.serofit.other.MaintainScriptGenerator;
+import com.serofit.other.ProScriptGenerator;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,6 +36,9 @@ public class SurveyServiceImpl implements SurveyService {
 	
 	@Autowired
 	UProfileMapper uMapper;
+	
+	@Autowired
+	DietMapper dMapper;
 	
 	@Autowired
 	AiService aService;
@@ -71,9 +77,6 @@ public class SurveyServiceImpl implements SurveyService {
 		int result1 = mMapper.deleteMate(mVO.getUno());
 		int result2 = mMapper.insertMate(mVO);
 		int result3 = uMapper.updateTag(uDTO);
-		log.warn(mVO);
-		log.warn(uDTO);
-		System.out.println(result1+result1+result3);
 		return result1+result2+result3>=3?true:false;
 	}
 	
@@ -123,7 +126,12 @@ public class SurveyServiceImpl implements SurveyService {
 			break;
 			
 		case "프로 득근러":
+			ProScriptGenerator psg = new ProScriptGenerator(aDTO);
+			prompts.put(DIET,psg.getDietScript());
+			prompts.put(ROUTINE,psg.getRoutineScript());
+			prompts.put(ADVICE,psg.getAdviceScript());
 			
+			result = requestToApi(prompts);
 			break;
 		}
 		return result;
@@ -138,6 +146,10 @@ public class SurveyServiceImpl implements SurveyService {
 		}
 		
 		return result;
+	}
+	
+	public boolean insertDiet(DietVO dvo) {
+		return dMapper.insertDiet(dvo)>=1 ? true : false;
 	}
 
 }

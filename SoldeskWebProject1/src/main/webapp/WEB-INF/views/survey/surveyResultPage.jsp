@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://www.springframework.org/security/tags" prefix = "sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,13 @@
 			</div>
 		</c:forEach>
 	</div>
+	<sec:authentication property="principal" var="pinfo"/>
+	<form>
+		<input type="hidden" name="uno" value="${pinfo.uno}">
+		<input type="hidden" name="title" value="">
+		<input type="hidden" name="tag" value="${goal}">
+		<input type="hidden" name="content" value="">
+	</form>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/surveyResultPage.js"></script>

@@ -24,4 +24,10 @@ public class SubmitCommonDTO {
 	private String[] supplements;
 	private String recipeComplexity;
 	private String goal;
+	
+	private int nOfSnacks;
+	private int fatRatio;
+	private int nOfScoops;
+	private int restDays;
+	private String nGoal;
 }

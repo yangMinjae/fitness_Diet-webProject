@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://www.springframework.org/security/tags" prefix = "sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,19 @@
 <body>
 	<jsp:include page="../layout/header.jsp" />
 	<jsp:include page="loadingModal.jsp"></jsp:include>
+	<sec:authentication property="principal" var="pinfo"/>
 	<div class="container">
 		<h1>라이프스타일 설문조사</h1>
 		<form id="surveyForm" method="post">
 			<section>
-			<input type="hidden" name="cDTO.uno" value="4">
+			<input type="hidden" name="cDTO.uno" value="${pinfo.uno}">
 				<h2>공통 정보</h2>
 				<!-- 기존 입력 항목 -->
-
+				<input type="hidden" name="cDTO.fatRatio" value="">
+				<input type="hidden" name="cDTO.nOfSnacks" value="">
+				<input type="hidden" name="cDTO.nOfScoops" value="">
+				<input type="hidden" name="cDTO.restDays" value="">
+				<input type="hidden" name="cDTO.nGoal" value="">
 				<label>키 (cm) : 
 					<input type="number" name="cDTO.height"min="0" required />
 				</label>
@@ -36,18 +42,14 @@
 						<option value="false">여성</option>
 					</select>
 				</label>
-				<label>
-					지역(추후수정) : 
-					<select name="cDTO.area">
-						<option value="">-- 선택하세요 --</option>
-						<option value="경기도">경기</option>
-						<option value="전라도">전라</option>
-						<option value="경상도">경상</option>
-						<option value="강원도">강원</option>
-						<option value="제주도">제주</option>
-						<option value="충청도">충청</option>
-					</select>
-				</label>
+				<section>
+				  지역 선택 :
+				  <div class="region-select-wrapper">
+				    <button type="button" onclick="openModal()" class="region-btn">지역 선택</button>
+				    <span id="showArea" class="selected-region">선택되지 않음</span>
+				  </div>
+				</section>
+				<input type="hidden" name="cDTO.area" id="areaInput" value="">
 				<label>
 					운동 시간대 : 
 					<select name="cDTO.workoutTime">
@@ -227,7 +229,7 @@
 				<label>목표 유형: 
 					<select name="proGoalType" id="proGoalTypeSelect">
 						<option value="">-- 선택하세요 --</option>
-						<option value="스트렝스 강화">스트랭스 강화</option>
+						<option value="스트렝스 강화">스트렝스 강화</option>
 						<option value="근육 성장">근육 성장</option>
 					</select>
 				</label>
@@ -271,7 +273,7 @@
 						</select>
 					</label> 
 					<label>주당 휴식일: 
-						<select name="restDays">
+						<select name="sRestDays">
 							<option value="">-- 선택하세요 --</option>
 							<option value="0">주 0회</option>
 							<option value="1">주 1회</option>
@@ -283,12 +285,13 @@
 
 				<!-- 💪 근육 성장 -->
 				<div id="proMuscleSection" class="hidden">
-					<label>근육량 / 체지방률: 
-						<input type="text" name="muscleStats" placeholder="예: 근육량 33kg / 체지방률 15%" />
+					<label>체지방률(%): 
+						<input type="number" name="muscleStats" max="99" min="1"/>
 					</label> 
 					<label> 추천 받을 운동 분할 방식: 
 						<select name="muscleSplit">
-							<option value="0">잘 모름</option>
+							<option value="">-- 선택하세요 --</option>
+							<option value="3">잘 모름</option>
 							<option value="2">2분할</option>
 							<option value="3">3분할</option>
 							<option value="4">4분할</option>
@@ -296,6 +299,7 @@
 					</label> 
 					<label>끼니 외 간식 횟수: 
 						<select name="muscleSnacks">
+							<option value="">-- 선택하세요 --</option>
 							<option value="1">일 1회</option>
 							<option value="2">일 2회</option>
 							<option value="3">일 3회</option>
@@ -303,6 +307,7 @@
 					</label> 
 					<label>보충제 스쿱 수: 
 						<select name="muscleScoops">
+							<option value="">-- 선택하세요 --</option>
 							<option value="1">1 스쿱</option>
 							<option value="2">2 스쿱</option>
 							<option value="3">3 스쿱</option>
@@ -310,8 +315,18 @@
 					</label> 
 					<label>원하는 체형: 
 						<select name="muscleType">
-							<option value="big">그냥 큰 몸</option>
-							<option value="physique">피지크 몸</option>
+							<option value="">-- 선택하세요 --</option>
+							<option value="보디빌더 체형">보디빌더 체형</option>
+							<option value="피지크 체형">피지크 체형</option>
+						</select>
+					</label>
+					<label>주당 휴식일: 
+						<select name="mRestDays">
+							<option value="">-- 선택하세요 --</option>
+							<option value="0">주 0회</option>
+							<option value="1">주 1회</option>
+							<option value="2">주 2회</option>
+							<option value="3">주 3회</option>
 						</select>
 					</label>
 				</div>
@@ -406,8 +421,9 @@
 			<button type="submit" id="testbtn">제출</button>
 		</form>
 	</div>
-
+	<jsp:include page="../user/region.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
+<script type="text/javascript" src="/resources/js/region.js"></script>
 <script type="text/javascript" src="/resources/js/survey.js"></script>
 </html>
