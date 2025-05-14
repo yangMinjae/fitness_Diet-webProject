@@ -1,6 +1,6 @@
 /* 전체 영역 */
 .mate-slider-wrapper {
-  width: 960px;
+  width: 1200px;  /* 기존 960px → 넓혀서 5개 넉넉히 들어가게 */
   margin: 0 auto;
   overflow: hidden;
 }
@@ -12,8 +12,8 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   gap: 20px;
-  padding: 10px;
-  height: 220px;
+  padding: 30px 10px;
+  height: 500px; /* 🔼 기존 360px → 440px로 확장 */
   justify-content: flex-start;
 }
 
@@ -23,18 +23,21 @@
 
 /* 개별 카드 */
 .mate-item {
-  flex: 0 0 220px;
-  height: 220px;
+  flex: 0 0 220px; /* 기존 180px → 넓게 */
+  height: 510px;   /* 🔼 기존 340 → 420px로 충분히 확장 */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  overflow: hidden;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
   cursor: pointer;
   position: relative;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .mate-item:hover {
@@ -44,10 +47,43 @@
 /* 카드 이미지 */
 .user-icon {
   width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  padding: 0;
+  height: 180px;             /* 🔼 이미지 높이 확장: 카드 내부에서 차지할 공간 지정 */
+  object-fit: cover;         /* 이미지를 비율 유지하며 꽉 채우게 */
+  margin-bottom: 10px;
+  border-radius: 12px;       /* 이미지에도 둥근 테두리 적용하면 좀 더 세련됨 */
+}
+
+/* 사용자 정보 */
+.mate-info {
+  text-align: left;
+  font-size: 0.88rem;         /* 살짝 키움 */
+  line-height: 1.6;           /* 줄 간격 확보 */
+  margin-top: 20px;
+  padding: 0 6px;             /* 좌우 여백 추가 */
+  color: #333;
+  flex-grow: 1;               /* 남는 공간 채우기 (optional) */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mate-info .nickname {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.mate-info .tag {
+  color: #6ac56d;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.mate-info p {
+  margin: 4px 0;              /* 여백 약간만 증가 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 좌우 커서 */
@@ -69,41 +105,63 @@
 
 /* 필터 영역 */
 .filter-container {
+  position: fixed;
+  top: 240px;
+  left: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 20px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.15);  /* ✨ 반투명 배경 */
+  backdrop-filter: blur(12px);                 /* ✨ 유리효과 핵심 */
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .filters-row {
   display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin-bottom: 12px;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .filters-row select {
-  padding: 8px 12px;
+  width: 140px;
+  padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #cfe4d1;
-  background-color: #fff;
-  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);  /* 밝은 반투명 */
+  font-size: 0.95rem;
   color: #34495e;
+  transition: border-color 0.2s;
+}
+
+.filters-row select:focus {
+  outline: none;
+  border-color: #6ac56d;
+  box-shadow: 0 0 5px rgba(106, 197, 109, 0.3);
+}
+
+.reset-btn-wrap {
+  margin-top: 12px;
 }
 
 .reset-btn-wrap button {
-  background-color: #6ac56d;
-  color: #fff;
-  padding: 10px 20px;
+  width: 140px;
+  background-color: #4d5a63; /* 진한 회색 계열 */
+  color: #ffffff;
+  padding: 10px 14px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .reset-btn-wrap button:hover {
-  background-color: #5da258;
+  background-color: #34495e; /* 살짝 진하게 */
 }
 
 /* 제목 */
@@ -180,51 +238,12 @@
   50% { transform: translateY(8px); }
 }
 
-/* 오버레이 정보 */
+/* 불필요해진 오버레이 비활성화 */
 .mate-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  padding: 8px;
-  box-sizing: border-box;
-  font-size: 0.8rem;
-  text-align: center;
-  pointer-events: none;
+  display: none !important;
 }
 
-.mate-overlay p {
-  margin: 2px 0;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mate-overlay .nickname {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 4px;
-}
-
-.mate-overlay .tag {
-  color: #6ac56d;
-  font-weight: 600;
-}
-
-.mate-item:hover .mate-overlay {
-  opacity: 1;
-}
-
+/* 가이드 버튼 */
 .scroll-guide-buttons {
   display: flex;
   gap: 10px;
@@ -246,6 +265,7 @@
   background-color: #5da258;
 }
 
+/* 빈 데이터 메시지 */
 .empty-message {
   display: none;
   text-align: center;
@@ -257,9 +277,127 @@
 }
 
 #sendEmptyMessage.empty-message {
-  margin-bottom: 236px;
+  margin-top: 300px;
+  margin-bottom: 120px;
 }
 
-#difEmptyMessage.empty-message {
-  margin-bottom: 30px;
+/* 메일 보내기 버튼 */
+.send-msg-btn {
+  background-color: #4d5a63;
+  color: white;
+}
+
+.send-msg-btn:hover {
+  background-color: #34495e;
+}
+
+/* 기본 팔로우 버튼 스타일 */
+.follow-btn {
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* 팔로우 버튼 (팔로우 안 한 상태) */
+#follow.follow-btn.follow {
+    background-color: #219150;
+    opacity: 1;
+}
+
+#follow.follow-btn.follow:hover {
+    background-color: #176936;
+}
+
+/* 팔로잉 버튼 (팔로우 중 상태) */
+#following.follow-btn.following {
+    background-color: #5A6A7A;
+    opacity: 0.85;
+}
+
+#following.follow-btn.following:hover {
+    background-color: #495765;
+    opacity: 1;
+}
+
+.mate-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 70px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.mate-buttons button {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 9999px; /* ✅ 완전 둥글게 */
+  white-space: nowrap;   /* ✅ 줄바꿈 방지 */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mate-item.hidden {
+  display: none !important;
+}
+
+.scroll-end-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.scroll-end-overlay.show {
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.scroll-end-overlay.hide {
+  animation: fadeOut 0.3s ease forwards;
+}
+.scroll-end-message {
+  background-color: white;
+  color: black;
+  padding: 16px 32px;
+  border-radius: 9999px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  animation: zoomIn 0.3s ease forwards;
+}
+
+.scroll-end-overlay.hide .scroll-end-message {
+  animation: zoomOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes zoomOut {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.8); opacity: 0; }
 }

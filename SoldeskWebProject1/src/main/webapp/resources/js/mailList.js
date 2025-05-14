@@ -1,6 +1,6 @@
 //-----CSS 파일 추가
 //1. 파일 경로 설정
-const CSS_FILE_PATH = ['/resources/css/mail.css', '/resources/css/mailModal.css', '/resources/css/sendMailModal.css'];
+const CSS_FILE_PATH = ['/resources/css/mailList.css', '/resources/css/mailModal.css', '/resources/css/sendMailModal.css'];
 //2. link 태그 생성
 CSS_FILE_PATH.forEach(css => {
 	let linkEle = document.createElement('link');

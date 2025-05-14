@@ -56,13 +56,19 @@ public class MatePageServiceImpl implements MatePageService{
 	@Transactional
 	public List<MateDTO> findMateList(int uno) {
 		List<MateDTO> mateList = new ArrayList<>();
+		
 		for (MateVO mvo : mMapper.findByNotUno(uno)) {
 			MateDTO dto = new MateDTO();
+			FollowVO fvo = new FollowVO();
 			
 			if (uPMapper.getUnoByMate(mvo.getUno()) != null) {
+				fvo.setThrower(uno);
+				fvo.setCatcher(mvo.getUno());
+				
 				dto.setMvo(mvo);
 				dto.setPvo(uPMapper.getUnoByMate(mvo.getUno()));
 				dto.setDto(mservice.getProfileSet(dto.getPvo().getUno()));
+				dto.setChecker(fMapper.checkIfFollow(fvo));
 				
 				mateList.add(dto);
 			}			

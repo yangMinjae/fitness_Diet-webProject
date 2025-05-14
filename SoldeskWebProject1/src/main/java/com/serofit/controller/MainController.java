@@ -20,6 +20,7 @@ import com.serofit.service.HFService;
 import com.serofit.service.MailService;
 import com.serofit.service.MainPageService;
 import com.serofit.service.MatePageService;
+import com.serofit.service.MyPageService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -41,6 +42,9 @@ public class MainController {
 	
 	@Autowired
 	MatePageService mtpService;
+	
+	@Autowired
+	MyPageService mypService;
 	
 	// 서버 구동 시 mainPage
 	@GetMapping()
@@ -99,7 +103,9 @@ public class MainController {
 		
 		model.addAttribute("user", mtpService.selectByUno(customUser.getUno()));
 		model.addAttribute("mateList", mtpService.findMateList(customUser.getUno()));
-			
+		
+		System.out.println(mtpService.findMateList(customUser.getUno()));
+		
 		return "/user/matePage";
 	}
 	

@@ -9,8 +9,10 @@
 </head>
 <body class="mate-page">
 	<jsp:include page="../layout/header.jsp" />
-	<div id="find-profile-modal"></div>
 	
+	<div class="scroll-end-overlay" id="scrollEndOverlay">
+	  <div class="scroll-end-message">마지막 데이터입니다.</div>
+	</div>
 	
 	<!-- 왼쪽 리모컨 스타일 사이드바 -->
 	<div class="page-wrapper">
@@ -35,7 +37,17 @@
 		</div>
 		<div class="filter-container">
 		  <div class="filters-row">
-		    <select id="time">
+		  
+		    <select id="fileterTag">
+		      <option value="::">태그</option>
+		      <option value="헬스키퍼">헬스키퍼</option>
+		      <option value="멸치탈출">멸치탈출</option>
+		      <option value="프로득근러">프로득근러</option>
+		      <option value="유지어터">유지어터</option>
+		      <option value="다이어터">다이어터</option>
+		    </select>
+		    
+		    <select id="fileterTime">
 		      <option value="::">운동시간대</option>
 		      <option value="08:00~09:59">08:00~09:59</option>
 		      <option value="10:00~11:59">10:00~11:59</option>
@@ -48,21 +60,20 @@
 		      <option value="00:00~07:59">00:00~07:59</option>
 		    </select>
 		
-		    <select id="gender">
+		    <select id="fileterGender">
 		      <option value="::">성별</option>
 		      <option value="men">남자</option>
 		      <option value="women">여자</option>
 		    </select>
 		
-		    <select id="age">
+		    <select id="fileterAge">
 		      <option value="::">나이</option>
 		      <option value="10대">10대</option>
 		      <option value="20대">20대</option>
 		      <option value="30대">30대</option>
-		      <option value="40대">40대</option>
-		      <option value="50대">50대</option>
-		      <option value="60대">60대</option>
+		      <option value="40대 이상">40대 이상</option>
 		    </select>
+		    
 	  		<div class="reset-btn-wrap">
 	    		<button type="button" id="resetBtn">초기화</button>
 	  		</div>
@@ -77,11 +88,20 @@
 			<c:set var="check" value="false" />
 			<c:forEach var="mate" items="${mateList}">
 				<c:set var="check" value="true" />
-				<div id="eqTag" class="mate-item" data-time="${mate.mvo.time}"
-								data-gender="${mate.mvo.gender}" data-age="${mate.mvo.age}">
+				<div id="eqTag" class="mate-item" 
+						data-time="${mate.mvo.time}"
+						data-gender="${mate.mvo.gender}" 
+						data-age="${mate.mvo.age}"
+						data-area="${mate.mvo.area}"
+						data-nickname="${mate.dto.nickname}"
+						data-tag="${mate.pvo.tag}"
+						data-uno="${mate.mvo.uno}"
+						data-checker="${mate.checker}">
+								
 					<!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
-					<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" /> 
-					<div class="mate-overlay">
+					<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" />
+					
+					<div class="mate-info">
 					  <p class="nickname">${mate.dto.nickname}</p>
 					  <p class="tag">#${mate.pvo.tag}</p>
 					  <p>성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
@@ -89,17 +109,32 @@
 					  <p>운동시간대 : ${mate.mvo.time}</p>
 					  <p>지역 : ${mate.mvo.area}</p>
 					</div>
+					
+					<div class="mate-buttons">
+					
+					  <c:if test="${mate.checker eq '1'}">
+					    <button class="follow-btn following" id="following" data-uno="${mate.mvo.uno}">팔로잉</button>
+					  </c:if>
+					  <c:if test="${mate.checker eq '0'}">
+					    <button class="follow-btn follow" id="follow" data-uno="${mate.mvo.uno}">팔로우</button>
+					  </c:if>
+					
+					
+					<button class="send-msg-btn">메일 보내기</button>
+					</div>
+					
+					<!-- 숨김 데이터 -->
 					<span class="uno" hidden="true">${mate.mvo.uno}</span>
 					<span class="tag" hidden="true">${mate.pvo.tag}</span>
 					<span class="userTag" hidden="true">${user.tag}</span>		
 					<span class="userUno" hidden="true">${user.uno}</span>
-					
 				</div>
 			</c:forEach>
 		</main>
 	</div>
+	<jsp:include page="sendMailModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 	<script type="text/javascript" src="/resources/js/matePage.js"></script>
-	<script type="text/javascript" src="/resources/js/profileModal.js"></script>
+	<script type="text/javascript" src="/resources/js/sendMailModal.js"></script>
 </body>
 </html>

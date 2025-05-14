@@ -20,6 +20,7 @@ import com.serofit.mapper.FollowMapper;
 import com.serofit.service.LoginService;
 import com.serofit.service.MailService;
 import com.serofit.service.MatePageService;
+import com.serofit.service.MyPageService;
 import com.serofit.service.SignupService;
 
 import lombok.extern.log4j.Log4j;
@@ -33,22 +34,10 @@ public class MateController {
 	MatePageService mtpService;
 	
 	@Autowired
-	FollowMapper fMapper;
+	MyPageService mpService;
 	
 	@Autowired
 	MailService mService;
-	
-	// 운동 메이트 찾기 화면에서 유저 프로필 불러오기(모달 띄우기)
-	@GetMapping("/findProfile")
-	public String findProfile(Model model, @RequestParam int uno, @RequestParam int userUno) {
-		// 팔로우를 하고 있는지 확인
-		model.addAttribute("result", mtpService.checkIfFollow(uno, userUno));
-		
-		// 클릭한 사람의 정보 가져오기
-		model.addAttribute("profile", mtpService.findProfile(uno));
-		
-		return "/user/profile";
-	};
 	
 	// 팔로우 취소 시 
 	@PostMapping("/unfollow")
@@ -60,7 +49,7 @@ public class MateController {
 		
 		// 언팔을 당하는 사람
 		fvo.setCatcher(uno);
-		return fMapper.unFollow(fvo) == 1;
+		return mpService.unfollow(fvo);
 	}
 	
 	// 팔로우 시
@@ -73,7 +62,7 @@ public class MateController {
 		
 		// 팔로우 당하는 사람
 		fvo.setCatcher(uno);
-		return fMapper.follow(fvo) == 1;
+		return mpService.follow(fvo);
 	}
 	
 	// 쪽지 보내기

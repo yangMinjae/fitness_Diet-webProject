@@ -14,7 +14,7 @@
 		
 				<!-- 상단: 프로필 이미지 + 이름 -->
 				<div class="modal-header">
-					<h2 id="senderName">쪽지 보내기</h2>
+					<h2 id="senderName">메일 보내기</h2>
 				</div>
 				
 				<!-- 메일 본문 -->

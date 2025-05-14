@@ -14,4 +14,5 @@ public class MateDTO {
 	private UProfileVO pvo;
 	private ProfileDTO dto;
 	private MateVO mvo;
+	private int checker;
 }

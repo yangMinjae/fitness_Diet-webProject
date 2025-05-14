@@ -1,5 +1,5 @@
 /* 모달 전체 배경 */
-#find-profile-modal {
+#profile-modal {
 	display: none;
 	position: fixed;
 	top: 0; left: 0;
@@ -14,14 +14,14 @@
 }
 
 /* 모달이 열릴 때 */
-#find-profile-modal.show {
-	display: flex; /* display: block; 제거 */
+#profile-modal.show {
+	display: flex;
 	opacity: 1;
 	pointer-events: auto;
 }
 
 /* 모달 박스 */
-.profile-modal-content {
+#profile-modal-content {
 	background-color: #F5F7FA;
 	width: 80%;
 	max-width: 800px;
@@ -48,7 +48,7 @@
 }
 
 /* 제목 */
-.profile-title .nickname {
+.profile-title #profile-nickname {
     font-size: 1.5rem;
     font-weight: 700;
     margin-right: 8px;
@@ -100,22 +100,22 @@
 }
 
 /* 팔로우 버튼 (팔로우 안 한 상태) */
-#find-profile-modal .follow-btn.follow {
+#follow.follow-btn.follow {
     background-color: #219150;
     opacity: 1;
 }
 
-.follow-btn.follow:hover {
+#follow.follow-btn.follow:hover {
     background-color: #176936;
 }
 
 /* 팔로잉 버튼 (팔로우 중 상태) */
-#find-profile-modal .follow-btn.following {
+#following.follow-btn.following {
     background-color: #5A6A7A;
     opacity: 0.85;
 }
 
-.follow-btn.following:hover {
+#following.follow-btn.following:hover {
     background-color: #495765;
     opacity: 1;
 }

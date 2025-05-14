@@ -52,6 +52,6 @@
 	<jsp:include page="../user/sendMailModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
-<script type="text/javascript" src="/resources/js/mail.js"></script>
-<script type="text/javascript" src="/resources/js/profileModal.js"></script>
+<script type="text/javascript" src="/resources/js/mailmailList.js"></script>
+<script type="text/javascript" src="/resources/js/sendMailModal.js"></script>
 </html>
