@@ -140,6 +140,7 @@ public class BoardController {
 		model.addAttribute("bList", jsonBList);
 		return "/board/boardView";
 	}
+	
 	// 게시글 수정
 	@PostMapping("/updateBoard")
 	public String updatePost(BoardVO bvo ) {
@@ -190,7 +191,6 @@ public class BoardController {
 		
 		return "board/writeBoard";
 	}
-	
 
 	
 	// 게시글 삭제

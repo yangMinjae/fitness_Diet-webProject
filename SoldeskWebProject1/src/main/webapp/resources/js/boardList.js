@@ -7,9 +7,7 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
 
-//const form = document.forms[0];
 let f= document.forms[0];
-
 
 //버튼 이벤트 추가
 document.querySelectorAll('button').forEach(button=>{
@@ -34,7 +32,7 @@ document.querySelectorAll('button').forEach(button=>{
 		        });
 	
 		}else if(type === 'dieter'){	
-			console.log("dieter");
+			console.log("dieter");		
 			getBoardListByTag("다이어터");
 		}else if(type === 'escapeAnchovy'){
 			console.log("escapeAnchovy");
@@ -67,12 +65,12 @@ function getAllBoardList(posts) {
 	let str = '';  
 
 	posts.forEach(post => {
-		const formattedDate = new Date(post.regdate).toLocaleDateString('ko-KR');
+		const formattedDate = formatDateToYMD(post.regdate);
 		str += 
 			`
 				<tr>
 					<td>
-						<a href="/board/${post.title}">${post.title}</a> [#${post.tag}]
+						<a href="/board/boardView?bno=${post.bno}">${post.title}</a> [#${post.tag}]
 					</td>
 					<td>${post.nickname}</td>
 					<td>${formattedDate}</td>
@@ -131,3 +129,11 @@ document.querySelectorAll('a').forEach(a=>{
 		}
 	});
 });
+// 날짜 형식 바꾸기
+function formatDateToYMD(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+}
