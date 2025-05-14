@@ -9,48 +9,69 @@ document.head.appendChild(linkEle);
 
 const form = document.forms[0];
 
-let f= document.forms[0];
-
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('like-btn').addEventListener('click', function(e){
-	  let bno = e.target.getAttribute("bno");
-	  
-	  fetch('/board//boardView/love',{
-		    method : 'post',
-		    body:JSON.stringify({
-		      uno : 3,
-		      bno : bno
-		    }),
-		    headers : {
-		      'Content-Type' : 'application/json; charset=utf-8'
+	const likeBtn = document.getElementById('like-btn');
+	const unLikeBtn = document.getElementById('unlike-btn');
+	const updateBtn = document.getElementById('edit-btn');
+	const deleteBtn = document.getElementById('delete-btn');
+	
+	if(likeBtn){
+		likeBtn.addEventListener('click', function(){			  
+			  fetch('/board/boardView/love',{
+				    method : 'post',
+				    body:JSON.stringify({
+				      uno : form.uno.value,
+				      bno : form.bno.value
+				    }),
+				    headers : {
+				      'Content-Type' : 'application/json; charset=utf-8'
+				    }
+				  })
+				  .then(res=>res.text())
+				  .then(text=>{
+					  location.href="/board/boardView?bno="+form.bno.value;
+				  })
+		  });
+	}
+ 
+	if(unLikeBtn){
+		unLikeBtn.addEventListener('click', function(){			  
+			  fetch('/board/boardView/unlove',{
+				    method : 'post',
+				    body:JSON.stringify({
+				      uno : form.uno.value,
+				      bno : form.bno.value
+				    }),
+				    headers : {
+				      'Content-Type' : 'application/json; charset=utf-8'
+				    }
+				  })
+				  .then(res=>res.text())
+				  .then(text=>{
+					  location.href="/board/boardView?bno="+form.bno.value;
+				  })
+		  });
+	}
+  	
+	if(updateBtn){
+		updateBtn.addEventListener('click', () => {
+			  location.href = '/board/updateBoard?' + 'bno='+ form.bno.value
+		 });
+	}	
+	
+	if(deleteBtn){
+		deleteBtn.addEventListener('click', () => {	  
+		    if (confirm('정말 삭제하시겠습니까?')) {
+		    	
+		      form.action='/board/boardView/delete';
+		      form.submit();
 		    }
-		  })
-		  .then(res=>res.text())
-		  .then(text=>{
-			  location.href="/board/boardView?bno="+bno;
-		  })
-  });
-
-  document.getElementById('edit-btn').addEventListener('click', () => {
-//    alert('수정 페이지로 이동합니다.');
-	  const uno=71;
-	  const bno = f.bno.value;
-	  location.href = '/board/updateBoard?uno='+uno+'&bno='+bno
-  });
-  
+		 });
+	}  
+	
   document.getElementById('list-btn').addEventListener('click', () => {
 	  location.href = '/boardList';
-  });
-
-
-  document.getElementById('delete-btn').addEventListener('click', () => {	  
-    if (confirm('정말 삭제하시겠습니까?')) {
-    	
-    	console.log(form.bno.value);
-      form.action='/board/boardView/delete';
-      form.submit();
-    }
-  });
+  }); 
 
   document.getElementById('prev-btn').addEventListener('click', function(e) {
 	  let bList = JSON.parse(e.target.getAttribute("bList"));

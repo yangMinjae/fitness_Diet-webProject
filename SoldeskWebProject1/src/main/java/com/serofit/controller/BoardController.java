@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import com.serofit.domain.BoardVO;
 import com.serofit.domain.BoardViewDTO;
 import com.serofit.domain.DietVO;
 import com.serofit.domain.LikeVO;
+import com.serofit.security.domain.CustomUser;
 import com.serofit.service.BoardService;
 import com.serofit.service.WriteBoardService;
 
@@ -69,10 +72,12 @@ public class BoardController {
 	
 
 	// 게시글 작성 페이지로 이동 + 식단 title 가져오기 
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/writeBoard")
-	public String writePost(int uno, Model model) {
-		log.info("writePost .... " + uno);
-		List<DietVO> dvoList = wbService.getDietTitle(uno);
+	public String writePost(Model model, Authentication authentication) {
+		log.info("writePost .... ");				
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		List<DietVO> dvoList = wbService.getDietTitle(customUser.getUno());
 		model.addAttribute("dietList", dvoList);
 		return "/board/writeBoard";
 	}
@@ -90,7 +95,8 @@ public class BoardController {
 
 	// 게시글 자세히 보기
 	@GetMapping("/boardView")
-	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response) {
+	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response
+			, Authentication authentication) {
 		log.info("boradView...!!");
 		
 		// 1. 쿠키로 조회 체크
@@ -119,6 +125,16 @@ public class BoardController {
 		
 		Gson gson = new Gson();
 		String jsonBList = gson.toJson(bService.getPostList());
+
+		model.addAttribute("isLike", false);
+		
+		if(authentication != null) {
+			CustomUser customUser = (CustomUser) authentication.getPrincipal();
+			LikeVO lvo = new LikeVO(customUser.getUno(), bno);
+			
+			if(bService.isLoveBoardByUno(lvo) > 0)			
+				model.addAttribute("isLike", true);
+		}
 		
 		model.addAttribute("bvDTO", bService.getPost(bno));
 		model.addAttribute("bList", jsonBList);
@@ -133,11 +149,27 @@ public class BoardController {
 	}
 	
 	// 게시글 좋아요 증가
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@PostMapping("/boardView/love")
 	public int boardViewLove(Model model, @RequestBody LikeVO lvo) {	
-		
+		System.out.println("love");
 		if(bService.increaseLove(lvo) > 0) {
+			model.addAttribute("isLike", true);
+			model.addAttribute("bvDTO",	bService.getPost(lvo.getBno())); 
+		}	 
+		
+		return lvo.getBno();
+	}
+	
+	// 게시글 좋아요 감소
+	@PreAuthorize("isAuthenticated()")
+	@ResponseBody
+	@PostMapping("/boardView/unlove")
+	public int boardViewUnLove(Model model, @RequestBody LikeVO lvo) {	
+		System.out.println("unlove");
+		if(bService.decreaseLove(lvo) > 0) {	
+			model.addAttribute("isLike", false);
 			model.addAttribute("bvDTO",	bService.getPost(lvo.getBno())); 
 		}	 
 		
@@ -147,12 +179,15 @@ public class BoardController {
 
 	// 게시글 수정 페이지로 이동
 	@GetMapping("/updateBoard")
-	public String updateBoard(int uno,int bno,Model model) {
-		log.info("writePost .... " + uno);
+	public String updateBoard(Authentication authentication, int bno, Model model) {
+		log.info("writePost .... ");		
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		BoardViewDTO bvdto = wbService.getBoard(bno);
-		List<DietVO> dvoList = wbService.getDietTitle(uno);
+		List<DietVO> dvoList = wbService.getDietTitle(customUser.getUno());
+		
 		model.addAttribute("board",bvdto);
 		model.addAttribute("dietList", dvoList);
+		
 		return "board/writeBoard";
 	}
 	

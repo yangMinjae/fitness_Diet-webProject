@@ -26,6 +26,9 @@ public interface BoardService {
 	// 게시글 좋아요 증가
 	public int increaseLove(LikeVO lvo);
 	
+	// 게시글 좋아요 감소
+	public int decreaseLove(LikeVO lvo);
+	
 	// 게시글 수정
 	public int updatePost(BoardVO bvo);
 	
@@ -34,4 +37,7 @@ public interface BoardService {
 	
 	// 조회수 증가
 	public int increaseHit(int bno);
+	
+	// 좋아요 여부
+	public int isLoveBoardByUno(LikeVO lvo);
 }

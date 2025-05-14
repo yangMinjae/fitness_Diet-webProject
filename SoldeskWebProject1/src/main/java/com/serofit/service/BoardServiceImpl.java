@@ -103,21 +103,9 @@ public class BoardServiceImpl implements BoardService {
 
 			BoardVO bvo = bMapper.getPostByBno(bno);
 
-			// 여기에있는 if문은 우리가 강제로 데이터 집어넣어서 넣은것 ( db정리후 삭제)
-			if (bvo == null) {
-				System.out.println("bvo가 없음");
-				continue;
-			}
-			//////////////
 			int dno = bvo.getDno();
 			DietVO dvo = dMapper.selectDietByDno(dno);
 
-			// 여기에있는 if문은 우리가 강제로 데이터 집어넣어서 넣은것 ( db정리후 삭제)
-			if (dvo == null) {
-				System.out.println("dvo가 없음");
-				continue;
-			}
-			/////////////
 			String nickname = uMapper.readNickname(uno);
 
 			BoardListDTO dto = new BoardListDTO(
@@ -154,16 +142,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 	// 게시글 수정
 	@Override
-	public int updatePost(BoardVO bvo) {
-		
+	public int updatePost(BoardVO bvo) {		
 		int result = bMapper.updatePost(bvo);
+		
 		return result;
 	}
 
 	@Transactional
 	@Override
 	public int increaseLove(LikeVO lvo) {
-
 		lMapper.insertByBnoAndUno(lvo);
 		return bMapper.updateLike(lvo.getBno(), 1);
 	}
@@ -171,7 +158,6 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	@Override
 	public int deletePost(int bno) {
-
 		lMapper.deleteByBno(bno);
 		return bMapper.deletePostByBno(bno);
 	}
@@ -179,5 +165,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int increaseHit(int bno) {
 		return bMapper.updateHit(bno);
+	}
+	
+	@Override
+	public int isLoveBoardByUno(LikeVO lvo) {
+		return lMapper.isLoveBoardByUno(lvo);
+	}
+	
+	@Override
+	public int decreaseLove(LikeVO lvo) {
+		lMapper.deleteByBnoAndUno(lvo);		
+		return bMapper.updateLike(lvo.getBno(), -1);
 	}
 }

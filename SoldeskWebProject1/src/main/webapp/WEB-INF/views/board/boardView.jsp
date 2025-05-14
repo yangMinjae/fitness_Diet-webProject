@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,16 +29,32 @@
 			  </div>			
 			  <div class="post-content">${bvDTO.content}</div>			  			
 			  <div class="icon-bar">
-			    <button type="button" class="icon-btn" id="like-btn" bno="${bvDTO.bno}" title="좋아요">❤️</button>
-					<button type="button" class="icon-btn" id="list-btn" title="목록" >☰</button>
-					<button type="button" class="icon-btn" id="prev-btn" bList='${bList}' bno="${bvDTO.bno}" title="이전 게시글">&lt;</button>
-					<button type="button" class="icon-btn" id="next-btn" bList='${bList}' bno="${bvDTO.bno}" title="다음 게시글">&gt;</button>
-					<button type="button" class="icon-btn" id="edit-btn" bno="${bvDTO.bno}" title="수정하기">✏️</button>
-					<button type="button" class="icon-btn" id="delete-btn" bno="${bvDTO.bno}" title="삭제">🗑️</button>
+				<sec:authorize access="isAuthenticated()">	
+					<c:if test="${isLike == 'true'}">
+						<button type="button" class="icon-btn" id="unlike-btn" title="싫어요">❤싫어요</button>
+					</c:if>
+					<c:if test="${isLike == 'false'}">
+						<button type="button" class="icon-btn" id="like-btn" title="좋아요">❤좋아요</button>	
+					</c:if>			
+				</sec:authorize>			  				  		
+				<button type="button" class="icon-btn" id="list-btn" title="목록" >☰</button>
+				<button type="button" class="icon-btn" id="prev-btn" bList='${bList}' bno="${bvDTO.bno}" title="이전 게시글">&lt;</button>
+				<button type="button" class="icon-btn" id="next-btn" bList='${bList}' bno="${bvDTO.bno}" title="다음 게시글">&gt;</button>
+				<sec:authorize access="isAuthenticated()">						
+					<sec:authentication var="uno" property="principal.uno" />
+					<c:if test="${bvDTO.uno eq uno}">						
+						<button type="button" class="icon-btn" id="edit-btn" title="수정하기">✏️</button>
+						<button type="button" class="icon-btn" id="delete-btn" title="삭제">🗑️</button>
+					</c:if>
+				</sec:authorize>
 			  </div>
 			</div>
 		</c:if>		
 		<input type="hidden" name="bno" value="${bvDTO.bno}">
+		<sec:authorize access="isAuthenticated()">			
+			<sec:authentication var="uno" property="principal.uno" />
+			<input type="hidden" name="uno" value="${uno}">
+		</sec:authorize>
 	</form>	
 	
 	<jsp:include page="../layout/footer.jsp" />

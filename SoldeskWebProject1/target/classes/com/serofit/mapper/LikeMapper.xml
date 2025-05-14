@@ -8,6 +8,11 @@
 		SELECT * FROM tbl_like WHERE uno=#{uno}
 	</select>
 	
+	<!-- 특정 좋아요 게시글 찾기 -->
+	<select id="isLoveBoardByUno" parameterType="com.serofit.domain.LikeVO" resultType="int">
+		SELECT COUNT(*) FROM tbl_like WHERE uno=#{uno} AND bno=#{bno}
+	</select>
+	
 	<!-- 좋아요 해제 -->
 	<delete id="deleteByBnoAndUno" parameterType="com.serofit.domain.LikeVO">
 		DELETE FROM tbl_like WHERE bno=#{bno} AND uno=#{uno}

@@ -23,4 +23,7 @@ public interface LikeMapper {
 	// 유저 탈퇴 좋아요 삭제
 	public int deleteByUno(int uno);
 	
+	// 특정 좋아요 게시글 찾기
+	public int isLoveBoardByUno(LikeVO lvo);
+	
 }

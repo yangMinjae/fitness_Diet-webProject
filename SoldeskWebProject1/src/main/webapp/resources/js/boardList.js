@@ -52,15 +52,8 @@ document.querySelectorAll('button').forEach(button=>{
 			console.log("listByLike");
 			getBoardListByLove();
 		}else if(type === 'writePostBtn'){
-			console.log("writePostBtn");
-			
-//			const sessionUno = sessionStorage.getItem('uno'); //세션에서 받아온 uno
-//			const formUno = f.uno.value;	
-//		    location.href ='/board/writeBoard?uno=' + formUno;			
-//			let senddata = 'uno=' + sessionUno; 		
-//		    location.href ='/board/writeBoard?uno=' + sessionUno;
-             
-		    location.href ='/board/writeBoard?uno=' + 71;
+			console.log("writePostBtn");	
+			location.href ='/board/writeBoard';
 		}
 		
 	});
