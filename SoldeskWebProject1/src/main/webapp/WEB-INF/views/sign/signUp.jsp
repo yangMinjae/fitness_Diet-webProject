@@ -35,7 +35,8 @@
 				<!-- 비밀번호 확인 -->
 				<div class="form-row">
 					<label for="mPwRe" class="form-label">비번 확인</label> <input
-						type="password" class="form-control input-no-btn" id="mPwRe" name="mPwRe">
+						type="password" class="form-control input-no-btn" id="mPwRe" name="mPwRe"
+						placeholder="비밀 번호 확인">
 				</div>
 
 				<!-- 닉네임 -->
