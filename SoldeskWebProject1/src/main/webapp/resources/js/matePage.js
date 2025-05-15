@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		const selectedTag = tagFilter.value;
 
 		let sendVisibleCount = 0;
-		let difVisibleCount = 0;
 
 		mateItems.forEach(item => {
 			const itemTime = item.dataset.time;
@@ -36,6 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
 			const matchAge = (selectedAge === "::" || selectedAge === "" || itemAge === selectedAge);
 			const matchTag = (selectedTag === "::" || selectedTag === "" || itemTag === selectedTag);
 
+			item.querySelectorAll(".mate-info p").forEach(p => p.classList.remove("match"));
+			const matchMap = [
+				  { matched: matchTag, className: "tag", selected: selectedTag },
+				  { matched: matchGender, className: "gender", selected: selectedGender },
+				  { matched: matchAge, className: "age", selected: selectedAge },
+				  { matched: matchTime, className: "time", selected: selectedTime }
+				];
+
+			matchMap.forEach(({ matched, className, selected }) => {
+			  if (matched && selected !== "::" && selected !== "") {
+			    const el = item.querySelector(`.mate-info .${className}`);
+			    if (el) el.classList.add("match");
+			  }
+			});
+			
 			if (matchTime && matchGender && matchAge && matchTag) {
 				item.classList.remove("hidden");
 				if (item.closest(".mate-scroll-section").classList.contains("sendList")) sendVisibleCount++;
@@ -48,12 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("sendWrapper").style.display = sendVisibleCount === 0 ? "none" : "block";
 		
 		document.querySelectorAll(".mate-scroll-section").forEach(section => {
-			section.scrollTo({
-				left: 0,
-				behavior: "auto"  // "smooth" 넣으면 부드럽게 이동
-			});
+			section.scrollTo({left: 0, behavior: "auto"});
 		});
-	}
+		
+		
+		updateFilterVisualState();
+	};
 
 	timeFilter.addEventListener("change", applyFilters);
 	genderFilter.addEventListener("change", applyFilters);
@@ -69,6 +83,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
+// 필터 시 시각적으로 확인되는 함수
+function updateFilterVisualState() {
+	const filters = [timeFilter, genderFilter, ageFilter, tagFilter];
+	filters.forEach(select => {
+		if (select.value !== "::" && select.value !== "") {
+			select.classList.add("active");
+		} else {
+			select.classList.remove("active");
+		}
+	});
+};
 
 // 팔로우 팔로잉 버튼 
 document.addEventListener("DOMContentLoaded", function () {

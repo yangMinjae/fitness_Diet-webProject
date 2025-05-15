@@ -104,10 +104,10 @@
 					<div class="mate-info">
 					  <p class="nickname">${mate.dto.nickname}</p>
 					  <p class="tag">#${mate.pvo.tag}</p>
-					  <p>성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
-					  <p>나이 : ${mate.mvo.age}</p>
-					  <p>운동시간대 : ${mate.mvo.time}</p>
-					  <p>지역 : ${mate.mvo.area}</p>
+					  <p class="gender">성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
+					  <p class="age">나이 : ${mate.mvo.age}</p>
+					  <p class="time">운동시간대 : ${mate.mvo.time}</p>
+					  <p class="area">지역 : ${mate.mvo.area}</p>
 					</div>
 					
 					<div class="mate-buttons">

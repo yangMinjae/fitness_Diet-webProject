@@ -27,7 +27,7 @@
   height: 510px;   /* 🔼 기존 340 → 420px로 충분히 확장 */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
   border-radius: 16px;
@@ -400,4 +400,20 @@
 @keyframes zoomOut {
   from { transform: scale(1); opacity: 1; }
   to { transform: scale(0.8); opacity: 0; }
+}
+
+/* 필터가 적용되었을 때 강조 스타일 */
+.filters-row select.active {
+  border: 2px solid #6ac56d;
+  background-color: #e6f5ea;
+  font-weight: bold;
+  color: #2c7a4b;
+}
+
+.mate-info p.match {
+  background-color: #e6f5ea;
+  font-weight: bold;
+  color: #2c7a4b;
+  padding: 0px 6px;
+  border-radius: 6px;
 }
