@@ -15,4 +15,5 @@ public class HotBoardDTO {
 	String tag;
 	String imgPath;
 	String nickname;
+	int bno;
 }

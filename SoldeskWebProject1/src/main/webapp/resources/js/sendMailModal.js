@@ -47,3 +47,19 @@ document.addEventListener("keydown", (e) => {
 	document.getElementById('sendmailModal').classList.remove('show')
 	}
 });
+
+//글자 수 초기화 함수
+function initMailModalContent() {
+	mailInput.value = '';
+	charCount.textContent = `${mailInput.value.length} / 300`;
+}
+
+// 글자 수 실시간 함수
+function initMailModalEvent() {
+	if (mailInput && charCount) {
+		mailInput.addEventListener('input', () => {
+			const length = mailInput.value.length;
+			charCount.textContent = `${length} / 300`;
+		});
+	}
+}

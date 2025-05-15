@@ -1,7 +1,3 @@
-
-let isBlock = false;
-let style = document.querySelector('.dropdown-content').style;
-
 // 헤더 A 태그 버튼화
 document.querySelectorAll('a').forEach(a=>{
 	a.addEventListener("click", function(e){
@@ -25,11 +21,8 @@ document.querySelectorAll('a').forEach(a=>{
 			// 운동 메이트 찾기
 			case 'matePage' :
 				location.href = '/matePage';
-				// 추후에 uno 관련 코드 수정
 				break;
 		}
-		
-		initMenu();
 	});
 });
 
@@ -52,8 +45,6 @@ document.querySelectorAll('p').forEach(p=>{
 				console.log("logout");
 				break;
 		}
-		
-		initMenu();
 	});
 });
 
@@ -67,13 +58,7 @@ document.querySelectorAll('img').forEach(img=>{
 				location.href = '/mailList';
 				break;
 			case 'profile' :
-				if(isBlock){
-					style.display = "none";
-					isBlock = false;
-				}else{
-					style.display = "block";
-					isBlock = true;
-				}
+				location.href = '/myPage';
 				break;
 		}
 	});
@@ -83,7 +68,17 @@ document.querySelectorAll('img').forEach(img=>{
 document.querySelectorAll('button').forEach(button=>{
 	button.addEventListener("click", function(e){		
 		let name = e.target.getAttribute('class');
-
+		let id = e.currentTarget.id;
+		
+		switch(id){
+			case 'reject' :
+				console.log(id);
+				break;
+			case 'agree' :
+				console.log(id);
+				break;
+		}
+		
 		switch(name){
 			case 'login-btn' :
 				location.href = '/login';
@@ -91,13 +86,9 @@ document.querySelectorAll('button').forEach(button=>{
 			case 'logout-btn' :
 				location.href = '/customLogout';
 				break;
+			case 'reject' :
+				console.log(id);
+				break;
 		}
-		
-		initMenu();
 	});
 });
-
-function initMenu() {
-	style.display = "none";
-	isBlock = false;
-}

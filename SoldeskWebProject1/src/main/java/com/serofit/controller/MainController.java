@@ -78,7 +78,6 @@ public class MainController {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		
 		model.addAttribute("mList", mService.selectByReceiver(customUser.getUno()));
-		System.out.println(mService.selectByReceiver(customUser.getUno()));
 		return "/mail/mailList";
 	}
 	
@@ -104,8 +103,6 @@ public class MainController {
 		model.addAttribute("user", mtpService.selectByUno(customUser.getUno()));
 		model.addAttribute("mateList", mtpService.findMateList(customUser.getUno()));
 		
-		System.out.println(mtpService.findMateList(customUser.getUno()));
-		
 		return "/user/matePage";
 	}
 	
@@ -121,5 +118,23 @@ public class MainController {
 	public String logoutGET() {
 		log.info("custom Logout");
 		return "/";
+	}
+	
+	// 운동 메이트 동의
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/agree")
+	public int agree(Authentication authentication) {
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		System.out.println(customUser.getUno());
+		return 1;
+	}
+	
+	// 운동 메이트 거절
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/reject")
+	public int reject(Authentication authentication) {
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		System.out.println(customUser.getUno());
+		return 1;
 	}
 }

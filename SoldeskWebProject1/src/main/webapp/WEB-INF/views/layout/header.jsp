@@ -22,6 +22,15 @@
 		</nav>
 
 		<div class="right-icons">
+			<div class="mate-agree-reject">
+				<sec:authorize access="isAuthenticated()">
+					<h5>운동 메이트</h5>
+					<sec:authentication var="mateChecker" property="principal.mateChecker" />
+					<span class="mateCheck">${mateChecker}</span>
+				</sec:authorize>
+					<button class="mateCheckerBtn" id="agree">동의</button>
+					<button class="mateCheckerBtn" id="reject">거부</button>
+			</div>
 			<div class="mail">
 				<img
 					src="https://img.icons8.com/material-sharp/24/000000/new-post.png"
@@ -39,11 +48,6 @@
 					<sec:authentication var="nickname" property="principal.nickname" />					
 					<span class="nickname">${nickname}</span>
 				</sec:authorize>
-				<div class="dropdown-content">
-					<p id="myPage">My page</p>
-					<p id="modifyPage">회원 정보 수정</p>
-					<p id="logout">로그아웃</p>
-				</div>
 			</div>
 			
 			<sec:authorize access="isAuthenticated()">

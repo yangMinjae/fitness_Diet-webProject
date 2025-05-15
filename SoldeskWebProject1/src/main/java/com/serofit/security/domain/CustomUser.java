@@ -17,7 +17,8 @@ public class CustomUser extends User{
 	
 	private UserVO uvo;
 	private int mailCount;
-
+	private int mateChecker;
+	
 	 public CustomUser() {
 	        super("anonymous", "anonymous", new ArrayList<>());
 	 }
@@ -26,7 +27,7 @@ public class CustomUser extends User{
 		super(username, password, authorities);
 	}
 	
-	public CustomUser(UserVO uvo, int mailCount) {
+	public CustomUser(UserVO uvo, int mailCount, int mateChecker) {
 		super(uvo.getId(),
 				uvo.getPw(),
 				uvo.getAuthList()
@@ -38,6 +39,7 @@ public class CustomUser extends User{
 				);
 		this.uvo = uvo;
 		this.mailCount = mailCount;
+		this.mateChecker = mateChecker;
 	}
 	
 	public int getUno() {
@@ -50,5 +52,9 @@ public class CustomUser extends User{
 	
 	public int getMailCount() {
 		return this.mailCount;
+	}
+	
+	public int getMateChecker() {
+		return this.mateChecker;
 	}
 }

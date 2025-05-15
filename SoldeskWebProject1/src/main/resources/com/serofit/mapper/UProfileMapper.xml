@@ -45,9 +45,21 @@
 	SELECT * FROM tbl_uprofile WHERE uno = #{uno} AND mate = 1
 	</select>
 	
+	<!-- 식단 완료 시 태그 부여 -->
 	<update id="updateTag" parameterType="com.serofit.domain.UpdateTagDTO">
 		UPDATE tbl_uprofile
 			SET tag=#{tag}
 			WHERE uno=#{uno}
 	</update>
+	
+	<!-- 운동 메이트 거절 -->
+	<update id="updateMateReject" parameterType="int">
+		UPDATE tbl_uprofile SET mate=0 WHERE uno=#{uno}
+	</update>
+	
+	<!-- 운동 메이트 동의 -->
+	<update id="updateMateAgree" parameterType="int">
+		UPDATE tbl_uprofile SET mate=1 WHERE uno=#{uno}	
+	</update>
+	
 </mapper>

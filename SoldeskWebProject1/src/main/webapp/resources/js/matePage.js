@@ -225,22 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 });
 
-//글자 수 초기화 함수
-function initMailModalContent() {
-	mailInput.value = '';
-	charCount.textContent = `${mailInput.value.length} / 300`;
-}
-
-// 글자 수 실시간 함수
-function initMailModalEvent() {
-	if (mailInput && charCount) {
-		mailInput.addEventListener('input', () => {
-			const length = mailInput.value.length;
-			charCount.textContent = `${length} / 300`;
-		});
-	}
-}
-
 //ESC 키 닫기 처리 (우선순위별로)
 document.addEventListener("keydown", (e) => {
 	const guideOverlay = document.getElementById("scrollGuideOverlay");

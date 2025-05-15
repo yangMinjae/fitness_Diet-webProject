@@ -64,6 +64,7 @@ public class MainPageServiceImple implements MainPageService{
 			hbDTO.setNickname(uMapper.readNickname(boardVO.getUno()));
 			hbDTO.setTitle(boardVO.getTitle());
 			hbDTO.setRegdate(boardVO.getRegDate());
+			hbDTO.setBno(boardVO.getBno());
 			hbList.add(hbDTO);
 		}
 		

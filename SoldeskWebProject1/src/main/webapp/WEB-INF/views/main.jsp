@@ -94,6 +94,7 @@
 		          <span>${hbdto.nickname}</span> · 
 		          <span>${hbdto.regdate}</span>
 		        </div>
+		          <span class="bno" hidden="true">${hbdto.bno}</span>
 		      </div>
 		    </c:forEach>
 		  </div>

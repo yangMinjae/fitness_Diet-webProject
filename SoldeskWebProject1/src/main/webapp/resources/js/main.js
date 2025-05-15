@@ -24,8 +24,8 @@ document.querySelectorAll('button').forEach(button=>{
 
 // 인기 게시글 버튼화
 document.querySelectorAll('.post-card').forEach(div=>{
-	div.addEventListener("click", function(e){		
-		console.log("post-card");
+	div.addEventListener("click", function(e){
+		location.href=`/board/boardView?bno=${div.querySelector(".bno").textContent.trim()}`;
 	});
 });
 
