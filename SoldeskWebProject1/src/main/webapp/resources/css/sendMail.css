@@ -143,25 +143,42 @@ body {
   text-align: right;
 }
 
+/* 버튼 그룹 우측 정렬 */
 .btn-group {
   margin-top: 30px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end;  /* ✅ 우측 정렬 */
   gap: 16px;
 }
 
+/* 기본 버튼 공통 */
 .btn {
-  background-color: #6ac56d; /* ✔️ 민트 파스텔 톤 */
-  color: white;
   border: none;
   padding: 12px 24px;
   font-size: 1rem;
   border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
   transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #57ab5a; /* ✔️ hover tone */
+/* 전송 버튼 - 강조 (민트 파스텔 톤) */
+.send {
+  background-color: #6ac56d;
+  color: white;
+}
+
+.send:hover {
+  background-color: #57ab5a;
+}
+
+/* 목록 버튼 - 보조 (라이트 그레이) */
+.cancel {
+  background-color: #eeeeee;
+  color: #444;
+}
+
+.cancel:hover {
+  background-color: #dddddd;
 }

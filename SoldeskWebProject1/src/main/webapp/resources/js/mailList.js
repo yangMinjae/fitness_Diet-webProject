@@ -28,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	    mailItems.forEach(item => {
 	      const sender = item.querySelector(".sender").textContent.toLowerCase();
-	      const preview = item.querySelector(".preview").textContent.toLowerCase();
+	      const content = item.dataset.content.toLowerCase();
 
-	      const matches = sender.includes(keyword) || preview.includes(keyword);
+	      const matches = sender.includes(keyword) || content.includes(keyword);
 	      item.style.display = matches ? "flex" : "none";
 	    });
 	  }

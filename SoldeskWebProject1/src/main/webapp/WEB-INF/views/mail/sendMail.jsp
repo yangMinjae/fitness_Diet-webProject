@@ -32,7 +32,7 @@
 			<div class="text-limit-info">
 			  <span id="char-count">0</span>/300자
 			</div>
-	
+						
 			<div class="btn-group">
 				<button type="button" class="btn send">전송</button>
 				<button type="button" class="btn close">목록</button>
