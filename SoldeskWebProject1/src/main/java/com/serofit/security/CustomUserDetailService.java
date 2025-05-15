@@ -28,7 +28,8 @@ public class CustomUserDetailService implements UserDetailsService {
 		log.warn("load user by userName : "+username);
 		UserVO uvo = uMapper.read(username);
 		int mailCount = mMapper.selectMailCountByReceiver(uvo.getUno());
+		int mateChecker = 0;// 메퍼 갔다와
 		log.warn("member mapper : "+uvo);
-		return uvo == null ? null : new CustomUser(uvo, mailCount);
+		return uvo == null ? null : new CustomUser(uvo, mailCount, mateChecker);
 	}
 }
