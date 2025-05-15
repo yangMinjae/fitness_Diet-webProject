@@ -14,7 +14,6 @@
 	<update id="updateProfile" parameterType="com.serofit.domain.UProfileVO">
 		UPDATE tbl_uprofile 
 			SET uuid=#{uuid},
-				mate=#{mate},
 				self=#{self},
 				fav=#{fav},
 				tag=#{tag}

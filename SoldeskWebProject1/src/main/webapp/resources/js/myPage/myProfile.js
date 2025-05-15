@@ -107,13 +107,6 @@ function fetchUserInfo(uno){      						// getUserInfo() 함수에서 쓰이는 
 	    let nickName =document.querySelector('.profile-nickname');
 	    nickName.textContent=json.uVO.nickname;
 
-	    if(json.upVO.mate=='0'){
-	      noRadio.checked=true;
-	      yesRadio.checked=false;
-	    }else if(json.upVO.mate=='1'){
-	      noRadio.checked=false;
-	      yesRadio.checked=true;
-	    }
 	    f.elements['upVO.fav'].value=json.upVO.fav;
 	    showArea.innerText=json.mVO.area;  
 	    f.elements['mVO.time'].value=json.mVO.time;
@@ -146,15 +139,7 @@ function profileEditToSubmit(){   						// 화면상 표시되는 '프로필 수
 //-------------------------------------------------------------
 
 function submitForm(){            						// 폼을 동기 방식으로 제출하는 함수
-  const isChecked = Array
-  .from(document.querySelectorAll('input[name="upVO.mate"]'))
-  .some(r => r.checked);
-
   let areaVal = showArea.textContent;
-  if(!isChecked){
-    alert('메이트 추천 여부를 체크해 주세요');
-    return;
-  }
 
   if(!f.elements['upVO.fav'].value){
     alert('좋아하는 운동을 입력해 주세요');
