@@ -69,5 +69,15 @@ public class MainPageServiceImple implements MainPageService{
 		}
 		
 		return hbList;
-	}	
+	}
+	
+	@Override
+	public String updateMateAgree(int uno) {
+		return upMapper.updateMateAgree(uno) == 1 ? "true" : "false";
+	}
+	
+	@Override
+	public String updateMateReject(int uno) {
+		return upMapper.updateMateReject(uno) == 1 ? "true" : "false";
+	}
 }

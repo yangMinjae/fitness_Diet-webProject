@@ -24,4 +24,10 @@ public interface UProfileMapper {
 	
 	// tag 수정
 	public int updateTag(UpdateTagDTO uDTO);
+	
+	// 운동 메이트 동의
+	public int updateMateAgree(int uno);
+	
+	// 운동 메이트 거절
+	public int updateMateReject(int uno);
 }

@@ -68,16 +68,6 @@ document.querySelectorAll('img').forEach(img=>{
 document.querySelectorAll('button').forEach(button=>{
 	button.addEventListener("click", function(e){		
 		let name = e.target.getAttribute('class');
-		let id = e.currentTarget.id;
-		
-		switch(id){
-			case 'reject' :
-				console.log(id);
-				break;
-			case 'agree' :
-				console.log(id);
-				break;
-		}
 		
 		switch(name){
 			case 'login-btn' :
@@ -86,9 +76,25 @@ document.querySelectorAll('button').forEach(button=>{
 			case 'logout-btn' :
 				location.href = '/customLogout';
 				break;
-			case 'reject' :
-				console.log(id);
-				break;
 		}
 	});
 });
+
+//메이트 버튼 토글 형태
+if (document.getElementById('mateToggle') != null) {
+	document.getElementById('mateToggle').addEventListener("change", function () {
+		const isChecked = this.checked;
+		
+		fetch(`/updateMateVisibility?visible=${isChecked}`, {
+			method: 'GET'
+		})
+		.then(res => res.text())
+		.then(result => {
+			const mate = document.getElementById('mateChecker');
+			
+			if (mate) {
+				mate.textContent = result;
+			}
+		})
+	});
+}

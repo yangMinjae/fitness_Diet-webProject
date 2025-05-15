@@ -57,4 +57,8 @@ public class CustomUser extends User{
 	public int getMateChecker() {
 		return this.mateChecker;
 	}
+	
+	public void setMateChecker(int mateChecker) {
+	    this.mateChecker = mateChecker;
+	}
 }

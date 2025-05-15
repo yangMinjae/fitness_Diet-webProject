@@ -22,15 +22,19 @@
 		</nav>
 
 		<div class="right-icons">
-			<%-- <div class="mate-agree-reject">
+			<div class="mate-toggle">
 				<sec:authorize access="isAuthenticated()">
-					<h5>운동 메이트</h5>
+					<label class="mate-label">운동 메이트 추천 여부</label>
 					<sec:authentication var="mateChecker" property="principal.mateChecker" />
-					<span class="mateCheck">${mateChecker}</span>
+					<span hidden="true" id="mateChecker">${mateChecker}</span>
+					<input type="checkbox" id="mateToggle" 
+				    	<c:if test="${mateChecker == 1}">checked</c:if> />
+					<label for="mateToggle" class="mate-switch">
+				        <span class="handle-text on">ON</span>
+				        <span class="handle-text off">OFF</span>
+				    </label>
 				</sec:authorize>
-					<button class="mateCheckerBtn" id="agree">동의</button>
-					<button class="mateCheckerBtn" id="reject">거부</button>
-			</div> --%>
+			</div>
 			<div class="mail">
 				<img
 					src="https://img.icons8.com/material-sharp/24/000000/new-post.png"

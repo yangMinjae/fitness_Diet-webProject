@@ -11,7 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.BoardListDTO;
 import com.serofit.security.domain.CustomUser;
@@ -122,19 +123,19 @@ public class MainController {
 	
 	// 운동 메이트 동의
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/agree")
-	public int agree(Authentication authentication) {
+	@GetMapping("/updateMateVisibility")
+	@ResponseBody
+	public String updateMateVisibility(@RequestParam boolean visible, Authentication authentication) {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
-		System.out.println(customUser.getUno());
-		return 1;
-	}
-	
-	// 운동 메이트 거절
-	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/reject")
-	public int reject(Authentication authentication) {
-		CustomUser customUser = (CustomUser) authentication.getPrincipal();
-		System.out.println(customUser.getUno());
-		return 1;
+		int updateMateChecker = customUser.getMateChecker();
+		
+		if (visible) {
+			customUser.setMateChecker(updateMateChecker == 1 || updateMateChecker == 0 ? 1 : 0);
+			return String.valueOf(customUser.getMateChecker());
+		}else {
+			customUser.setMateChecker(updateMateChecker == 1 || updateMateChecker == 0 ? 0 : 1);
+			return String.valueOf(customUser.getMateChecker());
+		}
+		
 	}
 }

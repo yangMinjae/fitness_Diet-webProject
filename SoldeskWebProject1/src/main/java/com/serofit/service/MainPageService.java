@@ -8,4 +8,10 @@ public interface MainPageService {
 	
 	// 인기 게시글 불러오기
 	public List<HotBoardDTO> getHotPosts(int quantity);	
+	
+	// 메이트 동의
+	public String updateMateAgree(int uno);
+	
+	// 메이트 거절
+	public String updateMateReject(int uno);
 }

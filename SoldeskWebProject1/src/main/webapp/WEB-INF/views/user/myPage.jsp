@@ -31,17 +31,6 @@
 					</div>
 					<form class="profile-form" method="post">
 						<div class="form-group">
-							<label>메이트 추천 여부</label>
-							<div class="radio-group">
-								<label title="Yes 선택시 이용자님이 다른 유저의 운동메이트로 추천됩니다.">
-									<input type="radio" name="upVO.mate" value="1" id="yesRadio">Yes
-								</label> 
-								<label title="No 선택시 이용자님이 다른 유저의 운동메이트로 추천되지 않습니다.">
-									<input type="radio" name="upVO.mate" value="0" id="noRadio">No
-								</label>
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="favSport">좋아하는 운동</label> 
 							<input type="text" name="upVO.fav" id="favSport">
 						</div>

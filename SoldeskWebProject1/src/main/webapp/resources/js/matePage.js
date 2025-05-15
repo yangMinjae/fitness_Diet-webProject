@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll('.mate-scroll-section').forEach(a => {
 		a.addEventListener('click', (e) => {
 			const followBtn = e.target.closest('.follow-btn');
+			const sendBtn = e.target.closest('.send-msg-btn');
 			
 			if (followBtn) {
 				const uno = followBtn.dataset.uno;
@@ -125,22 +126,25 @@ document.addEventListener("DOMContentLoaded", function () {
 						e.target.classList.add('following');
 					}
 				});
+				return;
+			}else if (sendBtn) {
+				initMailModalContent();
+				initMailModalEvent();
+				document.getElementById('sendmailModal').classList.add('show');
+				return;
+			}else{
+				return;
 			}
 		});
 	});
 });
 
-// 메일 보내기 모달 띄우기, 메일 보내기
+// 메일 보내기 모달 띄우기
 document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll('.mate-scroll-section').forEach(a => {
 		a.addEventListener('click', (e) => {
-			const sendBtn = e.target.closest('.send-msg-btn');
 			
-			if (sendBtn) {
-				initMailModalContent();
-				initMailModalEvent();
-				document.getElementById('sendmailModal').classList.add('show');
-			}
+			
 			
 		});
 	});
