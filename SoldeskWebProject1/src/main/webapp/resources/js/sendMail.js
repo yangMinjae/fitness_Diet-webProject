@@ -55,3 +55,39 @@ textarea.addEventListener('input', function () {
 
   charCount.textContent = textarea.value.length;
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+	  const input = document.getElementById('friend-input');
+	  const list = document.getElementById('dropdown-list');
+	  const hiddenInput = document.getElementById('receiver-hidden');
+	  const items = Array.from(list.querySelectorAll('li'));
+
+	  // input 클릭 시 드롭다운 표시
+	  input.addEventListener('focus', () => {
+	    list.classList.remove('hidden');
+	  });
+
+	  // input 입력 시 필터링
+	  input.addEventListener('input', function () {
+	    const keyword = this.value.toLowerCase();
+	    items.forEach(li => {
+	      li.style.display = li.textContent.toLowerCase().includes(keyword) ? '' : 'none';
+	    });
+	  });
+
+	  // 항목 클릭 시 input 채우기 + hidden input 설정
+	  list.addEventListener('click', function (e) {
+	    if (e.target.tagName === 'LI') {
+	      input.value = e.target.textContent;
+	      hiddenInput.value = e.target.dataset.value;
+	      list.classList.add('hidden');
+	    }
+	  });
+
+	  // 외부 클릭 시 드롭다운 숨김
+	  document.addEventListener('click', function (e) {
+	    if (!e.target.closest('.custom-dropdown')) {
+	      list.classList.add('hidden');
+	    }
+	  });
+	});

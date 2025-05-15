@@ -29,6 +29,67 @@ body {
   min-width: 90px;         /* ✅ 라벨이 너무 붙지 않게 */
 }
 
+.custom-dropdown {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+#friend-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #ccd5c9;
+  border-radius: 12px;
+  background-color: #f4f8f4;
+  color: #333;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px;
+  box-shadow: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#friend-input:focus {
+  border-color: #6ac56d;
+  box-shadow: 0 0 0 3px rgba(106, 197, 109, 0.25);
+  outline: none;
+}
+
+/* 📌 드롭다운 목록 */
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccd5c9;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 6px;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.dropdown-list li {
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.hidden {
+  display: none;
+}
+
 #friend-search {
   appearance: none;
   padding: 12px 16px;

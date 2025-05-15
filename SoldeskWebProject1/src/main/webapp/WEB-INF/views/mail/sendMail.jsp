@@ -13,13 +13,16 @@
 	<form method="post">
 		<div class="container">
 			<div class="receiver">
-				<label for="friend-search">받는 사람 :</label> 
-				<select id="friend-search">
-					<option value=""></option>
-					<c:forEach var="rmdto" items="${rmdtoList}">					
-						<option value="${rmdto.receiver}">${rmdto.nickname}</option>
-					</c:forEach>
-				</select>
+			  <label for="friend-input">받는 사람 :</label>
+			  <div class="custom-dropdown">
+			    <input type="text" id="friend-input" placeholder="닉네임 검색" autocomplete="off">
+			    <ul id="dropdown-list" class="dropdown-list hidden">
+			      <c:forEach var="rmdto" items="${rmdtoList}">
+			        <li data-value="${rmdto.receiver}">${rmdto.nickname}</li>
+			      </c:forEach>
+			    </ul>
+			    <input type="hidden" name="receiver" id="receiver-hidden">
+			  </div>
 			</div>
 			
 			<div class="message-box">
