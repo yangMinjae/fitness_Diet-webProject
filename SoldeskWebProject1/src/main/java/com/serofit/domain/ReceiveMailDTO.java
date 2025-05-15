@@ -16,4 +16,6 @@ public class ReceiveMailDTO {
 	String content;
 	String preview;
 	String imgPath;
+	int mno;
+	int hit;
 }

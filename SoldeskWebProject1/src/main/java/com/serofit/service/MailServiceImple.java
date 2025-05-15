@@ -77,7 +77,10 @@ public class MailServiceImple implements MailService {
 			}
 			rmDTO.setContent(mvo.getContent());
 			rmDTO.setRegdate(mvo.getRegdate());
+			rmDTO.setMno(mvo.getMno());
+			rmDTO.setHit(mvo.getHit());
 			rmList.add(rmDTO);
+			
 		}
 		
 		return rmList;
@@ -111,5 +114,17 @@ public class MailServiceImple implements MailService {
 	@Override
 	public int insertMail(MailVO mvo) {		
 		return mMapper.insertMail(mvo);
+	}
+	
+	// 메일 확인 시 update
+	@Override
+	public int updateByReadMail(int mno) {
+		return mMapper.updateByReadMail(mno);
+	}
+	
+	// 메일 안 읽은 수 가져오기
+	@Override
+	public int selectMailCountByReceiver(int receiver) {
+		return mMapper.selectMailCountByReceiver(receiver);
 	}
 }

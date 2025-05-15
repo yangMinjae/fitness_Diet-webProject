@@ -61,4 +61,9 @@ public class CustomUser extends User{
 	public void setMateChecker(int mateChecker) {
 	    this.mateChecker = mateChecker;
 	}
+	
+	public void setMailCount(int mailCount) {
+		this.mailCount = mailCount;
+	}
+		
 }

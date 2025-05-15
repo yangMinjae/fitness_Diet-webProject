@@ -17,4 +17,10 @@ public interface MailService {
 	
 	// 메일 보내기
 	public int insertMail(MailVO mvo);
+	
+	// 메일 확인 시 update
+	public int updateByReadMail(int mno);
+	
+	// 메일 안 읽은 수 가져오기
+	public int selectMailCountByReceiver(int receiver);
 }

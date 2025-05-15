@@ -79,6 +79,9 @@ public class MainController {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		
 		model.addAttribute("mList", mService.selectByReceiver(customUser.getUno()));
+		
+		System.out.println(mService.selectByReceiver(customUser.getUno()));
+		
 		return "/mail/mailList";
 	}
 	

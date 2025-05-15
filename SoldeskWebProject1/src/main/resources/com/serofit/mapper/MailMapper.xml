@@ -36,4 +36,9 @@
 	<select id="selectMailCountByReceiver" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM tbl_mail WHERE receiver=#{receiver} AND hit=0
 	</select>
+	
+	<!-- 메일 확인 시 update -->
+	<update id="updateByReadMail" parameterType="int">
+		UPDATE tbl_mail SET hit=1 WHERE mno=#{mno}
+	</update>
 </mapper>

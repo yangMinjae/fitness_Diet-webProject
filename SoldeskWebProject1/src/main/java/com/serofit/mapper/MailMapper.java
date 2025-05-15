@@ -19,4 +19,7 @@ public interface MailMapper {
 	
 	// 메일 갯수 가져오기
 	public int selectMailCountByReceiver(int receiver);
+	
+	// 메일 확인 시 update
+	public int updateByReadMail(int mno);
 }

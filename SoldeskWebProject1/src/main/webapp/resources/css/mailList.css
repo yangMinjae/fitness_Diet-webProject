@@ -140,3 +140,10 @@ body {
   color: #888;
   margin-top: 4px;
 }
+
+/* 읽음 처리된 메일 스타일 */
+.mail-item.read {
+  background-color: #eeeeee !important; /* 기존 배경보다 흐리게 */
+  opacity: 0.7;                          /* 흐릿하게 */
+  font-style: italic;                   /* 기울임 (선택) */
+}

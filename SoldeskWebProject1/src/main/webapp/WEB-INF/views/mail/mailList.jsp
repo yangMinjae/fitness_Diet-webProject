@@ -26,12 +26,13 @@
 		<!-- 메일 리스트 -->
 		<ul class="mail-list">
 			<c:forEach var="mvo" items="${mList}">
-				<li class="mail-item"
+				<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
 				    data-name="${mvo.nickname}"
 				    data-photo="${mvo.imgPath}"
 				    data-content="${mvo.content}"
 				    data-regdate="${mvo.regdate}"
-				    data-uno="${mvo.uno}">
+				    data-uno="${mvo.uno}"
+				    data-mno="${mvo.mno}">
 					<div class="profile-icon">
 						<img src="/resources/img/tag/다이어터.png" alt="프로필" />
 					</div>

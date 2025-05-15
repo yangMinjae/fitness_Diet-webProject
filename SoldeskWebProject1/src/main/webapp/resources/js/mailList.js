@@ -65,13 +65,31 @@ document.querySelectorAll('.mail-item').forEach(item => {
 		const name = item.dataset.name;
 		const photo = item.dataset.photo;
 		const content = item.dataset.content;
-		const regdate = item.dataset.regdate
+		const mno = item.dataset.mno;
+		const regdate = item.dataset.regdate;
+		
+		fetch(`/mail/updateByReadMail?mno=${mno}`, {
+			method: 'GET'
+		})
+		.then(res => res.json())
+		.then(data  => {
+			if (data.status === 'success') {
+				// 모달 채우기
+				document.getElementById('senderName').innerText = name;
+				document.getElementById('mailContent').innerText = content;
+				document.getElementById('regdate').innerText = regdate;
+				document.getElementById('mailModal').classList.add('show');
 
-		document.getElementById('senderName').innerText = name;
-		document.getElementById('mailContent').innerText = content;
-		document.getElementById('regdate').innerText = regdate;
+				// 읽음 처리된 mail-item에 클래스 추가
+				item.classList.add('read');
 
-		document.getElementById('mailModal').classList.add('show');
+				// ✔ mailCount 갱신 (헤더 UI 업데이트)
+				const mailCountSpan = document.querySelector('.count');
+				if (mailCountSpan) {
+					mailCountSpan.textContent = data.mailCount;
+				}
+			}
+		})
 	});
 });
 
