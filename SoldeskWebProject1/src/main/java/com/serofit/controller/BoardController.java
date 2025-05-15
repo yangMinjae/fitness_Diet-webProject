@@ -1,5 +1,6 @@
 package com.serofit.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -69,7 +70,21 @@ public class BoardController {
 		int uno = 2;
 		return bService.getPostsByLove(uno);
 	}
-	
+	// 게시글 작성 버튼 눌렀을때 비동기로 dietList 가져와서 돌아오기
+	@GetMapping(value = "/writeBoard/checkHasDiet", produces = MediaType.APPLICATION_JSON_UTF8_VALUE )
+	@ResponseBody
+	public int checkHasDiet(Authentication authentication) {
+		List<DietVO> dvoList = new ArrayList<DietVO>();
+		
+		if(authentication != null) {
+			CustomUser customUser = (CustomUser) authentication.getPrincipal();
+			dvoList = wbService.getDietTitle(customUser.getUno());	
+			
+			return dvoList.size();
+		}
+		
+		return dvoList.size();
+	}
 
 	// 게시글 작성 페이지로 이동 + 식단 title 가져오기 
 	@PreAuthorize("isAuthenticated()")
@@ -78,7 +93,11 @@ public class BoardController {
 		log.info("writePost .... ");				
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		List<DietVO> dvoList = wbService.getDietTitle(customUser.getUno());
+		
 		model.addAttribute("dietList", dvoList);
+		// 식단 가지고 있는지 확인
+		model.addAttribute("hasDiet",!dvoList.isEmpty());
+		System.out.println(!dvoList.isEmpty());
 		return "/board/writeBoard";
 	}
 	

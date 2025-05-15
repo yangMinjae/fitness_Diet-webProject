@@ -7,53 +7,54 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
 
-let f= document.forms[0];
+let f = document.forms[0];
 
 //버튼 이벤트 추가
-document.querySelectorAll('button').forEach(button=>{
-	button.addEventListener("click", function(e){		
+document.querySelectorAll('button').forEach(button => {
+	button.addEventListener("click", function (e) {
 		let type = e.target.getAttribute('class');
-		
+
 		if (type === 'allList') {            // 전체 게시글
 
-		    fetch('/board/getAllBoardList')
-		        .then(response => {
-		            if (!response.ok) {
-		                throw new Error(`HTTP 오류! 상태: ${response.status}`);
-		            }
-		            return response.json();
-		        })
-		        .then(data => {
-		            console.log("전체 게시글:", data); 
-		            getAllBoardList(data); 
-		        })
-		        .catch(error => {
-		            console.error("게시글 불러오기 실패:", error);
-		        });
-	
-		}else if(type === 'dieter'){	
-			console.log("dieter");		
+			fetch('/board/getAllBoardList')
+				.then(response => {
+					if (!response.ok) {
+						throw new Error(`HTTP 오류! 상태: ${response.status}`);
+					}
+					return response.json();
+				})
+				.then(data => {
+					console.log("전체 게시글:", data);
+					getAllBoardList(data);
+				})
+				.catch(error => {
+					console.error("게시글 불러오기 실패:", error);
+				});
+
+		} else if (type === 'dieter') {
+			console.log("dieter");
 			getBoardListByTag("다이어터");
-		}else if(type === 'escapeAnchovy'){
+		} else if (type === 'escapeAnchovy') {
 			console.log("escapeAnchovy");
 			getBoardListByTag("멸치탈출");
-		}else if(type === 'maintenance'){
+		} else if (type === 'maintenance') {
 			console.log("maintenance");
 			getBoardListByTag("유지어터");
-		}else if(type === 'Professional'){
+		} else if (type === 'Professional') {
 			console.log("Professional");
 			getBoardListByTag("프로득근러");
-		}else if(type === 'healthKeeper'){
+		} else if (type === 'healthKeeper') {
 			console.log("healthKeeper");
 			getBoardListByTag("헬스키퍼");
-		}else if(type === 'listByLike'){
+		} else if (type === 'listByLike') {
 			console.log("listByLike");
 			getBoardListByLove();
-		}else if(type === 'writePostBtn'){
-			console.log("writePostBtn");	
-			location.href ='/board/writeBoard';
+		} else if (type === 'writePostBtn') {
+			//			checkDno();
+			checkHasDiet();
+
 		}
-		
+
 	});
 });
 
@@ -61,12 +62,12 @@ document.querySelectorAll('button').forEach(button=>{
 function getAllBoardList(posts) {
 	const allList = document.getElementById("postList");
 	allList.innerHTML = ""; // 기존 내용 초기화
-	
-	let str = '';  
+
+	let str = '';
 
 	posts.forEach(post => {
 		const formattedDate = formatDateToYMD(post.regdate);
-		str += 
+		str +=
 			`
 				<tr>
 					<td>
@@ -78,62 +79,95 @@ function getAllBoardList(posts) {
 					<td>${post.love}</td>
 				</tr>
 			`;
-});
+	});
 	allList.innerHTML = str;
 }
 
 // 태그에 맞춰서 보여주기
 function getBoardListByTag(tag) {
-	fetch(`/board/boardList/${tag}`)  
-			.then(response => {
-					if (!response.ok) {
-							throw new Error(`HTTP 오류! 상태: ${response.status}`);
-					}
-					return response.json();
-			})
-			.then(data => {
-					console.log(`#${tag} 게시글:`, data);
-					getAllBoardList(data); 
-			})
-			.catch(error => {
-					console.error(`#${tag} 게시글이 없습니다:`, error);
-			});
+	fetch(`/board/boardList/${tag}`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP 오류! 상태: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			console.log(`#${tag} 게시글:`, data);
+			getAllBoardList(data);
+		})
+		.catch(error => {
+			console.error(`#${tag} 게시글이 없습니다:`, error);
+		});
 }
 
 
 // 좋아요 누른 게시글 
-function getBoardListByLove(uno){
-	   fetch(`/board/boardList/love`)
-       .then(response => {
-           if (!response.ok) {
-               throw new Error(`HTTP 오류! 상태: ${response.status}`);
-           }
-           return response.json();
-       })
-       .then(data => {
-           console.log("좋아요 누른 게시글:", data);
-           getAllBoardList(data);  
-       })
-       .catch(error => {
-           console.error("좋아요 누른 게시글 불러오기 실패:", error);
-       });
+function getBoardListByLove(uno) {
+	fetch(`/board/boardList/love`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP 오류! 상태: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			console.log("좋아요 누른 게시글:", data);
+			getAllBoardList(data);
+		})
+		.catch(error => {
+			console.error("좋아요 누른 게시글 불러오기 실패:", error);
+		});
 }
 
-document.querySelectorAll('a').forEach(a=>{
-	a.addEventListener("click", function(e){
+document.querySelectorAll('a').forEach(a => {
+	a.addEventListener("click", function (e) {
 		e.preventDefault();
-		if(e.target.getAttribute("title") === 'title'){
+		if (e.target.getAttribute("title") === 'title') {
 			let href = e.target.getAttribute('href');
 
-			location.href="/board/boardView?bno="+href;
+			location.href = "/board/boardView?bno=" + href;
 		}
 	});
 });
 // 날짜 형식 바꾸기
 function formatDateToYMD(dateString) {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`;
+	const date = new Date(dateString);
+	const year = date.getFullYear();
+	const month = ('0' + (date.getMonth() + 1)).slice(-2);
+	const day = ('0' + date.getDate()).slice(-2);
+	return `${year}-${month}-${day}`;
 }
+
+
+// 게시글 작성 하러 갈때 dno 있는지 확인하고 없으면 설문하러 갈건지 confirm
+function checkHasDiet() {
+	fetch("/board/writeBoard/checkHasDiet", {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(res => res.json())
+		.then(length => {
+			if(length == 0){				
+				if(document.querySelector('#isLogin')) {
+					if(confirm("설문을 진행해야 게시글을 작성할 수 있습니다.\n설문을 진행하시겠습니까?")) {
+						location.href = "/survey";
+						return;
+					}
+					else{
+						location.href = "/boardList";
+						return;
+					}
+				}
+			}
+
+			location.href = "/board/writeBoard";
+		})
+		.catch(err => {
+			console.log(err);
+		});
+
+}
+
