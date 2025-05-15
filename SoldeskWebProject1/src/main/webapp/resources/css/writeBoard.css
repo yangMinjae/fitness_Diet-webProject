@@ -2,40 +2,41 @@
   background-color: #f4f8f4;
   color: #333;
 }
-/* 공통 컨테이너 스타일 */
+
+/* 🍃 전체 컨테이너 넓게 */
 .content-container {
-  max-width: 700px;
-  margin: 60px auto;
-  padding: 40px 5vw;
+  max-width: 960px;                  /* ✅ 기존 700px → 더 넓게 */
+  margin: 80px auto;                 /* ✅ 상하 여백 증가 */
+  padding: 60px 60px;                /* ✅ 좌우 여백도 넉넉하게 */
   font-family: 'Inter', 'Noto Sans KR', sans-serif;
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
 }
 
-/* 폼 그룹 */
+/* 🧱 폼 그룹 */
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #4d5a63;
 }
 
-/* 입력 필드 */
+/* ✍️ 입력 필드 */
 input[type="text"],
 select,
 textarea {
   width: 100%;
-  padding: 12px;
-  font-size: 1rem;
+  padding: 14px;
+  font-size: 1.05rem;
   border: 1px solid #ccd5cc;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: #f9fdf9;
   box-sizing: border-box;
   transition: border-color 0.3s;
@@ -48,29 +49,35 @@ textarea:focus {
   outline: none;
 }
 
-/* 콘텐츠 입력창 */
+/* ✨ 콘텐츠 입력창 */
 .content-input {
-  min-height: 300px;
-  resize: vertical;
+  height: 360px;
+  resize: none;
+  overflow-y: auto;
+  font-size: 1.05rem;
+  padding: 14px;
+  border-radius: 10px;
+  background-color: #f9fdf9;
+  box-sizing: border-box;
 }
 
-/* 버튼 그룹 */
+/* 🧩 버튼 그룹 */
 .button-group,
 .action-buttons {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 12px;
+  margin-top: 40px;
 }
 
 .upload-button,
 .action-buttons button {
   flex: 1;
-  padding: 14px 0;
-  font-size: 1rem;
+  padding: 16px 0;
+  font-size: 1.05rem;
   font-weight: 600;
   border: none;
-  border-radius: 32px;
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -78,7 +85,6 @@ textarea:focus {
 .upload-button {
   background-color: #6ac56d;
   color: white;
-  margin-button: 15px;
 }
 
 .upload-button:hover {
@@ -102,38 +108,61 @@ textarea:focus {
 .list-btn:hover {
   background-color: #bbb;
 }
-#imageInput{
-	display: none;
+
+#imageInput {
+  display: none;
 }
 
-/* 이미지 버튼 */
-.imageButton {
-  width: 100px;
-  padding: 10px;
-  background-color: #f4f8f4;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.3s;
-  margin-top: 15px;
-}
 .image-wrapper {
   min-height: 20px;
-  margin-bottom: 20px;
-}
-.imageButton:hover {
-  border-color: #6ac56d;
+  margin-top: 15px;
+  margin-bottom: 24px;
+  overflow-x: auto;       /* 넘치면 가로 스크롤 */
+  white-space: nowrap;    /* 줄바꿈 없이 가로 나열 */
 }
 
-/* 미리보기 콘텐츠 */
+/* 이미지 업로드 버튼 */
+.imageButton {
+  width: 140px;
+  height: 140px;
+  background-color: #f4f8f4;
+  border: 1px solid #ccd5cc;
+  display: inline-flex;   /* inline 흐름 + 정렬 지원 */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 12px;
+  border-radius: 10px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.imageButton:hover {
+  border-color: #6ac56d;
+  background-color: #f0fdf0;
+}
+
+/* 업로드된 이미지 스타일 */
+.image-wrapper img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  margin-right: 12px;
+  vertical-align: top;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+
+/* 📦 미리보기 콘텐츠 */
 #content {
-  min-height: 200px;
-  max-height: 300px;
+  min-height: 240px;
+  max-height: 360px;
   overflow-y: auto;
   border: 1px solid #ccd5cc;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 10px;
   background-color: #f9fdf9;
 }
 
@@ -143,27 +172,26 @@ textarea:focus {
   margin: 8px;
   vertical-align: top;
   display: inline-block;
-  border-radius: 8px;
+  border-radius: 10px;
 }
+
+/* 📄 읽기 전용 박스 */
 .readonly-box {
-  min-height: 120px;
-  padding: 12px;
+  min-height: 140px;
+  padding: 14px;
   background-color: #f9fdf9;
   border: 1px solid #ccd5cc;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
   color: #555;
   line-height: 1.6;
   white-space: pre-wrap;
   box-sizing: border-box;
 }
-.boardList-btn{
+
+/* 🧷 기타 버튼 */
+.boardList-btn,
+.register-btn {
   background-color: #6ac56d;
   color: white;
-  margin-button: 15px;
-}
-.register-btn{
-  background-color: #6ac56d;
-  color: white;
-  margin-button: 15px;
 }

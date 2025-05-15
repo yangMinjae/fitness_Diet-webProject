@@ -61,7 +61,7 @@
 			<input type="file" id="imageInput" accept="image/*">
 			<!-- 이미지 버튼이 생길 영역 -->
 			<div class="image-wrapper">
-			<div id="imageButton"></div>
+				<div id="imageButton"></div>
 			</div>
 			<!-- 사용법 및 주의사항 입력 -->
 			<div class="form-group">
