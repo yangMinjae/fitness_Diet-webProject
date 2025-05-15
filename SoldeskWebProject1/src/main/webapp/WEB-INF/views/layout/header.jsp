@@ -22,7 +22,7 @@
 		</nav>
 
 		<div class="right-icons">
-			<div class="mate-agree-reject">
+			<%-- <div class="mate-agree-reject">
 				<sec:authorize access="isAuthenticated()">
 					<h5>운동 메이트</h5>
 					<sec:authentication var="mateChecker" property="principal.mateChecker" />
@@ -30,7 +30,7 @@
 				</sec:authorize>
 					<button class="mateCheckerBtn" id="agree">동의</button>
 					<button class="mateCheckerBtn" id="reject">거부</button>
-			</div>
+			</div> --%>
 			<div class="mail">
 				<img
 					src="https://img.icons8.com/material-sharp/24/000000/new-post.png"
