@@ -2,8 +2,8 @@
 	display: none;
 	position: fixed;
 	top: 0; left: 0;
-	width: 100%; height: 100%;
-	background-color: rgba(0,0,0,0.5);
+	width: 100vw; height: 100vh;
+	background-color: rgba(0,0,0,0.4);
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.3s ease;
@@ -11,51 +11,31 @@
 }
 
 .modal.show {
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	opacity: 1;
 	pointer-events: auto;
 }
 
-.mail-input {
-	width: 100%;
-	height: 100px;
-	border: none;
-	resize: none;
-	outline: none;
-	font-size: 14px;
-	padding: 10px;
-	box-sizing: border-box;
-	border-radius: 4px;
-	background-color: #f5f5f5;
-}
-
-.mail-input::placeholder {
-    color: #aaa;
-}
-
-.char-counter {
-    text-align: right;
-    font-size: 12px;
-    color: #666;
-    margin-top: 5px;
-}
-    
+/* 🍃 심플하고 넉넉한 모달 */
 .modal-content {
-	background: #fff;
-	margin: 10% auto;
-	padding: 20px;
-	width: 400px;
-	border-radius: 8px;
+	background: #f4f8f4;  /* 기존 배경색 계열 맞춤 */
+	padding: 32px 40px;
+	width: 600px;
+	max-width: 90%;
+	border-radius: 16px;
 	text-align: left;
 	position: relative;
 	animation: slideUp 0.3s ease;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	border: 1px solid #d0e0d0;
 }
 
-/* 등장 애니메이션 */
+/* 애니메이션 */
 @keyframes slideUp {
 	from {
-		transform: translateY(30px);
+		transform: translateY(40px);
 		opacity: 0;
 	}
 	to {
@@ -64,61 +44,91 @@
 	}
 }
 
-/* 헤더: 사진 + 이름 가로 정렬 */
+/* 헤더 */
 .modal-header {
 	display: flex;
 	align-items: center;
-	gap: 15px;
-	margin-bottom: 15px;
+	gap: 20px;
+	margin-bottom: 20px;
 }
 
 .modal-header img {
-	width: 60px;
-	height: 60px;
+	width: 72px;
+	height: 72px;
 	border-radius: 50%;
 	object-fit: cover;
+	border: 2px solid #6ac56d;
 }
 
 .modal-header h2 {
 	margin: 0;
-	font-size: 20px;
-	color: #333;
+	font-size: 22px;
+	color: #4d5a63;
 }
 
 /* 본문 */
 .modal-body {
-	border-top: 1px solid #ddd;
-	padding-top: 15px;
-	margin-top: 10px;
+	border-top: 1px solid #cfe4d1;
+	padding-top: 20px;
+	margin-top: 15px;
 	font-size: 16px;
-	color: #444;
+	color: #34495e;
 }
 
 /* 푸터 */
 .modal-footer {
-	margin-top: 20px;
+	margin-top: 30px;
 	text-align: right;
 }
 
 .modal-footer button {
-	background-color: #007bff;
+	background-color: #6ac56d;
 	color: white;
-	padding: 8px 14px;
+	padding: 10px 20px;
 	border: none;
-	border-radius: 4px;
+	border-radius: 8px;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 15px;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
 }
 
 .modal-footer button:hover {
-	background-color: #0056b3;
+	background-color: #5da258;
 }
 
 /* 닫기 버튼 */
 .close-btn {
 	position: absolute;
-	right: 15px;
-	top: 10px;
-	font-size: 24px;
+	right: 20px;
+	top: 18px;
+	font-size: 26px;
 	cursor: pointer;
+	color: #4d5a63;
+}
+
+/* 입력 박스 */
+.mail-input {
+	width: 100%;
+	height: 120px;
+	border: 1px solid #cfe4d1;
+	resize: none;
+	outline: none;
+	font-size: 15px;
+	padding: 12px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background-color: white;
+	color: #333;
+}
+
+.mail-input::placeholder {
+	color: #aaa;
+}
+
+.char-counter {
+	text-align: right;
+	font-size: 13px;
+	color: #555;
+	margin-top: 6px;
 }

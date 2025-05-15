@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #f4f8f4;
+  color: #333;
+}
+
 /* 전체 영역 */
 .mate-slider-wrapper {
   width: 1200px;  /* 기존 960px → 넓혀서 5개 넉넉히 들어가게 */
@@ -47,10 +54,11 @@
 /* 카드 이미지 */
 .user-icon {
   width: 100%;
-  height: 180px;             /* 🔼 이미지 높이 확장: 카드 내부에서 차지할 공간 지정 */
-  object-fit: cover;         /* 이미지를 비율 유지하며 꽉 채우게 */
-  margin-bottom: 10px;
-  border-radius: 12px;       /* 이미지에도 둥근 테두리 적용하면 좀 더 세련됨 */
+  aspect-ratio: 1 / 1;      /* 또는 16 / 9, 3 / 4 등 원하는 고정 비율 */
+  object-fit: cover;        /* 비율 유지하면서 영역 채우기 */
+  background-color: #eee;
+  border-radius: 12px;
+  display: block;
 }
 
 /* 사용자 정보 */
