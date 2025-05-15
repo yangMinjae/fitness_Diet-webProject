@@ -84,7 +84,10 @@
 				<h2>친구관리</h2>
 
 				<section class="friend-subsection">
-					<h3>즐겨찾기</h3>
+					<div class="section-header fav">
+					    <h3>즐겨찾기</h3>
+					    <input type="text" id="searchFav" placeholder="닉네임 검색" class="search-box">
+					</div>
 					<div class="friend-list">
 						<!-- 반복 영역 시작 -->
 						<table id="favList" class="listTable">
@@ -103,8 +106,11 @@
 					</div>
 				</section>
 
-				<section class="friend-subsection">
-					<h3>팔로우</h3>
+				<section class="friend-subsection follow">
+					<div class="section-header">
+						<h3>팔로우</h3>
+						<input type="text" id="searchFollow" placeholder="닉네임 검색" class="search-box">
+					</div>
 					<div class="friend-list">
 						<div class="friend-row">
 							<!-- 반복 영역 시작 -->
@@ -125,8 +131,11 @@
 					</div>
 				</section>
 
-				<section class="friend-subsection">
-					<h3>팔로워</h3>
+				<section class="friend-subsection follower">
+					<div class="section-header">
+						<h3>팔로워</h3>
+						<input type="text" id="searchFollower" placeholder="닉네임 검색" class="search-box">
+					</div>
 					<div class="friend-list">
 						<div class="friend-row">
 							<!-- 반복 영역 시작 -->

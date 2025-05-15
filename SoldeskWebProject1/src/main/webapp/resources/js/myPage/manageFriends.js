@@ -6,7 +6,8 @@ let uno = f.elements['uVO.uno'].value;      // 시큐리티 구현시 수정
 
 initFriendsList();							// 최초 로드시 목록 초기화
 
-function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, follower의 목록을 가져오는 함수
+function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, follower의
+											// 목록을 가져오는 함수
 	  const bodyMap = {
 	    fav: favBody,
 	    follow: followBody,
@@ -32,12 +33,14 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 	        // 즐겨찾기 된 사람은 팔로우 목록에서 제외
 	        if (type === 'follow' && (fav === true || fav === 'true' || fav === 1 || fav === '1')) return;
 
-	        str += `<tr>
-	                  <td class="tblImgSection">
-	                    <img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg" alt="프로필">
-	                  </td>
-	                  <td class="tblNicknameSection">${nickname}</td>`;
-
+	        str += `<tr class="hover-card-row clickable-profile">	     
+		        		<td class="tblImgSection">
+					    	<img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg" alt="프로필">
+					    </td>
+					    <td class="tblNicknameSection">
+					    	${nickname}
+					    </td>`;
+	        
 	        if (type === 'fav') {
 	          str += `<td class="tblFollowBtnSection">
 	                    <button class="followCancelBtn" data-catcher="${targetUno}">취소</button>
@@ -87,7 +90,9 @@ function initFriendsList(){							// 목록을 초기화
 	  getList('follower');
 }
 
-function updateFollowOrFav(catcher, action) {		// 현재 로그인 중인 사람의 uno와, action(팔로우 추가/취소, 즐찾 추가/해제) 입력시 해당 동작을 처리       
+function updateFollowOrFav(catcher, action) {		// 현재 로그인 중인 사람의 uno와,
+													// action(팔로우 추가/취소, 즐찾
+													// 추가/해제) 입력시 해당 동작을 처리
 	  const url = `/myPage/${action}`;
 	  const methodMap = {
 	    addFollow: 'put',                           // 팔로우 추가
@@ -124,3 +129,44 @@ function updateFollowOrFav(catcher, action) {		// 현재 로그인 중인 사람
 	  })
 	  .catch(err => console.log(err));
 	}
+
+function setupSearch(inputId, tableBodyId) {
+	const input = document.getElementById(inputId);
+	const tableBody = document.getElementById(tableBodyId);
+
+	if (!input || !tableBody) return;
+
+	input.addEventListener('input', function () {
+		const filter = this.value.toLowerCase();
+		const rows = tableBody.getElementsByTagName('tr');
+
+		Array.from(rows).forEach(row => {
+			const nicknameCell = row.querySelector('td:nth-child(2)');
+			const nickname = nicknameCell ? nicknameCell.textContent.toLowerCase() : '';
+			row.style.display = nickname.includes(filter) ? '' : 'none';
+		});
+	});
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+	setupSearch('searchFav', 'favBody');
+	setupSearch('searchFollow', 'followBody');
+	setupSearch('searchFollower', 'followerBody');
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+	  document.querySelectorAll('.listTable').forEach(table => {
+	    table.addEventListener('click', function (e) {
+	      const clickedRow = e.target.closest('tr');
+	      if (!clickedRow) return;
+
+	      const isProfileClick =
+	        e.target.closest('.tblImgSection') || e.target.closest('.tblNicknameSection');
+
+	      if (isProfileClick) {
+	        const nickname = clickedRow.querySelector('.tblNicknameSection').innerText.trim();
+	        alert(`프로필 클릭됨: ${nickname}`);
+	      }
+	    });
+	  });
+});

@@ -14,11 +14,17 @@
     <!-- 패스워드 인코더 -->
     <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	<bean id="customLogoutSuccessHandler" class="com.serofit.security.CustomLogoutSuccessHandler"/>
+	<bean id="customLoginFailureHandler" class="com.serofit.security.CustomAuthenticationFailureHandler"/>
 
     <!-- 로그인 & 인증 설정 -->
     <security:http auto-config="true">
-        <security:form-login login-page="/login" authentication-success-handler-ref="customLoginSuccessHandler" />
+        <security:form-login 
+        login-page="/login"
+        authentication-success-handler-ref="customLoginSuccessHandler"
+        authentication-failure-handler-ref="customLoginFailureHandler" />
+        
 		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="JSESSIONID" />
+		
         <security:csrf disabled="true" />
     </security:http>
     

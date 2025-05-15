@@ -1,8 +1,8 @@
 let profileSection = document.querySelector('.profile-section')
 let friendSection = document.querySelector('.friend-section');
-let favSection = document.querySelector('#favList');
-let followSection = document.querySelector('#followList');
-let followerSection = document.querySelector('#followerList');
+let favSection = document.querySelector('.fav');
+let followSection = document.querySelector('.follow');
+let followerSection = document.querySelector('.follower');
 
 document.querySelectorAll('button')
 .forEach(ele=>{

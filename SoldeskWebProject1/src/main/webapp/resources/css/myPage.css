@@ -1,27 +1,36 @@
+/* 기본 레이아웃 */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f4f8f4;
-    min-width: 1300px;
-    overflow-x: auto;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f8f4;
+  min-width: 1300px;
+  overflow-x: auto;
 }
 
 .container {
-    display: flex;
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* 사이드바 전체 박스 */
+.main-content {
+  flex: 1;
+  padding: 0 40px;
+  max-width: 1000px;
+  margin: 50px auto 40px auto;
+  box-sizing: border-box;
+}
+
+/* 사이드바 */
 .floating-sidebar {
   position: fixed;
-  top: 125px; /* 브라우저 상단에서의 거리 */
-  left: 80px; /* 왼쪽 고정 위치 */
+  top: 125px;
+  left: 80px;
   width: 180px;
   padding: 24px 16px;
-  background-color: #e4f4ec; /* 민트 */
+  background-color: #e4f4ec;
   border-radius: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   display: flex;
@@ -30,9 +39,8 @@ body {
   z-index: 100;
 }
 
-/* 큰 메뉴 버튼 */
 .menu-section {
-  background-color: #d4e8f7; /* 파스텔 블루 */
+  background-color: #d4e8f7;
   color: #333;
   font-weight: 600;
   padding: 18px 12px;
@@ -46,7 +54,6 @@ body {
   background-color: #c5ddf0;
 }
 
-/* 하위 버튼들 */
 .menu-subgroup {
   display: flex;
   flex-direction: column;
@@ -54,7 +61,7 @@ body {
 }
 
 .menu-button {
-  background-color: #f6e7f2; /* 파스텔 핑크톤 */
+  background-color: #f6e7f2;
   color: #444;
   padding: 10px 12px;
   border-radius: 10px;
@@ -67,34 +74,24 @@ body {
   background-color: #edd2e7;
 }
 
-
-.main-content {
-  flex: 1;
-  padding: 0px 40px;
-  max-width: 1000px;
-  margin: 50px auto 40px auto; /* 상단 여백 + 좌우 auto로 중앙 정렬 */
-  box-sizing: border-box;
-}
-
-
-/* 메인 콘텐츠 */
-
+/* 프로필 섹션 */
 .profile-section {
-  background-color: #e6f4ec; /* 파스텔 민트 */
+  background-color: #f2fdf2;
   padding: 40px;
-  border-radius: 20px;
+  border-radius: 24px;
   margin-bottom: 40px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .profile-section h2 {
-  font-size: 1.8rem;
-  color: #3a4a42;
-  margin-bottom: 30px;
+  padding-left: 10px;
+  color: #3c5e3c;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  border-left: 6px solid #a0d3a0;
   text-align: center;
 }
 
@@ -102,7 +99,6 @@ body {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
-  align-items: flex-start;
 }
 
 .profile-left {
@@ -115,11 +111,11 @@ body {
 }
 
 .profile-image {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #c4e3d5;
+  border: 3px solid #a0d3a0;
   background-color: #fff;
 }
 
@@ -128,6 +124,7 @@ body {
   font-weight: bold;
   color: #2e2e2e;
   text-align: center;
+  word-break: keep-all;
 }
 
 .profile-form {
@@ -172,12 +169,12 @@ body {
   border: 1px solid #bbb;
   padding: 8px 12px;
   border-radius: 8px;
-  display: inline-block;
   margin-bottom: 8px;
   color: #444;
+  display: inline-block;
 }
 
-/* 공통 버튼 스타일 */
+/* 버튼 스타일 */
 button {
   border: none;
   border-radius: 30px;
@@ -189,27 +186,17 @@ button {
   font-family: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
-/* 수정 버튼 - 파스텔 라벤더 */
-.edit-button {
-  background-color: #d8ccf7;
-  color: #3f3f3f;
-}
-
-.edit-button:hover {
-  background-color: #c8b6ec;
-}
-
-/* 제출 버튼 - 파스텔 라벤더 */
+.edit-button,
 .submit-button {
   background-color: #d8ccf7;
   color: #3f3f3f;
 }
 
+.edit-button:hover,
 .submit-button:hover {
   background-color: #c8b6ec;
 }
 
-/* 취소 버튼 - 파스텔 살구 */
 .cancel-button {
   background-color: #f9c2b1;
   color: #3f3f3f;
@@ -219,11 +206,6 @@ button {
   background-color: #f5aa93;
 }
 
-.hidden {
-  display: none;
-}
-
-/* 일반 회색 버튼 (예: 지역 검색 등) */
 .profile-form button,
 .form-group button[name="searchAreaBtn"] {
   background-color: #ececec;
@@ -237,104 +219,72 @@ button {
   background-color: #dcdcdc;
 }
 
-/* 목록 부분 */
+.hidden {
+  display: none;
+}
+
+/* 친구 섹션 */
 .friend-section h2 {
   font-size: 1.6rem;
   margin-bottom: 24px;
   padding: 10px 16px;
-  background-color: #eef9f4; /* 더 옅은 민트톤 */
+  background-color: #eef9f4;
   color: black;
-  border-left: 6px solid #b7e3d6; /* 조금 더 은은한 포인트 컬러 */
+  border-left: 6px solid #b7e3d6;
   border-radius: 6px;
-  box-shadow: none; /* 그림자 제거로 심플하게 */
   font-weight: 600;
 }
 
-.profile-section {
-  background-color: #f2fdf2; /* 파스텔 민트 그린톤 */
-  padding: 40px;
-  border-radius: 24px;
-  margin-bottom: 40px;
-  box-sizing: border-box;
-  max-width: 1000px;
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* 박스 내부 구성 */
-.profile-box {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.profile-left {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 160px;
-}
-
-.profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #a0d3a0; /* 라이트 민트 */
-  box-sizing: content-box;
-  background-color: #fff;
-}
-
-.profile-nickname {
-  font-weight: bold;
-  font-size: 1.1rem;
-  text-align: center;
-  color: #444;
-  word-break: keep-all;
-}
-
-/* 입력 폼 */
-.profile-form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.profile-section h2 {
-  padding-left: 10px;
-  color: #3c5e3c;
-  font-size: 1.5rem;
-  margin-bottom: 24px;
-  border-left: 6px solid #a0d3a0;
-}
-
-/* 테이블 전체 */
+/* 테이블 */
 .listTable {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 16px;
 }
 
-/* 행 스타일 */
+.listTable thead th {
+  background-color: #d8f0ff;
+  color: #555;
+  font-size: 0.9rem;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.tblImgHeader,
+.tblBtnHeader {
+  width: 120px;
+}
+
+.tblNicknameHeader {
+  width: auto;
+}
+
 .listTable tbody tr {
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.listTable tbody tr:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  background-color: #f9f9f9;
+  position: relative;
+  z-index: 5;
+  border-radius: 12px;
 }
 
 .listTable td {
-  padding: 16px 12px;  /* 기존 16px 유지, 좌우 조금 조절 가능 */
+  padding: 16px 12px;
   text-align: center;
   font-size: 0.95rem;
   vertical-align: middle;
   color: #333;
 }
 
-/* 프로필 이미지 */
+/* 테이블 안 이미지 */
 .tblImgSection img {
   width: 48px;
   height: 48px;
@@ -351,33 +301,34 @@ button {
   width: 100%;
 }
 
-/* 버튼들 */
+/* 버튼 셀 */
 .tblBtnSection {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  min-height: 60px;   /* ✅ 고정 최소 높이 지정 */
+  min-height: 60px;
 }
 
-/* 버튼 공통 스타일 */
+/* 테이블 내 버튼 */
 .followCancelBtn,
 .addFavBtn,
 .addFollowBtn,
 .favRemoveBtn {
-  padding: 10px 10px;        /* ✅ 가로/세로 패딩 증가 */
-  white-space: nowrap;       /* ✅ 줄바꿈 방지 */
-  min-width: 100px;     /* ✅ 최소 너비 넓힘 */
+  padding: 10px;
+  min-width: 100px;
   border: none;
   border-radius: 20px;
   font-size: 0.85rem;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .followCancelBtn { background-color: #f9c2b1; color: #333; }
-.addFavBtn, .addFollowBtn { background-color: #d4e8f7; color: #333; }
+.addFavBtn,
+.addFollowBtn { background-color: #d4e8f7; color: #333; }
 .favRemoveBtn { background-color: #aaa; color: white; }
 
 .followCancelBtn:hover,
@@ -387,22 +338,35 @@ button {
   filter: brightness(0.95);
 }
 
-/* 헤더 스타일 */
-.listTable thead th {
-  background-color: #d8f0ff;
-  color: #555;
-  font-size: 0.9rem;
-  padding: 12px;
-  border-radius: 8px;
+/* 검색창 + 섹션 제목 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-/* 칸 너비 정리 */
-.tblImgHeader,
-.tblBtnHeader {
-  width: 120px;
+.section-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+  color: black;
 }
 
-.tblNicknameHeader {
-  width: auto;
+.search-box {
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  width: 220px;
+  border-radius: 20px;
+  border: 1px solid #b7e3d6;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease-in-out;
 }
 
+.search-box:focus {
+  border-color: #87cbb7;
+  box-shadow: 0 0 6px rgba(135, 203, 183, 0.4);
+}
