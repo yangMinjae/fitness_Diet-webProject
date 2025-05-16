@@ -1,8 +1,10 @@
 package com.serofit.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.BoardListDTO;
+import com.serofit.mapper.MailMapper;
+import com.serofit.security.CustomUserDetailService;
 import com.serofit.security.domain.CustomUser;
 import com.serofit.service.BoardService;
 import com.serofit.service.HFService;
@@ -47,6 +51,12 @@ public class MainController {
 	@Autowired
 	MyPageService mypService;
 	
+	@Autowired
+	CustomUserDetailService userService;
+	
+	@Autowired
+    MailMapper mMapaer;
+	
 	// 서버 구동 시 mainPage
 	@GetMapping()
 	public String home(Locale locale, Model model) {
@@ -55,6 +65,21 @@ public class MainController {
 		
 		return "main";
 	}
+	
+	// 지속적인 헤더 리로드
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/header/data", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+    public Map<String, Object> getHeaderData(Authentication authentication) {
+		Map<String, Object> result = new HashMap<>();
+		
+        CustomUser user = (CustomUser) authentication.getPrincipal();
+        CustomUser customUser = (CustomUser) userService.loadUserByUsername(user.getUsername());
+        user.setMailCount(customUser.getMailCount());
+        result.put("mailCount", user.getMailCount());
+    
+        return result;
+    }
 	
 	// 로그인 페이지 이동
 	@GetMapping("/login")
@@ -79,8 +104,6 @@ public class MainController {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		
 		model.addAttribute("mList", mService.selectByReceiver(customUser.getUno()));
-		
-		System.out.println(mService.selectByReceiver(customUser.getUno()));
 		
 		return "/mail/mailList";
 	}

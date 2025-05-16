@@ -1,3 +1,6 @@
+// 새로고침 시간 밀리초 (30초)
+const SETTIME = 30000;
+
 // 헤더 A 태그 버튼화
 document.querySelectorAll('a').forEach(a=>{
 	a.addEventListener("click", function(e){
@@ -98,3 +101,22 @@ if (document.getElementById('mateToggle') != null) {
 		})
 	});
 }
+
+function updateHeaderData() {
+	const mailCountEl = document.getElementById('mailCount');
+	if (mailCountEl.textContent.trim() != '') {
+		fetch('/header/data')
+		.then(res => res.json())
+		.then(data => {
+			
+			if (mailCountEl && data.mailCount !== undefined) {
+				mailCountEl.textContent = data.mailCount;
+			}
+			
+		})
+		.catch(err => console.error('헤더 데이터 갱신 실패:', err));
+	}
+}
+
+// 예: 30초마다 자동 갱신
+setInterval(updateHeaderData, SETTIME);

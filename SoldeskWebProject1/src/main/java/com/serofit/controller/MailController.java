@@ -43,6 +43,19 @@ public class MailController {
 		return "redirect:/mailList";
 	}
 	
+	// 모달에서 쪽지 보내기
+	@PostMapping("/sendMsg")
+	@ResponseBody
+	public String sendMsg(int myUno, int selectUno, String content) {
+		MailVO mvo = new MailVO();
+		
+		mvo.setReceiver(selectUno);
+		mvo.setSender(myUno);
+		mvo.setContent(content);
+		
+		return mService.insertMail(mvo) == 1 ? "true" : "false";
+	}
+	
 	// 메일 확인 시 update
 	@GetMapping(value = "/updateByReadMail", produces = "application/json")
 	@ResponseBody

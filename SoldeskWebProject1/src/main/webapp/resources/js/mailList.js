@@ -60,36 +60,44 @@ document.querySelectorAll('button').forEach(button=>{
 });
 
 // 메일 모달창
-document.querySelectorAll('.mail-item').forEach(item => {
-	item.addEventListener('click', () => {
-		const name = item.dataset.name;
-		const photo = item.dataset.photo;
-		const content = item.dataset.content;
-		const mno = item.dataset.mno;
-		const regdate = item.dataset.regdate;
-		
-		fetch(`/mail/updateByReadMail?mno=${mno}`, {
-			method: 'GET'
-		})
-		.then(res => res.json())
-		.then(data  => {
-			if (data.status === 'success') {
-				// 모달 채우기
-				document.getElementById('senderName').innerText = name;
-				document.getElementById('mailContent').innerText = content;
-				document.getElementById('regdate').innerText = regdate;
-				document.getElementById('mailModal').classList.add('show');
-
-				// 읽음 처리된 mail-item에 클래스 추가
-				item.classList.add('read');
-
-				// ✔ mailCount 갱신 (헤더 UI 업데이트)
-				const mailCountSpan = document.querySelector('.count');
-				if (mailCountSpan) {
-					mailCountSpan.textContent = data.mailCount;
+document.addEventListener('DOMContentLoaded', () => {
+	document.querySelectorAll('.mail-item').forEach(item => {
+		item.addEventListener('click', () => {
+			const name = item.dataset.name;
+			const photo = item.dataset.photo;
+			const content = item.dataset.content;
+			const mno = item.dataset.mno;
+			const regdate = item.dataset.regdate;
+			const selectUno = item.dataset.selectuno;
+			const myUno = item.dataset.myuno;
+			
+			fetch(`/mail/updateByReadMail?mno=${mno}`, {
+				method: 'GET'
+			})
+			.then(res => res.json())
+			.then(data  => {
+				if (data.status === 'success') {
+					// 모달 채우기
+					document.getElementById('senderName').innerText = name;
+					document.getElementById('mailContent').innerText = content;
+					document.getElementById('regdate').innerText = regdate;
+					document.getElementById('selectUno').innerText = selectUno;
+					document.getElementById('myUno').innerText = myUno;
+					document.getElementById('regdate').innerText = regdate;
+					
+					document.getElementById('mailModal').classList.add('show');
+	
+					// 읽음 처리된 mail-item에 클래스 추가
+					item.classList.add('read');
+	
+					// ✔ mailCount 갱신 (헤더 UI 업데이트)
+					const mailCountSpan = document.querySelector('.count');
+					if (mailCountSpan) {
+						mailCountSpan.textContent = data.mailCount;
+					}
 				}
-			}
-		})
+			})
+		});
 	});
 });
 

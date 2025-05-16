@@ -95,19 +95,21 @@ function updateFilterVisualState() {
 	});
 };
 
-// 팔로우 팔로잉 버튼 
+// 버튼 (팔로우, 메일) 
 document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll('.mate-scroll-section').forEach(a => {
 		a.addEventListener('click', (e) => {
 			const followBtn = e.target.closest('.follow-btn');
 			const sendBtn = e.target.closest('.send-msg-btn');
+			const mateItem = e.target.closest('.mate-item');
+			const myUno = mateItem.dataset.myuno;
+			const selectUno = mateItem.dataset.selectuno;
 			
+			// 팔로우 팔로잉
 			if (followBtn) {
-				const uno = followBtn.dataset.uno;
 				const isFollowing = followBtn.classList.contains("following");
-				const userUno = document.querySelector('.userUno').textContent.trim();
 				
-				fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${uno}&userUno=${userUno}`, {
+				fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${selectUno}&userUno=${myUno}`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' }
 				})
@@ -127,7 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
 					}
 				});
 				return;
+				
+			// 메일 모달 띄우기
 			}else if (sendBtn) {
+				document.getElementById('selectUno').innerText = selectUno;
+				document.getElementById('myUno').innerText = myUno;
 				initMailModalContent();
 				initMailModalEvent();
 				document.getElementById('sendmailModal').classList.add('show');
@@ -135,17 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			}else{
 				return;
 			}
-		});
-	});
-});
-
-// 메일 보내기 모달 띄우기
-document.addEventListener("DOMContentLoaded", function () {
-	document.querySelectorAll('.mate-scroll-section').forEach(a => {
-		a.addEventListener('click', (e) => {
-			
-			
-			
 		});
 	});
 });
