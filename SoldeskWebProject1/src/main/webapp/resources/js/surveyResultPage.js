@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function insertSubheading(div){
   if(div!=null){
-	console.log('하하하');
     const subheadingId = div.getAttribute('id');
     switch (subheadingId) {
       case 'dietSubheading':
@@ -68,13 +67,14 @@ document.getElementById("printBtn").addEventListener("click", () => {
 
 	  html2pdf().set(opt).from(element).save();
 	});
+
+document.getElementById("homeBtn").addEventListener("click", () => {
+	location.href = '/';
+});
+
 function fetchDiet(formA){
   const formData = new FormData(formA);
 
-  // 콘솔에 폼 데이터 출력
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-  }
   fetch('/survey/insertDiet',{
     method:'put',
     body:JSON.stringify(Object.fromEntries(formData.entries())),

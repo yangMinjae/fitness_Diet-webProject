@@ -12,6 +12,7 @@
 </head>
 <body>
 	<button id="printBtn" title="PDF 저장"><i class="fa-solid fa-print"></i></button>
+	<button id="homeBtn" title="홈으로 이동"> <i class="fa-solid fa-house"></i></button>
 	<div id = "mainBlock">
 		<c:forEach var="entry" items="${result}">
 			<div class="details">

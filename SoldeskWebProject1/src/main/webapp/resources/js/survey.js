@@ -361,8 +361,16 @@ function hideLoadingModal() {
 }
 
 function fetchFunc(f,param){
+	const popup = window.open("/survey/surveyResultPage", "_blank");
+	
+	if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+		  alert("팝업이 차단되어 안내를 띄울 수 없습니다. 브라우저 설정을 확인해주세요.");		  
+		  return;
+	}else{
+		popup.close();
+	}
+	
 	showLoadingModal();
-	console.log(f);
 	
 	const sendData = Object.fromEntries(f.entries());
 	sendData['cDTO.supplements'] = f.getAll('cDTO.supplements');
@@ -379,15 +387,12 @@ function fetchFunc(f,param){
 	})
 	.then(res=>res.text())
 	.then(text=>{
-		console.log(text);
 		hideLoadingModal();
-		alert('설문이 완료되었습니다.')
-		window.open("/survey/surveyResultPage", "_blank");
-		setTimeout(() => {
-			location.replace('/');
-		}, 50); 	
-	})
+
+		location.replace('/survey/surveyResultPage');	
+	});	
 }
+
 
 const areaObserver = new MutationObserver(() => {
 	  const areaText = document.getElementById("showArea").textContent.trim();

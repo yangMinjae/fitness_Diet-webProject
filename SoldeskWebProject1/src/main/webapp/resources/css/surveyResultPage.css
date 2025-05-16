@@ -1,146 +1,169 @@
-/* surveyResult.css */
-
-/* 공통 폰트 및 배경 */
+/* 공통 배경과 폰트 */
 body {
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: #fff9f4;
+  margin: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #f4f8f4;
   color: #333;
 }
 
-html, body{
-	margin: 0;
-    padding: 0;
+html, body {
+  padding: 0;
 }
 
 /* 전체 컨테이너 */
 #mainBlock {
   width: 90%;
   max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  margin-top:0;
-}
-
-/* 각 영역 박스 */
-.details {
-  background-color: #fef6ff;
-  border: 2px dashed #ddb6f2;
+  margin: 60px auto;
+  padding: 32px;
   border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 30px;
-  box-shadow: 2px 2px 8px rgba(220, 180, 255, 0.3);
-  page-break-inside: avoid;
-  break-inside: avoid;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
-/* 소제목 - 제목처럼 보이게 */
+/* 개별 상세 블록 */
+.details {
+  background-color: #f9fef9;
+  border: 2px solid #cceccc;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 36px;
+  box-shadow: 0 2px 10px rgba(100, 200, 140, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.details:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(100, 200, 140, 0.15);
+}
+
+/* 소제목 */
 .subheadings {
-  font-size: 26px;
+  font-size: 1.6rem;
   font-weight: 800;
-  color: #7a32cc;
+  color: #4d5a63;
   margin-bottom: 20px;
   text-align: left;
 }
 
 /* 파티션 제목 */
 .partitionTitles {
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #ff6e96;
+  color: #6ac56d;
   margin: 10px 0;
 }
 
-/* 운동 리스트 */
+/* 리스트 스타일 */
 .schedule {
   list-style-type: "🏋️ ";
   padding-left: 28px;
   line-height: 1.8;
-  font-size: 16px;
+  font-size: 1rem;
   color: #444;
 }
 
 /* 조언 텍스트 */
 #advice {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
   background-color: #e6f9ff;
-  padding: 15px;
-  border-radius: 10px;
-  border-left: 5px solid #00aaff;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 6px solid #00aaff;
+  color: #333;
 }
 
-/* 식단 제목 */
+/* 식단 관련 요소 */
 #dietTitle {
-  font-size: 22px;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #ff884d;
   margin-bottom: 20px;
 }
 
-/* 식단 이름 */
 .dietName {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: 600;
   color: #e34f4f;
   margin-top: 20px;
 }
 
-/* 영양 정보 */
 .dietNutrition {
-  font-size: 14px;
-  color: #888;
+  font-size: 0.9rem;
+  color: #777;
   margin-bottom: 10px;
 }
 
-/* 식재료 목록 */
 .dietIngredient {
   list-style-type: "🥗 ";
   padding-left: 25px;
   margin-bottom: 10px;
 }
 
-/* 조리 순서 */
 .dietRecipe {
   list-style-type: decimal;
   padding-left: 20px;
   margin-bottom: 20px;
 }
 
-/* 치팅밀 음식 제목 */
+/* 치팅밀 */
 .cheatingMeal {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 div.reason {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-/* 우상단 인쇄 버튼 */
+/* 인쇄 버튼 (우상단) */
 #printBtn {
   position: fixed;
   top: 20px;
   right: 30px;
   width: 50px;
   height: 50px;
-  background-color: #7a32cc;
+  background-color: #6ac56d;
   color: white;
-  font-size: 24px;
+  font-size: 22px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
 #printBtn:hover {
-  background-color: #5a1ba8;
+  background-color: #57a759;
+}
+
+#homeBtn {
+  position: fixed;
+  top: 20px;
+  right: 100px; /* 인쇄 버튼보다 왼쪽에 위치 */
+  width: 50px;
+  height: 50px;
+  background-color: #6ac56d;
+  color: white;
+  font-size: 22px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+#homeBtn:hover {
+  background-color: #57a759;
 }
