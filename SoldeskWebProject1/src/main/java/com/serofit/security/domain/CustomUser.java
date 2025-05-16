@@ -65,5 +65,4 @@ public class CustomUser extends User{
 	public void setMailCount(int mailCount) {
 		this.mailCount = mailCount;
 	}
-		
 }

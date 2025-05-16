@@ -85,19 +85,18 @@
 		</div>
 		<div id="sendWrapper" class="mate-slider-wrapper">
 			<section class="mate-scroll-section sendList">
-			<c:set var="check" value="false" />
-			<c:forEach var="mate" items="${mateList}">
-				<c:set var="check" value="true" />
-				<div id="eqTag" class="mate-item" 
+				<c:forEach var="mate" items="${mateList}">
+					<div id="eqTag" class="mate-item" 
 						data-time="${mate.mvo.time}"
 						data-gender="${mate.mvo.gender}" 
 						data-age="${mate.mvo.age}"
 						data-area="${mate.mvo.area}"
 						data-nickname="${mate.dto.nickname}"
 						data-tag="${mate.pvo.tag}"
-						data-uno="${mate.mvo.uno}"
+						data-selectuno="${mate.mvo.uno}"
+						data-myuno="${user.uno}"
 						data-checker="${mate.checker}">
-								
+										
 					<!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
 					<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" />
 					
@@ -118,18 +117,18 @@
 					  <c:if test="${mate.checker eq '0'}">
 					    <button class="follow-btn follow" id="follow" data-uno="${mate.mvo.uno}">팔로우</button>
 					  </c:if>
-					
-					
+							
+							
 					<button class="send-msg-btn">메일 보내기</button>
 					</div>
 					
 					<!-- 숨김 데이터 -->
-					<span class="uno" hidden="true">${mate.mvo.uno}</span>
 					<span class="tag" hidden="true">${mate.pvo.tag}</span>
 					<span class="userTag" hidden="true">${user.tag}</span>		
-					<span class="userUno" hidden="true">${user.uno}</span>
-				</div>
-			</c:forEach>
+					</div>
+				</c:forEach>
+			</section>
+		</div>
 		</main>
 	</div>
 	<jsp:include page="sendMailModal.jsp" />

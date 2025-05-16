@@ -43,12 +43,8 @@ public class MateController {
 	@PostMapping("/unfollow")
 	@ResponseBody
 	public boolean unfollow(int uno, int userUno) {
-		FollowVO fvo = new FollowVO();
-		// 언팔을 하려고 하는 사람
-		fvo.setThrower(userUno);
+		FollowVO fvo = new FollowVO(userUno, uno, false);
 		
-		// 언팔을 당하는 사람
-		fvo.setCatcher(uno);
 		return mpService.unfollow(fvo);
 	}
 	
@@ -56,25 +52,8 @@ public class MateController {
 	@PostMapping("/follow")
 	@ResponseBody
 	public boolean follow(int uno, int userUno) {
-		FollowVO fvo = new FollowVO();
-		// 팔로우 하려고 하는 사람
-		fvo.setThrower(userUno);
+		FollowVO fvo = new FollowVO(userUno, uno, false);
 		
-		// 팔로우 당하는 사람
-		fvo.setCatcher(uno);
 		return mpService.follow(fvo);
-	}
-	
-	// 쪽지 보내기
-	@PostMapping("/sendMsg")
-	@ResponseBody
-	public String sendMsg(int uno, int userUno, String content) {
-		MailVO mvo = new MailVO();
-		
-		mvo.setReceiver(uno);
-		mvo.setSender(userUno);
-		mvo.setContent(content);
-		
-		return mService.insertMail(mvo) == 1 ? "true" : "false";
 	}
 }

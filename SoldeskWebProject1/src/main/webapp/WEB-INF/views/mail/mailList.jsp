@@ -25,13 +25,16 @@
 
 		<!-- 메일 리스트 -->
 		<ul class="mail-list">
+			<sec:authentication var="uno" property="principal.uno" />
 			<c:forEach var="mvo" items="${mList}">
 				<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
 				    data-name="${mvo.nickname}"
 				    data-photo="${mvo.imgPath}"
 				    data-content="${mvo.content}"
 				    data-regdate="${mvo.regdate}"
-				    data-uno="${mvo.uno}"
+				    data-regdate="${mvo.regdate}"
+				    data-selectuno="${mvo.uno}"
+				    data-myuno="${uno}"
 				    data-mno="${mvo.mno}">
 					<div class="profile-icon">
 						<img src="/resources/img/tag/다이어터.png" alt="프로필" />
@@ -41,10 +44,7 @@
 						<span class="preview">${mvo.preview}</span>
 						<span class="regdate">${mvo.regdate}</span>
 					</div>
-				</li>				
-				<span class="uno" hidden="true">${mvo.uno}</span>					
-				<sec:authentication var="uno" property="principal.uno" />
-				<span class="userUno" hidden="true">${uno}</span>
+				</li>
 			</c:forEach>
 		</ul>			
 	</div>

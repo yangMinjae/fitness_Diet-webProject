@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ReceiveMailDTO {
-	int uno;
-	String nickname;
-	Date regdate;
-	String content;
-	String preview;
-	String imgPath;
-	int mno;
-	int hit;
+	private int uno;
+	private String nickname;
+	private Date regdate;
+	private String content;
+	private String preview;
+	private String imgPath;
+	private int mno;
+	private int hit;
 }

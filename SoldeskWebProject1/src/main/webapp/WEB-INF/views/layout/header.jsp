@@ -10,6 +10,7 @@
 <title>MemberBoard</title>
 </head>
 <body>
+<div id="headerArea">
 	<header>
 		<div class="logo">
 			<a href="mainPage">SeroFit</a>
@@ -41,8 +42,8 @@
 					alt="mailPage" />
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication var="mailCount" property="principal.mailCount" />
-					<span class="count">${mailCount}</span>
 				</sec:authorize>
+				<span class="count" id="mailCount">${mailCount}</span>
 			</div>
 
 			<div class="dropdown user">
@@ -50,7 +51,7 @@
 					alt="profile" />
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication var="nickname" property="principal.nickname" />					
-					<span class="nickname">${nickname}</span>
+					<span class="nickname" id="nickname">${nickname}</span>
 				</sec:authorize>
 			</div>
 			
@@ -63,4 +64,5 @@
 			</sec:authorize>
 		</div>
 	</header>
-	<main>
+</div>
+<main>
