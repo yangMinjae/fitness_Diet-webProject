@@ -34,23 +34,23 @@
 			<div class="form-group">
 				<label for="tag">태그</label> <input type="text" id="tag" name="tag"
 					placeholder="식단을 선택하면 태그가 정해집니다" readonly
-					value="${board.tag != null ? board.tag : '' }" />
+					value='${board.tag != null ? board.tag : "" }' />
 			</div>
 
 			<!-- 제목 입력 -->
 			<div class="form-group">
 				<label for="title">제목 :</label> <input type="text" id="title"
 					name="title" placeholder="제목을 입력하세요"
-					value="${board.title != null ? board.title : '' }" />
+					value='${board.title != null ? board.title : "" }' />
 			</div>
 
 			<!-- 본문 입력 -->
 			<div class="form-group">
 				<label for="content">본문</label>
 				<div class="form-group">
-					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value="${board.content}" escapeXml="false" /></div>
+					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value='${board.content}' escapeXml="false" /></div>
 				</div>
-				<textarea id="hiddenContent" name="content" style="display: none;"><c:out value="${board.content}" escapeXml="false" /></textarea>
+				<textarea id="hiddenContent" name="content" style="display: none;"><c:out value='${board.content}' escapeXml="false" /></textarea>
 			</div>
 
 			<!-- 이미지 업로드 버튼 영역 -->
