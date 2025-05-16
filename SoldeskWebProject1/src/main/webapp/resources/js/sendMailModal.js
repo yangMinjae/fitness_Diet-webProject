@@ -2,6 +2,7 @@
 			
 		// 닫기 버튼
 		if (e.target.classList.contains('close-btn')) {
+			initMailModalContent();
 			document.getElementById('sendmailModal').classList.remove('show');
 		};
 		
@@ -54,6 +55,7 @@ function initMailModalContent() {
 	charCount.textContent = `${mailInput.value.length} / 300`;
 }
 
+initMailModalEvent();
 // 글자 수 실시간 함수
 function initMailModalEvent() {
 	if (mailInput && charCount) {

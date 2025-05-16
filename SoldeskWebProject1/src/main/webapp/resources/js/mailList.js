@@ -1,117 +1,158 @@
-//-----CSS 파일 추가
-//1. 파일 경로 설정
+const ITEMS_PER_PAGE = 8;
+let allMailItems = [];
+let filteredMailItems = [];
+let currentPage = 0;
+
+// CSS 추가
 const CSS_FILE_PATH = ['/resources/css/mailList.css', '/resources/css/mailModal.css', '/resources/css/sendMailModal.css'];
-//2. link 태그 생성
 CSS_FILE_PATH.forEach(css => {
-	let linkEle = document.createElement('link');
+	const linkEle = document.createElement('link');
 	linkEle.rel = 'stylesheet';
 	linkEle.href = css;
-//3. head 태그에 link 엘리먼트 추가
-	document.head.appendChild(linkEle);	
+	document.head.appendChild(linkEle);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-	  const searchInput = document.querySelector(".search-input");
-	  const mailItems = document.querySelectorAll(".mail-item");
+	const searchInput = document.querySelector(".search-input");
+	const rawMailItems = document.querySelectorAll(".mail-item");
+	allMailItems = Array.from(rawMailItems);
+	filteredMailItems = [...allMailItems];
 
-	  // 디바운스 함수 정의
-	  function debounce(func, delay) {
-	    let timeout;
-	    return function (...args) {
-	      clearTimeout(timeout);
-	      timeout = setTimeout(() => func.apply(this, args), delay);
-	    };
-	  }
+	renderMailListPage(currentPage);
+	renderPagination();
 
-	  function filterMails() {
-	    const keyword = searchInput.value.toLowerCase().trim();
+	// 필터 함수
+	function filterMails() {
+		const keyword = searchInput.value.toLowerCase().trim();
+		filteredMailItems = allMailItems.filter(item => {
+			const sender = item.querySelector(".sender").textContent.toLowerCase();
+			const content = item.dataset.content.toLowerCase();
+			return sender.includes(keyword) || content.includes(keyword);
+		});
+		currentPage = 0;
+		renderMailListPage(currentPage);
+		renderPagination();
+	}
 
-	    mailItems.forEach(item => {
-	      const sender = item.querySelector(".sender").textContent.toLowerCase();
-	      const content = item.dataset.content.toLowerCase();
-
-	      const matches = sender.includes(keyword) || content.includes(keyword);
-	      item.style.display = matches ? "flex" : "none";
-	    });
-	  }
-
-	  // 실시간 입력값 변경 시 검색
-	  searchInput.addEventListener("input", filterMails);
-	  
-	  // 디바운스된 버전으로 등록
-	  /*
-		 * const debouncedFilter = debounce(filterMails, 300);
-		 * searchInput.addEventListener("input", debouncedFilter);
-		 */
+	searchInput.addEventListener("input", filterMails);
 });
 
-//메일 보내기 버튼
-document.querySelectorAll('button').forEach(button=>{
-	button.addEventListener("click", function(e){		
-		let name = e.target.getAttribute('class');
+// 메일 리스트 렌더링
+function renderMailListPage(page) {
+	const mailList = document.querySelector(".mail-list");
+	mailList.innerHTML = "";
 
-		switch(name){
-			case 'send-mail-btn' :
-				console.log("send-mail-btn");
-				location.href = '/mail/sendMail';
-				break;
+	const start = page * ITEMS_PER_PAGE;
+	const end = start + ITEMS_PER_PAGE;
+	const pageItems = filteredMailItems.slice(start, end);
+
+	pageItems.forEach(item => mailList.appendChild(item));
+}
+
+// 페이징 렌더링
+function renderPagination() {
+	const existing = document.getElementById("pagination");
+	if (existing) existing.remove();
+
+	const totalPages = Math.ceil(filteredMailItems.length / ITEMS_PER_PAGE);
+	const pageGroup = Math.floor(currentPage / 10);
+	const startPage = pageGroup * 10;
+	const endPage = Math.min(startPage + 10, totalPages);
+
+	const container = document.createElement("div");
+	container.id = "pagination";
+	container.style.textAlign = "center";
+	container.style.margin = "20px";
+
+	if (currentPage > 0) {
+		const prevBtn = document.createElement("button");
+		prevBtn.textContent = "이전";
+		prevBtn.onclick = () => {
+			currentPage--;
+			renderMailListPage(currentPage);
+			renderPagination();
+		};
+		container.appendChild(prevBtn);
+	}
+
+	for (let i = startPage; i < endPage; i++) {
+		const btn = document.createElement("button");
+		btn.textContent = i + 1;
+		if (i === currentPage) btn.classList.add("active");
+		btn.onclick = () => {
+			currentPage = i;
+			renderMailListPage(currentPage);
+			renderPagination();
+		};
+		container.appendChild(btn);
+	}
+
+	if (currentPage < totalPages - 1) {
+		const nextBtn = document.createElement("button");
+		nextBtn.textContent = "다음";
+		nextBtn.onclick = () => {
+			currentPage++;
+			renderMailListPage(currentPage);
+			renderPagination();
+		};
+		container.appendChild(nextBtn);
+	}
+
+	document.querySelector(".mailbox-container").appendChild(container);
+}
+
+// 버튼
+document.querySelectorAll('button').forEach(button => {
+	button.addEventListener("click", function (e) {
+		if (e.target.classList.contains("send-mail-btn")) {
+			location.href = '/mail/sendMail';
 		}
 	});
 });
 
-// 메일 모달창
+// 메일 모달 열기
 document.querySelectorAll('.mail-item').forEach(item => {
 	item.addEventListener('click', () => {
-		const name = item.dataset.name;
-		const photo = item.dataset.photo;
-		const content = item.dataset.content;
-		const mno = item.dataset.mno;
-		const regdate = item.dataset.regdate;
+		const { name, photo, content, mno, regdate } = item.dataset;
+
+		initMailModalContent();
 		
-		fetch(`/mail/updateByReadMail?mno=${mno}`, {
-			method: 'GET'
-		})
-		.then(res => res.json())
-		.then(data  => {
-			if (data.status === 'success') {
-				// 모달 채우기
-				document.getElementById('senderName').innerText = name;
-				document.getElementById('mailContent').innerText = content;
-				document.getElementById('regdate').innerText = regdate;
-				document.getElementById('mailModal').classList.add('show');
+		fetch(`/mail/updateByReadMail?mno=${mno}`)
+			.then(res => res.json())
+			.then(data => {
+				if (data.status === 'success') {
+					document.getElementById('senderName').innerText = name;
+					document.getElementById('mailContent').innerText = content;
+					document.getElementById('regdate').innerText = regdate;
+					document.getElementById('mailModal').classList.add('show');
 
-				// 읽음 처리된 mail-item에 클래스 추가
-				item.classList.add('read');
+					item.classList.add('read');
 
-				// ✔ mailCount 갱신 (헤더 UI 업데이트)
-				const mailCountSpan = document.querySelector('.count');
-				if (mailCountSpan) {
-					mailCountSpan.textContent = data.mailCount;
+					const mailCountSpan = document.querySelector('.count');
+					if (mailCountSpan) {
+						mailCountSpan.textContent = data.mailCount;
+					}
 				}
-			}
-		})
+			});
 	});
 });
 
+// 모달 닫기
 document.querySelector('.close-btn').addEventListener('click', () => {
 	document.getElementById('mailModal').classList.remove('show');
 });
-
 document.getElementById('replyBtn').addEventListener('click', () => {
 	document.getElementById('mailInput').value = '';
 	document.getElementById('sendmailModal').classList.add('show');
 });
-
-//모달 닫기 (ESC 키)
 document.addEventListener('keydown', (e) => {
 	const sendModal = document.getElementById("sendmailModal");
-	
-    if (e.key === 'Escape') {
-    	if(!sendModal || !sendModal.classList.contains("show")){
-    		document.getElementById('mailModal').classList.remove('show');	
-    	}
-    	else{
-    		document.getElementById('sendmailModal').classList.remove('show');	
-    	}
-    }
+	if (e.key === 'Escape') {
+		if (!sendModal || !sendModal.classList.contains("show")) {
+			document.getElementById('mailModal').classList.remove('show');
+		} else {
+			initMailModalContent();
+			document.getElementById('sendmailModal').classList.remove('show');
+		}
+	}
 });
