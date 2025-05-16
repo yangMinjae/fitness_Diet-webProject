@@ -110,10 +110,7 @@ document.querySelectorAll('button').forEach(button => {
 	});
 });
 
-// 메일 모달 열기
-document.querySelectorAll('.mail-item').forEach(item => {
-	item.addEventListener('click', () => {
-	// 메일 모달창
+// 메일 모달창
 document.addEventListener('DOMContentLoaded', () => {
 	document.querySelectorAll('.mail-item').forEach(item => {
 		item.addEventListener('click', () => {
@@ -150,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						mailCountSpan.textContent = data.mailCount;
 					}
 				}
-			})
+			});
 		});
 	});
 });
