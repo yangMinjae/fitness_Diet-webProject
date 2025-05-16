@@ -26,10 +26,17 @@
 				<h2>내 프로필</h2>
 				<div class="profile-box">
 					<div class="profile-left">
-						<img src="/resources/img/tag/헬스키퍼.png" class="profile-image" id="myProfileImg" alt="프로필 사진">
-						<div class="profile-nickname">닉네임</div>
+					  <div class="profile-image-wrapper">
+					    <img src="" class="profile-image" id="myProfileImg" alt="프로필 사진">
+					    <button type="button" class="img-edit-btn hidden" id="imgEditBtn">
+					      <img src="/resources/img/icon/gear.svg" alt="수정" />
+					    </button>
+					  </div>
+					  <div class="profile-nickname">닉네임</div>
 					</div>
-					<form class="profile-form" method="post">
+					<form class="profile-form" method="post" enctype="multipart/form-data">
+						<input type="file" name="uploadFile" hidden="hidden">
+						<input type="text" name="basicImg" hidden="hidden" value="">
 						<div class="form-group">
 							<label for="favSport">좋아하는 운동</label> 
 							<input type="text" name="upVO.fav" id="favSport">
@@ -146,7 +153,33 @@
 			</div>
 		</div>
 	</div>
+	<!-- 모달 오버레이 -->
+	<div class="modal-overlay" id="modalOverlay" style="display: none;">
+	  <div class="modal-content">
+	    
+	    <!-- 상단 텍스트 + 수평선 -->
+	    <div class="modal-header">기본 제공 이미지</div>
+	    <div class="modal-header-border"></div>
+	    
+	    <!-- 이미지 버튼 그리드 -->
+	    <div class="button-grid">
+	      <button id="basic1"><img src="/resources/img/basicProfileImg/basic1.png" alt="기본1"></button>
+	      <button id="basic2"><img src="/resources/img/basicProfileImg/basic2.png" alt="기본2"></button>
+	      <button id="basic3"><img src="/resources/img/basicProfileImg/basic3.png" alt="기본3"></button>
+	      <button id="basic4"><img src="/resources/img/basicProfileImg/basic4.png" alt="기본4"></button>
+	      <button id="basic5"><img src="/resources/img/basicProfileImg/basic5.png" alt="기본5"></button>
+	      <button id="basic6"><img src="/resources/img/basicProfileImg/basic6.png" alt="기본6"></button>
+	      <button id="basic7"><img src="/resources/img/basicProfileImg/basic7.png" alt="기본7"></button>
+	      <button id="basic8"><img src="/resources/img/basicProfileImg/basic8.png" alt="기본8"></button>
+	    </div>
 	
+	    <!-- 하단 버튼 -->
+	    <div class="modal-footer">
+	      <button id="directUp">직접 업로드</button>
+	      <button id="close">닫기</button>
+	    </div>
+	  </div>
+	</div>
 	<jsp:include page="../user/region.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>

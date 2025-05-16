@@ -27,7 +27,6 @@ document.querySelectorAll('.edit-button-wrapper button')
   ele.addEventListener('click',(e)=>{
     let btnId = e.currentTarget.getAttribute('id');
     if(btnId=='editProfile'){
-      console.log("프로필 수정");
       if(firstPressed){            						// 프로필 수정 버튼 가장 처음 눌렀을 시
 
         setToEdit();                					// input 태그 및 이미지 버튼의 disabled를 풀어준다.
@@ -57,32 +56,21 @@ function getProfileFormElements() {
 }
 
 function initialProfileTagSet(){       					// 초기셋팅 : input 태그들, 이미지 버튼 비활성화
-	getProfileFormElements()
-	.forEach(el => {
-    if(el.tagName.toLowerCase()=='img'){
-      el.classList.remove('imgAbled','imgClickable');
-      el.classList.add('imgDisabled');
-      el.removeEventListener('click',imgClicked);
-    }else{
-      el.disabled = true;
-    }
-  });
-  cancelEdit.classList.add('hidden');
-}
-
+  getProfileFormElements().forEach(el => {
+	    if (el.tagName.toLowerCase() !== 'img') {
+	      el.disabled = true;
+	    }
+	  });
+	  document.querySelector('#imgEditBtn').classList.add('hidden');
+	}
 function setToEdit(){             						// input 태그 및 이미지 버튼의 disabled를 풀어준다.
-	getProfileFormElements()
-	.forEach(el => {
-    if(el.tagName.toLowerCase()=='img'){
-      el.classList.remove('imgDisabled');
-      el.classList.add('imgAbled');
-      el.classList.add('imgClickable');
-      el.addEventListener('click',imgClicked);
-    }else{
-      el.disabled = false;
-    }
-  });
-}
+  getProfileFormElements().forEach(el => {
+	    if (el.tagName.toLowerCase() !== 'img') {
+	      el.disabled = false;
+	    }
+	  });
+	  document.querySelector('#imgEditBtn').classList.remove('hidden');
+	}
 
 function getUserInfo(){           						// db에서 비동기로 유저프로필 및 메이트 데이터 가져와서 화면에 표시
   let uno = f.elements['uVO.uno'].value;
@@ -99,8 +87,13 @@ function fetchUserInfo(uno){      						// getUserInfo() 함수에서 쓰이는 
 	  })
 	  .then(res=>res.json())
 	  .then(json=>{
+		  console.log(json);
 	    // 이 부분에 현재 db에 저장된 프로필 사진(경로를 이용해) 표시
 	    // 각각 json.fVO.path, json.fVO.fileName, json.fVO.uuid 로 접근 가능
+		
+		let result = json.fVO.path.substring(json.fVO.path.indexOf("\\profile"))+'\\'+json.upVO.uuid+'_'+json.fVO.fileName;
+		result = result.replace(/\\/g, "/");
+		myProfileImg.setAttribute('src',`/profile/basic/${json.upVO.uuid}__.png`);
 
 	    let yesRadio = document.querySelector('#yesRadio');
 	    let noRadio = document.querySelector('#noRadio');
@@ -173,7 +166,69 @@ function submitForm(){            						// 폼을 동기 방식으로 제출하�
   }
 }
 
-function imgClicked(){            						// 이미지 버튼 클릭시 파일 업로드/db 등록을 하는함수
-	console.log("이미지 버튼 클릭");
-	// 후에 input[tyep="file" hidden]과 연결
+//------------------이미지 업로드 모달 관련-------------------------
+document.querySelectorAll('.button-grid button, .modal-footer button').forEach(button => {
+	  button.addEventListener('click', (e) => {
+	    const id = e.currentTarget.id;
+
+	    switch(id) {
+	      case 'basic1':
+	      case 'basic2':
+	      case 'basic3':
+	      case 'basic4':
+	      case 'basic5':
+	      case 'basic6':
+	      case 'basic7':
+	      case 'basic8':
+	    	f.basicImg.value=id;
+	    	myProfileImg.setAttribute('src',`/resources/img/basicProfileImg/${id}.png`);
+	    	f.uploadFile.value='';
+	        closeModal(); // 기본 이미지 선택 후 모달 닫기
+	        break;
+	      case 'directUp':
+	        closeModal();
+	        f.uploadFile.click();
+	        break;
+	      case 'close':
+	        closeModal(); // 닫기 버튼 클릭 시 모달 닫기
+	        break;
+	      default:
+	        console.warn('알 수 없는 버튼 ID:', id);
+	    }
+	  });
+	});
+
+//모달 DOM 참조
+const modalOverlay = document.getElementById('modalOverlay');
+const imgEditBtn = document.getElementById('imgEditBtn');
+
+// 모달 열기 함수
+function openModal() {
+	modalOverlay.style.display = 'flex';
 }
+
+// 모달 닫기 함수
+function closeModal() {
+	modalOverlay.style.display = 'none';
+}
+
+// 기어 버튼 클릭 → 모달 열기
+imgEditBtn.addEventListener('click', () => {
+  openModal();
+});
+
+//직접 업로드된 이미지 미리보기
+f.uploadFile.addEventListener('change', function(e) {
+	  f.basicImg.value='';
+	  const file = e.target.files[0];
+	  if (file && file.type.startsWith("image/")) {
+	    const reader = new FileReader();
+	    reader.onload = function(event) {
+	      myProfileImg.setAttribute("src", event.target.result); // 이미지 미리보기
+	    };
+	    reader.readAsDataURL(file);
+	  } else {
+	    alert("이미지 파일만 업로드할 수 있습니다.");
+	    e.target.value = ''; // 잘못된 파일일 경우 초기화
+	  }
+	});

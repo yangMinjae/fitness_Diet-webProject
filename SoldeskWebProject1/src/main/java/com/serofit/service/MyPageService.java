@@ -54,4 +54,8 @@ public interface MyPageService {
 	
 	// 즐겨찾기 해제
 	public boolean removeFromFav(FollowVO fvo);
+	
+	//------------------ 파일 업로드 관련--------------------
+	//
+	
 }

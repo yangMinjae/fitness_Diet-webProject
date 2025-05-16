@@ -85,7 +85,6 @@ public class MyPageServiceImpl implements MyPageService{
 	public boolean ModifyUserProfile(MypageProfileDTO mpDTO) {
 		UProfileVO upVO = upMapper.selectByUno(mpDTO.getUVO().getUno());
 		mpDTO.getUpVO().setTag(upVO.getTag());
-		mpDTO.getUpVO().setUuid(upVO.getUuid());
 		mpDTO.initMpDTO();
 		
 		int result1 = upMapper.updateProfile(mpDTO.getUpVO());

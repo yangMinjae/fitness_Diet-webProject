@@ -118,7 +118,42 @@ body {
   border: 3px solid #a0d3a0;
   background-color: #fff;
 }
+/* 이미지 버튼  */
+.profile-image-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
 
+.img-edit-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #f0f0f0;
+  border: none; /* 선택: 필요시 테두리도 없애기 */
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  cursor: pointer;
+  box-shadow: none; /* 선택: 그림자 제거 */
+  transition: all 0.2s ease-in-out;
+}
+
+.img-edit-btn:hover {
+  transform: scale(1.1); /* 약간 튀어나오게 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* hover 시 그림자 강조 */
+}
+
+.img-edit-btn img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.2s ease;
+}
+/*-------------*/
 .profile-nickname {
   font-size: 1.1rem;
   font-weight: bold;
@@ -369,4 +404,102 @@ button {
 .search-box:focus {
   border-color: #87cbb7;
   box-shadow: 0 0 6px rgba(135, 203, 183, 0.4);
+}
+
+/* 상단 제목 + 수평선 */
+.modal-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+.modal-header-border {
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+/* 원형 이미지 버튼 */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+    justify-items: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.button-grid button {
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-grid button:hover {
+  border-color: #a0d3a0;
+}
+
+.button-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* 하단 버튼 */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease-in-out;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* 처음엔 안보임 */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* z-index 제일 높게! */
+}
+
+#directUp {
+  background-color: #d8ccf7;
+  color: #3f3f3f;
+}
+
+#directUp:hover {
+  background-color: #c8b6ec;
+}
+
+#close {
+  background-color: #f9c2b1;
+  color: #3f3f3f;
+}
+
+#close:hover {
+  background-color: #f5aa93;
 }

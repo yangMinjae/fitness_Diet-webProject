@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MypageProfileDTO;
@@ -39,9 +41,18 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/updateProfile")
-	public String updateProfile(MypageProfileDTO mpDTO) {
-		log.info("!!!내 프로필 수정!!!");
-		log.info("???????????????-"+mpDTO.getUVO().getUno());
+	public String updateProfile(MypageProfileDTO mpDTO, @RequestParam("uploadFile")MultipartFile[] uploadFile) {
+		String uuid = "";
+		String path = "C:\\upload\\profile";
+		String fileName = "";
+		
+		if(!mpDTO.getBasicImg().equals("")) {	// 기본 이미지 중 하나 선택했을 경우
+			mpDTO.getUpVO().setUuid(mpDTO.getBasicImg());	
+		}
+		if(!uploadFile[0].isEmpty()) {			// 직접 업로드 했을 경우
+			// 파일 시스템에 파일 만드는 작업
+			
+		}
 		mService.ModifyUserProfile(mpDTO);
 		
 		return "redirect:/myPage";

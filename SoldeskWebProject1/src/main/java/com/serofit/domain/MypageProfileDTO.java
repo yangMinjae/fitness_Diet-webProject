@@ -21,6 +21,8 @@ public class MypageProfileDTO {
 	@JsonProperty("fVO")
 	private FileVO fVO=null;
 	
+	private String basicImg;
+	
 	public MypageProfileDTO() {
 		initMpDTO();
 	}

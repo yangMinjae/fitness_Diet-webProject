@@ -57,7 +57,7 @@ public class SignupServiceImpl implements SignupService {
 		// uuid 고정 값 변경!!!!!!!!!!!!!!!
 		
 		if(result >= 1) {
-			upvo.setUuid("UUID-TEST");
+			upvo.setUuid("basic0");
 			upvo.setUno(uvo.getUno());
 			result = upmapper.insertProfile(upvo);
 		}
