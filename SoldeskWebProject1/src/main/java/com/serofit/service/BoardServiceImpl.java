@@ -122,6 +122,7 @@ public class BoardServiceImpl implements BoardService {
 		return allPostByLove;
 	}
 
+
 	@Override
 	public BoardViewDTO getPost(int bno) {
 		BoardVO bvo = bMapper.getPostByBno(bno);

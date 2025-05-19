@@ -22,7 +22,11 @@
 			<button class="maintenance">유지어터</button>
 			<button class="Professional">프로득근러</button>
 			<button class="healthKeeper">헬스키퍼</button>
-			<button class="listByLike">추천한 글</button>
+			<sec:authorize access="isAuthenticated()">
+				<button class="listByLike">추천한 글</button>
+			</sec:authorize>
+				
+			
 			<button class="writePostBtn">게시글 작성</button>
 		</div>
 
@@ -71,16 +75,14 @@
 				<c:set var="prePage" value="${page-1}"/>
 				<c:set var="nextPage" value="${page+1}"/>
 				<c:set var="totalPages" value="${(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)}" />
-		<div class="page-btn">
-			<c:if test="${page >1 }">
-				<button type="button" class="movePrePage" id="prePage-btn" data-page-num="${page}"> 이전 페이지 </button>
-			</c:if>
-			<c:forEach var="i" begin="${startPage }" end="${endPage}">
-				<button type="button" class="movePageByNum ${i == page ? 'active' : ''}" data-page-num="${i}">${i}</button>
-    		</c:forEach>
-			<c:if test="${page + 1 < totalPages }">
-				<button type="button" class="moveNextPage" id="nextPage-btn" data-page-num="${page}" > 다음 페이지 </button>
-			</c:if>	
+		<div class="page-btn"> </div>
+		<div class="search-container">
+			<select id="searchType">
+				<option value="title"> 제목 </option>
+				<option value="nickname"> 닉네임 </option>
+			</select>
+			<input type="text" id="searchBox" class="search-box" placeholder="검색 내용 입력">
+			<button type="button" id="search-btn">검색</button>
 		</div>
 	</div>
 	

@@ -7,8 +7,8 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
 
-//let f = document.forms[0];
-let allPosts = [];  // 전체/필터링된 게시글 리스트 저장
+let allPosts = [];  
+let filteredPosts =[];  
 let currentPage = 1;
 const pageSize = 10;
 //버튼 이벤트 추가
@@ -27,7 +27,6 @@ document.querySelectorAll('button').forEach(btn => {
 					return response.json();
 				})
 				.then(data => {
-					console.log("전체 게시글:", data);
 					getAllBoardList(data);
 				})
 				.catch(error => {
@@ -62,10 +61,10 @@ document.querySelectorAll('button').forEach(btn => {
 // 전체리스트보여주기 (버튼눌렀을때 비동기로)
 	function getAllBoardList(posts) {
    allPosts = posts;
+	 filteredPosts = [...allPosts]; 
    currentPage = 1;
    renderPage(currentPage);      // 현재 페이지 렌더
    renderPagination();           // 페이지 버튼 렌더
-   switchButton();
 }
 
 
@@ -80,10 +79,10 @@ function getBoardListByTag(tag) {
 	      })
 	      .then(data => {
 	         allPosts = data;
+	         filteredPosts = [...allPosts];
 	         currentPage = 1;
 	         renderPage(currentPage);
 	         renderPagination();
-	         switchButton();
 	      })
 	      .catch(error => {
 	         console.error(`#${tag} 게시글이 없습니다:`, error);
@@ -103,10 +102,10 @@ function getBoardListByLove() {
 	      })
 	      .then(data => {
 	         allPosts = data;
+	         filteredPosts = [...allPosts];
 	         currentPage = 1;
 	         renderPage(currentPage);
 	         renderPagination();
-	         switchButton();
 	      })
 	      .catch(error => {
 	         console.error("좋아요 누른 게시글 불러오기 실패:", error);
@@ -166,7 +165,7 @@ function movePageByNum(pageNum) {
 function renderPage(pageNum) {
 	   const start = (pageNum - 1) * pageSize;
 	   const end = start + pageSize;
-	   const pagePosts = allPosts.slice(start, end);
+	   const pagePosts = filteredPosts.slice(start, end);
 
 	   const allList = document.getElementById("postList");
 	   allList.innerHTML = "";
@@ -177,7 +176,7 @@ function renderPage(pageNum) {
 	      str += `
 	         <tr>
 	            <td>
-	               <a href="/board/boardView?bno=${post.bno}">${post.title}</a> [#${post.tag}]
+	               <a href="/board/boardView?bno=${post.bno}" class="title-cell" >${post.title}</a> [#${post.tag}]
 	            </td>
 	            <td>${post.nickname}</td>
 	            <td>${formattedDate}</td>
@@ -191,13 +190,13 @@ function renderPage(pageNum) {
 	}
 // 페이지 이동 버튼 생성
 function renderPagination() {
-	   const totalPages = Math.ceil(allPosts.length / pageSize);
+	   const totalPages = Math.ceil(filteredPosts.length / pageSize);
 	   const paginationDiv = document.querySelector(".page-btn");
 
 	   let html = '';
 
 	   if (currentPage > 1) {
-	      html += `<button class="movePageByNum" data-page="${currentPage - 1}">이전</button>`;
+	      html += `<button class="movePageByNum" data-page="${currentPage - 1}">< 이전 </button>`;
 	   }
 
 	   for (let i = 1; i <= totalPages; i++) {
@@ -205,7 +204,7 @@ function renderPagination() {
 	   }
 
 	   if (currentPage < totalPages) {
-	      html += `<button class="movePageByNum" data-page="${currentPage + 1}">다음</button>`;
+	      html += `<button class="movePageByNum" data-page="${currentPage + 1}">다음 ></button>`;
 	   }
 
 	   paginationDiv.innerHTML = html;
@@ -225,3 +224,38 @@ document.addEventListener("DOMContentLoaded", () => {
         allBtn.click(); 
     }
 });
+
+
+//--------------------검색--------------
+
+function search() {
+	const searchType = document.getElementById("searchType");
+	const searchInput = document.getElementById("searchBox");
+	const searchBtn = document.getElementById("search-btn");
+
+	if (!searchInput || !searchBtn || !searchType) return;
+	searchBtn.addEventListener("click", () => {
+		const type = searchType.value;  
+		const keyword = searchInput.value.trim().toLowerCase();
+
+		// 필터링 수행
+		filteredPosts = allPosts.filter(post => {
+			const value = post[type].toLowerCase();
+			return value.includes(keyword);
+		});
+
+		currentPage = 1;
+		renderPage(currentPage);
+		renderPagination();
+	});
+}
+document.addEventListener("DOMContentLoaded", () => {
+	const allBtn = document.querySelector("button.allList");
+	if (allBtn) allBtn.click();
+
+	search(); 
+});
+
+
+
+

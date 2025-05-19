@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -67,10 +68,10 @@ public class BoardController {
 	@GetMapping(value = "/boardList/love", produces =MediaType.APPLICATION_JSON_UTF8_VALUE )
 	public List<BoardListDTO> getPostsByLove(Authentication authentication){
 		CustomUser LoginUser = (CustomUser) authentication.getPrincipal();
-		// uno 수정 필요!!
 		int uno = LoginUser.getUno();
 		return bService.getPostsByLove(uno);
 	}
+
 	// 게시글 작성 버튼 눌렀을때 비동기로 dietList 가져와서 돌아오기
 	@GetMapping(value = "/writeBoard/checkHasDiet", produces = MediaType.APPLICATION_JSON_UTF8_VALUE )
 	@ResponseBody
