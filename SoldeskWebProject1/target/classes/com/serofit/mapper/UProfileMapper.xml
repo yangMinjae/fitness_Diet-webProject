@@ -13,8 +13,7 @@
 	<!-- 프로필 수정 -->
 	<update id="updateProfile" parameterType="com.serofit.domain.UProfileVO">
 		UPDATE tbl_uprofile 
-			SET uuid=#{uuid},
-				self=#{self},
+			SET self=#{self},
 				fav=#{fav},
 				tag=#{tag}
 			WHERE uno=#{uno}	
@@ -59,6 +58,13 @@
 	<!-- 운동 메이트 동의 -->
 	<update id="updateMateAgree" parameterType="int">
 		UPDATE tbl_uprofile SET mate=1 WHERE uno=#{uno}	
+	</update>
+	
+	<!-- uuid 수정 -->
+	<update id="updateUUID">
+		UPDATE tbl_uprofile 
+			SET uuid = #{uuid}
+			WHERE uno=#{uno}	
 	</update>
 	
 </mapper>

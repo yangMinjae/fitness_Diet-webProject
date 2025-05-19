@@ -12,4 +12,12 @@ public class FileVO {
 	private int bno;
 	private String fileName;
 	private String path;
+	
+	public FileVO(String path, String uuid, String fileName) {
+		this.uuid = uuid;
+		this.fileName = fileName;
+		this.path = path;
+	}
+	
+	
 }

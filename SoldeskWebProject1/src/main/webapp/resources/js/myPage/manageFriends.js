@@ -28,6 +28,9 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 	    .then(json => {
 	      let str = '';
 	      json.forEach(ele => {
+	    	console.log(ele);
+			let result = ele.fvo.path.substring(ele.fvo.path.indexOf("\\profile"))+'\\'+ele.fvo.uuid+'_'+ele.fvo.fileName;
+			result = result.replace(/\\/g, "/");
 	        const { nickname, fav, uno: targetUno } = ele;
 
 	        // 즐겨찾기 된 사람은 팔로우 목록에서 제외
@@ -35,7 +38,7 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 
 	        str += `<tr class="hover-card-row clickable-profile">	     
 		        		<td class="tblImgSection">
-					    	<img src="/resources/img/tag/헬스키퍼.png" class="smallProfileImg" alt="프로필">
+					    	<img src="${result}" class="smallProfileImg" alt="프로필">
 					    </td>
 					    <td class="tblNicknameSection">
 					    	${nickname}

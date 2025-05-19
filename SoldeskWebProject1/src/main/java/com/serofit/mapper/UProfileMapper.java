@@ -2,6 +2,8 @@ package com.serofit.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.serofit.domain.UProfileVO;
 import com.serofit.domain.UpdateTagDTO;
 
@@ -30,4 +32,7 @@ public interface UProfileMapper {
 	
 	// 운동 메이트 거절
 	public int updateMateReject(int uno);
+	
+	// uuid 수정
+	public int updateUUID(@Param("uuid") String uuid, @Param("uno") int uno);
 }

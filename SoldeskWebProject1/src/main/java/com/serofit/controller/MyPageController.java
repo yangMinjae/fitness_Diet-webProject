@@ -21,6 +21,7 @@ import com.serofit.domain.FollowVO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
 import com.serofit.security.domain.CustomUser;
+import com.serofit.service.FileUploadService;
 import com.serofit.service.MyPageService;
 
 import lombok.extern.log4j.Log4j;
@@ -32,6 +33,9 @@ public class MyPageController {
 	@Autowired
 	MyPageService mService;
 	
+	@Autowired
+	FileUploadService fService;
+	
 	@ResponseBody
 	@PostMapping(value = "/getProfileInfo", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public MypageProfileDTO getProfileInfo(Authentication authentication) {		
@@ -41,18 +45,9 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/updateProfile")
-	public String updateProfile(MypageProfileDTO mpDTO, @RequestParam("uploadFile")MultipartFile[] uploadFile) {
-		String uuid = "";
-		String path = "C:\\upload\\profile";
-		String fileName = "";
+	public String updateProfile(MypageProfileDTO mpDTO, @RequestParam("uploadFile")MultipartFile uploadFile) {
 		
-		if(!mpDTO.getBasicImg().equals("")) {	// 기본 이미지 중 하나 선택했을 경우
-			mpDTO.getUpVO().setUuid(mpDTO.getBasicImg());	
-		}
-		if(!uploadFile[0].isEmpty()) {			// 직접 업로드 했을 경우
-			// 파일 시스템에 파일 만드는 작업
-			
-		}
+		fService.uploadFile(uploadFile, mpDTO);
 		mService.ModifyUserProfile(mpDTO);
 		
 		return "redirect:/myPage";

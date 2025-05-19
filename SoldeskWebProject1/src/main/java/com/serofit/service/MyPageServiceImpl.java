@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.serofit.domain.FileVO;
 import com.serofit.domain.FollowVO;
@@ -187,4 +188,5 @@ public class MyPageServiceImpl implements MyPageService{
 		int result = followMapper.removeFromFav(fvo);
 		return result!=0 ? true : false;
 	}
+	
 }

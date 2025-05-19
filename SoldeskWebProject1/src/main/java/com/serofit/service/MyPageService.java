@@ -2,11 +2,11 @@ package com.serofit.service;
 
 import java.util.List;
 
-import com.serofit.domain.FileVO;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
-import com.serofit.domain.UProfileVO;
 
 public interface MyPageService {
 	// *) 공통
@@ -54,8 +54,5 @@ public interface MyPageService {
 	
 	// 즐겨찾기 해제
 	public boolean removeFromFav(FollowVO fvo);
-	
-	//------------------ 파일 업로드 관련--------------------
-	//
 	
 }

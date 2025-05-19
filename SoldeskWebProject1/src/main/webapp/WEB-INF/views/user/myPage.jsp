@@ -37,6 +37,7 @@
 					<form class="profile-form" method="post" enctype="multipart/form-data">
 						<input type="file" name="uploadFile" hidden="hidden">
 						<input type="text" name="basicImg" hidden="hidden" value="">
+						<input type="text" name="fVO.uuid" hidden="hidden" value="">
 						<div class="form-group">
 							<label for="favSport">좋아하는 운동</label> 
 							<input type="text" name="upVO.fav" id="favSport">

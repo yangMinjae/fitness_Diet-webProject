@@ -87,19 +87,19 @@ function fetchUserInfo(uno){      						// getUserInfo() 함수에서 쓰이는 
 	  })
 	  .then(res=>res.json())
 	  .then(json=>{
-		  console.log(json);
 	    // 이 부분에 현재 db에 저장된 프로필 사진(경로를 이용해) 표시
 	    // 각각 json.fVO.path, json.fVO.fileName, json.fVO.uuid 로 접근 가능
 		
 		let result = json.fVO.path.substring(json.fVO.path.indexOf("\\profile"))+'\\'+json.upVO.uuid+'_'+json.fVO.fileName;
 		result = result.replace(/\\/g, "/");
-		myProfileImg.setAttribute('src',`/profile/basic/${json.upVO.uuid}__.png`);
+		myProfileImg.setAttribute('src',result);			
+
 
 	    let yesRadio = document.querySelector('#yesRadio');
 	    let noRadio = document.querySelector('#noRadio');
 	    let nickName =document.querySelector('.profile-nickname');
 	    nickName.textContent=json.uVO.nickname;
-
+	    f.elements['fVO.uuid'].value=json.fVO.uuid; 
 	    f.elements['upVO.fav'].value=json.upVO.fav;
 	    showArea.innerText=json.mVO.area;  
 	    f.elements['mVO.time'].value=json.mVO.time;
