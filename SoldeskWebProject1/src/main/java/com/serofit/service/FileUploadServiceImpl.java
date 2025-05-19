@@ -46,7 +46,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 		if(!uploadFile.isEmpty()) {			// 직접 업로드 했을 경우
 			// 파일 시스템에 파일 만드는 작업
 			String nUuid = UUID.randomUUID().toString();
-			String nPath = "Z:\\upload\\profile";
+			String nPath = "Z:\\profile";
 			String nFileName = uploadFile.getOriginalFilename();
 			
 			String nFullFilePath = nPath+"\\"+nUuid+"_"+nFileName;

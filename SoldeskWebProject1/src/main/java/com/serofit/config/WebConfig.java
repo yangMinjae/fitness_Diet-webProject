@@ -14,6 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
         // 브라우저에서 /profile/으로 시작하면 C:/upload/profile/ 폴더를 찾아감
         registry
             .addResourceHandler("/profile/**")
-            .addResourceLocations("file:/Z:/upload/profile/");
+            .addResourceLocations("file:/Z:/profile/");
     }
 }
