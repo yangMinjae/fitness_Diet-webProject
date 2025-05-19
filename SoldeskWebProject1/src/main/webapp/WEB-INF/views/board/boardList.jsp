@@ -68,6 +68,20 @@
 				<input type="hidden" id="isLogin">
 			</sec:authorize>		
 		</div>
+				<c:set var="prePage" value="${page-1}"/>
+				<c:set var="nextPage" value="${page+1}"/>
+				<c:set var="totalPages" value="${(totalCount / pageSize) + (totalCount % pageSize > 0 ? 1 : 0)}" />
+		<div class="page-btn">
+			<c:if test="${page >1 }">
+				<button type="button" class="movePrePage" id="prePage-btn" data-page-num="${page}"> 이전 페이지 </button>
+			</c:if>
+			<c:forEach var="i" begin="${startPage }" end="${endPage}">
+				<button type="button" class="movePageByNum ${i == page ? 'active' : ''}" data-page-num="${i}">${i}</button>
+    		</c:forEach>
+			<c:if test="${page + 1 < totalPages }">
+				<button type="button" class="moveNextPage" id="nextPage-btn" data-page-num="${page}" > 다음 페이지 </button>
+			</c:if>	
+		</div>
 	</div>
 	
 	<jsp:include page="../layout/footer.jsp" />

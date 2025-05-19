@@ -107,7 +107,7 @@ public class MainController {
 		
 		return "/mail/mailList";
 	}
-	
+
 	// 전체게시글 페이지로 이동 (동기)
 	@GetMapping("/boardList")
 	public String list(Model model) {			

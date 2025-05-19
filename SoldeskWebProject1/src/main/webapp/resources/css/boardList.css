@@ -113,3 +113,45 @@ body {
   padding: 2rem;
   color: #888;
 }
+.page-btn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.page-btn button {
+  padding: 8px 16px;
+  border-radius: 18px;
+  border: none;
+  background-color: #e1f0e1; /* 기본 민트 */
+  color: #3c4a3e;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.page-btn button:hover {
+  background-color: #c8e5c8;
+  transform: translateY(-1px);
+}
+
+.page-btn button.active {
+  background-color: #a0dca0;
+  color: #1c3121;
+}
+
+.page-btn #prePage-btn,
+.page-btn #nextPage-btn {
+  background-color: #d8efe2;
+  color: #2b3b2e;
+  font-weight: bold;
+}
+
+.page-btn #prePage-btn:hover,
+.page-btn #nextPage-btn:hover {
+  background-color: #c0e3ce;
+}
+

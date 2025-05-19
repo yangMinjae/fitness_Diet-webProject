@@ -62,12 +62,13 @@ public class BoardController {
 	}
 	
 	// 좋아요 누른 게시글 가져오기 (비동기)
+	@PreAuthorize("isAuthenticated()")
 	@ResponseBody
 	@GetMapping(value = "/boardList/love", produces =MediaType.APPLICATION_JSON_UTF8_VALUE )
-	public List<BoardListDTO> getPostsByLove(){
-		
+	public List<BoardListDTO> getPostsByLove(Authentication authentication){
+		CustomUser LoginUser = (CustomUser) authentication.getPrincipal();
 		// uno 수정 필요!!
-		int uno = 2;
+		int uno = LoginUser.getUno();
 		return bService.getPostsByLove(uno);
 	}
 	// 게시글 작성 버튼 눌렀을때 비동기로 dietList 가져와서 돌아오기

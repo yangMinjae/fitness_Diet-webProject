@@ -7,16 +7,19 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
 
-let f = document.forms[0];
-
+//let f = document.forms[0];
+let allPosts = [];  // 전체/필터링된 게시글 리스트 저장
+let currentPage = 1;
+const pageSize = 10;
 //버튼 이벤트 추가
-document.querySelectorAll('button').forEach(button => {
-	button.addEventListener("click", function (e) {
-		let type = e.target.getAttribute('class');
+document.querySelectorAll('button').forEach(btn => {
+	  btn.addEventListener('click', e => {
+	    let type = btn.getAttribute('class');
 
-		if (type === 'allList') {            // 전체 게시글
-
-			fetch('/board/getAllBoardList')
+	    switch (type) {
+	      // 파일 업로드
+	      case 'allList':
+	    	  fetch('/board/getAllBoardList')
 				.then(response => {
 					if (!response.ok) {
 						throw new Error(`HTTP 오류! 상태: ${response.status}`);
@@ -30,106 +33,86 @@ document.querySelectorAll('button').forEach(button => {
 				.catch(error => {
 					console.error("게시글 불러오기 실패:", error);
 				});
-
-		} else if (type === 'dieter') {
-			console.log("dieter");
-			getBoardListByTag("다이어터");
-		} else if (type === 'escapeAnchovy') {
-			console.log("escapeAnchovy");
-			getBoardListByTag("멸치탈출");
-		} else if (type === 'maintenance') {
-			console.log("maintenance");
-			getBoardListByTag("유지어터");
-		} else if (type === 'Professional') {
-			console.log("Professional");
-			getBoardListByTag("프로득근러");
-		} else if (type === 'healthKeeper') {
-			console.log("healthKeeper");
-			getBoardListByTag("헬스키퍼");
-		} else if (type === 'listByLike') {
-			console.log("listByLike");
-			getBoardListByLove();
-		} else if (type === 'writePostBtn') {
-			//			checkDno();
-			checkHasDiet();
-
-		}
-
-	});
-});
-
+	        break;
+	      case 'dieter':
+	    	  getBoardListByTag("다이어터");
+	        break;
+	      case 'escapeAnchovy':
+	    	  getBoardListByTag("멸치탈출");
+	        break;
+	      case 'maintenance':
+	    	  getBoardListByTag("유지어터");
+	        break;
+	      case 'Professional':
+	    	  getBoardListByTag("프로득근러");
+	        break; 
+	      case 'healthKeeper':
+	    	  getBoardListByTag("헬스키퍼");
+	        break; 
+	      case 'listByLike':
+				console.log("listByLike");
+				getBoardListByLove();
+	        break; 
+	      case 'writePostBtn':
+	    	  checkHasDiet();
+	        break;  
+	    }
+	  })
+	})
 // 전체리스트보여주기 (버튼눌렀을때 비동기로)
-function getAllBoardList(posts) {
-	const allList = document.getElementById("postList");
-	allList.innerHTML = ""; // 기존 내용 초기화
-
-	let str = '';
-
-	posts.forEach(post => {
-		const formattedDate = formatDateToYMD(post.regdate);
-		str +=
-			`
-				<tr>
-					<td>
-						<a href="/board/boardView?bno=${post.bno}">${post.title}</a> [#${post.tag}]
-					</td>
-					<td>${post.nickname}</td>
-					<td>${formattedDate}</td>
-					<td>${post.hit}</td>						
-					<td>${post.love}</td>
-				</tr>
-			`;
-	});
-	allList.innerHTML = str;
+	function getAllBoardList(posts) {
+   allPosts = posts;
+   currentPage = 1;
+   renderPage(currentPage);      // 현재 페이지 렌더
+   renderPagination();           // 페이지 버튼 렌더
+   switchButton();
 }
 
-// 태그에 맞춰서 보여주기
+
+// 태그에 맞춰서 보여주기(비동기)
 function getBoardListByTag(tag) {
-	fetch(`/board/boardList/${tag}`)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`HTTP 오류! 상태: ${response.status}`);
-			}
-			return response.json();
-		})
-		.then(data => {
-			console.log(`#${tag} 게시글:`, data);
-			getAllBoardList(data);
-		})
-		.catch(error => {
-			console.error(`#${tag} 게시글이 없습니다:`, error);
-		});
-}
+	   fetch(`/board/boardList/${tag}`)
+	      .then(response => {
+	         if (!response.ok) {
+	            throw new Error(`HTTP 오류! 상태: ${response.status}`);
+	         }
+	         return response.json();
+	      })
+	      .then(data => {
+	         allPosts = data;
+	         currentPage = 1;
+	         renderPage(currentPage);
+	         renderPagination();
+	         switchButton();
+	      })
+	      .catch(error => {
+	         console.error(`#${tag} 게시글이 없습니다:`, error);
+	      });
+	}
 
 
-// 좋아요 누른 게시글 
-function getBoardListByLove(uno) {
-	fetch(`/board/boardList/love`)
-		.then(response => {
-			if (!response.ok) {
-				throw new Error(`HTTP 오류! 상태: ${response.status}`);
-			}
-			return response.json();
-		})
-		.then(data => {
-			console.log("좋아요 누른 게시글:", data);
-			getAllBoardList(data);
-		})
-		.catch(error => {
-			console.error("좋아요 누른 게시글 불러오기 실패:", error);
-		});
-}
 
-document.querySelectorAll('a').forEach(a => {
-	a.addEventListener("click", function (e) {
-		e.preventDefault();
-		if (e.target.getAttribute("title") === 'title') {
-			let href = e.target.getAttribute('href');
+// 좋아요 누른 게시글  (비동기)
+function getBoardListByLove() {
+	   fetch(`/board/boardList/love`)
+	      .then(response => {
+	         if (!response.ok) {
+	            throw new Error(`HTTP 오류! 상태: ${response.status}`);
+	         }
+	         return response.json();
+	      })
+	      .then(data => {
+	         allPosts = data;
+	         currentPage = 1;
+	         renderPage(currentPage);
+	         renderPagination();
+	         switchButton();
+	      })
+	      .catch(error => {
+	         console.error("좋아요 누른 게시글 불러오기 실패:", error);
+	      });
+	}
 
-			location.href = "/board/boardView?bno=" + href;
-		}
-	});
-});
 // 날짜 형식 바꾸기
 function formatDateToYMD(dateString) {
 	const date = new Date(dateString);
@@ -171,3 +154,74 @@ function checkHasDiet() {
 
 }
 
+// --------------------페이징 ----------------------------
+function movePageByNum(pageNum) {
+    console.log("비동기 페이지 번호:", pageNum);
+    currentPage = pageNum;
+    renderPage(currentPage);
+    renderPagination(); // 버튼 갱신
+}
+
+// 페이지 기준으로 뿌리기
+function renderPage(pageNum) {
+	   const start = (pageNum - 1) * pageSize;
+	   const end = start + pageSize;
+	   const pagePosts = allPosts.slice(start, end);
+
+	   const allList = document.getElementById("postList");
+	   allList.innerHTML = "";
+
+	   let str = '';
+	   pagePosts.forEach(post => {
+	      const formattedDate = formatDateToYMD(post.regdate);
+	      str += `
+	         <tr>
+	            <td>
+	               <a href="/board/boardView?bno=${post.bno}">${post.title}</a> [#${post.tag}]
+	            </td>
+	            <td>${post.nickname}</td>
+	            <td>${formattedDate}</td>
+	            <td>${post.hit}</td>                  
+	            <td>${post.love}</td>
+	         </tr>
+	      `;
+	   });
+
+	   allList.innerHTML = str;
+	}
+// 페이지 이동 버튼 생성
+function renderPagination() {
+	   const totalPages = Math.ceil(allPosts.length / pageSize);
+	   const paginationDiv = document.querySelector(".page-btn");
+
+	   let html = '';
+
+	   if (currentPage > 1) {
+	      html += `<button class="movePageByNum" data-page="${currentPage - 1}">이전</button>`;
+	   }
+
+	   for (let i = 1; i <= totalPages; i++) {
+	      html += `<button class="movePageByNum ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+	   }
+
+	   if (currentPage < totalPages) {
+	      html += `<button class="movePageByNum" data-page="${currentPage + 1}">다음</button>`;
+	   }
+
+	   paginationDiv.innerHTML = html;
+
+	   document.querySelectorAll(".movePageByNum").forEach(btn => {
+	        btn.addEventListener("click", function () {
+	            const page = parseInt(btn.dataset.page); 
+	            movePageByNum(page);  
+	        });
+	    });
+	}
+// 페이지 로드 되었을때 자동으로 전체버튼 누르게하기
+document.addEventListener("DOMContentLoaded", () => {
+
+    const allBtn = document.querySelector("button.allList");
+    if (allBtn) {
+        allBtn.click(); 
+    }
+});
