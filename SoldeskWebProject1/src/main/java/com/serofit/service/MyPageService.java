@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
+import com.serofit.domain.ProfileModalDTO;
 
 public interface MyPageService {
 	// *) 공통
@@ -21,6 +22,9 @@ public interface MyPageService {
 	
 	// 1-1)유저 프로필 세부 정보 가져오기
 	public MypageProfileDTO getUserProfileInfo(int uno);
+	
+	// 1-1-1) 유저 프로필 모달 정보 가져오기
+	public ProfileModalDTO getProfileModalInfo(int uno);
 	
 	// 1-2) 프로필 수정 기능
 	public boolean ModifyUserProfile(MypageProfileDTO mpDTO);

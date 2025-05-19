@@ -31,6 +31,13 @@
 		WHERE bno = #{bno}
 	</select>
 	
+	<!-- 특정 유저 게시글 불러오기 -->
+	<select id="getPostByUno" parameterType="int" resultType="com.serofit.domain.BoardVO">
+		SELECT *
+		FROM tbl_board
+		WHERE uno = #{uno}
+	</select>
+	
 	<!-- 조회수 업데이트 -->
 	<update id="updateHit" parameterType="int">
 		UPDATE tbl_board

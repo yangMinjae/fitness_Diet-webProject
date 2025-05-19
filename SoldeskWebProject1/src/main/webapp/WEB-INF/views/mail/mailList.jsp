@@ -32,7 +32,6 @@
 				    data-photo="${mvo.imgPath}"
 				    data-content="${mvo.content}"
 				    data-regdate="${mvo.regdate}"
-				    data-regdate="${mvo.regdate}"
 				    data-selectuno="${mvo.uno}"
 				    data-myuno="${uno}"
 				    data-mno="${mvo.mno}">

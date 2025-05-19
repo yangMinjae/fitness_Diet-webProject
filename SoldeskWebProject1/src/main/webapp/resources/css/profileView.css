@@ -21,8 +21,8 @@
   padding: 32px 40px;
   width: 90%;
   max-width: 640px;
-  max-height: 80vh; /* 💡 모달 최대 높이 제한 */
-  overflow: hidden; /* 내부만 스크롤하도록 설정 */
+  max-height: 80vh;
+  overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   position: relative;
   animation: modalFadeIn 0.3s ease;
@@ -41,7 +41,7 @@
   color: #4d5a63;
   cursor: pointer;
   transition: color 0.2s;
-  z-index: 1; /* 혹시 내용 위로 올라오지 않을 경우 대비 */
+  z-index: 1;
 }
 
 #profileModal .close:hover {
@@ -101,9 +101,10 @@
 /* 게시글 영역만 스크롤되게 */
 .post-section {
   margin-top: 24px;
-  padding-right: 4px; /* 스크롤 여백 */
+  padding-right: 4px;
 }
 
+/* 게시글 제목 */
 .post-section h3 {
   font-size: 1.2rem;
   margin-bottom: 16px;
@@ -114,8 +115,8 @@
   border-top: 2px solid #cceccc;
   border-bottom: 2px solid #cceccc;
   overflow-y: auto;
-  max-height: 240px;       /* 💡 스크롤 높이 제한 */
-  padding-right: 4px;      /* 스크롤 공간 확보 */
+  max-height: 240px;
+  padding-right: 6px; /* ✔️ 스크롤 여백 */
 }
 
 /* 스크롤바 스타일 */
@@ -127,13 +128,30 @@
   border-radius: 8px;
 }
 
-.post-row {
+/* 게시글 행 스타일 */
+.post-row,
+.post-row.header {
   display: grid;
   grid-template-columns: 4fr 2fr 1fr 1fr;
-  padding: 12px 8px;
-  border-bottom: 1px solid #e6e6e6;
+  column-gap: 16px; /* ✔️ 컬럼 간 여백 */
+  padding: 14px 8px;
   font-size: 0.95rem;
   align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* 제목 칸: 말줄임 처리 */
+.post-row > div:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 4px; /* ✔️ 내부 여백 */
+}
+
+/* 다른 셀에도 여백 추가 */
+.post-row > div {
+  padding: 0 4px;
 }
 
 .post-row.header {

@@ -12,6 +12,9 @@ public interface BoardMapper {
 	// 게시글 불러오기
 	public BoardVO getPostByBno(int bno);
 	
+	// 특정 유저 게시글 불러오기
+	public List<BoardVO> getPostByUno(int uno);
+	
 	// 인기 게시글 가져오기
 	public List<BoardVO> getHotPosts(int quantity);
 	

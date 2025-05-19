@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // 프로필 모달 띄우기
 document.querySelectorAll(".mate-info").forEach(item => {
 	  item.addEventListener("click", function(event) {	
+		  setSelectUno(item.dataset.selectuno);
 		  modal.classList.add("show");
 	  });
 });

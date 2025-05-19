@@ -68,4 +68,10 @@
 		SELECT COUNT(*) FROM tbl_follow
 		WHERE thrower = #{thrower} AND catcher = #{catcher}
 	</select>
+	
+	<!-- 팔로워 수 가져오기 -->
+	<select id="getCountFollwer" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM tbl_follow
+		WHERE catcher = #{uno}
+	</select>
 </mapper>

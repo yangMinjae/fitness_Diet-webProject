@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
+import com.serofit.domain.ProfileModalDTO;
 import com.serofit.security.domain.CustomUser;
 import com.serofit.service.FileUploadService;
 import com.serofit.service.MyPageService;
@@ -42,6 +43,14 @@ public class MyPageController {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		MypageProfileDTO mpDTO = mService.getUserProfileInfo(customUser.getUvo().getUno());
 		return mpDTO;
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "/getProfileModalInfo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ProfileModalDTO getProfileModalInfo(@RequestParam("uno") int uno) {
+		ProfileModalDTO pmDTO = mService.getProfileModalInfo(uno);
+		
+		return pmDTO;
 	}
 	
 	@PostMapping("/updateProfile")

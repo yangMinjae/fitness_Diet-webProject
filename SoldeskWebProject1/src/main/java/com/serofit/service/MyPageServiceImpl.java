@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.serofit.domain.BoardVO;
 import com.serofit.domain.FileVO;
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MateVO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
+import com.serofit.domain.ProfileModalDTO;
 import com.serofit.domain.UProfileVO;
+import com.serofit.mapper.BoardMapper;
 import com.serofit.mapper.FileMapper;
 import com.serofit.mapper.FollowMapper;
 import com.serofit.mapper.MateMapper;
@@ -40,6 +43,9 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Autowired
 	MateMapper mMapper;
+	
+	@Autowired
+	BoardMapper bMapper;
 	
 	// 유저 프로필 사진/닉네임 가져오기
 	@Override
@@ -78,6 +84,26 @@ public class MyPageServiceImpl implements MyPageService{
 		mpDTO.getUVO().setUno(uno);
 		mpDTO.initMpDTO();
 		return mpDTO;
+	}
+	
+	// 1-1-1) 유저 프로필 모달 정보 가져오기
+	@Override
+	@Transactional
+	public ProfileModalDTO getProfileModalInfo(int uno) {
+		ProfileModalDTO pmDTO = new ProfileModalDTO();
+		
+		List<BoardVO> bList = bMapper.getPostByUno(uno);
+		UProfileVO upVO = upMapper.selectByUno(uno);
+		String nickname = uMapper.readNickname(uno);
+		int fCount = followMapper.getCountFollwer(uno);
+		System.out.println(fCount);
+		
+		pmDTO.setBList(bList);
+		pmDTO.setFCount(fCount);
+		pmDTO.setNickname(nickname);
+		pmDTO.setUpvo(upVO);
+		pmDTO.setUno(uno);
+		return pmDTO;
 	}
 	
 	// 1-2) 프로필 수정 기능

@@ -32,4 +32,7 @@ public interface FollowMapper {
 	
 	// 팔로우 하려는 사람을 이미 팔로우 하고 있는지 확인
 	public int checkIfFollow(FollowVO fvo);
+	
+	// 팔로워 수 가져오기
+	public int getCountFollwer(int uno);
 }
