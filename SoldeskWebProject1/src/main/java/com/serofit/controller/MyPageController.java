@@ -109,4 +109,10 @@ public class MyPageController {
 		boolean result = mService.follow(fvo);
 		return result? "success" : "fail";
 	}
+	
+	@GetMapping("/profileView")
+	public String getProfileView(int uno) {
+		System.out.println("ininin" + uno);
+		return "/user/profileView";
+	}
 }

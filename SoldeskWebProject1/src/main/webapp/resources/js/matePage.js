@@ -1,11 +1,13 @@
 //-----CSS 파일 추가
-const CSS_FILE_PATH = ['/resources/css/matePage.css', '/resources/css/sendMailModal.css'];
+const CSS_FILE_PATH = ['/resources/css/matePage.css', '/resources/css/sendMailModal.css', '/resources/css/profileView.css'];
 CSS_FILE_PATH.forEach(css => {
 	let linkEle = document.createElement('link');
 	linkEle.rel = 'stylesheet';
 	linkEle.href = css;
 	document.head.appendChild(linkEle);
 });
+
+const modal = document.getElementById("profileModal");
 
 // 필터링
 document.addEventListener("DOMContentLoaded", function () {
@@ -81,6 +83,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		tagFilter.selectedIndex = 0;
 		applyFilters();
 	});
+});
+
+// 프로필 모달 띄우기
+document.querySelectorAll(".mate-info").forEach(item => {
+	  item.addEventListener("click", function(event) {	
+		  modal.classList.add("show");
+	  });
 });
 
 // 필터 시 시각적으로 확인되는 함수

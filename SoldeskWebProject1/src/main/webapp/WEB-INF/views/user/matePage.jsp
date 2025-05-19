@@ -96,11 +96,10 @@
 						data-selectuno="${mate.mvo.uno}"
 						data-myuno="${user.uno}"
 						data-checker="${mate.checker}">
-										
-					<!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
-					<img src="/resources/img/tag/헬스키퍼.png" class="user-icon" />
-					
-					<div class="mate-info">
+															
+					<div class="mate-info" data-selectuno="${mate.mvo.uno}">					
+					  <!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
+					  <img src="/resources/img/tag/헬스키퍼.png" class="user-icon" />
 					  <p class="nickname">${mate.dto.nickname}</p>
 					  <p class="tag">#${mate.pvo.tag}</p>
 					  <p class="gender">성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
@@ -132,6 +131,7 @@
 		</main>
 	</div>
 	<jsp:include page="sendMailModal.jsp" />
+	<jsp:include page="profileViewModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 	<script type="text/javascript" src="/resources/js/matePage.js"></script>
 	<script type="text/javascript" src="/resources/js/sendMailModal.js"></script>
