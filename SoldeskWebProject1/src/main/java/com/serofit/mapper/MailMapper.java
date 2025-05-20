@@ -8,6 +8,9 @@ public interface MailMapper {
 	// 받은 사람 기준으로 메일 불러오기
 	public List<MailVO> selectByReceiver(int receiver);
 	
+	// 보낸 사람 기준으로 메일 불러오기
+	public List<MailVO> selectBySender(int sender);
+	
 	// 메일 보내기
 	public int insertMail(MailVO mvo);
 	

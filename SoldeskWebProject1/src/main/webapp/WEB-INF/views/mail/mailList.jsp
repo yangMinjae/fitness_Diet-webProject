@@ -22,10 +22,15 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<div class="mail-type-buttons">
+		  <button id="loadSenderBtn">받은 메일</button>
+		  <button id="loadRecevierBtn">보낸 메일</button>
+		</div>
+		
+		<sec:authentication var="uno" property="principal.uno" />
 		<!-- 메일 리스트 -->
 		<ul class="mail-list">
-			<sec:authentication var="uno" property="principal.uno" />
 			<c:forEach var="mvo" items="${mList}">
 				<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
 				    data-name="${mvo.nickname}"
@@ -45,7 +50,8 @@
 					</div>
 				</li>
 			</c:forEach>
-		</ul>			
+			<span id="myUno" hidden="true">${uno}</span>
+		</ul>
 	</div>
 	
 	<jsp:include page="mailModal.jsp" />	

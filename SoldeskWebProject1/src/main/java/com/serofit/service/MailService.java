@@ -9,8 +9,11 @@ import com.serofit.domain.ReceiveMailDTO;
 
 public interface MailService {
 	
-	// 메일 목록 가져오기
+	// 받은 사람 기준 메일 목록 가져오기
 	public List<ReceiveMailDTO> selectByReceiver(int receiver);
+	
+	// 보낸 사람 기준 메일 목록 가져오기
+	public List<ReceiveMailDTO> selectBySender(int sender);
 	
 	// 팔로우 한 사람 목록 가져오기
 	public List<FollowMailDTO> getFollowList(int uno);

@@ -1,9 +1,11 @@
 package com.serofit.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.serofit.domain.MailVO;
+import com.serofit.domain.ReceiveMailDTO;
 import com.serofit.security.domain.CustomUser;
 import com.serofit.service.MailService;
 import lombok.extern.log4j.Log4j;
@@ -72,5 +75,27 @@ public class MailController {
 	    result.put("status", "success");
 	    
 		return result;
+	}
+	
+	// 받은 메일함(최신화)
+	// 메일 목록 화면
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/sender", produces = "application/json")
+	@ResponseBody
+	public List<ReceiveMailDTO> sender(Authentication authentication) {		
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();		
+		
+		return mService.selectBySender(customUser.getUno());
+	}
+	
+	// 보낸 메일함(최신화)
+	// 메일 목록 화면
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/recevier", produces = "application/json")
+	@ResponseBody
+	public List<ReceiveMailDTO> recevier(Authentication authentication) {		
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		
+		return mService.selectByReceiver(customUser.getUno());
 	}
 }

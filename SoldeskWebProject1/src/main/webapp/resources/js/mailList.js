@@ -1,8 +1,3 @@
-const ITEMS_PER_PAGE = 8;
-let allMailItems = [];
-let filteredMailItems = [];
-let currentPage = 0;
-
 // CSS 추가
 const CSS_FILE_PATH = ['/resources/css/mailList.css', '/resources/css/mailModal.css', '/resources/css/sendMailModal.css'];
 CSS_FILE_PATH.forEach(css => {
@@ -12,106 +7,8 @@ CSS_FILE_PATH.forEach(css => {
 	document.head.appendChild(linkEle);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-	const searchInput = document.querySelector(".search-input");
-	const rawMailItems = document.querySelectorAll(".mail-item");
-	allMailItems = Array.from(rawMailItems);
-	filteredMailItems = [...allMailItems];
-
-	renderMailListPage(currentPage);
-	renderPagination();
-
-	// 필터 함수
-	function filterMails() {
-		const keyword = searchInput.value.toLowerCase().trim();
-		filteredMailItems = allMailItems.filter(item => {
-			const sender = item.querySelector(".sender").textContent.toLowerCase();
-			const content = item.dataset.content.toLowerCase();
-			return sender.includes(keyword) || content.includes(keyword);
-		});
-		currentPage = 0;
-		renderMailListPage(currentPage);
-		renderPagination();
-	}
-
-	searchInput.addEventListener("input", filterMails);
-});
-
-// 메일 리스트 렌더링
-function renderMailListPage(page) {
-	const mailList = document.querySelector(".mail-list");
-	mailList.innerHTML = "";
-
-	const start = page * ITEMS_PER_PAGE;
-	const end = start + ITEMS_PER_PAGE;
-	const pageItems = filteredMailItems.slice(start, end);
-
-	pageItems.forEach(item => mailList.appendChild(item));
-}
-
-// 페이징 렌더링
-function renderPagination() {
-	const existing = document.getElementById("pagination");
-	if (existing) existing.remove();
-
-	const totalPages = Math.ceil(filteredMailItems.length / ITEMS_PER_PAGE);
-	const pageGroup = Math.floor(currentPage / 10);
-	const startPage = pageGroup * 10;
-	const endPage = Math.min(startPage + 10, totalPages);
-
-	const container = document.createElement("div");
-	container.id = "pagination";
-	container.style.textAlign = "center";
-	container.style.margin = "20px";
-
-	if (currentPage > 0) {
-		const prevBtn = document.createElement("button");
-		prevBtn.textContent = "이전";
-		prevBtn.onclick = () => {
-			currentPage--;
-			renderMailListPage(currentPage);
-			renderPagination();
-		};
-		container.appendChild(prevBtn);
-	}
-
-	for (let i = startPage; i < endPage; i++) {
-		const btn = document.createElement("button");
-		btn.textContent = i + 1;
-		if (i === currentPage) btn.classList.add("active");
-		btn.onclick = () => {
-			currentPage = i;
-			renderMailListPage(currentPage);
-			renderPagination();
-		};
-		container.appendChild(btn);
-	}
-
-	if (currentPage < totalPages - 1) {
-		const nextBtn = document.createElement("button");
-		nextBtn.textContent = "다음";
-		nextBtn.onclick = () => {
-			currentPage++;
-			renderMailListPage(currentPage);
-			renderPagination();
-		};
-		container.appendChild(nextBtn);
-	}
-
-	document.querySelector(".mailbox-container").appendChild(container);
-}
-
-// 버튼
-document.querySelectorAll('button').forEach(button => {
-	button.addEventListener("click", function (e) {
-		if (e.target.classList.contains("send-mail-btn")) {
-			location.href = '/mail/sendMail';
-		}
-	});
-});
-
 // 메일 모달창
-document.addEventListener('DOMContentLoaded', () => {
+function readModal() {
 	document.querySelectorAll('.mail-item').forEach(item => {
 		item.addEventListener('click', () => {
 			const name = item.dataset.name;
@@ -150,12 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	});
-});
+};
+readModal();
 
 // 모달 닫기
 document.querySelector('.close-btn').addEventListener('click', () => {
 	document.getElementById('mailModal').classList.remove('show');
 });
+
 document.getElementById('replyBtn').addEventListener('click', () => {
 	document.getElementById('mailInput').value = '';
 	document.getElementById('sendmailModal').classList.add('show');
@@ -171,3 +70,67 @@ document.addEventListener('keydown', (e) => {
 		}
 	}
 });
+//메일 타입 버튼 처리
+document.addEventListener('DOMContentLoaded', () => {
+	const unoElement = document.getElementById('myUno');
+	const senderBtn = document.getElementById('loadSenderBtn');
+	const recevierBtn = document.getElementById('loadRecevierBtn');
+	const myUno = unoElement ? unoElement.textContent.trim() : null;
+
+	if (senderBtn) {
+	  senderBtn.addEventListener('click', () => {
+	    loadMailListByType('/mail/recevier', myUno, true);
+	  });
+	}
+
+	if (recevierBtn) {
+	  recevierBtn.addEventListener('click', () => {
+	    loadMailListByType('/mail/sender', myUno, false);
+	  });
+	}
+});
+
+function loadMailListByType(url, myUno, isView) {
+	fetch(url)
+	.then(res => res.json())
+	.then(html => {
+		const mailListContainer = document.querySelector('.mail-list');
+		let data = '';
+		mailListContainer.innerHTML = data;
+		
+		html.forEach(mvo=>{
+			data +=`<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
+			    data-name="${mvo.nickname}"
+			    data-photo="${mvo.imgPath}"
+			    data-content="${mvo.content}"
+			    data-regdate="${mvo.regdate}"
+			    data-selectuno="${mvo.uno}"
+			    data-mno="${mvo.mno}"
+			    >
+				<div class="profile-icon">
+					<img src="/resources/img/tag/다이어터.png" alt="프로필" />
+				</div>
+				<div class="mail-info">
+					<span class="sender">${mvo.nickname}</span> 
+					<span class="preview">${mvo.preview}</span>
+					<span class="regdate">${formatDateToYMD(mvo.regdate)}</span>
+				</div>
+			</li>`				
+			
+		})
+		mailListContainer.innerHTML = data;
+		
+		if(isView)
+			readModal();
+	})
+	.catch(err => console.error("메일 목록 불러오기 실패:", err));
+}
+
+//날짜 형식 바꾸기
+function formatDateToYMD(dateString) {
+	const date = new Date(dateString);
+	const year = date.getFullYear();
+	const month = ('0' + (date.getMonth() + 1)).slice(-2);
+	const day = ('0' + date.getDate()).slice(-2);
+	return `${year}-${month}-${day}`;
+}
