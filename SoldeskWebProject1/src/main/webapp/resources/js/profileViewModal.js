@@ -56,7 +56,11 @@ function getProfile() {
 
 function renderProfileModalInfo(data) {
 	  // 프로필 이미지
-	  //document.querySelector(".profile-photo").src = data.upVO.photoUrl || "/default-profile.jpg";
+	console.log(data);
+	  document.querySelector(".profile-photo").src = 
+		  (data.fvo.path.substring(data.fvo.path.indexOf("\\profile"))+'\\'+data.fvo.uuid+'_'+data.fvo.fileName)
+		  .replace(/\\/g, "/");
+
 	
 	  // 닉네임
 	  document.querySelector(".up-nickname").textContent = data.nickname;
