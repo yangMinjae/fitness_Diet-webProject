@@ -54,9 +54,6 @@ public class MainController {
 	@Autowired
 	CustomUserDetailService userService;
 	
-	@Autowired
-    MailMapper mMapaer;
-	
 	// 서버 구동 시 mainPage
 	@GetMapping()
 	public String home(Locale locale, Model model) {
