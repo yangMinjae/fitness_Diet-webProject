@@ -8,13 +8,12 @@
 		
 		// 보내기 버튼
 		if (e.target.classList.contains('sendMail')) {
-			const myUno = document.querySelector('.myUno').textContent.trim();
-			const selectUno = document.querySelector('.selectUno').textContent.trim();
-			
+			console.log(sendSelectUno);
+			console.log(snedMyUno);
 			let content = document.getElementById('mailInput').value;
 			
 			if (confirm("쪽지를 보내시겠습니까?")) {
-				fetch(`/mail/sendMsg?selectUno=${selectUno}&myUno=${myUno}&content=${content}`, {
+				fetch(`/mail/sendMsg?selectUno=${sendSelectUno}&myUno=${snedMyUno}&content=${content}`, {
 					method : 'POST',
 					headers : {'Content-Type': ' application/json'}
 				})
@@ -64,4 +63,13 @@ function initMailModalEvent() {
 			charCount.textContent = `${length} / 300`;
 		});
 	}
+}
+// myUno 넘겨주기
+function setSendMyUno(uno) {
+	snedMyUno = uno
+}
+
+// selectUno 넘겨주기
+function setSendSelectUno(uno) {
+	sendSelectUno = uno
 }

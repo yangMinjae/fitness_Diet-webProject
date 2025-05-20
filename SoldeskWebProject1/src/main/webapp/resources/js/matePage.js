@@ -112,8 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			const followBtn = e.target.closest('.follow-btn');
 			const sendBtn = e.target.closest('.send-msg-btn');
 			const mateItem = e.target.closest('.mate-item');
-			const myUno = mateItem.dataset.myuno;
-			const selectUno = mateItem.dataset.selectuno;
 			
 			// 팔로우 팔로잉
 			if (followBtn) {
@@ -142,8 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				
 			// 메일 모달 띄우기
 			}else if (sendBtn) {
-				document.getElementById('selectUno').innerText = selectUno;
-				document.getElementById('myUno').innerText = myUno;
+				setSendMyUno(mateItem.dataset.myuno);
+				setSendSelectUno(mateItem.dataset.selectuno);
 				initMailModalContent();
 				initMailModalEvent();
 				document.getElementById('sendmailModal').classList.add('show');

@@ -125,18 +125,16 @@ function readModal() {
 			const content = item.dataset.content;
 			const mno = item.dataset.mno;
 			const regdate = item.dataset.regdate;
-			const selectUno = item.dataset.selectuno;
-			const myUno = item.dataset.myuno;
-
+			
 			fetch(`/mail/updateByReadMail?mno=${mno}`, { method: 'GET' })
 				.then(res => res.json())
 				.then(data => {
 					if (data.status === 'success') {
 						document.getElementById('senderName').innerText = name;
 						document.getElementById('mailContent').innerText = content;
-						document.getElementById('regdate').innerText = regdate;
-						document.getElementById('selectUno').innerText = selectUno;
-						document.getElementById('myUno').innerText = myUno;
+						document.getElementById('regdate').innerText = formatDateToYMD(regdate);
+						setSendMyUno(item.dataset.myuno)
+						setSendSelectUno(item.dataset.selectuno)
 
 						document.getElementById('mailModal').classList.add('show');
 						item.classList.add('read');
@@ -194,8 +192,12 @@ document.addEventListener('keydown', (e) => {
 
 
 // ===== 날짜 포맷 함수 =====
-function formatDateToYMD(dateString) {
-	const date = new Date(dateString);
+function formatDateToYMD(input) {
+	const timestamp = Number(input);  // string → number로 강제 변환
+	const date = new Date(timestamp);
+
+	if (isNaN(date.getTime())) return '-';  // 유효성 체크
+
 	const year = date.getFullYear();
 	const month = ('0' + (date.getMonth() + 1)).slice(-2);
 	const day = ('0' + date.getDate()).slice(-2);

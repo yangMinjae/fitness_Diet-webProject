@@ -86,7 +86,9 @@
 		<div id="sendWrapper" class="mate-slider-wrapper">
 			<section class="mate-scroll-section sendList">
 				<c:forEach var="mate" items="${mateList}">
-					<div class="mate-item" >
+					<div class="mate-item" 
+					data-selectuno="${mate.mvo.uno}"
+					data-myuno="${user.uno}">
 															
 					<div class="mate-info" data-selectuno="${mate.mvo.uno}">					
 					  <!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
@@ -114,7 +116,7 @@
 					
 					<!-- 숨김 데이터 -->
 					<span class="tag" hidden="true">${mate.pvo.tag}</span>
-					<span class="userTag" hidden="true">${user.tag}</span>		
+					<span class="userTag" hidden="true">${user.tag}</span>
 					</div>
 				</c:forEach>
 			</section>
