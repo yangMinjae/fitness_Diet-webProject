@@ -10,10 +10,6 @@
 <body class="mate-page">
 	<jsp:include page="../layout/header.jsp" />
 	
-	<div class="scroll-end-overlay" id="scrollEndOverlay">
-	  <div class="scroll-end-message">마지막 데이터입니다.</div>
-	</div>
-	
 	<!-- 왼쪽 리모컨 스타일 사이드바 -->
 	<div class="page-wrapper">
 		<main class="content-main">
@@ -30,7 +26,7 @@
 			</div>
 		    <p class="scroll-guide-text">휠을 위아래로 움직이면 옆으로 이동할 수 있어요!</p>
 		    <div class="scroll-guide-buttons">
-			  <button id="scrollGuideNever">다시 보지 않기</button>
+			  <button id="scrollGuideNever">하루 동안 보지 않기</button>
 			  <button id="scrollGuideConfirm">확인</button>
 			</div>
 		  </div>
@@ -88,8 +84,15 @@
 				<c:forEach var="mate" items="${mateList}">
 					<div class="mate-item" 
 					data-selectuno="${mate.mvo.uno}"
-					data-myuno="${user.uno}">
-															
+					data-myuno="${user.uno}"
+                  	data-time="${mate.mvo.time}"
+                  	data-gender="${mate.mvo.gender}" 
+                  	data-age="${mate.mvo.age}"
+                 	data-area="${mate.mvo.area}"
+                  	data-nickname="${mate.dto.nickname}"
+                  	data-tag="${mate.pvo.tag}"
+                  	data-checker="${mate.checker}">
+                  			
 					<div class="mate-info" data-selectuno="${mate.mvo.uno}">					
 					  <!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
 					  <img src="" src-data="${mate.dto.fvo.path}${'\\'}${mate.dto.fvo.uuid}_${mate.dto.fvo.fileName}" class="user-icon" />

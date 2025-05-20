@@ -10,7 +10,6 @@ CSS_FILE_PATH.forEach(css => {
 const profileModal = document.getElementById("profileModal");
 setImages();
 // 필터링
-document.addEventListener("DOMContentLoaded", function () {
 	const timeFilter = document.getElementById("fileterTime");
 	const genderFilter = document.getElementById("fileterGender");
 	const ageFilter = document.getElementById("fileterAge");
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		tagFilter.selectedIndex = 0;
 		applyFilters();
 	});
-});
 
 // 프로필 모달 띄우기
 document.querySelectorAll(".mate-info").forEach(item => {
@@ -106,12 +104,13 @@ function updateFilterVisualState() {
 };
 
 // 버튼 (팔로우, 메일) 
-document.addEventListener("DOMContentLoaded", function () {
 	document.querySelectorAll('.mate-scroll-section').forEach(a => {
 		a.addEventListener('click', (e) => {
 			const followBtn = e.target.closest('.follow-btn');
 			const sendBtn = e.target.closest('.send-msg-btn');
 			const mateItem = e.target.closest('.mate-item');
+			const selectUno = mateItem.dataset.selectuno;
+			const myUno = mateItem.dataset.myuno;
 			
 			// 팔로우 팔로잉
 			if (followBtn) {
@@ -140,8 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				
 			// 메일 모달 띄우기
 			}else if (sendBtn) {
-				setSendMyUno(mateItem.dataset.myuno);
-				setSendSelectUno(mateItem.dataset.selectuno);
+				setSendMyUno(myUno);
+				setSendSelectUno(selectUno);
 				initMailModalContent();
 				initMailModalEvent();
 				document.getElementById('sendmailModal').classList.add('show');
@@ -151,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		});
 	});
-});
 
 // 가이드 닫기 함수
 function closeScrollGuideOverlay() {
@@ -160,22 +158,28 @@ function closeScrollGuideOverlay() {
 }
 
 //가로 스크롤 바인딩
-document.addEventListener("DOMContentLoaded", () => {
 	const scrollSections = document.querySelectorAll(".mate-scroll-section");
 	const scrollEndOverlay = document.getElementById("scrollEndOverlay");
 
 	scrollSections.forEach(section => {
+		let lastWheelTime = 0;
+		const SCROLL_DELAY = 500; // 밀리초 단위
+
+		// 카드 한 번에 넘길 너비 계산
 		const scrollStep = () => {
 			const visibleCard = section.querySelector(".mate-item:not(.hidden)");
 			return visibleCard ? (visibleCard.offsetWidth + 20) * 3 : 240 * 3;
 		};
 
-		let isScrolling = false;
-
+		// 휠 이벤트 → 일정 시간 내 한 번만 스크롤
 		section.addEventListener("wheel", (e) => {
+			const now = Date.now();
+			if (now - lastWheelTime < SCROLL_DELAY) {
+				e.preventDefault();
+				return;
+			}
+			lastWheelTime = now;
 			e.preventDefault();
-			if (isScrolling) return;
-			isScrolling = true;
 
 			const delta = e.deltaY;
 			const step = scrollStep();
@@ -187,6 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				behavior: "smooth"
 			});
 
+			// 끝에 도달하면 안내 표시
 			if (delta > 0 && isAtEnd && scrollEndOverlay) {
 				scrollEndOverlay.classList.remove("hide");
 				scrollEndOverlay.classList.add("show");
@@ -194,42 +199,59 @@ document.addEventListener("DOMContentLoaded", () => {
 				setTimeout(() => {
 					scrollEndOverlay.classList.remove("show");
 					scrollEndOverlay.classList.add("hide");
-				}, 1000); // 1초 후 사라지기 시작
+				}, 1000);
 			}
-
-			setTimeout(() => {
-				isScrolling = false;
-			}, 300);
 		}, { passive: false });
 
+		// 마우스 위치에 따라 방향 힌트 표시 (좌/우)
 		section.addEventListener("mousemove", (e) => {
 			const rect = section.getBoundingClientRect();
 			const x = e.clientX - rect.left;
 			const width = rect.width;
+
 			section.classList.toggle("scroll-left", x < width * 0.25);
 			section.classList.toggle("scroll-right", x > width * 0.75);
 		});
 	});
-});
+
 
 // 가이드 오버레이 표시 로직
+const LAST_HIDE_KEY = "scrollGuideLastHide";
+const HIDE_DAYS = 1;
+
+function shouldShowGuide() {
+	const lastHide = localStorage.getItem(LAST_HIDE_KEY);
+	if (!lastHide) return true; // 기록 없으면 무조건 보여줌
+
+	const diff = Date.now() - Number(lastHide);
+	return diff > HIDE_DAYS * 24 * 60 * 60 * 1000; // ms 기준 비교
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 	const guideOverlay = document.getElementById("scrollGuideOverlay");
 	const guideButton = document.getElementById("scrollGuideConfirm");
 	const neverButton = document.getElementById("scrollGuideNever");
 
-	if (!localStorage.getItem("scrollGuideHidden")) {
+	if (guideOverlay && shouldShowGuide()) {
 		setTimeout(() => {
 			guideOverlay.style.display = "flex";
 		}, 500);
+	} else if (guideOverlay) {
+		guideOverlay.style.display = "none";
 	}
 
-	guideButton.addEventListener("click", closeScrollGuideOverlay);
+	if (guideButton) {
+		guideButton.addEventListener("click", () => {
+			if (guideOverlay) guideOverlay.style.display = "none";
+		});
+	}
 
-	neverButton.addEventListener("click", () => {
-		localStorage.setItem("scrollGuideHidden", "true");
-		closeScrollGuideOverlay();
-	});
+	if (neverButton) {
+		neverButton.addEventListener("click", () => {
+			localStorage.setItem(LAST_HIDE_KEY, Date.now()); // ❗ 7일 숨기기 시작 시점
+			if (guideOverlay) guideOverlay.style.display = "none";
+		});
+	}
 });
 
 //ESC 키 닫기 처리 (우선순위별로)
@@ -252,3 +274,4 @@ function setImages(){
 		ele.setAttribute('src',srcPath);
 	})
 }
+
