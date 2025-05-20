@@ -24,18 +24,23 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		 	log.warn("Login Success");
+		  	log.warn("Login Success");
 
-	        // 사용자가 로그인 전에 접근했던 URL 가져오기
-	        SavedRequest savedRequest = requestCache.getRequest(request, response);
+		    SavedRequest savedRequest = requestCache.getRequest(request, response);
 
-	        if (savedRequest != null) {
-	            String redirectUrl = savedRequest.getRedirectUrl();
-	            log.warn("Redirecting to saved request URL: " + redirectUrl);
-	            response.sendRedirect(redirectUrl);
-	        } else {
-	            log.warn("Redirecting to default URL: /");
-	            response.sendRedirect("/");
-	        }
+		    if (savedRequest != null) {
+		        String redirectUrl = savedRequest.getRedirectUrl();
+		        log.warn("Redirecting to saved request URL: " + redirectUrl);
+
+		        if (redirectUrl != null && redirectUrl.contains("/header/data")) {
+		            response.sendRedirect("/");  // 또는 "/main", "/dashboard" 등 원하는 뷰 페이지
+		        } else {
+		            response.sendRedirect(redirectUrl);
+		        }
+
+		    } else {
+		        log.warn("Redirecting to default URL: /");
+		        response.sendRedirect("/");
+		    }
 	}
 }
