@@ -20,11 +20,10 @@ const observer = new MutationObserver((mutationsList) => {
  for (let mutation of mutationsList) {
      if (mutation.type === "attributes" && mutation.attributeName === "class") {
          const currentClassList = [...profilemodal.classList];
-
+         
          const added = currentClassList.filter(cls => !previousClassList.includes(cls));
-         const removed = previousClassList.filter(cls => !currentClassList.includes(cls));
 
-         if (added.includes("show")) {
+         if (added.includes("show")) {        	 
              getProfile();
          }
 
@@ -39,11 +38,11 @@ observer.observe(profilemodal, {
 });
 
 function setSelectUno(uno) {
-	selectUno = uno
+	selectUno = uno;
 }
 
 function getProfile() {
-	if(selectUno == null)
+	if(!selectUno)
 		return;
 	
 	fetch(`/myPage/getProfileModalInfo?uno=${selectUno}`)
@@ -56,7 +55,6 @@ function getProfile() {
 
 function renderProfileModalInfo(data) {
 	  // 프로필 이미지
-	console.log(data);
 	  document.querySelector(".profile-photo").src = 
 		  (data.fvo.path.substring(data.fvo.path.indexOf("\\profile"))+'\\'+data.fvo.uuid+'_'+data.fvo.fileName)
 		  .replace(/\\/g, "/");

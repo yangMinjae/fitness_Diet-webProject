@@ -97,7 +97,6 @@ public class MyPageServiceImpl implements MyPageService{
 		String nickname = uMapper.readNickname(uno);
 		int fCount = followMapper.getCountFollwer(uno);
 		FileVO fvo = fileMapper.selectUprofileFile(upVO.getUuid());
-		System.out.println(fCount);
 		
 		pmDTO.setBList(bList);
 		pmDTO.setFCount(fCount);
@@ -105,6 +104,7 @@ public class MyPageServiceImpl implements MyPageService{
 		pmDTO.setUpvo(upVO);
 		pmDTO.setUno(uno);
 		pmDTO.setFvo(fvo);
+		
 		return pmDTO;
 	}
 	

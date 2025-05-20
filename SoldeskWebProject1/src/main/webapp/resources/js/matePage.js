@@ -116,7 +116,7 @@ function updateFilterVisualState() {
 			if (followBtn) {
 				const isFollowing = followBtn.classList.contains("following");
 				
-				fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${selectUno}&userUno=${myUno}`, {
+				fetch(`/mate/${isFollowing ? 'unfollow' : 'follow'}?uno=${mateItem.dataset.selectuno}&userUno=${mateItem.dataset.myuno}`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' }
 				})

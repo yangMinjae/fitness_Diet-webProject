@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MateDTO {
-	
+public class MateDTO {	
 	private UProfileVO pvo;
 	private ProfileDTO dto;
 	private MateVO mvo;

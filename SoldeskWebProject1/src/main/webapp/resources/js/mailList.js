@@ -11,8 +11,16 @@ CSS_FILE_PATH.forEach(css => {
 let fullMailList = [];
 let currentPage = 1;
 const pageSize = 10;
-let currentViewType = '/mail/recevier';
 let isReceiverView = true; // 기본값: 받은 메일 보기 상태
+
+//버튼
+document.querySelectorAll('button').forEach(button => {
+   button.addEventListener("click", function (e) {
+      if (e.target.classList.contains("send-mail-btn")) {
+         location.href = '/mail/sendMail';
+      }
+   });
+});
 
 // ===== 페이지 로딩 시 =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== 메일 리스트 로딩 =====
 function loadMailListByType(url, myUno) {
-	currentViewType = url;
 	isReceiverView = (url === '/mail/recevier'); // 받은 메일인지 여부 저장
 
 	fetch(url)
@@ -133,8 +140,8 @@ function readModal() {
 						document.getElementById('senderName').innerText = name;
 						document.getElementById('mailContent').innerText = content;
 						document.getElementById('regdate').innerText = formatDateToYMD(regdate);
-						setSendMyUno(item.dataset.myuno)
-						setSendSelectUno(item.dataset.selectuno)
+						setSendMyUno(item.dataset.myuno);
+						setSendSelectUno(item.dataset.selectuno);
 
 						document.getElementById('mailModal').classList.add('show');
 						item.classList.add('read');

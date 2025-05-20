@@ -1,4 +1,4 @@
-let profileSection = document.querySelector('.profile-section')
+let profileSection = document.querySelector('.profile-section');
 let friendSection = document.querySelector('.friend-section');
 let favSection = document.querySelector('.fav');
 let followSection = document.querySelector('.follow');
