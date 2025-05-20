@@ -86,20 +86,11 @@
 		<div id="sendWrapper" class="mate-slider-wrapper">
 			<section class="mate-scroll-section sendList">
 				<c:forEach var="mate" items="${mateList}">
-					<div id="eqTag" class="mate-item" 
-						data-time="${mate.mvo.time}"
-						data-gender="${mate.mvo.gender}" 
-						data-age="${mate.mvo.age}"
-						data-area="${mate.mvo.area}"
-						data-nickname="${mate.dto.nickname}"
-						data-tag="${mate.pvo.tag}"
-						data-selectuno="${mate.mvo.uno}"
-						data-myuno="${user.uno}"
-						data-checker="${mate.checker}">
+					<div class="mate-item" >
 															
 					<div class="mate-info" data-selectuno="${mate.mvo.uno}">					
 					  <!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
-					  <img src="/resources/img/tag/헬스키퍼.png" class="user-icon" />
+					  <img src="" src-data="${mate.dto.fvo.path}${'\\'}${mate.dto.fvo.uuid}_${mate.dto.fvo.fileName}" class="user-icon" />
 					  <p class="nickname">${mate.dto.nickname}</p>
 					  <p class="tag">#${mate.pvo.tag}</p>
 					  <p class="gender">성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>

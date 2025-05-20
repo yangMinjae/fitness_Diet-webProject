@@ -8,7 +8,7 @@ CSS_FILE_PATH.forEach(css => {
 });
 
 const profileModal = document.getElementById("profileModal");
-
+setImages();
 // 필터링
 document.addEventListener("DOMContentLoaded", function () {
 	const timeFilter = document.getElementById("fileterTime");
@@ -244,3 +244,13 @@ document.addEventListener("keydown", (e) => {
 		}
 	}
 });
+
+function setImages(){
+	document
+	.querySelectorAll('.user-icon')
+	.forEach(ele=>{
+		let srcPath = ele.getAttribute('src-data');
+		srcPath = srcPath.substring(srcPath.indexOf("\\profile")).replace(/\\/g, "/");
+		ele.setAttribute('src',srcPath);
+	})
+}
