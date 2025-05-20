@@ -182,6 +182,7 @@
 	  </div>
 	</div>
 	<jsp:include page="../user/region.jsp" />
+	<jsp:include page="profileViewModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/region.js"></script>

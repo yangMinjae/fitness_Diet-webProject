@@ -1,11 +1,11 @@
 // 1. 파일 경로 설정
-const CSS_FILE_PATH = '/resources/css/region.css';
+const CSS_FILE_PATH_REGION = '/resources/css/region.css';
 // 2. link 태그 생성
-let linkEle = document.createElement('link');
-linkEle.rel = 'stylesheet';
-linkEle.href = CSS_FILE_PATH;
+let linkEleRegion = document.createElement('link');
+linkEleRegion.rel = 'stylesheet';
+linkEleRegion.href = CSS_FILE_PATH_REGION;
 // 3. head 태그에 link 엘리먼트 추가
-document.head.appendChild(linkEle);
+document.head.appendChild(linkEleRegion);
 
 const regionData = {
 	"경기도" : [
@@ -52,7 +52,7 @@ const regionData = {
 const doListElem = document.getElementById("doList");
 const siListElem = document.getElementById("siList");
 const resultDisplay = document.getElementById("result");
-const closeBtn = document.getElementById("closeBtn");
+const closeBtnRegoin = document.getElementById("closeBtn");
 const modal = document.getElementById("regionModal");
 const searchInput = document.getElementById("searchInput");
 
@@ -142,6 +142,6 @@ function renderGlobalResults(list) {
 }
 
 // 모달 닫기
-closeBtn.onclick = () => {
+closeBtnRegoin.onclick = () => {
 	closeModal();
 };

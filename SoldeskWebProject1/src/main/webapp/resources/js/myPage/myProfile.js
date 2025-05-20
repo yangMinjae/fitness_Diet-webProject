@@ -1,10 +1,11 @@
-//----------------css스타일--------------------------------
-let link = document.createElement('link');
-link.setAttribute('rel','stylesheet');
-link.setAttribute('type','text/css');
-link.setAttribute('href','/resources/css/myPage.css');
-document.head.appendChild(link);
-//--------------------------------------------------------
+//-----CSS 파일 추가
+const CSS_FILE_PATH = ['/resources/css/myPage.css', '/resources/css/profileView.css'];
+CSS_FILE_PATH.forEach(css => {
+	let linkEle = document.createElement('link');
+	linkEle.rel = 'stylesheet';
+	linkEle.href = css;
+	document.head.appendChild(linkEle);
+});
 
 let showArea = document.querySelector('#showArea');
 

@@ -7,7 +7,7 @@ CSS_FILE_PATH.forEach(css => {
 	document.head.appendChild(linkEle);
 });
 
-const modal = document.getElementById("profileModal");
+const profileModal = document.getElementById("profileModal");
 
 // 필터링
 document.addEventListener("DOMContentLoaded", function () {
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.querySelectorAll(".mate-info").forEach(item => {
 	  item.addEventListener("click", function(event) {	
 		  setSelectUno(item.dataset.selectuno);
-		  modal.classList.add("show");
+		  profileModal.classList.add("show");
 	  });
 });
 
