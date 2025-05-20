@@ -70,6 +70,14 @@
 		      <option value="40대 이상">40대 이상</option>
 		    </select>
 		    
+		    <select id="filterRegion1">
+			  <option value="">도 선택</option>
+			</select>
+			
+			<select id="filterRegion2">
+			  <option value="">시/군/구 선택</option>
+			</select>
+			
 	  		<div class="reset-btn-wrap">
 	    		<button type="button" id="resetBtn">초기화</button>
 	  		</div>
