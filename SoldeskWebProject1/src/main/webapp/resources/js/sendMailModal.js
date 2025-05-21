@@ -8,8 +8,6 @@
 		
 		// 보내기 버튼
 		if (e.target.classList.contains('sendMail')) {
-			console.log(sendSelectUno);
-			console.log(snedMyUno);
 			let content = document.getElementById('mailInput').value;
 			
 			if (confirm("쪽지를 보내시겠습니까?")) {
