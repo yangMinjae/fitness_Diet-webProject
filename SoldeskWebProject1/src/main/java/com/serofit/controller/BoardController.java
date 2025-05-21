@@ -121,6 +121,7 @@ public class BoardController {
 	@GetMapping("/boardView")
 	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response
 			, Authentication authentication) {
+		
 		log.info("boradView...!!");
 		// dno로 식단정보 가져오기
 		BoardViewDTO bvDTO = bService.getPost(bno);
@@ -144,7 +145,7 @@ public class BoardController {
 	            dietDetailHtml = "<div id=\"dietDetail\">" + cleanedHtml + "</div>";
 	        }
 	    }
-
+	    System.out.println(dietDetailHtml);
 	    model.addAttribute("dietContent", dietDetailHtml);
 		
 		

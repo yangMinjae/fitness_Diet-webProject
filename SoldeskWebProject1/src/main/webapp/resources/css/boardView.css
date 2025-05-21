@@ -2,8 +2,9 @@ body {
   background-color: #f4f8f4;
   color: #333;
 }
+
 .post-container {
-  max-width: 1000px;           /* ✅ 넓게 */
+  max-width: 1000px;
   margin: 60px auto;
   padding: 40px;
   background-color: #fff;
@@ -48,18 +49,18 @@ body {
   margin-right: 12px;
 }
 
-.post-nickname:hover{
-	color:black;
-	cursor: pointer;
+.post-nickname:hover {
+  color: black;
+  cursor: pointer;
 }
 
-/* 본문 콘텐츠 */
+/* 공통 본문 콘텐츠 */
 .post-content {
   font-size: 1.05rem;
   min-height: 400px;
   line-height: 1.9;
   color: #333;
-  padding: 40px 30px;          /* ✅ 좌우 padding 줄임 */
+  padding: 40px 30px;
   background-color: #f3fbf3;
   border-radius: 16px;
   border: 1px solid #d2e8d2;
@@ -70,6 +71,18 @@ body {
   box-sizing: border-box;
 }
 
+/* ✅ 사용자 본문 내용 스크롤 처리 */
+.user-content .post-content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* ✅ 식단 내용 스크롤 처리 */
+.diet-content .post-content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 /* 첨부 이미지 */
 .uploadedImg {
   max-width: 30%;
@@ -77,7 +90,7 @@ body {
   margin: 10px 8px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);  
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   vertical-align: top;
 }
 
@@ -103,49 +116,52 @@ body {
   transform: scale(1.1);
 }
 
+/* 닉네임 팝업 */
 .nickname-popup {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-    padding: 0;
-    z-index: 1000;
-    border-radius: 5px;
-    width: 150px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  padding: 0;
+  z-index: 1000;
+  border-radius: 5px;
+  width: 150px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 
 .nickname-popup ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nickname-popup li {
-    border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .nickname-popup li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .nickname-popup a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-    transition: background 0.2s ease;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s ease;
 }
 
 .nickname-popup a:hover {
-    background-color: #f0f0f0;
-    color: #007BFF;
+  background-color: #f0f0f0;
+  color: #007BFF;
 }
 
 .nickname-popup.hidden {
-    display: none;
+  display: none;
 }
+
+/* 접었다 펼쳤다 버튼 */
 .toggle-btn {
   background: none;
   border: none;
@@ -157,6 +173,7 @@ body {
   border-radius: 12px;
   transition: background 0.3s ease;
 }
+
 .toggle-btn:hover {
   background-color: #e9f4e9;
 }
@@ -167,12 +184,12 @@ body {
   transition: max-height 0.5s ease;
 }
 
-/* 접힌 상태 (높이 0) */
+/* 접힌 상태 */
 .diet-wrapper.collapsed {
   max-height: 0;
 }
 
-/* 펼친 상태 (충분히 크게 설정) */
+/* 펼친 상태 */
 .diet-wrapper.expanded {
-  max-height: 1500px; /* 충분히 큰 값으로 설정 */
+  max-height: 1500px;
 }
