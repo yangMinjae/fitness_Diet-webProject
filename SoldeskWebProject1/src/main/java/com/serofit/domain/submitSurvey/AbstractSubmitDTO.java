@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
 
 public abstract class AbstractSubmitDTO {
-
+	
     private SubmitCommonDTO cDTO = new SubmitCommonDTO();
     
     

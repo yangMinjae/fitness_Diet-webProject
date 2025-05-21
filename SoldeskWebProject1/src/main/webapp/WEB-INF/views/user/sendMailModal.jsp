@@ -28,9 +28,6 @@
 				<div class="modal-footer">
 					<button class="sendMail" id="replyBtn">✉️ 보내기</button>
 				</div>
-				
-				<span class="selectUno" hidden="true" id="selectUno"></span>
-				<span class="myUno" hidden="true" id="myUno"></span>
 			</div>
 		</div>
 </body>

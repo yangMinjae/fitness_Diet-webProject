@@ -96,13 +96,15 @@ public class MyPageServiceImpl implements MyPageService{
 		UProfileVO upVO = upMapper.selectByUno(uno);
 		String nickname = uMapper.readNickname(uno);
 		int fCount = followMapper.getCountFollwer(uno);
-		System.out.println(fCount);
+		FileVO fvo = fileMapper.selectUprofileFile(upVO.getUuid());
 		
 		pmDTO.setBList(bList);
 		pmDTO.setFCount(fCount);
 		pmDTO.setNickname(nickname);
 		pmDTO.setUpvo(upVO);
 		pmDTO.setUno(uno);
+		pmDTO.setFvo(fvo);
+		
 		return pmDTO;
 	}
 	

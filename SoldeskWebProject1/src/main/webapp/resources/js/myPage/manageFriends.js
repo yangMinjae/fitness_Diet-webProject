@@ -3,6 +3,7 @@ let followBody = document.querySelector('#followBody');
 let followerBody = document.querySelector('#followerBody');
 
 let uno = f.elements['uVO.uno'].value;      // 시큐리티 구현시 수정
+const profileModal = document.getElementById("profileModal");
 
 initFriendsList();							// 최초 로드시 목록 초기화
 
@@ -28,7 +29,6 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 	    .then(json => {
 	      let str = '';
 	      json.forEach(ele => {
-	    	console.log(ele);
 			let result = ele.fvo.path.substring(ele.fvo.path.indexOf("\\profile"))+'\\'+ele.fvo.uuid+'_'+ele.fvo.fileName;
 			result = result.replace(/\\/g, "/");
 	        const { nickname, fav, uno: targetUno } = ele;
@@ -40,7 +40,7 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 		        		<td class="tblImgSection">
 					    	<img src="${result}" class="smallProfileImg" alt="프로필">
 					    </td>
-					    <td class="tblNicknameSection">
+					    <td class="tblNicknameSection" data-catcher="${targetUno}">
 					    	${nickname}
 					    </td>`;
 	        
@@ -167,8 +167,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	        e.target.closest('.tblImgSection') || e.target.closest('.tblNicknameSection');
 
 	      if (isProfileClick) {
-	        const nickname = clickedRow.querySelector('.tblNicknameSection').innerText.trim();
-	        alert(`프로필 클릭됨: ${nickname}`);
+	        const uno = clickedRow.querySelector('.tblNicknameSection').dataset.catcher;
+	        setSelectUno(uno);
+	        profileModal.classList.add("show");
 	      }
 	    });
 	  });

@@ -10,10 +10,6 @@
 <body class="mate-page">
 	<jsp:include page="../layout/header.jsp" />
 	
-	<div class="scroll-end-overlay" id="scrollEndOverlay">
-	  <div class="scroll-end-message">마지막 데이터입니다.</div>
-	</div>
-	
 	<!-- 왼쪽 리모컨 스타일 사이드바 -->
 	<div class="page-wrapper">
 		<main class="content-main">
@@ -30,7 +26,7 @@
 			</div>
 		    <p class="scroll-guide-text">휠을 위아래로 움직이면 옆으로 이동할 수 있어요!</p>
 		    <div class="scroll-guide-buttons">
-			  <button id="scrollGuideNever">다시 보지 않기</button>
+			  <button id="scrollGuideNever">하루 동안 보지 않기</button>
 			  <button id="scrollGuideConfirm">확인</button>
 			</div>
 		  </div>
@@ -74,6 +70,14 @@
 		      <option value="40대 이상">40대 이상</option>
 		    </select>
 		    
+		    <select id="filterRegion1">
+			  <option value="">도 선택</option>
+			</select>
+			
+			<select id="filterRegion2">
+			  <option value="">시/군/구 선택</option>
+			</select>
+			
 	  		<div class="reset-btn-wrap">
 	    		<button type="button" id="resetBtn">초기화</button>
 	  		</div>
@@ -86,20 +90,20 @@
 		<div id="sendWrapper" class="mate-slider-wrapper">
 			<section class="mate-scroll-section sendList">
 				<c:forEach var="mate" items="${mateList}">
-					<div id="eqTag" class="mate-item" 
-						data-time="${mate.mvo.time}"
-						data-gender="${mate.mvo.gender}" 
-						data-age="${mate.mvo.age}"
-						data-area="${mate.mvo.area}"
-						data-nickname="${mate.dto.nickname}"
-						data-tag="${mate.pvo.tag}"
-						data-selectuno="${mate.mvo.uno}"
-						data-myuno="${user.uno}"
-						data-checker="${mate.checker}">
-															
+					<div class="mate-item" 
+					data-selectuno="${mate.mvo.uno}"
+					data-myuno="${user.uno}"
+                  	data-time="${mate.mvo.time}"
+                  	data-gender="${mate.mvo.gender}" 
+                  	data-age="${mate.mvo.age}"
+                 	data-area="${mate.mvo.area}"
+                  	data-nickname="${mate.dto.nickname}"
+                  	data-tag="${mate.pvo.tag}"
+                  	data-checker="${mate.checker}">
+                  			
 					<div class="mate-info" data-selectuno="${mate.mvo.uno}">					
 					  <!--"실제 경로로 변경하기 !!!!!!!!!!!!!!!!!!!!!!!! /upload/${mate.dto.fvo.uuid}"-->
-					  <img src="/resources/img/tag/헬스키퍼.png" class="user-icon" />
+					  <img src="" src-data="${mate.dto.fvo.path}${'\\'}${mate.dto.fvo.uuid}_${mate.dto.fvo.fileName}" class="user-icon" />
 					  <p class="nickname">${mate.dto.nickname}</p>
 					  <p class="tag">#${mate.pvo.tag}</p>
 					  <p class="gender">성별 : ${mate.mvo.gender eq 'true' ? '남자' : '여자'}</p>
@@ -123,7 +127,7 @@
 					
 					<!-- 숨김 데이터 -->
 					<span class="tag" hidden="true">${mate.pvo.tag}</span>
-					<span class="userTag" hidden="true">${user.tag}</span>		
+					<span class="userTag" hidden="true">${user.tag}</span>
 					</div>
 				</c:forEach>
 			</section>

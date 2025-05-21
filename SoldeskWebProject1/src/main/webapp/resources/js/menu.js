@@ -39,14 +39,6 @@ document.querySelectorAll('p').forEach(p=>{
 			case 'myPage' :
 				location.href = '/myPage';
 				break;
-			// 회원 정보 수정
-			case 'modifyPage' :
-				console.log("modifyPage");
-				break;
-			// 로그 아웃
-			case 'logout' :
-				console.log("logout");
-				break;
 		}
 	});
 });

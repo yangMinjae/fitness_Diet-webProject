@@ -30,11 +30,9 @@ public class CustomUserDetailService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		log.warn("load user by userName : "+username);
 		UserVO uvo = uMapper.read(username);
 		int mailCount = mMapper.selectMailCountByReceiver(uvo.getUno());
 		int mateChecker = upMapper.selectByUno(uvo.getUno()).getMate();
-		log.warn("member mapper : "+uvo);
 		return uvo == null ? null : new CustomUser(uvo, mailCount, mateChecker);
 	}
 }

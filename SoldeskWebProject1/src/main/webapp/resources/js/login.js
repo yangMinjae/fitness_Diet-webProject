@@ -21,7 +21,6 @@ const inputFieldID = document.querySelector("input[name=username]");
 const inputFieldPW = document.querySelector("input[name=password]");
 
 let f = document.forms[0];
-let btnSubmit = document.querySelector('.login-submit');
 
 document
 .querySelectorAll('a')
@@ -40,49 +39,12 @@ document
   })
 });
 
-//btnSubmit.addEventListener('click', (e)=>{
-//  console.log('로그인 버튼');
-//  if(!regExpId.test(f.username.value)){
-//    alert('올바른 형식의 아이디를 입력해주세요\n(숫자와 영소문자로만 구성된 3~12자)');
-//    f.username.focus();
-//    return;
-//  }
-//  if(!regExpPw.test(f.password.value)){
-//    alert('올바른 형식의 비밀번호를 입력해주세요\n(숫자와 영문자로만 구성된 8~16자)');
-//    f.password.focus();
-//    return;
-//  }
-//  //login();
-//})
-
-function login(){
- /* fetch('/sign/login',{
-    method : 'post',
-    body:JSON.stringify({
-      username : f.username.value,
-      password : f.password.value
-    }),
-    headers : {
-      'Content-Type' : 'application/json; charset=utf-8'
-    }
-  })
-  .then(res=>res.text())
-  .then(text=>{
-    if(text=='fail'){
-      alert('일치하는 회원정보가 존재하지 않습니다.');
-    }else if(regIsNum.test(text)){
-      sessionStorage.setItem('uno',text);
-      location.href='/'+'?uno='+sessionStorage.getItem('uno');
-    }
-  })*/
-}
-
-//회원 가입 모달 닫기
+//아이디 비밀번호 찾기 모달 닫기
 document.querySelector('#findIdModal .close-btn').addEventListener('click', () => {
 	findModal.classList.remove('show');
 });
 
-//정보창 모달 닫기
+// 아이디 비번 결과창 모달 닫기
 document.querySelector('#resultModal .close-btn').addEventListener('click', () => {
 	resultModal.classList.remove('show');
 	console.log(inputFieldID.value);

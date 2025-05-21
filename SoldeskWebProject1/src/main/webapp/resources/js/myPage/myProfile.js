@@ -1,10 +1,11 @@
-//----------------css스타일--------------------------------
-let link = document.createElement('link');
-link.setAttribute('rel','stylesheet');
-link.setAttribute('type','text/css');
-link.setAttribute('href','/resources/css/myPage.css');
-document.head.appendChild(link);
-//--------------------------------------------------------
+//-----CSS 파일 추가
+const CSS_FILE_PATH = ['/resources/css/myPage.css', '/resources/css/profileView.css'];
+CSS_FILE_PATH.forEach(css => {
+	let linkEle = document.createElement('link');
+	linkEle.rel = 'stylesheet';
+	linkEle.href = css;
+	document.head.appendChild(linkEle);
+});
 
 let showArea = document.querySelector('#showArea');
 
@@ -183,14 +184,14 @@ document.querySelectorAll('.button-grid button, .modal-footer button').forEach(b
 	    	f.basicImg.value=id;
 	    	myProfileImg.setAttribute('src',`/resources/img/basicProfileImg/${id}.png`);
 	    	f.uploadFile.value='';
-	        closeModal(); // 기본 이미지 선택 후 모달 닫기
+	    	closeProfileImgModal(); // 기본 이미지 선택 후 모달 닫기
 	        break;
 	      case 'directUp':
 	        closeModal();
 	        f.uploadFile.click();
 	        break;
 	      case 'close':
-	        closeModal(); // 닫기 버튼 클릭 시 모달 닫기
+	    	  closeProfileImgModal(); // 닫기 버튼 클릭 시 모달 닫기
 	        break;
 	      default:
 	        console.warn('알 수 없는 버튼 ID:', id);
@@ -203,24 +204,25 @@ const modalOverlay = document.getElementById('modalOverlay');
 const imgEditBtn = document.getElementById('imgEditBtn');
 
 // 모달 열기 함수
-function openModal() {
+function openProfileImgModal() {
 	modalOverlay.style.display = 'flex';
 }
 
 // 모달 닫기 함수
-function closeModal() {
+function closeProfileImgModal() {
 	modalOverlay.style.display = 'none';
 }
 
 // 기어 버튼 클릭 → 모달 열기
 imgEditBtn.addEventListener('click', () => {
-  openModal();
+	openProfileImgModal();
 });
 
 //직접 업로드된 이미지 미리보기
 f.uploadFile.addEventListener('change', function(e) {
 	  f.basicImg.value='';
 	  const file = e.target.files[0];
+	  	  
 	  if (file && file.type.startsWith("image/")) {
 	    const reader = new FileReader();
 	    reader.onload = function(event) {

@@ -49,7 +49,6 @@ document.querySelectorAll('button').forEach(btn => {
 	    	  getBoardListByTag("헬스키퍼");
 	        break; 
 	      case 'listByLike':
-				console.log("listByLike");
 				getBoardListByLove();
 	        break; 
 	      case 'writePostBtn':
@@ -59,7 +58,7 @@ document.querySelectorAll('button').forEach(btn => {
 	  })
 	})
 // 전체리스트보여주기 (버튼눌렀을때 비동기로)
-	function getAllBoardList(posts) {
+function getAllBoardList(posts) {
    allPosts = posts;
 	 filteredPosts = [...allPosts]; 
    currentPage = 1;
@@ -120,7 +119,6 @@ function formatDateToYMD(dateString) {
 	const day = ('0' + date.getDate()).slice(-2);
 	return `${year}-${month}-${day}`;
 }
-
 
 // 게시글 작성 하러 갈때 dno 있는지 확인하고 없으면 설문하러 갈건지 confirm
 function checkHasDiet() {

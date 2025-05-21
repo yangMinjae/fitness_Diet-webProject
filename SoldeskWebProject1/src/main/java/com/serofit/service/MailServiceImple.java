@@ -80,9 +80,42 @@ public class MailServiceImple implements MailService {
 			rmDTO.setMno(mvo.getMno());
 			rmDTO.setHit(mvo.getHit());
 			rmList.add(rmDTO);
-			
 		}
+		return rmList;
+	}
+	
+	// 보낸 메일 목록 가져오기
+	@Override
+	public List<ReceiveMailDTO> selectBySender(int sender) {
+		// DTOList
+		List<ReceiveMailDTO> rmList = new ArrayList<ReceiveMailDTO>();
 		
+		// 보낸 메일 가져오기
+		List<MailVO> mList = mMapper.selectBySender(sender);
+		
+		for (MailVO mvo : mList) {
+			// DTO 생성
+			ReceiveMailDTO rmDTO = new ReceiveMailDTO();
+			
+			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
+			UProfileVO upVO = upMapper.selectByUno(mvo.getReceiver());
+			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
+			rmDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
+			
+			// DTO에 변수 설정
+			rmDTO.setUno(mvo.getReceiver());
+			rmDTO.setNickname(uMapper.readNickname(mvo.getReceiver()));
+			if(mvo.getContent().length() > 15) {
+				rmDTO.setPreview(mvo.getContent().substring(0, 15));
+			}else {
+				rmDTO.setPreview(mvo.getContent());
+			}
+			rmDTO.setContent(mvo.getContent());
+			rmDTO.setRegdate(mvo.getRegdate());
+			rmDTO.setMno(mvo.getMno());
+			rmDTO.setHit(mvo.getHit());
+			rmList.add(rmDTO);
+		}
 		return rmList;
 	}
 	

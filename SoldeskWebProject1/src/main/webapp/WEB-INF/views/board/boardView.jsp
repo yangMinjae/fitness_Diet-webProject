@@ -21,8 +21,14 @@
 			
 			  <div class="post-meta-line">
 			    <div class="post-meta-left">
-			      <span>${bvDTO.nickname}</span> | <span>${bvDTO.regdate}</span>
+			      <span class="post-nickname" id="post-Nickname">${bvDTO.nickname}</span> | <span>${bvDTO.regdate}</span>
 			    </div>
+			    <div id="nickname-popup" class="nickname-popup hidden">
+				    <ul>
+				        <li id="show-profile" data-uno="${bvDTO.uno}"><a href="">프로필 보기</a></li>
+				        <li id="send-mail" data-uno="${bvDTO.uno}"><a href="">메일 보내기</a></li>
+				    </ul>
+				</div>
 			    <div class="post-meta-right">
 			      	조회 : <span>${bvDTO.hit}</span> | 추천 : <span>${bvDTO.love}</span>
 			    </div>
@@ -57,6 +63,7 @@
 		</sec:authorize>
 	</form>	
 	
+	<jsp:include page="../user/profileViewModal.jsp" />
 	<jsp:include page="../layout/footer.jsp" />
 </body>
 <script type="text/javascript" src="/resources/js/boardView.js"></script>

@@ -9,6 +9,11 @@
 		SELECT * FROM tbl_mail WHERE receiver=#{receiver} ORDER BY REGDATE DESC
 	</select>
 	
+	<!-- 보낸 사람 기준으로 메일 불러오기 -->
+	<select id="selectBySender" resultType="com.serofit.domain.MailVO" parameterType="int">
+		SELECT * FROM tbl_mail WHERE sender=#{sender} ORDER BY REGDATE DESC
+	</select>
+	
 	<!-- 메일 보내기 -->
 	<insert id="insertMail" parameterType="com.serofit.domain.MailVO">
 		INSERT INTO tbl_mail
