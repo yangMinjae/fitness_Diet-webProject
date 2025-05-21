@@ -71,17 +71,12 @@ body {
   box-sizing: border-box;
 }
 
-/* ✅ 사용자 본문 내용 스크롤 처리 */
-.user-content .post-content {
-  max-height: 400px;
+/* ✅ 식단 내용만 길이 제한 + 스크롤 */
+.diet-content .post-content {
+  max-height: 1300px; /* ← 이 값을 자유롭게 조절하세요! */
   overflow-y: auto;
 }
 
-/* ✅ 식단 내용 스크롤 처리 */
-.diet-content .post-content {
-  max-height: 400px;
-  overflow-y: auto;
-}
 
 /* 첨부 이미지 */
 .uploadedImg {
@@ -184,12 +179,10 @@ body {
   transition: max-height 0.5s ease;
 }
 
-/* 접힌 상태 */
 .diet-wrapper.collapsed {
   max-height: 0;
 }
 
-/* 펼친 상태 */
 .diet-wrapper.expanded {
   max-height: 1500px;
 }
