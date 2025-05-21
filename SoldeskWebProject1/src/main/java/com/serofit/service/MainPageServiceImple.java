@@ -54,8 +54,8 @@ public class MainPageServiceImple implements MainPageService{
 			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(boardVO.getUno());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
-			hbDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
-			
+			hbDTO.setImgPath(fVO.getPath().substring(fVO.getPath().indexOf("\\profile")).replace("\\", "/") + "/" + fVO.getUuid() + "_" + fVO.getFileName());
+			System.out.println(hbDTO.getImgPath());
 			// 식단 태그 가져오기
 			DietVO dVO = dMapper.selectDietByDno(boardVO.getDno());
 			hbDTO.setTag(dVO.getTag());

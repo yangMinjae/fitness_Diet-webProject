@@ -1,63 +1,80 @@
 #loadingModal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(245, 243, 255, 0.9); /* 연보라 파스텔 */
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(244, 248, 244, 0.6); /* 부드러운 연녹 배경 + 투명도 */
   z-index: 9999;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
-/* 모달 중앙 영역 */
-.modal-background {
+/* 배경 정렬 */
+.loading-modal-background {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
 
-.modal-content {
-  text-align: center;
-  background: white;
-  padding: 40px;
+/* 중앙 모달 */
+.loading-modal-content {
+  background: rgba(255, 255, 255, 0.9); /* 흰색에 가까운 밝은 반투명 */
+  color: #5d6b60;
+  padding: 48px 36px;
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  width: 400px;
-  animation: fadeIn 1s ease-in-out;
+  border: 2px solid #bfe7dc;
+  box-shadow: 0 8px 24px rgba(160, 200, 180, 0.3);
+  width: 340px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: loadingFadeIn 0.6s ease;
+  box-sizing: border-box;
 }
 
-/* 로딩 스피너 */
-.spinner {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 20px auto;
-  border: 10px solid #ddd;
-  border-top: 10px solid #a3d5ff;
+/* 스피너 */
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 24px auto;
+  border: 6px solid #e1f3ed;
+  border-top: 6px solid #7dd5c3;
   border-radius: 50%;
-  animation: spin 1.2s linear infinite;
+  animation: loadingSpin 1.1s linear infinite;
 }
 
-/* 깜빡이는 텍스트 */
+/* 텍스트 */
 .loading-text {
-  font-size: 20px;
-  font-weight: bold;
-  color: #666;
-  animation: blink 1.5s infinite;
+  font-size: 17px;
+  font-weight: 500;
+  color: #4d5a63;
+  letter-spacing: 0.4px;
+  animation: loadingBlink 1.5s infinite;
 }
 
-/* 애니메이션 정의 */
-@keyframes spin {
+/* CRT 선 대신 부드러운 흐림 효과 */
+.loading-modal-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.15), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 애니메이션 */
+@keyframes loadingSpin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-@keyframes blink {
+@keyframes loadingBlink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.6; }
 }
 
-@keyframes fadeIn {
+@keyframes loadingFadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1); }
 }

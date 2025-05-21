@@ -40,16 +40,13 @@
 					    data-selectuno="${mvo.uno}"
 					    data-myuno="${uno}"
 					    data-mno="${mvo.mno}">
-						<div class="profile-icon">
-							<img src="/resources/img/tag/다이어터.png" alt="프로필" />
-						</div>
 						<div class="mail-info">
 							<span class="sender">${mvo.nickname}</span> 
 							<span class="preview">${mvo.preview}</span>
 							<span class="regdate">${mvo.regdate}</span>
 						</div>
 					</li>
-				</c:forEach>
+				</c:forEach> 
 			</ul>
 			
 			<!-- ✅ 페이징 위치는 여기 -->

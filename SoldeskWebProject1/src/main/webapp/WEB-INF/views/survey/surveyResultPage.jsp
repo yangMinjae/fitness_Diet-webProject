@@ -28,6 +28,7 @@
 		<input type="hidden" name="tag" value="${goal}">
 		<input type="hidden" name="content" value="">
 	</form>
+	<div id="pdfContainer" style="display: none;"></div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script type="text/javascript" src="/resources/js/surveyResultPage.js"></script>

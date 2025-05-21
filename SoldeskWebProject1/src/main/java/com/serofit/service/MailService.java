@@ -26,4 +26,5 @@ public interface MailService {
 	
 	// 메일 안 읽은 수 가져오기
 	public int selectMailCountByReceiver(int receiver);
+	
 }

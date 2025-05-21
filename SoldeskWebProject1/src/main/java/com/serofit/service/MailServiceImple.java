@@ -65,7 +65,7 @@ public class MailServiceImple implements MailService {
 			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(mvo.getSender());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
-			rmDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
+			rmDTO.setImgPath(fVO.getPath().substring(fVO.getPath().indexOf("\\profile")).replace("\\", "/") + "/" + fVO.getUuid() + "_" + fVO.getFileName());
 
 			// DTO에 변수 설정
 			rmDTO.setUno(mvo.getSender());
@@ -100,7 +100,7 @@ public class MailServiceImple implements MailService {
 			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(mvo.getReceiver());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
-			rmDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
+			rmDTO.setImgPath(fVO.getPath().substring(fVO.getPath().indexOf("\\profile")).replace("\\", "/") + "/" + fVO.getUuid() + "_" + fVO.getFileName());
 			
 			// DTO에 변수 설정
 			rmDTO.setUno(mvo.getReceiver());
@@ -132,7 +132,7 @@ public class MailServiceImple implements MailService {
 			// Uno 통해서 Uuid 가져 온 후 FilePath 생성
 			UProfileVO upVO = upMapper.selectByUno(fvo.getCatcher());
 			FileVO fVO = fMapper.selectUprofileFile(upVO.getUuid());
-			fmDTO.setImgPath(fVO.getUuid() + fVO.getFileName() + fVO.getPath());
+			fmDTO.setImgPath(fVO.getPath().substring(fVO.getPath().indexOf("\\profile")).replace("\\", "/") + "/" + fVO.getUuid() + "_" + fVO.getFileName());
 
 			// DTO에 변수 설정
 			fmDTO.setNickname(uMapper.readNickname(fvo.getCatcher()));

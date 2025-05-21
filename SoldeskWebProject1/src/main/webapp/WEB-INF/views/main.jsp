@@ -90,7 +90,7 @@
 		        <h3>${hbdto.title}</h3>
 		        <p>${hbdto.tag}</p>
 		        <div class="post-meta">
-		          <img src="/resources/img/tag/다이어터.png" alt="프로필" />
+		          <img src="${hbdto.imgPath}" alt="프로필" />
 		          <span>${hbdto.nickname}</span> · 
 		          <span>${hbdto.regdate}</span>
 		        </div>

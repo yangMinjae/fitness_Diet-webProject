@@ -14,7 +14,7 @@
 		
 				<!-- 상단: 프로필 이미지 + 이름 -->
 				<div class="modal-header">
-				  <img id="profilePhoto" src="/resources/img/tag/다이어터.png" alt="프로필 사진">
+				  <img id="profilePhoto" src="" alt="프로필 사진">
 				  <div class="header-main">
 				    <h2 id="senderName"></h2>
 				  </div>

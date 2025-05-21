@@ -81,7 +81,7 @@ function renderPage(page) {
 			data-myuno="${myUno}"
 			data-mno="${mvo.mno}">
 			<div class="profile-icon">
-				<img src="/resources/img/tag/다이어터.png" alt="프로필" />
+				<img src="${mvo.imgPath}" alt="프로필" />
 			</div>
 			<div class="mail-info">
 				<span class="sender">${mvo.nickname}</span> 
@@ -132,14 +132,17 @@ function readModal() {
 			const content = item.dataset.content;
 			const mno = item.dataset.mno;
 			const regdate = item.dataset.regdate;
-			
+			const imgPath = item.dataset.photo;
+			console.log(imgPath);
 			fetch(`/mail/updateByReadMail?mno=${mno}`, { method: 'GET' })
 				.then(res => res.json())
 				.then(data => {
+					console.log(data);
 					if (data.status === 'success') {
 						document.getElementById('senderName').innerText = name;
 						document.getElementById('mailContent').innerText = content;
 						document.getElementById('regdate').innerText = formatDateToYMD(regdate);
+						document.getElementById('profilePhoto').setAttribute('src',imgPath);
 						setSendMyUno(item.dataset.myuno);
 						setSendSelectUno(item.dataset.selectuno);
 
