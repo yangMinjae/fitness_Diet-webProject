@@ -146,3 +146,33 @@ body {
 .nickname-popup.hidden {
     display: none;
 }
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #2d624a;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin: 10px 0 20px 0;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+.toggle-btn:hover {
+  background-color: #e9f4e9;
+}
+
+/* 애니메이션용 wrapper */
+.diet-wrapper {
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+/* 접힌 상태 (높이 0) */
+.diet-wrapper.collapsed {
+  max-height: 0;
+}
+
+/* 펼친 상태 (충분히 크게 설정) */
+.diet-wrapper.expanded {
+  max-height: 1500px; /* 충분히 큰 값으로 설정 */
+}

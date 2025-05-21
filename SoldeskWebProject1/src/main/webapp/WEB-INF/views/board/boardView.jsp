@@ -32,8 +32,18 @@
 			    <div class="post-meta-right">
 			      	조회 : <span>${bvDTO.hit}</span> | 추천 : <span>${bvDTO.love}</span>
 			    </div>
-			  </div>			
-			  <div class="post-content">${bvDTO.content}</div>			  			
+			  </div>
+			  <!--  식단 접었다 펼쳤다 -->
+			  <button type="button" id="toggleDietContentBtn" class="toggle-btn">[+ 식단 내용 펼치기]</button>
+			  <div class="diet-wrapper collapsed" id="dietContentWrapper">
+				  <div class="diet-content">
+			  			<div class="post-content"><c:out value="${dietContent}" escapeXml="false" /></div>
+				  </div>
+			  </div>
+			  
+			  <div class="user-content">
+			  	<div class="post-content">${bvDTO.content}</div>
+			  </div>					  			
 			  <div class="icon-bar">
 				<sec:authorize access="isAuthenticated()">	
 					<c:if test="${isLike == 'true'}">

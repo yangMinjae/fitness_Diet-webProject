@@ -21,7 +21,7 @@
 	<select id="getPostList" resultType="com.serofit.domain.BoardVO">
 		SELECT *
 		FROM tbl_board
-		ORDER BY regdate DESC
+		ORDER BY bno DESC
 	</select>
 	
 	<!-- 게시글 불러오기 -->

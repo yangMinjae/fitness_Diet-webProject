@@ -39,25 +39,40 @@ document.getElementById("diet").addEventListener("change", function () {
 
   const selectedOption = this.options[this.selectedIndex];
 
-  const content = selectedOption.getAttribute("data-content");
+  const dietContent = selectedOption.getAttribute("data-content");
   const tag = selectedOption.getAttribute("data-tag");
   const dno = selectedOption.getAttribute("data-dno");
   const uno = selectedOption.getAttribute("data-uno");
-  
-  // 본문
-  document.getElementById("content").innerHTML = content;
-  // 태그
+
+  // DOMParser를 사용해서 문자열을 HTML로 파싱
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(dietContent, "text/html");
+
+  // id가 "dietDetail"인 요소만 추출
+  const dietDetail = doc.getElementById("dietDetail");
+
+  // dietDetail이 있으면 innerHTML로 표시
+  if (dietDetail) {
+    document.getElementById("dietContent").innerHTML = dietDetail.outerHTML;
+    document.getElementById("hiddenDietContent").value = dietDetail.outerHTML;
+  } else {
+    document.getElementById("dietContent").innerHTML = "식단 정보가 정확하지 않습니다";
+    document.getElementById("hiddenDietContent").value = "";
+  }
+
+  // 태그, dno, uno 설정
   document.getElementById("tag").value = tag;
-  // dno
   document.getElementById("dno").value = dno;
-  // uno
   document.getElementById("uno").value = uno;
 });
 
+
 // 업로드 버튼 클릭시 내용 있는지 검증 + 게시글 작성 완료
 function register() {
-  const html = document.getElementById('content').innerHTML;
-  document.getElementById('hiddenContent').value = html;
+  const userHtml = document.getElementById('content').innerHTML;
+ 
+  document.getElementById('hiddenContent').value = userHtml;
+
   
   if (!f.diet.value) {
 	    alert("식단을 선택해주세요");
@@ -155,6 +170,7 @@ function insertImgAtCursor(imgUrl) {
   const range = selection.getRangeAt(0);
 
   const contentDiv = document.getElementById('content');
+  const userInput = document.getElementById('userContent')
   
   // content 안에만 이미지 삽입
   if (!contentDiv.contains(range.startContainer)) return;

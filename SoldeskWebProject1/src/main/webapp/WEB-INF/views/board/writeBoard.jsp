@@ -43,14 +43,27 @@
 					name="title" placeholder="제목을 입력하세요"
 					value='${board.title != null ? board.title : "" }' />
 			</div>
-
-			<!-- 본문 입력 -->
+			<!-- 식단 내용 들어가는 곳 -->
 			<div class="form-group">
-				<label for="content">본문</label>
+				<label for="dietContent">식단 내용</label>
 				<div class="form-group">
-					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value='${board.content}' escapeXml="false" /></div>
+					<div id="dietContent" name="dietContent" class="content-input" contenteditable="false">
+						<c:out value='${dietContent}' escapeXml="false" />
+					</div>
 				</div>
-				<textarea id="hiddenContent" name="content" style="display: none;"><c:out value='${board.content}' escapeXml="false" /></textarea>
+				<textarea id="hiddenContent" name="content" style="display: none;"><c:out value='${diet.content}' escapeXml="false" /></textarea>
+			</div>
+			<!-- 유저가 직접 입력하는 영역 -->
+			<div class="input-group">
+				<label for="content">본문 내용</label>
+				<div class="form-group">
+					<div id="content" name="content" class="content-input" contenteditable="true">
+						 <c:out value='${board.content}' escapeXml="false" />
+					</div>
+				</div>
+				<textarea id="hiddenContent" name="content" style="display: none;">
+					<c:out value='${board.content}' escapeXml="false" />
+				</textarea>
 			</div>
 
 			<!-- 이미지 업로드 버튼 영역 -->
@@ -85,6 +98,7 @@
 				<input type="hidden" id="dno" name="dno" value="${board.dno}">
 				<input type="hidden" id="uno" name="uno" value="${board.uno}">
 			</c:if>
+			<input type="hidden" id="hiddenDietContent" name="dietContent" />
 		</form>
 	</div>
 

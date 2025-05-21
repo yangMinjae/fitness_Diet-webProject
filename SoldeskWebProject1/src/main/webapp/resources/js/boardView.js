@@ -18,6 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
 	const popup = document.getElementById('nickname-popup');
 	const profileModal = document.getElementById("profileModal");
 	
+	const toggleDietBtn = document.getElementById("toggleDietContentBtn");
+	const dietWrapper = document.getElementById("dietContentWrapper");
+	
+	if (toggleDietBtn  && dietWrapper) {
+			console.log("식단 펼치기 버튼 ")
+		  toggleDietBtn.addEventListener("click", () => {
+		    const isCollapsed = dietWrapper.classList.contains("collapsed");
+
+		    if (isCollapsed) {
+		      dietWrapper.classList.remove("collapsed");
+		      dietWrapper.classList.add("expanded");
+		      toggleDietBtn.textContent = "[- 식단 내용 접기]";
+		    } else {
+		      dietWrapper.classList.remove("expanded");
+		      dietWrapper.classList.add("collapsed");
+		      toggleDietBtn.textContent = "[+ 식단 내용 펼치기]";
+		    }
+		  });
+		}
+	
 	if(likeBtn){
 		likeBtn.addEventListener('click', function(){			  
 			  fetch('/board/boardView/love',{

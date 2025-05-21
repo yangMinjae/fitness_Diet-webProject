@@ -58,4 +58,10 @@ public class WriteBoardServiceImple implements WriteBoardService {
 		
 		return bvdto;
 	}
+	// 게시글 삽입시 dno로 식단내용 가져오기
+	@Override
+	public DietVO getDietByDno(int dno) {
+		
+		return dMapper.selectDietByDno(dno);
+	}
 }

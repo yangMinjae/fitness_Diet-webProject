@@ -16,4 +16,7 @@ public interface WriteBoardService {
 	
 	// 게시글 수정 시 기존 게시글 내용 가져오기
 	public BoardViewDTO getBoard(int bno);
+	
+	// 게시글 삽입시 dno로 식단내용 가져오기
+	public DietVO getDietByDno(int dno);
 }

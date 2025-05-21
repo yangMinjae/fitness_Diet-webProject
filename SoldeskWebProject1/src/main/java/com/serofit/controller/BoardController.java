@@ -7,6 +7,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -119,6 +122,31 @@ public class BoardController {
 	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response
 			, Authentication authentication) {
 		log.info("boradView...!!");
+		// dno로 식단정보 가져오기
+		BoardViewDTO bvDTO = bService.getPost(bno);
+	    model.addAttribute("bvDTO", bvDTO);
+	    
+		DietVO dvo = wbService.getDietByDno(bvDTO.getDno());
+
+	    String dietDetailHtml = "";
+	    
+	    if (dvo != null && dvo.getContent() != null) {
+	        Document doc = Jsoup.parse(dvo.getContent());
+	        Element dietDetail = doc.getElementById("dietDetail");
+
+	        if (dietDetail != null) {
+	            // 내용 정리: 불필요한 공백 줄이기
+	            String cleanedHtml = dietDetail.html()
+	                .replaceAll("\\s{2,}", " ")     // 2칸 이상 공백 → 1칸
+	                .replaceAll(">\\s+<", "><");    // 태그 사이 공백 제거
+
+	            // 다시 wrapper로 감싸기
+	            dietDetailHtml = "<div id=\"dietDetail\">" + cleanedHtml + "</div>";
+	        }
+	    }
+
+	    model.addAttribute("dietContent", dietDetailHtml);
+		
 		
 		// 1. 쿠키로 조회 체크
 	    String cookieName = "viewed_bno_" + bno;
@@ -198,17 +226,26 @@ public class BoardController {
 		return lvo.getBno();
 	}
 	
-
-	// 게시글 수정 페이지로 이동
 	@GetMapping("/updateBoard")
 	public String updateBoard(Authentication authentication, int bno, Model model) {
 		log.info("writePost .... ");		
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		BoardViewDTO bvdto = wbService.getBoard(bno);
 		List<DietVO> dvoList = wbService.getDietTitle(customUser.getUno());
+		DietVO dvo = wbService.getDietByDno(bvdto.getDno());
 		
-		model.addAttribute("board",bvdto);
-		model.addAttribute("dietList", dvoList);
+	    // HTML 파싱
+	    String dietDetailHtml = "";
+	    if (dvo != null && dvo.getContent() != null) {
+	        Document doc = Jsoup.parse(dvo.getContent());
+	        Element dietDetail = doc.getElementById("dietDetail");
+	        if (dietDetail != null) {
+	            dietDetailHtml = dietDetail.outerHtml();
+	        }
+	    }
+	    model.addAttribute("board", bvdto);
+	    model.addAttribute("dietList", dvoList);
+	    model.addAttribute("dietContent", dietDetailHtml);
 		
 		return "board/writeBoard";
 	}
