@@ -57,13 +57,9 @@
 			<div class="input-group">
 				<label for="content">본문 내용</label>
 				<div class="form-group">
-					<div id="content" name="content" class="content-input" contenteditable="true">
-						 <c:out value='${board.content}' escapeXml="false" />
-					</div>
+					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value='${board.content}' escapeXml="false" /></div>
 				</div>
-				<textarea id="hiddenContent" name="content" style="display: none;">
-					<c:out value='${board.content}' escapeXml="false" />
-				</textarea>
+				<textarea id="hiddenContent" name="content" style="display: none;"></textarea>
 			</div>
 
 			<!-- 이미지 업로드 버튼 영역 -->

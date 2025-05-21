@@ -111,7 +111,7 @@ public class BoardController {
 	@PostMapping("/writeBoard")
 	public String register(BoardVO bvo) {
 		log.info("Register...." + bvo);
-		
+		System.out.println("== 게시글 내용 (sysout): " + bvo.getContent());
 		wbService.register(bvo);
 		return "redirect:/boardList";
 	}

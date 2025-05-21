@@ -35,7 +35,7 @@ document.querySelectorAll('button').forEach(btn => {
 // 선택된 식단의 정보 가져오기
 document.getElementById("diet").addEventListener("change", function () {
   const selectDiet = this.value;
-  console.log("식단 이름:" + selectDiet);
+  console.log("식단 이름:" + selectDiet);  
 
   const selectedOption = this.options[this.selectedIndex];
 
@@ -70,7 +70,7 @@ document.getElementById("diet").addEventListener("change", function () {
 // 업로드 버튼 클릭시 내용 있는지 검증 + 게시글 작성 완료
 function register() {
   const userHtml = document.getElementById('content').innerHTML;
- 
+  console.log("userHtml : " + userHtml);    // 얘는 잘 찍히는데 왜 submit 할때 ,가 자꾸 뒤에 붙는데 뭐임
   document.getElementById('hiddenContent').value = userHtml;
 
   
