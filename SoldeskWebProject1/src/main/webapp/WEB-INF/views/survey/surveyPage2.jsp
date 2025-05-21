@@ -68,13 +68,13 @@
 					<label><input type="radio" name="cDTO.vegan" value="no" checked /> 아니오</label>
 				</div>
 			</section>
-			<section>
-				<label class="section-title">평소 식사량</label>
-				<div class="inline-group">
-					<label><input type="radio" name="cDTO.hit" value="2" /> 하루 2번</label>
-					<label><input type="radio" name="cDTO.hit" value="3" checked /> 하루 3번</label>
-				</div>
-			</section>
+		<section>
+			<label class="section-title">평소 식사량</label>
+			<div class="inline-group">
+				<label><input type="radio" name="cDTO.hit" value="2" /> 하루 2번</label>
+				<label><input type="radio" name="cDTO.hit" value="3" checked /> 하루 3번</label>
+			</div>
+		</section>
 			<section>
 				<label> 선호하는 운동  <select name="cDTO.favSport">
 						<option value="">-- 선택하세요 --</option>

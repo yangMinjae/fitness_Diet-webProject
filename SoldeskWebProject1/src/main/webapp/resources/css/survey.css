@@ -57,7 +57,6 @@ form section {
   border: 1px solid #e2e2e2;
 }
 
-/* 마지막 여백 조절 */
 form section:last-of-type {
   margin-bottom: 0;
 }
@@ -96,7 +95,7 @@ form input[type="checkbox"] {
   transform: scale(1.1);
 }
 
-/* === 라디오/체크박스 그룹 가로 나열용 === */
+/* === 라디오/체크박스 그룹 === */
 .inline-group {
   display: flex;
   flex-wrap: wrap;
@@ -108,6 +107,14 @@ form input[type="checkbox"] {
   display: inline-flex;
   align-items: center;
   margin-bottom: 0;
+}
+
+/* 특정 섹션에서 세로 정렬 */
+#gainSection .inline-group,
+.radio-group-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 /* === 제출 버튼 === */
@@ -158,7 +165,7 @@ button[type="submit"]:hover {
 /* === 지역 선택 인터페이스 === */
 .region-select-wrapper {
   display: flex;
-  flex-direction: column;     /* 전체는 수직 정렬 */
+  flex-direction: column;
   gap: 8px;
 }
 
@@ -194,4 +201,38 @@ button[type="submit"]:hover {
   font-family: inherit;
   line-height: 1.5;
   min-width: 120px;
+}
+
+.radio-group-vertical {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 8px;
+}
+
+.option-table {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.option-table td {
+	padding: 4px 12px; /* 기존 8px → 4px로 줄임 */
+	vertical-align: top;
+	width: 33.33%;
+}
+
+.option-table label {
+	display: inline-flex;
+	align-items: center;
+	font-size: 0.95rem;
+	line-height: 1.2; /* 수직 정렬 더 촘촘하게 */
+	margin: 2px 0;     /* 상하 여백 최소화 */
+}
+
+.section-title {
+	display: block;
+	font-weight: normal;
+	margin-bottom: 8px;
+	color: #333;
 }
