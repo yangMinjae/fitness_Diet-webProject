@@ -51,7 +51,6 @@
 						<c:out value='${dietContent}' escapeXml="false" />
 					</div>
 				</div>
-				<textarea id="hiddenContent" name="content" style="display: none;"><c:out value='${diet.content}' escapeXml="false" /></textarea>
 			</div>
 			<!-- 유저가 직접 입력하는 영역 -->
 			<div class="input-group">
