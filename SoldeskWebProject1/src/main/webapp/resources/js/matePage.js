@@ -235,6 +235,7 @@ function updateFilterVisualState() {
 				initMailModalContent();
 				initMailModalEvent();
 				document.getElementById('sendmailModal').classList.add('show');
+				document.body.classList.add('modal-open'); // ✅ 스크롤 차단
 				return;
 			}else{
 				return;

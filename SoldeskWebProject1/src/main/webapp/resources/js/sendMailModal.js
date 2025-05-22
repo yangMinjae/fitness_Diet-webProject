@@ -4,6 +4,7 @@
 		if (e.target.classList.contains('close-btn')) {
 			initMailModalContent();
 			document.getElementById('sendmailModal').classList.remove('show');
+			document.body.classList.remove('modal-open'); // ✅ 스크롤 차단 해제
 		};
 		
 		// 보내기 버튼
@@ -19,11 +20,13 @@
 				.then(data => {
 					if (data === 'true') {
 						document.getElementById('sendmailModal').classList.remove('show');
+						document.body.classList.remove('modal-open'); // ✅ 스크롤 차단 해제
 						
 						const profileModal = document.getElementById("find-profile-modal");
 						
 						if(!profileModal || !profileModal.classList.contains('show')){
-							document.getElementById('sendmailModal').classList.remove('show');	
+							document.getElementById('sendmailModal').classList.remove('show');
+							document.body.classList.remove('modal-open'); // ✅ 스크롤 차단 해제
 						}else{
 							profileModal.classList.remove('show');
 						}
