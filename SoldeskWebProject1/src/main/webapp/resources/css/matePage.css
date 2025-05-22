@@ -8,7 +8,7 @@ body {
 /* 전체 영역 */
 .mate-slider-wrapper {
   width: 1200px;  /* 기존 960px → 넓혀서 5개 넉넉히 들어가게 */
-  margin: 0 auto;
+  margin: 0px auto 130px auto;
   overflow: hidden;
 }
 
@@ -286,7 +286,7 @@ body {
 
 #sendEmptyMessage.empty-message {
   margin-top: 300px;
-  margin-bottom: 120px;
+  margin-bottom: 386px;
 }
 
 /* 메일 보내기 버튼 */
