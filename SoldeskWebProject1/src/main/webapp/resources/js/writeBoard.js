@@ -162,6 +162,24 @@ function createImageButton(event) {
   });
 }
 
+//제목 글자 수 제한
+const titleInput = document.getElementById('title');
+const titleCount = document.getElementById('titleCount');
+const MAX_TITLE_LENGTH = 100;
+
+titleInput.addEventListener('input', function () {
+  let currentText = this.value;
+
+  // 입력 제한: 100글자 초과 시 자르기
+  if (currentText.length > MAX_TITLE_LENGTH) {
+    this.value = currentText.substring(0, MAX_TITLE_LENGTH);
+    currentText = this.value; // 자른 후 다시 갱신
+  }
+
+  // 실시간 글자 수 표시
+  titleCount.textContent = `${currentText.length} / ${MAX_TITLE_LENGTH}`;
+});
+
 
 // 커서 위치에 이미지 삽입함수
 function insertImgAtCursor(imgUrl) {

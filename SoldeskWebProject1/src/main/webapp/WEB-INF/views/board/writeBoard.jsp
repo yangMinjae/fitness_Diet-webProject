@@ -39,9 +39,10 @@
 
 			<!-- 제목 입력 -->
 			<div class="form-group">
-				<label for="title">제목 :</label> <input type="text" id="title"
+				<label for="title">제목 :  </label> <input type="text" id="title"
 					name="title" placeholder="제목을 입력하세요"
 					value='${board.title != null ? board.title : "" }' />
+					<span id="titleCount">0 / 100</span>
 			</div>
 			<!-- 식단 내용 들어가는 곳 -->
 			<div class="form-group">

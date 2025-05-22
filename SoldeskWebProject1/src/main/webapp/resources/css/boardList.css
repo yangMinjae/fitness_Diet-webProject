@@ -96,26 +96,32 @@ body {
   border-bottom: 1px solid #d9e6d9;
 }
 
-/* 각 열 너비 고정 */
+/* 게시글 제목, 글쓴이, 등록일, 조회수, 추천수, 간격 조절 */
 .post-table th:nth-child(1),
 .post-table td:nth-child(1) {
-  width: 45%;
+  width: 60%;  /* 제목을 좀 더 확보 */
   text-align: left;
   padding-left: 1.2rem;
 }
 
 .post-table th:nth-child(2),
 .post-table td:nth-child(2) {
-  width: 15%;
+  width: 14%;  /* 글쓴이 */
 }
 
 .post-table th:nth-child(3),
-.post-table td:nth-child(3),
+.post-table td:nth-child(3) {
+  width: 10%;  /* 등록일 */
+}
+
 .post-table th:nth-child(4),
-.post-table td:nth-child(4),
+.post-table td:nth-child(4) {
+  width: 8%;  /* 조회수 */
+}
+
 .post-table th:nth-child(5),
 .post-table td:nth-child(5) {
-  width: 10%;
+  width: 8%;  /* 추천수 */
 }
 
 .post-table th {
@@ -139,7 +145,7 @@ body {
 /* 제목 텍스트 자르기 */
 .title-cell {
   display: inline-block;
-  width: 30ch; /* 약 10글자 크기 */
+  width: 50ch; /* 약 50글자 크기 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -244,5 +250,26 @@ body {
 
 .search-container button:hover {
   background-color: #57ab5a;
+}
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  display: none;
+  user-select: none;
+}
+
+.search-box {
+  width: 100%;
+  padding-right: 24px; /* 공간 확보 */
 }
 

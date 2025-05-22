@@ -174,7 +174,7 @@ function renderPage(pageNum) {
 	      str += `
 	         <tr>
 	            <td>
-	               <a href="/board/boardView?bno=${post.bno}" class="title-cell" >${post.title}</a> [#${post.tag}]
+	              [#${post.tag}]  <a href="/board/boardView?bno=${post.bno}" class="title-cell">${post.title}</a> 
 	            </td>
 	            <td>${post.nickname}</td>
 	            <td>${formattedDate}</td>
@@ -232,7 +232,8 @@ function search() {
 	const searchBtn = document.getElementById("search-btn");
 
 	if (!searchInput || !searchBtn || !searchType) return;
-	searchBtn.addEventListener("click", () => {
+	
+	const handleSearch = () => {
 		const type = searchType.value;  
 		const keyword = searchInput.value.trim().toLowerCase();
 
@@ -245,6 +246,15 @@ function search() {
 		currentPage = 1;
 		renderPage(currentPage);
 		renderPagination();
+	};
+
+	searchBtn.addEventListener("click", handleSearch);
+
+	// 엔터 키도 검색 실행
+	searchInput.addEventListener("keydown", (event) => {
+		if (event.key === "Enter") {
+			handleSearch();
+		}
 	});
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -255,5 +265,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+const searchBox = document.getElementById("searchBox");
+const clearBtn = document.getElementById("clearSearch");
 
+searchBox.addEventListener("input", () => {
+	clearBtn.style.display = searchBox.value ? "inline" : "none";
+});
+
+clearBtn.addEventListener("click", () => {
+	searchBox.value = "";
+	clearBtn.style.display = "none";
+	searchBox.focus();
+});
 

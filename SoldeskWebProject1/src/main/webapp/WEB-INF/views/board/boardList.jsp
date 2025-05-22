@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAACAAQAAAAAA">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SeroFit 게시판</title>
@@ -35,7 +37,7 @@
 			<table class="post-table">
 				<thead>
 					<tr>
-						<th>제목</th>
+						<th>제목</th>				
 						<th>글쓴이</th>
 						<th>등록일</th>
 						<th>조회</th>
@@ -45,17 +47,7 @@
 				<c:choose>
 					<c:when test="${not empty list}">
 						<tbody id="postList">
-							<c:forEach var= "bdto" items="${ list}">
-								<tr>  
-									<td> 
-										<a href="${bdto.bno}" title="title"> ${bdto.title }</a> [#${bdto.tag}]
-									</td>
-									<td> ${bdto.nickname }</td>         
-									<td><fmt:formatDate value="${bdto.regdate}" pattern="yyyy-MM-dd" /></td>
-									<td> ${bdto.hit }</td>
-									<td> ${bdto.love }</td>
-								</tr>
-							</c:forEach>
+
 						</tbody>
 					</c:when>
 					<c:otherwise>
@@ -81,8 +73,12 @@
 				<option value="title"> 제목 </option>
 				<option value="nickname"> 닉네임 </option>
 			</select>
-			<input type="text" id="searchBox" class="search-box" placeholder="검색 내용 입력">
-			<button type="button" id="search-btn">검색</button>
+			<div class="search-input-wrapper">
+				<input type="text" id="searchBox" class="search-box" placeholder="검색 내용 입력">
+				<span class="clear-btn" id="clearSearch">X</span>
+			</div>
+
+				<button type="button" id="search-btn">검색</button>
 		</div>
 	</div>
 	
