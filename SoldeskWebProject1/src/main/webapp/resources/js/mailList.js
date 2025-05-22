@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== 메일 리스트 로딩 =====
-function loadMailListByType(url, myUno) {
+function loadMailListByType(url, myUno, initPage = 1) {
 	isReceiverView = (url === '/mail/recevier'); // 받은 메일인지 여부 저장
 
 	fetch(url)
@@ -73,7 +73,7 @@ function loadMailListByType(url, myUno) {
 		.then(list => {
 			fullMailList = list;
 			filteredList = [...list];  // 처음 로딩 시에는 전체를 보여줌
-			currentPage = 1;
+			currentPage = initPage;
 			renderPage(currentPage);  // 👈 isReceiverView는 전역값으로 씀
 		})
 		.catch(err => console.error("메일 목록 불러오기 실패:", err));
@@ -194,7 +194,12 @@ function readModal() {
 
 						document.getElementById('mailModal').classList.add('show');
 						item.classList.add('read');
+						
+						const unoElement = document.getElementById('myUno');
+						const myUno = unoElement ? unoElement.textContent.trim() : null;
 
+						loadMailListByType('/mail/recevier', myUno, currentPage);
+						
 						const mailCountSpan = document.querySelector('.count');
 						if (mailCountSpan) {
 							mailCountSpan.textContent = data.mailCount;

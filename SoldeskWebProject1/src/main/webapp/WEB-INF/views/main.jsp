@@ -71,7 +71,7 @@
 		
 		<section class="interactive-gallery">
 		  <div class="thumbnail-row">
-		    <img src="/resources/img/tag/다이어터.png" alt="item1" class="thumb" data-title="다이어터" data-desc="둥글둥글했던 시절은 안녕~ <br>건강한 식단과 운동으로 변화 중인 판다, 다이어터! <br>꾸준하게,이제는 몸도 마음도 가벼워지는 중입니다.">
+		    <img src="/resources/img/tag/다이어터.png" alt="item1" class="thumb" data-title="다이어터" data-desc="둥글둥글했던 시절은 안녕~ <br>건강한 식단과 운동으로 변화 중인 판다, 다이어터!<br>천천히지만 꾸준하게,이제는 몸도 마음도 가벼워지는 중입니다.">
 		    <img src="/resources/img/tag/멸치탈출.png" alt="item2" class="thumb" data-title="멸치탈출" data-desc="바람에도 흔들리던 말랐던 시절은 그만! <br>잘 먹고, 제대로 운동하며탄탄한 몸을 향해 달려가는 성장형 캐릭터, 멸치 탈출!">
 		    <img src="/resources/img/tag/유지어터.png" alt="item3" class="thumb" data-title="유지어터" data-desc="지금 이 밸런스, 절대 무너지면 안 돼! <br>몸매 유지가 최우선, 완벽한 루틴을 지키는 스마트한 토끼, 유지어터! <br>한 끼의 유혹보단 한 끗의 유지력이 더 중요해요. <br>식단도, 운동도, 마인드도 꾸준히 오늘도 자기 관리 만렙 갱신 중입니다.">
 		    <img src="/resources/img/tag/프로득근러.png" alt="item4" class="thumb" data-title="프로득근러" data-desc="근육은 배신하지 않는다! <br>오늘도 단백질과 중량을 챙기는 근육 집착 호랑이, 프로 득근러! <br>운동은 삶의 일부, 식단은 무기! <br>볼 때마다 더 커지는 어깨처럼, 그의 목표는 딱 하나, 득근!">
@@ -83,7 +83,7 @@
 		    <div class="main-text">
 		      <h3 id="main-title">다이어터</h3>
 		      <p id="main-desc">둥글둥글했던 시절은 안녕~ <br>
-		      	건강한 식단과 운동으로 변화 중인 판다, 다이어터. <br>
+		      	건강한 식단과 운동으로 변화 중인 판다, 다이어터! <br>
 		      	천천히지만 꾸준하게,이제는 몸도 마음도 가벼워지는 중입니다.</p>
 		    </div>
 		  </div>	

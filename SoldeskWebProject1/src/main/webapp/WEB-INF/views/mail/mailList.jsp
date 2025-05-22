@@ -17,7 +17,7 @@
 			<button class="send-mail-btn">메일 보내기</button>
 			<div class="search-box">
 				<div class="input-wrapper">
-					<input type="text" class="search-input" placeholder="제목 + 내용 으로 검색..." />
+					<input type="text" class="search-input" placeholder="닉네임 or 내용 으로 검색..." />
 					<button class="search-btn">🔍</button>
 				</div>
 			</div>
