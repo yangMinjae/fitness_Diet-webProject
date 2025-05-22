@@ -37,6 +37,6 @@ thumbnails.forEach(thumb => {
   thumb.addEventListener('click', () => {
     mainImg.src = thumb.src;
     mainTitle.textContent = thumb.getAttribute('data-title');
-    mainDesc.textContent = thumb.getAttribute('data-desc');
+    mainDesc.innerHTML = thumb.getAttribute('data-desc');
   });
 });

@@ -118,3 +118,10 @@ function formatDateToYMD(dateString) {
 	const day = ('0' + date.getDate()).slice(-2);
 	return `${year}-${month}-${day}`;
 }
+
+//esc 누를 시 모달 스타일 제거 (sendmailModal이 열려 있을 시에만)
+document.addEventListener("keydown", (e) => {
+	if (e.key === "Escape"){
+	document.getElementById('profileModal').classList.remove('show')
+	}
+});

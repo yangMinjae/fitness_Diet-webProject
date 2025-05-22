@@ -61,17 +61,24 @@ if (region1 && region2) {
   });
 
   region1.addEventListener("change", function () {
-    const selectedProvince = this.value;
-    region2.innerHTML = '<option value="">시/군/구 선택</option>';
-    if (selectedProvince && regionData[selectedProvince]) {
-      regionData[selectedProvince].forEach(city => {
-        const option = document.createElement("option");
-        option.value = city;
-        option.textContent = city;
-        region2.appendChild(option);
-      });
-    }
-  });
+	  const selectedProvince = this.value;
+
+	  region2.innerHTML = '<option value="">시/군/구 선택</option>';
+
+	  if (selectedProvince && regionData[selectedProvince]) {
+	    // 도 선택됨 → 시/군/구 표시 + 옵션 추가
+	    region2.style.display = 'inline-block'; // 또는 'block'
+	    regionData[selectedProvince].forEach(city => {
+	      const option = document.createElement("option");
+	      option.value = city;
+	      option.textContent = city;
+	      region2.appendChild(option);
+	    });
+	  } else {
+	    // 도가 선택되지 않았으면 시/군/구 숨기기
+	    region2.style.display = 'none';
+	  }
+	});
 }
 
 const profileModal = document.getElementById("profileModal");
@@ -163,6 +170,7 @@ document.getElementById("resetBtn").addEventListener("click", function () {
 	tagFilter.selectedIndex = 0;
 	region1Filter.selectedIndex = 0;
 	region2Filter.innerHTML = '<option value="">시/군/구 선택</option>';
+	region2.style.display = 'none';
 	applyFilters();
 });
 
@@ -311,6 +319,7 @@ function shouldShowGuide() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+	region2.style.display = 'none';
 	const guideOverlay = document.getElementById("scrollGuideOverlay");
 	const guideButton = document.getElementById("scrollGuideConfirm");
 	const neverButton = document.getElementById("scrollGuideNever");

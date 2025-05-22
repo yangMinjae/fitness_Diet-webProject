@@ -12,6 +12,7 @@ let fullMailList = [];
 let currentPage = 1;
 const pageSize = 10;
 let isReceiverView = true; // 기본값: 받은 메일 보기 상태
+let filteredList = []; // 검색 결과 목록 (기본은 fullMailList와 동일)
 
 //버튼
 document.querySelectorAll('button').forEach(button => {
@@ -24,6 +25,25 @@ document.querySelectorAll('button').forEach(button => {
 
 // ===== 페이지 로딩 시 =====
 document.addEventListener('DOMContentLoaded', () => {
+	const searchInput = document.querySelector('.search-input');
+
+	searchInput.addEventListener('input', () => {
+		const keyword = searchInput.value.trim().toLowerCase();
+
+		if (!keyword) {
+			filteredList = [...fullMailList]; // 입력 없으면 전체 목록
+		} else {
+			filteredList = fullMailList.filter(mvo =>
+				(mvo.content && mvo.content.toLowerCase().includes(keyword)) ||
+				(mvo.preview && mvo.preview.toLowerCase().includes(keyword)) ||
+				(mvo.nickname && mvo.nickname.toLowerCase().includes(keyword))
+			);
+		}
+
+		currentPage = 1;
+		renderPage(currentPage);
+	});
+	
 	const unoElement = document.getElementById('myUno');
 	const myUno = unoElement ? unoElement.textContent.trim() : null;
 
@@ -52,6 +72,7 @@ function loadMailListByType(url, myUno) {
 		.then(res => res.json())
 		.then(list => {
 			fullMailList = list;
+			filteredList = [...list];  // 처음 로딩 시에는 전체를 보여줌
 			currentPage = 1;
 			renderPage(currentPage);  // 👈 isReceiverView는 전역값으로 씀
 		})
@@ -62,14 +83,39 @@ function loadMailListByType(url, myUno) {
 function renderPage(page) {
 	const mailListContainer = document.querySelector('.mail-list');
 	const paginationContainer = document.getElementById('pagination');
-
+	
+	// 🔽 결과 없음 메시지 div가 없으면 생성
+	let noResultMessage = document.getElementById('no-result');
+	if (!noResultMessage) {
+		noResultMessage = document.createElement('div');
+		noResultMessage.id = 'no-result';
+		noResultMessage.textContent = '🔍 검색 결과가 없습니다.';
+		noResultMessage.style.cssText = `
+			display: none;
+			text-align: center;
+			margin-top: 20px;
+			color: gray;
+			font-size: 1.1rem;
+		`;
+		mailListContainer.parentNode.insertBefore(noResultMessage, paginationContainer);
+	}
+	
 	const start = (page - 1) * pageSize;
 	const end = start + pageSize;
-	const pageList = fullMailList.slice(start, end);
-
+	const pageList = filteredList.slice(start, end);
+	
+	if (filteredList.length === 0) {
+		mailListContainer.innerHTML = '';
+		paginationContainer.innerHTML = '';
+		noResultMessage.style.display = 'block';
+		return;
+	} else {
+		noResultMessage.style.display = 'none';
+	}
+	
 	const myUnoElement = document.getElementById('myUno');
 	const myUno = myUnoElement ? myUnoElement.textContent.trim() : '';
-
+	
 	let data = '';
 	pageList.forEach(mvo => {
 		data += `<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
@@ -102,7 +148,7 @@ function renderPage(page) {
 // ===== 페이징 버튼 출력 =====
 function renderPagination(page) {
 	const paginationContainer = document.getElementById('pagination');
-	const totalPages = Math.ceil(fullMailList.length / pageSize);
+	const totalPages = Math.ceil(filteredList.length / pageSize); // ✅ 검색 결과 기준으로 변경
 	let html = '';
 
 	if (page > 1) {

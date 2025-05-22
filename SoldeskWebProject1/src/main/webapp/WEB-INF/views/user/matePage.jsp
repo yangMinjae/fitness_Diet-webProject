@@ -75,7 +75,6 @@
 			</select>
 			
 			<select id="filterRegion2">
-			  <option value="">시/군/구 선택</option>
 			</select>
 			
 	  		<div class="reset-btn-wrap">

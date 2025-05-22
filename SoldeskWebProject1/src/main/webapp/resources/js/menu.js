@@ -29,34 +29,14 @@ document.querySelectorAll('a').forEach(a=>{
 	});
 });
 
-// 프로필 팝업들 버튼화
-document.querySelectorAll('p').forEach(p=>{
-	p.addEventListener("click", function(e){		
-		let id = e.target.getAttribute('id');
-
-		switch(id){
-			// 마이페이지
-			case 'myPage' :
-				location.href = '/myPage';
-				break;
-		}
-	});
+// 헤더 메일 아이콘 버튼화
+document.querySelector('.mail').addEventListener("click", function(e){		
+	location.href = '/mailList';
 });
 
-// 헤더 메일 아이콘 버튼화
-document.querySelectorAll('img').forEach(img=>{
-	img.addEventListener("click", function(e){		
-		let alt = e.target.getAttribute('alt');
-
-		switch(alt){
-			case 'mailPage' :
-				location.href = '/mailList';
-				break;
-			case 'profile' :
-				location.href = '/myPage';
-				break;
-		}
-	});
+// 마이 페이지 버튼 할당량 수정
+document.querySelector('.dropdown.user').addEventListener("click", function(e) {
+	location.href = '/myPage';
 });
 
 // 로그인 버튼

@@ -25,15 +25,16 @@
 		<div class="right-icons">
 			<div class="mate-toggle">
 				<sec:authorize access="isAuthenticated()">
-					<label class="mate-label">운동 메이트 추천 여부</label>
 					<sec:authentication var="mateChecker" property="principal.mateChecker" />
 					<span hidden="true" id="mateChecker">${mateChecker}</span>
-					<input type="checkbox" id="mateToggle" 
-				    	<c:if test="${mateChecker == 1}">checked</c:if> />
-					<label for="mateToggle" class="mate-switch">
-				        <span class="handle-text on">ON</span>
-				        <span class="handle-text off">OFF</span>
-				    </label>
+					<div class="tooltip-wrapper">
+					  <input type="checkbox" id="mateToggle" <c:if test="${mateChecker == 1}">checked</c:if> />
+					  <label for="mateToggle" class="mate-switch">
+					    <span class="handle-text on">YES</span>
+					    <span class="handle-text off">NO</span>
+					  </label>
+					  <span class="custom-tooltip">운동 메이트 추천 여부</span>
+					</div>
 				</sec:authorize>
 			</div>
 			<div class="mail">
@@ -42,8 +43,8 @@
 					alt="mailPage" />
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication var="mailCount" property="principal.mailCount" />
-				</sec:authorize>
 				<span class="count" id="mailCount">${mailCount}</span>
+				</sec:authorize>
 			</div>
 
 			<div class="dropdown user">
