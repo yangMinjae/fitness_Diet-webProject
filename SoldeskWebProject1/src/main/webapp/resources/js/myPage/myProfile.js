@@ -124,6 +124,7 @@ function profileEditToSubmit(){   						// 화면상 표시되는 '프로필 수
 	  editProfile.classList.add('submit-button');
 	  cancelEdit.classList.remove('hidden');
 	  searchArea.classList.remove('hidden');
+	  updateCharCount();
 	}
 
 	function submitToProfileEdit(){   					// '제출'버튼의 스타일을 다시 '프로필 수정' 버튼으로 변경
@@ -238,3 +239,9 @@ f.uploadFile.addEventListener('change', function(e) {
 	    e.target.value = ''; // 잘못된 파일일 경우 초기화
 	  }
 	});
+
+function updateCharCount() {
+    const textarea = document.getElementById('self');
+    const count = textarea.value.length;
+    document.getElementById('charCount').innerText = count;
+}
