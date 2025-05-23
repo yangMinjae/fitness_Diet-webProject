@@ -153,12 +153,21 @@ public class MainController {
 		int updateMateChecker = customUser.getMateChecker();
 		
 		if (visible) {
-			customUser.setMateChecker(updateMateChecker == 1 || updateMateChecker == 0 ? 1 : 0);
-			return String.valueOf(customUser.getMateChecker());
+			String agree = mpService.updateMateAgree(customUser.getUno());
+			if (agree  == "true") {
+				customUser.setMateChecker(updateMateChecker == 1 || updateMateChecker == 0 ? 1 : 0);
+				return String.valueOf(customUser.getMateChecker());
+			}else {
+				return "";
+			}
 		}else {
+			String reject = mpService.updateMateReject(customUser.getUno());
+			if (reject == "true") {
 			customUser.setMateChecker(updateMateChecker == 1 || updateMateChecker == 0 ? 0 : 1);
 			return String.valueOf(customUser.getMateChecker());
+			}else {
+				return "";
+			}
 		}
-		
 	}
 }
