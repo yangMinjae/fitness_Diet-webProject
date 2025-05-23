@@ -273,3 +273,8 @@ body {
   width: 100%;
   padding-right: 24px;
 }
+#search-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}

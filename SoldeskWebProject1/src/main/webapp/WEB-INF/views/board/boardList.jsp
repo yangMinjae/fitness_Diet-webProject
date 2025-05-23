@@ -78,7 +78,9 @@
 				<span class="clear-btn" id="clearSearch">X</span>
 			</div>
 
-				<button type="button" id="search-btn">검색</button>
+			<button type="button" id="search-btn">
+				<img alt=검색 src="https://cdn-icons-png.flaticon.com/512/13/13267.png">
+			</button>
 		</div>
 	</div>
 	
