@@ -27,6 +27,13 @@ label {
   font-size: 1.05rem;
   color: #4d5a63;
 }
+/* 제목 글자수 카운트 */
+#titleCount {
+  float: right;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 8px; /* 약간의 위쪽 여백 (옵션) */
+}
 
 /* ✍️ 입력 필드 */
 input[type="text"],
