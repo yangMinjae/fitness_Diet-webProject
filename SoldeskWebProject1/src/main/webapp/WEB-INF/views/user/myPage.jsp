@@ -66,8 +66,11 @@
 						</div>
 						<div class="form-group">
 							<label for="intro">자기소개</label>
-							<textarea rows="9" cols="30" name="upVO.self" maxlength="300" placeholder="300자 이내 작성" id="self"></textarea>
+							<textarea rows="9" cols="30" name="upVO.self" maxlength="300" placeholder="300자 이내 작성" id="self" oninput="updateCharCount()"></textarea>
 						</div>
+						<div style="text-align: right; font-size: 0.9em; color: #555;">
+					        <span id="charCount">0</span>/300
+					    </div>
 					</form>
 				</div>
 				<div class="edit-button-wrapper">
