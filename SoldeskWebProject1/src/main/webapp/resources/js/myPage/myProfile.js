@@ -28,16 +28,7 @@ document.querySelectorAll('.edit-button-wrapper button')
   ele.addEventListener('click',(e)=>{
     let btnId = e.currentTarget.getAttribute('id');
     if(btnId=='editProfile'){
-      if(firstPressed){            						// 프로필 수정 버튼 가장 처음 눌렀을 시
-
-        setToEdit();                					// input 태그 및 이미지 버튼의 disabled를 풀어준다.
-
-        profileEditToSubmit(e);     					// 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과
-                                    					// 텍스트를 바꿔준다.
-        firstPressed=!firstPressed;
-      }else if(!firstPressed){      					// '프로필 수정'(제출 버튼)이 두번째 눌렸을 시 컨트롤러로 form을 제출
-        submitForm();               					// 폼을 동기 방식으로 제출하는 함수
-      }
+    	handleEditProfile(e);
     }else if(btnId=='cancelEdit'){  					// 취소 버튼을 누를 시
 
       initProfile();                       				// input 태그와 img 버튼을 비활성화 시키고
@@ -49,6 +40,27 @@ document.querySelectorAll('.edit-button-wrapper button')
     }
   })
 })
+
+async function handleEditProfile(e) {
+    const res = await fetch('/getCountDite');
+    const result = await res.text();
+
+    if (result === 'false') {
+        alert("최초 1회 설문이 필요합니다.");
+        return;
+    }
+
+    if(firstPressed){            						// 프로필 수정 버튼 가장 처음 눌렀을 시
+
+        setToEdit();                					// input 태그 및 이미지 버튼의 disabled를 풀어준다.
+
+        profileEditToSubmit(e);     					// 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과
+                                    					// 텍스트를 바꿔준다.
+        firstPressed=!firstPressed;
+      }else if(!firstPressed){      					// '프로필 수정'(제출 버튼)이 두번째 눌렸을 시 컨트롤러로 form을 제출
+        submitForm();               					// 폼을 동기 방식으로 제출하는 함수
+      }
+}
 
 //--------------------------프로필 세팅---------------------------
 

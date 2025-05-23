@@ -18,4 +18,7 @@ public interface DietMapper {
 	// DNO로 TAG 가져오기
 	public DietVO selectDietByDno(int dno);
 	
+	// Dite 갯수 가져오기
+	public int getCountDiet(int uno);
+	
 }

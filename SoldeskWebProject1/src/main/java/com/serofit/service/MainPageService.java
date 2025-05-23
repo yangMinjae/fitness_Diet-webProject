@@ -14,4 +14,7 @@ public interface MainPageService {
 	
 	// 메이트 거절
 	public String updateMateReject(int uno);
+	
+	// 식단 여부 확인
+	public String getCountDiet(int uno);
 }

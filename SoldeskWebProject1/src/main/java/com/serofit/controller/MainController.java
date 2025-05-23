@@ -170,4 +170,14 @@ public class MainController {
 			}
 		}
 	}
+	
+	// 운동 메이트 동의
+		@PreAuthorize("isAuthenticated()")
+		@GetMapping("/getCountDite")
+		@ResponseBody
+		public String getCountDite(Authentication authentication) {
+			CustomUser customUser = (CustomUser) authentication.getPrincipal();
+			
+			return mpService.getCountDiet(customUser.getUno());
+		}
 }

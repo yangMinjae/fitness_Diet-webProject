@@ -80,4 +80,10 @@ public class MainPageServiceImple implements MainPageService{
 	public String updateMateReject(int uno) {
 		return upMapper.updateMateReject(uno) == 1 ? "true" : "false";
 	}
+	
+	@Override
+	public String getCountDiet(int uno) {
+		String result = dMapper.getCountDiet(uno) > 0 ? "true" : "false";
+		return result;
+	}
 }

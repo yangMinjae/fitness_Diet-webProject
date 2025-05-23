@@ -31,4 +31,9 @@
 		SELECT * FROM tbl_diet WHERE dno=#{dno}
 	</select>
 	
+	<!-- Diet 갯수 가져오기 -->
+	<select id="getCountDiet" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM tbl_diet WHERE uno=#{uno}
+	</select>
+	
 </mapper>

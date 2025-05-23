@@ -56,22 +56,35 @@ document.querySelectorAll('button').forEach(button=>{
 });
 
 //메이트 버튼 토글 형태
-if (document.getElementById('mateToggle') != null) {
-	document.getElementById('mateToggle').addEventListener("change", function () {
-		const isChecked = this.checked;
-		
-		fetch(`/updateMateVisibility?visible=${isChecked}`, {
-			method: 'GET'
-		})
-		.then(res => res.text())
-		.then(result => {
-			const mate = document.getElementById('mateChecker');
-			
-			if (mate) {
-				mate.textContent = result;
-			}
-		})
-	});
+if (document.getElementById('mateToggle') !== null) {
+    document.getElementById('mateToggle').addEventListener("change", async function () {
+        const isChecked = this.checked;
+        const self = this;
+
+        if (isChecked) {
+            const res = await fetch('/getCountDite');
+            const result = await res.text();
+
+            if (result === 'false') {
+                self.checked = false;
+
+                if (confirm("최초 1회 설문이 필요합니다. 설문 페이지로 이동할까요?")) {
+                    location.href = '/survey';
+                }
+                return;
+            }
+        }
+
+        const response = await fetch(`/updateMateVisibility?visible=${isChecked}`, {
+            method: 'GET'
+        });
+        const text = await response.text();
+
+        const mate = document.getElementById('mateChecker');
+        if (mate) {
+            mate.textContent = text;
+        }
+    });
 }
 
 function updateHeaderData() {
