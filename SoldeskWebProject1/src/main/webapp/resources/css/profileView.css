@@ -180,3 +180,8 @@
     transform: scale(1);
   }
 }
+
+body.modal-open {
+  overflow: hidden;
+  touch-action: none;
+}

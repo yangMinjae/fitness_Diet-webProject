@@ -8,7 +8,7 @@ let selectUno;
 // 게시글 클릭 시 해당 ID로 이동
 
 closeBtn.addEventListener("click", () => {
-	profilemodal.classList.remove("show");
+	closeProfileModal();
 });
 
 const observer = new MutationObserver((mutationsList) => {
@@ -120,9 +120,20 @@ function formatDateToYMD(dateString) {
 	return `${year}-${month}-${day}`;
 }
 
+//모달 열기 닫기 함수
+function openProfileModal() {
+  document.body.classList.add('modal-open');
+  document.getElementById('profileModal').classList.add('show');
+}
+
+function closeProfileModal() {
+  document.body.classList.remove('modal-open');
+  document.getElementById('profileModal').classList.remove('show');
+}
+
 //esc 누를 시 모달 스타일 제거 (sendmailModal이 열려 있을 시에만)
 document.addEventListener("keydown", (e) => {
 	if (e.key === "Escape"){
-	document.getElementById('profileModal').classList.remove('show')
+		closeProfileModal();
 	}
 });

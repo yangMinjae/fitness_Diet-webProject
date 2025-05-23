@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	      if (isProfileClick) {
 	        const uno = clickedRow.querySelector('.tblNicknameSection').dataset.catcher;
 	        setSelectUno(uno);
-	        profileModal.classList.add("show");
+	        openProfileModal();
 	      }
 	    });
 	  });
