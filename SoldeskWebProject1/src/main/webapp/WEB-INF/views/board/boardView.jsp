@@ -26,11 +26,13 @@
 			    <div id="nickname-popup" class="nickname-popup hidden">
 				    <ul>
 				        <li id="show-profile" data-uno="${bvDTO.uno}"><a href="">프로필 보기</a></li>
-				        <li id="send-mail" data-uno="${bvDTO.uno}"><a href="">메일 보내기</a></li>
+				        <sec:authorize access="isAuthenticated()">
+				        	<li id="send-mail" data-uno="${bvDTO.uno}"><a href="">메일 보내기</a></li>
+				        </sec:authorize>
 				    </ul>
 				</div>
 			    <div class="post-meta-right">
-			      	조회 : <span>${bvDTO.hit}</span> | 추천 : <span>${bvDTO.love}</span>
+			      	조회 : <span>${bvDTO.hit}</span> | 추천 : <span id="love-count">${bvDTO.love}</span>
 			    </div>
 			  </div>
 			  <!--  식단 접었다 펼쳤다 -->
@@ -46,12 +48,15 @@
 			  </div>					  			
 			  <div class="icon-bar">
 				<sec:authorize access="isAuthenticated()">	
-					<c:if test="${isLike == 'true'}">
-						<button type="button" class="icon-btn" id="unlike-btn" title="싫어요">❤싫어요</button>
-					</c:if>
-					<c:if test="${isLike == 'false'}">
-						<button type="button" class="icon-btn" id="like-btn" title="좋아요">❤좋아요</button>	
-					</c:if>			
+					<div id="like-wrapper">
+					    <!-- 초기 버튼은 JSP에서 렌더링 -->
+					    <c:if test="${isLike == 'true'}">
+					        <button type="button" class="icon-btn" id="unlike-btn" title="싫어요">❤싫어요</button>
+					    </c:if>
+					    <c:if test="${isLike == 'false'}">
+					        <button type="button" class="icon-btn" id="like-btn" title="좋아요">❤좋아요</button>	
+					    </c:if>
+					</div>	
 				</sec:authorize>			  				  		
 				<button type="button" class="icon-btn" id="list-btn" title="목록" >☰</button>
 				<button type="button" class="icon-btn" id="prev-btn" bList='${bList}' bno="${bvDTO.bno}" title="이전 게시글">&lt;</button>
