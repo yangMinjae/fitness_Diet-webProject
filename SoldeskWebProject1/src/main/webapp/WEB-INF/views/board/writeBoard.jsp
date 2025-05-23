@@ -24,7 +24,7 @@
 					<c:forEach var="dvo" items="${dietList}">
 						<option value='${dvo.title}' data-content='${dvo.content}'
 							data-dno='${dvo.dno}' data-tag='${dvo.tag}' data-uno='${dvo.uno}'
-							<c:if test="${not empty board && board.tag eq dvo.tag}">selected="selected"</c:if>>
+							<c:if test="${not empty board && board.dno eq dvo.dno}">selected="selected"</c:if>>
 							${dvo.title}</option>
 					</c:forEach>
 				</select>
