@@ -29,9 +29,6 @@ document
     let href = e.currentTarget.getAttribute('href');
     if(href == 'findId'){
     	document.getElementById('findIdModal').classList.add('show');
-    }
-    else if(href == 'findPw'){
-      console.log('비밀번호 찾기');
     }else if(href == 'signup'){
       console.log('회원가입');
       location.href='/sign/signUp';
@@ -50,41 +47,104 @@ document.querySelector('#resultModal .close-btn').addEventListener('click', () =
 	console.log(inputFieldID.value);
 });
 
-// email 찾기 버튼 클릭 시
 document.getElementById('findIdSubmit').addEventListener('click', () => {
-	const email = document.getElementById('findIdEmail').value;
-	const result = document.getElementById('findIdResult');
+	  const email = document.getElementById('findIdEmail').value;
+	  const result = document.getElementById('findIdResult');
 
-	if (!email) {
-		result.textContent = "이메일을 입력해주세요.";
-		return;
-	}
-	
-	fetch('/sign/findID?email='+email)
-		.then(response => response.json())
-		.then(data => {
-			if (data != null) {
-				// 정보 존재 시
-				document.getElementById('resultTitle').textContent = "아이디 및 비밀번호 확인";
-				document.getElementById('resultBody').innerHTML = `
-					<p>🧑 아이디: <strong>${data.id}</strong></p>
-					<p>🔐 비밀번호: <strong>${data.pw}</strong></p>	`;
-				
-				// 찾은 ID, PW로 inputField 초기화
-				inputFieldID.value = data.id;
-				inputFieldPW.value = data.pw;
-			} else {
-				// 정보 없음
-				document.getElementById('resultTitle').textContent = "검색 결과 없음";
-				document.getElementById('resultBody').textContent = "해당 이메일로 등록된 회원 정보가 없습니다.";
-			}
+	  if (!email) {
+	    result.textContent = "이메일을 입력해주세요.";
+	    return;
+	  }
 
-			// 회원 가입 모달 닫기
-			findModal.classList.remove('show');
-			// 정보 창 모달 열기
-			resultModal.classList.add('show');
-		})
-		.catch(err => {
-			console.log(err);
-		});
-});
+	  fetch('/sign/findID?email=' + email)
+	    .then(response => response.json())
+	    .then(data => {
+	      const resultTitle = document.getElementById('resultTitle');
+	      const resultBody = document.getElementById('resultBody');
+
+	      if (data != null) {
+	        resultTitle.textContent = "아이디 확인 및 비밀번호 재설정";
+	        resultBody.innerHTML = `
+	          <p>🧑 아이디: <strong>${data.id}</strong></p>
+	          <p>🔐 새 비밀번호를 입력하세요:</p>
+	          <div class="pw-wrapper">
+	            <input type="password" id="newPassword" placeholder="새 비밀번호" required />
+	            <span class="toggle-password fa-solid fa-eye" data-target="newPassword"></span>
+	          </div>
+	          <div class="pw-wrapper">
+	            <input type="password" id="confirmPassword" placeholder="비밀번호 확인" required />
+	            <span class="toggle-password fa-solid fa-eye" data-target="confirmPassword"></span>
+	          </div>
+	          <p id="pwMessage" style="color: red; display: none;"></p>
+	          <div class="button-center">
+				  <button id="submitPwBtn" class="icon-btn">변경하기</button>
+			  </div>
+	        `;
+
+	        const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+
+	        setTimeout(() => {
+	          document.getElementById('submitPwBtn').addEventListener('click', () => {
+	            const pw = document.getElementById('newPassword').value;
+	            const confirmPw = document.getElementById('confirmPassword').value;
+	            const pwMsg = document.getElementById('pwMessage');
+
+	            if (!pwRegex.test(pw)) {
+	              pwMsg.textContent = '비밀번호는 영문 대/소문자, 숫자 포함 8~16자여야 합니다.';
+	              pwMsg.style.display = 'block';
+	              return;
+	            }
+
+	            if (pw !== confirmPw) {
+	              pwMsg.textContent = '비밀번호가 일치하지 않습니다.';
+	              pwMsg.style.display = 'block';
+	              return;
+	            }
+
+	            fetch('/sign/resetPassword', {
+	            	  method: 'POST',
+	            	  headers: { 'Content-Type': 'application/json; charset=utf-8' },
+	            	  body: JSON.stringify({ pw: pw, email: email })
+	            	})
+	            	.then(res => res.json())
+	            	.then(data => {
+	            	  if (data.success) {
+	            	    alert('비밀번호가 변경되었습니다.');
+	            	    document.getElementById('resultModal').classList.remove('show');
+	            	  } else {
+	            	    alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
+	            	  }
+	            	})
+	            	.catch(err => {
+	            	  console.error(err);
+	            	  alert('요청 중 오류가 발생했습니다.');
+	            	});
+	          });
+	        }, 0);
+	      } else {
+	        resultTitle.textContent = "검색 결과 없음";
+	        resultBody.textContent = "해당 이메일로 등록된 회원 정보가 없습니다.";
+	      }
+
+	      findModal.classList.remove('show');
+	      resultModal.classList.add('show');
+	    });
+	});
+
+// 비밀번호 보기/숨기기 토글
+document.addEventListener('click', function (e) {
+	  if (e.target.classList.contains('toggle-password')) {
+	    const targetId = e.target.getAttribute('data-target');
+	    const input = document.getElementById(targetId);
+
+	    if (input.type === 'password') {
+	      input.type = 'text';
+	      e.target.classList.remove('fa-eye');
+	      e.target.classList.add('fa-eye-slash');
+	    } else {
+	      input.type = 'password';
+	      e.target.classList.remove('fa-eye-slash');
+	      e.target.classList.add('fa-eye');
+	    }
+	  }
+	});

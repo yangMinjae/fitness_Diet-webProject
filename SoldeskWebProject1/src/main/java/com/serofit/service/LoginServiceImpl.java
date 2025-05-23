@@ -1,6 +1,7 @@
 package com.serofit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.serofit.domain.LoginDTO;
@@ -14,6 +15,9 @@ import lombok.extern.log4j.Log4j;
 public class LoginServiceImpl implements LoginService{
 	@Autowired
 	UserMapper uMapper;
+	
+	@Autowired
+	PasswordEncoder pwEncoder;
 	
 	// 로그인 함수
 	@Override
@@ -30,5 +34,11 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public UserVO findID(String email) {		
 		return uMapper.findIdPwByEmail(email);
+	}
+	
+	@Override
+	public int updatePW(UserVO uvo) {	
+		uvo.setPw(pwEncoder.encode(uvo.getPw()));
+		return uMapper.updatePW(uvo);
 	}
 }

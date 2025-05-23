@@ -10,4 +10,7 @@ public interface LoginService {
 	
 	// 아이디 비밀번호 찾기
 	public UserVO findID(String email);
+	
+	// 비밀번호 수정
+	public int updatePW(UserVO uvo);
 }

@@ -37,5 +37,8 @@ public interface UserMapper {
 	
 	// 회원 가입 시 권한 설정
 	public int insertAuth(int uno);
+	
+	// 비밀번호 수정
+	public int updatePW(UserVO uvo);
 
 }

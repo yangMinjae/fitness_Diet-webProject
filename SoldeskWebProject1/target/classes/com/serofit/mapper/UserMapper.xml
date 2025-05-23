@@ -89,4 +89,11 @@
 	<insert id="insertAuth" parameterType="int">
 		INSERT INTO tbl_auth VALUES(#{uno}, 'user')
 	</insert>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="updatePW" parameterType="com.serofit.domain.UserVO">
+		UPDATE tbl_user
+		SET pw = #{pw}
+		WHERE email = #{email}
+	</update>
 </mapper>
