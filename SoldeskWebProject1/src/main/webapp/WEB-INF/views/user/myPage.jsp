@@ -97,6 +97,7 @@
 								</tr>
 							</thead>
 							<tbody id="favBody">
+								<tr><td colspan=4>대상이 없습니다.</td></tr>
 							</tbody>
 						</table>
 						<!-- 반복 영역 끝 -->
@@ -121,6 +122,7 @@
 									</tr>
 								</thead>
 								<tbody id="followBody">
+								<tr><td colspan=4>대상이 없습니다.</td></tr>
 								</tbody>
 							</table>
 							<!-- 반복 영역 끝 -->
@@ -145,6 +147,7 @@
 									</tr>
 								</thead>
 								<tbody id="followerBody">
+								<tr><td colspan=4>대상이 없습니다.</td></tr>
 								</tbody>
 							</table>
 							<!-- 반복 영역 끝 -->

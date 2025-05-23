@@ -27,6 +27,9 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 	  fetch(url)
 	    .then(res => res.json())
 	    .then(json => {
+	    	if(json.length == 0)
+	    		return;
+	    	
 	      let str = '';
 	      json.forEach(ele => {
 			let result = ele.fvo.path.substring(ele.fvo.path.indexOf("\\profile"))+'\\'+ele.fvo.uuid+'_'+ele.fvo.fileName;
@@ -139,25 +142,50 @@ function setupSearch(inputId, tableBodyId) {
 
 	if (!input || !tableBody) return;
 
+	function ensureNoResultRow() {
+		let noResultRow = tableBody.querySelector('.no-results-row');
+		if (!noResultRow) {
+			noResultRow = document.createElement('tr');
+			noResultRow.className = 'no-results-row';
+			noResultRow.innerHTML = `<td colspan="100%" style="text-align: center; color: #888;">대상이 없습니다</td>`;
+			noResultRow.style.display = 'none';
+			tableBody.appendChild(noResultRow);
+		}
+		return noResultRow;
+	}
+
 	input.addEventListener('input', function () {
 		const filter = this.value.toLowerCase().trim();
-		const rows = tableBody.getElementsByTagName('tr');
+		const rows = Array.from(tableBody.querySelectorAll('tr:not(.no-results-row)'));
 
-		Array.from(rows).forEach(row => {
+		let visibleCount = 0;
+
+		rows.forEach(row => {
 			const nicknameCell = row.querySelector('td:nth-child(2)');
 			const nickname = nicknameCell ? nicknameCell.textContent.toLowerCase().trim() : '';
+			row.classList.remove('highlight');
 
-			row.classList.remove('highlight'); // 기존 강조 제거
-
-			if (nickname === filter) {
+			if (filter === '') {
 				row.style.display = '';
-				row.classList.add('highlight'); // 정확 일치 강조
+			} else if (nickname === filter) {
+				row.style.display = '';
+				row.classList.add('highlight');
+				visibleCount++;
 			} else if (nickname.includes(filter)) {
 				row.style.display = '';
+				visibleCount++;
 			} else {
 				row.style.display = 'none';
 			}
 		});
+
+		// 항상 확인하고 다시 추가
+		const noResultRow = ensureNoResultRow();
+		if (filter === '') {
+			noResultRow.style.display = 'none';
+		} else {
+			noResultRow.style.display = visibleCount === 0 ? '' : 'none';
+		}
 	});
 }
 
@@ -166,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	setupSearch('searchFollow', 'followBody');
 	setupSearch('searchFollower', 'followerBody');
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	  document.querySelectorAll('.listTable').forEach(table => {
