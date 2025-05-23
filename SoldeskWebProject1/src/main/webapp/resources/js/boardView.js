@@ -1,5 +1,5 @@
 //-----CSS 파일 추가
-const CSS_FILE_PATH = ['/resources/css/boardView.css', '/resources/css/profileView.css'];
+const CSS_FILE_PATH = ['/resources/css/boardView.css', '/resources/css/profileView.css', '/resources/css/sendMailModal.css'];
 CSS_FILE_PATH.forEach(css => {
 	let linkEle = document.createElement('link');
 	linkEle.rel = 'stylesheet';
@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const likeBtn = document.getElementById('like-btn');
 	const unLikeBtn = document.getElementById('unlike-btn');
 	const updateBtn = document.getElementById('edit-btn');
-	const deleteBtn = document.getElementById('delete-btn');	  
-	const nickname = document.getElementById('post-Nickname');
-	const popup = document.getElementById('nickname-popup');
+	const deleteBtn = document.getElementById('delete-btn');
+	
+	const nickname = document.getElementById('post-Nickname');	
+	const popup = document.getElementById('nickname-popup');	
 	const profileModal = document.getElementById("profileModal");
+	const likeWrapper = document.getElementById('like-wrapper');
 	
 	const toggleDietBtn = document.getElementById("toggleDietContentBtn");
 	const dietWrapper = document.getElementById("dietContentWrapper");
@@ -38,43 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		  });
 		}
 	
-	if(likeBtn){
-		likeBtn.addEventListener('click', function(){			  
-			  fetch('/board/boardView/love',{
-				    method : 'post',
-				    body:JSON.stringify({
-				      uno : form.uno.value,
-				      bno : form.bno.value
-				    }),
-				    headers : {
-				      'Content-Type' : 'application/json; charset=utf-8'
-				    }
-				  })
-				  .then(res=>res.text())
-				  .then(text=>{
-					  location.href="/board/boardView?bno="+form.bno.value;
-				  })
-		  });
-	}
- 
-	if(unLikeBtn){
-		unLikeBtn.addEventListener('click', function(){			  
-			  fetch('/board/boardView/unlove',{
-				    method : 'post',
-				    body:JSON.stringify({
-				      uno : form.uno.value,
-				      bno : form.bno.value
-				    }),
-				    headers : {
-				      'Content-Type' : 'application/json; charset=utf-8'
-				    }
-				  })
-				  .then(res=>res.text())
-				  .then(text=>{
-					  location.href="/board/boardView?bno="+form.bno.value;
-				  })
-		  });
-	}
+	if (likeBtn) likeBtn.addEventListener('click', handleLike);
+	if (unLikeBtn) unLikeBtn.addEventListener('click', handleUnLike);
   	
 	if(updateBtn){
 		updateBtn.addEventListener('click', () => {
@@ -145,6 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	        	break;
 	        case "send-mail" :
 	        	console.log("send-mail");
+	        	setSendMyUno(form.uno.value);
+				setSendSelectUno(e.currentTarget.dataset.uno);
+				initMailModalContent();
+				initMailModalEvent();
+				document.getElementById('sendmailModal').classList.add('show');
+				document.body.classList.add('modal-open'); // ✅ 스크롤 차단
 	        	break;
 	        }
 	        
@@ -152,3 +125,69 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
 });
+
+function createButton(isLiked) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'icon-btn';
+    if (isLiked) {
+        button.id = 'unlike-btn';
+        button.title = '싫어요';
+        button.textContent = '❤싫어요';
+        button.addEventListener('click', handleUnLike);
+    } else {
+        button.id = 'like-btn';
+        button.title = '좋아요';
+        button.textContent = '❤좋아요';
+        button.addEventListener('click', handleLike);
+    }
+    return button;
+}
+
+function transitionButton(newButton, oldButton) {
+    oldButton.classList.add('fade-out');
+    setTimeout(() => {
+        likeWrapper.innerHTML = '';
+        likeWrapper.appendChild(newButton);
+        void newButton.offsetWidth; // 리플로우를 강제로 트리거하여 애니메이션 적용
+        newButton.classList.add('fade-in');
+    }, 300); // fade-out 시간과 일치
+}
+
+function updateLoveCount(delta) {
+	const loveCount = document.getElementById('love-count');
+	if (loveCount) {
+		const current = parseInt(loveCount.textContent, 10);
+		loveCount.textContent = current + delta;
+	}
+}
+
+function handleLike() {
+	const currentBtn = document.getElementById('like-btn');
+	fetch('/board/boardView/love', {
+		method: 'POST',
+		body: JSON.stringify({ uno: form.uno.value, bno: form.bno.value }),
+		headers: { 'Content-Type': 'application/json; charset=utf-8' }
+	})
+	.then(res => res.text())
+	.then(() => {
+		const newBtn = createButton(true);
+		transitionButton(newBtn, currentBtn);
+		updateLoveCount(1); // 추천 수 +1
+	});
+}
+
+function handleUnLike() {
+	const currentBtn = document.getElementById('unlike-btn');
+	fetch('/board/boardView/unlove', {
+		method: 'POST',
+		body: JSON.stringify({ uno: form.uno.value, bno: form.bno.value }),
+		headers: { 'Content-Type': 'application/json; charset=utf-8' }
+	})
+	.then(res => res.text())
+	.then(() => {
+		const newBtn = createButton(false);
+		transitionButton(newBtn, currentBtn);
+		updateLoveCount(-1); // 추천 수 -1
+	});
+}

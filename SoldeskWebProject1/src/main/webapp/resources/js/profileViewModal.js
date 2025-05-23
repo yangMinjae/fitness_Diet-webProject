@@ -121,13 +121,19 @@ function formatDateToYMD(dateString) {
 }
 
 //모달 열기 닫기 함수
+let scrollPosition = 0;
+
 function openProfileModal() {
+  scrollPosition = window.scrollY || window.pageYOffset;
   document.body.classList.add('modal-open');
+  document.body.style.top = `-${scrollPosition}px`;
   document.getElementById('profileModal').classList.add('show');
 }
 
 function closeProfileModal() {
   document.body.classList.remove('modal-open');
+  document.body.style.top = '';
+  window.scrollTo(0, scrollPosition);
   document.getElementById('profileModal').classList.remove('show');
 }
 
