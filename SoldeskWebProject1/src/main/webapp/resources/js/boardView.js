@@ -1,5 +1,5 @@
 //-----CSS 파일 추가
-const CSS_FILE_PATH = ['/resources/css/boardView.css', '/resources/css/profileView.css'];
+const CSS_FILE_PATH = ['/resources/css/boardView.css', '/resources/css/profileView.css', '/resources/css/sendMailModal.css'];
 CSS_FILE_PATH.forEach(css => {
 	let linkEle = document.createElement('link');
 	linkEle.rel = 'stylesheet';
@@ -112,6 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	        	break;
 	        case "send-mail" :
 	        	console.log("send-mail");
+	        	setSendMyUno(form.uno.value);
+				setSendSelectUno(e.currentTarget.dataset.uno);
+				initMailModalContent();
+				initMailModalEvent();
+				document.getElementById('sendmailModal').classList.add('show');
+				document.body.classList.add('modal-open'); // ✅ 스크롤 차단
 	        	break;
 	        }
 	        
