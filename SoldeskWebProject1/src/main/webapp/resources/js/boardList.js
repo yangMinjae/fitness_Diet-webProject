@@ -10,7 +10,7 @@ document.head.appendChild(linkEle);
 let allPosts = [];  
 let filteredPosts =[];  
 let currentPage = 1;
-const pageSize = 2;
+const pageSize = 10;
 //버튼 이벤트 추가
 document.querySelectorAll('button').forEach(btn => {
 	  btn.addEventListener('click', e => {

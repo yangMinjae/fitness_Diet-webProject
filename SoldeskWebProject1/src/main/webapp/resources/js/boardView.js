@@ -140,9 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	        switch(id){
 	        case "show-profile" :
-	        	console.log("show-profile");
 	        	setSelectUno(e.currentTarget.dataset.uno);
-	        	profileModal.classList.add("show");
+	        	openProfileModal();
 	        	break;
 	        case "send-mail" :
 	        	console.log("send-mail");
