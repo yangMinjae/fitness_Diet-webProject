@@ -77,8 +77,7 @@
 		UPDATE tbl_board
 			SET 
 			title = #{title},
-			content = #{content},
-			regdate=sysdate 
+			content = #{content}
 		WHERE bno = #{bno}
 	</update>
 	
