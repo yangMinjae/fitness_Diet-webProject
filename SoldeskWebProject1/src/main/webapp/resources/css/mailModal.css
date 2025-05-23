@@ -129,3 +129,9 @@
 .close-btn:hover {
   color: #333;
 }
+
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}

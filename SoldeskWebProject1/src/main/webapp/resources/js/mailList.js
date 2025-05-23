@@ -81,94 +81,73 @@ function loadMailListByType(url, myUno, initPage = 1) {
 
 // ===== 페이징에 따라 리스트 출력 =====
 function renderPage(page) {
-	const mailListContainer = document.querySelector('.mail-list');
-	const paginationContainer = document.getElementById('pagination');
-	
-	// 🔽 결과 없음 메시지 div가 없으면 생성
-	let noResultMessage = document.getElementById('no-result');
-	if (!noResultMessage) {
-		noResultMessage = document.createElement('div');
-		noResultMessage.id = 'no-result';
-		noResultMessage.textContent = '🔍 검색 결과가 없습니다.';
-		noResultMessage.style.cssText = `
-			display: none;
-			text-align: center;
-			margin-top: 20px;
-			color: gray;
-			font-size: 1.1rem;
-		`;
-		mailListContainer.parentNode.insertBefore(noResultMessage, paginationContainer);
-	}
-	
-	const start = (page - 1) * pageSize;
-	const end = start + pageSize;
-	const pageList = filteredList.slice(start, end);
-	
-	if (filteredList.length === 0) {
-		mailListContainer.innerHTML = '';
-		paginationContainer.innerHTML = '';
-		noResultMessage.style.display = 'block';
-		return;
-	} else {
-		noResultMessage.style.display = 'none';
-	}
-	
-	const myUnoElement = document.getElementById('myUno');
-	const myUno = myUnoElement ? myUnoElement.textContent.trim() : '';
-	
-	let data = '';
-	pageList.forEach(mvo => {
-		data += `<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
-			data-name="${mvo.nickname}"
-			data-photo="${mvo.imgPath}"
-			data-content="${mvo.content}"
-			data-regdate="${mvo.regdate}"
-			data-selectuno="${mvo.uno}"
-			data-myuno="${myUno}"
-			data-mno="${mvo.mno}">
-			<div class="profile-icon">
-				<img src="${mvo.imgPath}" alt="프로필" />
-			</div>
-			<div class="mail-info">
-				<span class="sender">${mvo.nickname}</span> 
-				<span class="preview">${mvo.preview}</span>
-				<span class="regdate">${formatDateToYMD(mvo.regdate)}</span>
-			</div>
-		</li>`;
-	});
-	mailListContainer.innerHTML = data;
+	  const container = document.querySelector('.mail-list');
+	  const pagination = document.getElementById('pagination');
+	  const start = (page - 1) * pageSize;
+	  const end = start + pageSize;
+	  const pageItems = filteredList.slice(start, end);
 
-	if (isReceiverView) {
-		readModal(); // ✅ 전역 값 기준으로만 실행
-	}
+	  container.innerHTML = '';
 
-	renderPagination(page);
-}
+	  if (pageItems.length === 0) {
+	    container.innerHTML = '<div class="no-result">메일이 없습니다.</div>';
+	    pagination.innerHTML = '';
+	    return;
+	  }
+
+	  container.innerHTML = pageItems.map(mvo => `
+	    <li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
+	      data-name="${mvo.nickname}"
+	      data-photo="${mvo.imgPath}"
+	      data-content="${mvo.content}"
+	      data-regdate="${mvo.regdate}"
+	      data-selectuno="${mvo.uno}"
+	      data-myuno="${document.getElementById('myUno').textContent.trim()}"
+	      data-mno="${mvo.mno}">
+	      <div class="profile-icon"><img src="${mvo.imgPath}" alt="프로필" /></div>
+	      <div class="mail-info">
+	        <span class="sender">${mvo.nickname}</span>
+	        <span class="preview">${mvo.preview}</span>
+	        <span class="regdate">${formatDateToYMD(mvo.regdate)}</span>
+	      </div>
+	    </li>
+	  `).join('');
+
+	  if (isReceiverView) readModal();
+	  renderPagination(page);
+	}
 
 // ===== 페이징 버튼 출력 =====
 function renderPagination(page) {
-	const paginationContainer = document.getElementById('pagination');
-	const totalPages = Math.ceil(filteredList.length / pageSize); // ✅ 검색 결과 기준으로 변경
-	let html = '';
+	  const pagination = document.getElementById('pagination');
+	  const totalPages = Math.ceil(filteredList.length / pageSize);
+	  const pageBlockSize = 10;
+	  const startBlock = Math.floor((page - 1) / pageBlockSize) * pageBlockSize + 1;
+	  const endBlock = Math.min(startBlock + pageBlockSize - 1, totalPages);
 
-	if (page > 1) {
-		html += `<button class="page-btn" data-page="${page - 1}">이전</button>`;
-	}
-	for (let i = 1; i <= totalPages; i++) {
-		html += `<button class="page-btn ${i === page ? 'active' : ''}" data-page="${i}">${i}</button>`;
-	}
-	if (page < totalPages) {
-		html += `<button class="page-btn" data-page="${page + 1}">다음</button>`;
-	}
-	paginationContainer.innerHTML = html;
+	  let html = '';
 
-	document.querySelectorAll('.page-btn').forEach(btn => {
-		btn.addEventListener('click', () => {
-			currentPage = Number(btn.dataset.page);
-			renderPage(currentPage);
-		});
-	});
-}
+	  if (startBlock > 1) {
+	    html += `<button class="page-btn" data-page="${startBlock - 1}">이전</button>`;
+	  }
+
+	  for (let i = startBlock; i <= endBlock; i++) {
+	    html += `<button class="page-btn ${i === page ? 'active' : ''}" data-page="${i}">${i}</button>`;
+	  }
+
+	  if (endBlock < totalPages) {
+	    html += `<button class="page-btn" data-page="${endBlock + 1}">다음</button>`;
+	  }
+
+	  pagination.innerHTML = html;
+
+	  document.querySelectorAll('.page-btn').forEach(btn => {
+	    btn.addEventListener('click', () => {
+	      currentPage = Number(btn.dataset.page);
+	      renderPage(currentPage);
+	    });
+	  });
+	}
 
 // ===== 메일 모달 열기 =====
 function readModal() {
@@ -191,10 +170,9 @@ function readModal() {
 						document.getElementById('profilePhoto').setAttribute('src',imgPath);
 						setSendMyUno(item.dataset.myuno);
 						setSendSelectUno(item.dataset.selectuno);
-
-						document.getElementById('mailModal').classList.add('show');
-						item.classList.add('read');
 						
+						openModal();
+						item.classList.add('read');
 						const unoElement = document.getElementById('myUno');
 						const myUno = unoElement ? unoElement.textContent.trim() : null;
 
@@ -210,14 +188,31 @@ function readModal() {
 	});
 }
 
+let scrollPosition = 0;
+
+function openModal() {
+  scrollPosition = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollPosition}px`;
+  document.body.classList.add('modal-open');
+  document.getElementById('mailModal').classList.add('show');
+}
+
+function closeModal() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.classList.remove('modal-open');
+  window.scrollTo(0, scrollPosition);
+  document.getElementById('mailModal').classList.remove('show');
+}
+
 // ===== 모달 닫기 & ESC 처리 =====
 //메일 모달 닫기 버튼
 const closeBtn = document.querySelector('.close-btn');
 if (closeBtn) {
 	closeBtn.addEventListener('click', () => {
-		const mailModal = document.getElementById('mailModal');
 		if (mailModal) {
-			mailModal.classList.remove('show');
+			closeModal();
 		}
 	});
 }
@@ -241,7 +236,7 @@ document.addEventListener('keydown', (e) => {
 		const mailModal = document.getElementById('mailModal');
 
 		if (!sendModal || !sendModal.classList.contains("show")) {
-			if (mailModal) mailModal.classList.remove('show');
+			if (mailModal) closeModal();
 		} else {
 			if (typeof initMailModalContent === 'function') {
 				initMailModalContent();
