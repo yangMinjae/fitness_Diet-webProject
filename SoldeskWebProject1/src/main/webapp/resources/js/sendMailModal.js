@@ -11,6 +11,11 @@
 		if (e.target.classList.contains('sendMail')) {
 			let content = document.getElementById('mailInput').value;
 			
+			if (content == '') {
+				alert('내용을 입력하세요!!');
+				return;
+			}
+			
 			if (confirm("쪽지를 보내시겠습니까?")) {
 				fetch(`/mail/sendMsg?selectUno=${sendSelectUno}&myUno=${snedMyUno}&content=${content}`, {
 					method : 'POST',

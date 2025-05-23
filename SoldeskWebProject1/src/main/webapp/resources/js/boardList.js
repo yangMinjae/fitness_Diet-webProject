@@ -188,32 +188,40 @@ function renderPage(pageNum) {
 	}
 // 페이지 이동 버튼 생성
 function renderPagination() {
-	   const totalPages = Math.ceil(filteredPosts.length / pageSize);
-	   const paginationDiv = document.querySelector(".page-btn");
+    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+    const paginationDiv = document.querySelector(".page-btn");
+    const pageBlockSize = 10;
 
-	   let html = '';
+    const startBlock = Math.floor((currentPage - 1) / pageBlockSize) * pageBlockSize + 1;
+    const endBlock = Math.min(startBlock + pageBlockSize - 1, totalPages);
 
-	   if (currentPage > 1) {
-	      html += `<button class="movePageByNum" data-page="${currentPage - 1}">< 이전 </button>`;
-	   }
+    let html = '';
 
-	   for (let i = 1; i <= totalPages; i++) {
-	      html += `<button class="movePageByNum ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-	   }
+    // 이전 블록
+    if (startBlock > 1) {
+        html += `<button class="movePageByNum" data-page="${startBlock - 1}"> < 이전 </button>`;
+    }
 
-	   if (currentPage < totalPages) {
-	      html += `<button class="movePageByNum" data-page="${currentPage + 1}">다음 ></button>`;
-	   }
+    // 현재 블록의 페이지 버튼들
+    for (let i = startBlock; i <= endBlock; i++) {
+        html += `<button class="movePageByNum ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
 
-	   paginationDiv.innerHTML = html;
+    // 다음 블록
+    if (endBlock < totalPages) {
+        html += `<button class="movePageByNum" data-page="${endBlock + 1}"> 다음 > </button>`;
+    }
 
-	   document.querySelectorAll(".movePageByNum").forEach(btn => {
-	        btn.addEventListener("click", function () {
-	            const page = parseInt(btn.dataset.page); 
-	            movePageByNum(page);  
-	        });
-	    });
-	}
+    paginationDiv.innerHTML = html;
+
+    document.querySelectorAll(".movePageByNum").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const page = parseInt(btn.dataset.page);
+            movePageByNum(page);
+        });
+    });
+}
+
 // 페이지 로드 되었을때 자동으로 전체버튼 누르게하기
 document.addEventListener("DOMContentLoaded", () => {
 
