@@ -28,6 +28,13 @@ document
   ele.addEventListener('click',(e)=>{
     let href = e.currentTarget.getAttribute('href');
     if(href == 'findId'){
+    	const emailInput = document.getElementById('findIdEmail');
+    	const resultMsg = document.getElementById('findIdResult');
+
+    	emailInput.value = '';          
+    	resultMsg.textContent = '';       
+    	resultMsg.style.color = '';  
+    	
     	document.getElementById('findIdModal').classList.add('show');
     }else if(href == 'signup'){
       console.log('회원가입');
@@ -49,20 +56,23 @@ document.querySelector('#resultModal .close-btn').addEventListener('click', () =
 
 document.getElementById('findIdSubmit').addEventListener('click', () => {
 	  const email = document.getElementById('findIdEmail').value;
-	  const result = document.getElementById('findIdResult');
-
+	  const result = document.getElementById('findIdResult'); // 이메일 아래 결과 표시 영역
+	  const resultTitle = document.getElementById('resultTitle');
+	  const resultBody = document.getElementById('resultBody');
+	  
 	  if (!email) {
 	    result.textContent = "이메일을 입력해주세요.";
+	    result.style.color = "red";
 	    return;
 	  }
 
 	  fetch('/sign/findID?email=' + email)
 	    .then(response => response.json())
 	    .then(data => {
-	      const resultTitle = document.getElementById('resultTitle');
-	      const resultBody = document.getElementById('resultBody');
-
-	      if (data != null) {
+	      if (data.success) {
+	    	findModal.classList.remove('show');
+		    resultModal.classList.add('show');
+	        result.textContent = ""; // 오류 메시지 초기화
 	        resultTitle.textContent = "아이디 확인 및 비밀번호 재설정";
 	        resultBody.innerHTML = `
 	          <p>🧑 아이디: <strong>${data.id}</strong></p>
@@ -77,8 +87,8 @@ document.getElementById('findIdSubmit').addEventListener('click', () => {
 	          </div>
 	          <p id="pwMessage" style="color: red; display: none;"></p>
 	          <div class="button-center">
-				  <button id="submitPwBtn" class="icon-btn">변경하기</button>
-			  </div>
+	            <button id="submitPwBtn" class="icon-btn">변경하기</button>
+	          </div>
 	        `;
 
 	        const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
@@ -102,34 +112,33 @@ document.getElementById('findIdSubmit').addEventListener('click', () => {
 	            }
 
 	            fetch('/sign/resetPassword', {
-	            	  method: 'POST',
-	            	  headers: { 'Content-Type': 'application/json; charset=utf-8' },
-	            	  body: JSON.stringify({ pw: pw, email: email })
-	            	})
-	            	.then(res => res.json())
-	            	.then(data => {
-	            	  if (data.success) {
-	            	    alert('비밀번호가 변경되었습니다.');
-	            	    document.getElementById('resultModal').classList.remove('show');
-	            	  } else {
-	            	    alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
-	            	  }
-	            	})
-	            	.catch(err => {
-	            	  console.error(err);
-	            	  alert('요청 중 오류가 발생했습니다.');
-	            	});
+	              method: 'POST',
+	              headers: { 'Content-Type': 'application/json; charset=utf-8' },
+	              body: JSON.stringify({ pw: pw, email: email })
+	            })
+	              .then(res => res.json())
+	              .then(data => {
+	                if (data.success) {
+	                  alert('비밀번호가 변경되었습니다.');
+	                  resultTitle.textContent = '';
+	                  resultBody.innerHTML = '';
+	                } else {
+	                  alert('비밀번호 변경에 실패했습니다. 다시 시도해주세요.');
+	                }
+	              })
+	              .catch(err => {
+	                console.error(err);
+	                alert('요청 중 오류가 발생했습니다.');
+	              });
 	          });
 	        }, 0);
 	      } else {
-	        resultTitle.textContent = "검색 결과 없음";
-	        resultBody.textContent = "해당 이메일로 등록된 회원 정보가 없습니다.";
+	        result.textContent = "해당 이메일로 등록된 회원 정보가 없습니다.";
+	        result.style.color = "red";
 	      }
-
-	      findModal.classList.remove('show');
-	      resultModal.classList.add('show');
 	    });
-	});
+});
+
 
 // 비밀번호 보기/숨기기 토글
 document.addEventListener('click', function (e) {

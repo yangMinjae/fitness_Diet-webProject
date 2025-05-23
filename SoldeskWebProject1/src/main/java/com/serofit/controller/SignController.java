@@ -1,5 +1,6 @@
 package com.serofit.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +85,18 @@ public class SignController {
 	// 이메일로 아이디 비번 찾기
 	@ResponseBody
 	@GetMapping(value = "/findID", produces = MediaType.APPLICATION_JSON_VALUE)
-	public UserVO findID(String email, Model model) {	
-		return lService.findID(email);
+	public Map<String, Object> findID(String email) {
+	    UserVO user = lService.findID(email);
+
+	    Map<String, Object> result = new HashMap<>();
+	    if (user != null) {
+	        result.put("success", true);
+	        result.put("id", user.getId());
+	    } else {
+	        result.put("success", false);
+	    }
+
+	    return result;
 	}
 	
 	@PostMapping(value = "/resetPassword", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

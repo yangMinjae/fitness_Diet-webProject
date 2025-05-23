@@ -16,8 +16,8 @@
 	
 			<div class="modal-body">
 				<input type="email" id="findIdEmail" placeholder="이메일 입력" required>
-				<button id="findIdSubmit">아이디 찾기</button>
 				<p id="findIdResult"></p>
+				<button id="findIdSubmit">아이디 찾기</button>
 			</div>
 		</div>
 	</div>	
