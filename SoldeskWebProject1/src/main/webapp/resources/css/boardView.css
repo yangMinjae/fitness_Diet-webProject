@@ -13,11 +13,10 @@ body {
   box-sizing: border-box;
 }
 
-/* 제목 + 태그 (한 줄) */
+/* 제목 + 태그 */
 .post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  padding-right: 140px; /* 오른쪽 태그 공간 확보 */
   margin-bottom: 8px;
 }
 
@@ -25,14 +24,21 @@ body {
   font-size: 1.8rem;
   font-weight: bold;
   color: black;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .tag {
+  position: absolute;
+  top: 8px;
+  right: 0;
   background-color: #f3fbf3;
   color: #2d624a;
   font-size: 0.85rem;
   padding: 6px 12px;
   border-radius: 20px;
+  white-space: nowrap;
 }
 
 /* 닉네임/날짜 | 조회수/좋아요 */
@@ -54,7 +60,7 @@ body {
   cursor: pointer;
 }
 
-/* 공통 본문 콘텐츠 */
+/* 본문 콘텐츠 */
 .post-content {
   font-size: 1.05rem;
   min-height: 400px;
@@ -71,12 +77,11 @@ body {
   box-sizing: border-box;
 }
 
-/* ✅ 식단 내용만 길이 제한 + 스크롤 */
+/* 식단 내용 길이 제한 */
 .diet-content .post-content {
-  max-height: 1300px; /* ← 이 값을 자유롭게 조절하세요! */
+  max-height: 1300px;
   overflow-y: auto;
 }
-
 
 /* 첨부 이미지 */
 .uploadedImg {
