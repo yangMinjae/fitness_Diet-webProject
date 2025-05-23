@@ -172,12 +172,16 @@ body {
 .form-group {
   display: flex;
   flex-direction: column;
+  padding: 8px 0px 0px 16px;
+  border: 1px solid #e2e2e2;       /* 연한 회색 테두리 */
+  border-radius: 12px;              /* 부드러운 모서리 */
+  margin-bottom: -10px;
+  transition: box-shadow 0.2s ease;
 }
 
 .form-group label {
   font-weight: 600;
   color: #4a5a50;
-  margin-bottom: 6px;
   font-size: 0.95rem;
 }
 
@@ -197,16 +201,18 @@ body {
   font-size: 0.95rem;
   resize: none;
   box-sizing: border-box;
+  font-family: Arial, sans-serif; /* ✅ 여기만 추가하면 끝! */
 }
 
 #showArea {
-  background-color: #f4fef4;
-  border: 1px solid #bbb;
   padding: 8px 12px;
   border-radius: 8px;
   margin-bottom: 8px;
   color: #444;
   display: inline-block;
+  font-family: Arial, sans-serif; /* ✅ 추가하면 통일됨 */
+  font-size: 0.9rem; /* 필요 시 크기도 맞추기 */
+  border: none; /* ✅ 테두리 완전 제거 */
 }
 
 /* 버튼 스타일 */
@@ -502,4 +508,51 @@ button {
 
 #close:hover {
   background-color: #f5aa93;
+}
+
+.readonly {
+  border: none !important;
+  background-color: transparent !important;
+  pointer-events: none; /* 입력 막기 */
+  color: #333;
+}
+
+/* 수정 모드일 땐 테두리/배경 제거 */
+.profile-form.editing .form-group {
+  border: none;
+  background-color: transparent;
+  padding-left: 0; /* 선택적으로 여백도 정리 */
+}
+
+/* 기본 상태 (읽기 전용): 화살표 숨기기 */
+select.readonly {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none !important;
+  pointer-events: none; /* 클릭도 비활성화 */
+  color: #444; /* 선택적으로 텍스트 색만 유지 */
+  background-color: transparent;
+  border: none;
+}
+
+/* 수정 모드 시 (편집 가능하게) */
+.profile-form.editing select {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  pointer-events: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+input[type="text"],
+select,
+textarea,
+#showArea {
+  font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+  box-sizing: border-box;
 }

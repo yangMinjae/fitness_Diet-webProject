@@ -60,6 +60,7 @@ function initialProfileTagSet(){       					// 초기셋팅 : input 태그들, �
   getProfileFormElements().forEach(el => {
 	    if (el.tagName.toLowerCase() !== 'img') {
 	      el.disabled = true;
+	      el.classList.add('readonly');
 	    }
 	  });
 	  document.querySelector('#imgEditBtn').classList.add('hidden');
@@ -68,6 +69,8 @@ function setToEdit(){             						// input 태그 및 이미지 버튼의 
   getProfileFormElements().forEach(el => {
 	    if (el.tagName.toLowerCase() !== 'img') {
 	      el.disabled = false;
+	      el.classList.remove('readonly');
+	      document.querySelector('.profile-form').classList.add('editing');
 	    }
 	  });
 	  document.querySelector('#imgEditBtn').classList.remove('hidden');
@@ -112,6 +115,7 @@ function fetchUserInfo(uno){      						// getUserInfo() 함수에서 쓰이는 
 function initProfile() {
 	initialProfileTagSet();            					// 초기셋팅 : input 태그들, 이미지 버튼 비활성화
 	getUserInfo();                  					// db에서 비동기로 유저프로필 및 메이트 데이터 가져와서 화면에 표시
+	document.querySelector('.profile-form').classList.remove('editing');
 }
 
 function profileEditToSubmit(){   						// 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과 텍스트를 변경
