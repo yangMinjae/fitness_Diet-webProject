@@ -24,13 +24,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		  	log.warn("Login Success");
 
 		    SavedRequest savedRequest = requestCache.getRequest(request, response);
 
 		    if (savedRequest != null) {
 		        String redirectUrl = savedRequest.getRedirectUrl();
-		        log.warn("Redirecting to saved request URL: " + redirectUrl);
 
 		        if (redirectUrl != null && redirectUrl.contains("/header/data")) {
 		            response.sendRedirect("/");  // 또는 "/main", "/dashboard" 등 원하는 뷰 페이지
@@ -39,7 +37,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		        }
 
 		    } else {
-		        log.warn("Redirecting to default URL: /");
 		        response.sendRedirect("/");
 		    }
 	}
