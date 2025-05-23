@@ -412,8 +412,7 @@ body {
 
 /* 필터가 적용되었을 때 강조 스타일 */
 .filters-row select.active {
-  border: 2px solid #6ac56d;
-  background-color: #e6f5ea;
+  box-shadow: 0 0 0 3px rgba(106, 197, 109, 0.4);
   font-weight: bold;
   color: #2c7a4b;
 }

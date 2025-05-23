@@ -127,7 +127,9 @@ function applyFilters() {
 			  { matched: matchTag, className: "tag", selected: selectedTag },
 			  { matched: matchGender, className: "gender", selected: selectedGender },
 			  { matched: matchAge, className: "age", selected: selectedAge },
-			  { matched: matchTime, className: "time", selected: selectedTime }
+			  { matched: matchTime, className: "time", selected: selectedTime },
+			  { matched: matchArea, className: "area", selected: selectedRegion1 },
+			  { matched: matchTime, className: "area", selected: selectedRegion2 }
 			];
 
 		matchMap.forEach(({ matched, className, selected }) => {
@@ -184,7 +186,7 @@ document.querySelectorAll(".mate-info").forEach(item => {
 
 // 필터 시 시각적으로 확인되는 함수
 function updateFilterVisualState() {
-	const filters = [timeFilter, genderFilter, ageFilter, tagFilter];
+	const filters = [timeFilter, genderFilter, ageFilter, tagFilter, region1Filter, region2Filter];
 	filters.forEach(select => {
 		if (select.value !== "::" && select.value !== "") {
 			select.classList.add("active");
