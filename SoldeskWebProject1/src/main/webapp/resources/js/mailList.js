@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const myUno = unoElement ? unoElement.textContent.trim() : null;
 
 	loadMailListByType('/mail/recevier', myUno);  // ✅ 최초 받은메일 자동 로딩
+	document.getElementById('loadSenderBtn').classList.add('active');
 
 	const senderBtn = document.getElementById('loadSenderBtn');
 	const recevierBtn = document.getElementById('loadRecevierBtn');
@@ -55,11 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (senderBtn) {	
 		senderBtn.addEventListener('click', () => {
 			loadMailListByType('/mail/recevier', myUno);
+			senderBtn.classList.add('active');
+			recevierBtn.classList.remove('active');
 		});
 	}
 	if (recevierBtn) {
 		recevierBtn.addEventListener('click', () => {
 			loadMailListByType('/mail/sender', myUno);
+			recevierBtn.classList.add('active');
+			senderBtn.classList.remove('active');
 		});
 	}
 });

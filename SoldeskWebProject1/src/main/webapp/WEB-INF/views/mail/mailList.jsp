@@ -14,22 +14,26 @@
 	<div class="mailbox-container">
 		<!-- 상단 컨트롤 -->
 		<div class="top-bar">
-			<button class="send-mail-btn">메일 보내기</button>
+			<div class="mail-toggle-btns">
+		        <button id="loadSenderBtn" class="toggle-btn">받은 메일</button>
+		        <button id="loadRecevierBtn" class="toggle-btn">보낸 메일</button>
+		    </div>
+		    
 			<div class="search-box">
 				<div class="input-wrapper">
 					<input type="text" class="search-input" placeholder="닉네임 or 내용 으로 검색..." />
 					<button class="search-btn">🔍</button>
 				</div>
 			</div>
+			
+			<button class="send-mail-btn">메일 보내기</button>
 		</div>
 		
-		<div class="mail-type-buttons">
-		  <button id="loadSenderBtn">받은 메일</button>
-		  <button id="loadRecevierBtn">보낸 메일</button>
-		</div>
+		
 		
 		<sec:authentication var="uno" property="principal.uno" />
 		<!-- 메일 리스트 -->
+		<div class="mail-list-wrapper">
 			<ul class="mail-list">
 				<c:forEach var="mvo" items="${mList}">
 					<li class="mail-item ${mvo.hit == 1 ? 'read' : ''}"
@@ -48,6 +52,7 @@
 					</li>
 				</c:forEach> 
 			</ul>
+		</div>
 			
 			<!-- ✅ 페이징 위치는 여기 -->
 			<div id="pagination" class="pagination-container"></div>
