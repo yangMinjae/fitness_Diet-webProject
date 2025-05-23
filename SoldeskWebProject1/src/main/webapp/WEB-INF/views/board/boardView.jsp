@@ -26,9 +26,12 @@
 			    <div id="nickname-popup" class="nickname-popup hidden">
 				    <ul>
 				        <li id="show-profile" data-uno="${bvDTO.uno}"><a href="">프로필 보기</a></li>
-				        <sec:authorize access="isAuthenticated()">
-				        	<li id="send-mail" data-uno="${bvDTO.uno}"><a href="">메일 보내기</a></li>
-				        </sec:authorize>
+				        <sec:authorize access="isAuthenticated()">				        
+						<sec:authentication var="uno" property="principal.uno" />
+						  <c:if test="${bvDTO.uno ne uno}">
+						    <li id="send-mail" data-uno="${bvDTO.uno}"><a href="">메일 보내기</a></li>
+						  </c:if>
+						</sec:authorize>
 				    </ul>
 				</div>
 			    <div class="post-meta-right">
