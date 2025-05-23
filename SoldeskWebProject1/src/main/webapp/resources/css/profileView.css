@@ -183,5 +183,22 @@
 
 body.modal-open {
   overflow: hidden;
-  touch-action: none;
+  position: fixed;
+  width: 100%;
+}
+
+.scroll-lock-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  background: transparent;
+
+  pointer-events: auto;     /* ✅ 클릭 막기 */
+  touch-action: none;       /* ✅ 모바일 터치 스크롤 막기 */
+  overscroll-behavior: none;/* ✅ 크롬/모바일에서 스크롤 바운스 방지 */
+
+  /* 추가 스크롤 방지용 */
+  overflow: hidden;
 }
