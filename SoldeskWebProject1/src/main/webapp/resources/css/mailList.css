@@ -9,7 +9,7 @@ body {
   width: 95%;
   max-width: 1000px;
   margin: 60px auto;
-  padding: 32px;
+  padding: 20px 32px;
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
@@ -21,14 +21,13 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
 .send-mail-btn {
   background-color: #6ac56d;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border: none;
   border-radius: 24px;
   font-weight: bold;
@@ -58,7 +57,7 @@ body {
 
 .search-input {
   flex-grow: 1;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border: none;
   background-color: transparent;
   font-size: 0.95rem;
@@ -176,3 +175,64 @@ body {
   background-color: #f0f0f0;
 }
 
+.mail-toggle-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* 개별 탭 버튼 */
+.toggle-btn {
+  background-color: #f9f9f9;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 14px 20px 14px 20px;
+  border-radius: 12px 12px 0 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.toggle-btn.active {
+  background-color: var(--tab-bg);
+  border-color: #ccc;
+  border-bottom: none; /* 아래 내용과 연결된 느낌 */
+  z-index: 2;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.03); /* 탭 위 그림자 */
+}
+
+.toggle-btn:hover {
+  background-color: #eeeeee;
+}
+
+.toggle-btn.active:hover{
+  background-color: var(--tab-bg);
+}
+
+.mail-list-wrapper {
+  background-color: var(--tab-bg);
+  border: 1px solid #ccc;
+  border-radius: 0 12px 12px 12px;
+  padding: 20px;
+  margin-top: -1px;
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+:root {
+  --tab-bg: #fffdf9; /* 부드러운 크림톤 */
+}
+
+.mail-list-wrapper.sent-style {
+background-color: var(--tab-bg);
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: -1px;
+  z-index: 1;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px 12px 12px 12px;
+}
