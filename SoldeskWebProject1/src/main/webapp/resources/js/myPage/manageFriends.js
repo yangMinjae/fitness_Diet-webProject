@@ -140,13 +140,23 @@ function setupSearch(inputId, tableBodyId) {
 	if (!input || !tableBody) return;
 
 	input.addEventListener('input', function () {
-		const filter = this.value.toLowerCase();
+		const filter = this.value.toLowerCase().trim();
 		const rows = tableBody.getElementsByTagName('tr');
 
 		Array.from(rows).forEach(row => {
 			const nicknameCell = row.querySelector('td:nth-child(2)');
-			const nickname = nicknameCell ? nicknameCell.textContent.toLowerCase() : '';
-			row.style.display = nickname.includes(filter) ? '' : 'none';
+			const nickname = nicknameCell ? nicknameCell.textContent.toLowerCase().trim() : '';
+
+			row.classList.remove('highlight'); // 기존 강조 제거
+
+			if (nickname === filter) {
+				row.style.display = '';
+				row.classList.add('highlight'); // 정확 일치 강조
+			} else if (nickname.includes(filter)) {
+				row.style.display = '';
+			} else {
+				row.style.display = 'none';
+			}
 		});
 	});
 }

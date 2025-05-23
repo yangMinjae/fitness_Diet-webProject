@@ -412,6 +412,10 @@ button {
   box-shadow: 0 0 6px rgba(135, 203, 183, 0.4);
 }
 
+.listTable tbody tr.highlight {
+    background-color: #f0fdf4 !important;
+}
+
 /* 상단 제목 + 수평선 */
 .modal-header {
   font-weight: bold;

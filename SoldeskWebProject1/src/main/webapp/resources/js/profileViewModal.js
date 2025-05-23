@@ -6,11 +6,6 @@ let previousClassList = [...profilemodal.classList];
 let selectUno;
 
 // 게시글 클릭 시 해당 ID로 이동
-document.querySelectorAll('.post-row.clickable').forEach(row => {
-  row.addEventListener('click', () => {
-	  console.log('boardView!');
-  });
-});
 
 closeBtn.addEventListener("click", () => {
 	profilemodal.classList.remove("show");
@@ -25,8 +20,8 @@ const observer = new MutationObserver((mutationsList) => {
 
          if (added.includes("show")) {        	 
              getProfile();
-         }
-
+         }         
+         
          previousClassList = currentClassList;
      }
  }
@@ -98,7 +93,7 @@ function renderProfileModalInfo(data) {
 			  
 			  const row = document.createElement("div");
 			  row.className = "post-row clickable";
-			  row.dataset.postId = board.id;
+			  row.dataset.bno = board.bno;
 			  row.innerHTML = `
 				  <div>${board.title}</div>
 				  <div>${formatDateToYMD(board.regDate)}</div>
@@ -107,7 +102,13 @@ function renderProfileModalInfo(data) {
 				  `;
 			  
 			  postTable.appendChild(row);
-		  }); 
+		  });
+		  
+		  document.querySelectorAll('.post-row.clickable').forEach(row => {
+        	  row.addEventListener('click', () => {
+        		  location.href="/board/boardView?bno="+row.dataset.bno;
+        	  });
+		  });
 	  } 
 }
 
