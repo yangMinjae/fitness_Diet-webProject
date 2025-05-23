@@ -54,20 +54,38 @@
 		      </div>
 		    </div>
 		  </div>
-		
-		  <!-- 게시판 설명 (왼쪽에 설명, 오른쪽에 이미지) -->
-		  <div class="board-description">
-		    <div class="board-item">
-		      <div class="board-text">
-		        <h3>게시판</h3>
-		        <p>게시판은 운동 목적에 따라 구분되어 있습니다. <br>
-		        	각 게시글은 회원들이 제공받은 식단을 토대로 한 운동 결과나 반응을 공유하는 공간입니다. <br>
-		        	여러분의 경험을 나누고 다른 사람들의 피드백을 받을 수 있습니다.</p>
-		      </div>
-		      <img src="/resources/img/boardcat.jpg" alt="게시판 이미지" class="board-image right">
-		    </div>
-		  </div>
 		</section>
+		
+		<section class="section">
+		  <!-- 게시판 설명 2열 레이아웃 -->
+		  <div class="board-layout">
+		    <div class="board-left">
+	          <h3>게시판</h3>
+	          <p>게시판은 운동 목적에 따라 구분되어 있습니다.<br>
+			            각 게시글은 회원들이 제공받은 식단을 토대로 한 운동 결과나 반응을 공유하는 공간입니다.<br>
+			            여러분의 경험을 나누고 다른 사람들의 피드백을 받을 수 있습니다.</p>
+			<div class="popular-posts-inline">
+	          <div class="popular-posts-wrapper">
+	            <c:forEach var="hbdto" items="${hbList}">
+	              <div class="post-card">
+	                <h3>${hbdto.title}</h3>
+	                <div class="post-meta">
+	                  <img src="${hbdto.imgPath}" alt="프로필" />
+	                  <span>${hbdto.nickname}</span>
+	                </div>
+	                <span class="bno" hidden="true">${hbdto.bno}</span>
+	              </div>
+	            </c:forEach>
+	          </div>
+	        </div>
+	      </div>
+		
+	      <div class="board-right">
+	        <img src="/resources/img/boardcat.jpg" alt="게시판 이미지">
+	      </div>
+	    </div>
+	</section>
+
 		
 		<section class="interactive-gallery">
 		  <div class="thumbnail-row">
@@ -85,24 +103,6 @@
 		      <p id="main-desc">둥글둥글했던 시절은 안녕~ <br>건강한 식단과 운동으로 변화 중인 판다. 다이어터!<br>느리지만 꾸준하게,이제는 몸도 마음도 가벼워지는 중입니다. </p>
 		    </div>
 		  </div>	
-		</section>
-		
-		<section class="popular-posts">
-		  <h2>인기 게시글</h2>
-		  <div class="popular-posts-wrapper">
-		    <c:forEach var="hbdto" items="${hbList}">
-		      <div class="post-card">
-		        <h3>${hbdto.title}</h3>
-		        <p>${hbdto.tag}</p>
-		        <div class="post-meta">
-		          <img src="${hbdto.imgPath}" alt="프로필" />
-		          <span>${hbdto.nickname}</span> · 
-		          <span>${hbdto.regdate}</span>
-		        </div>
-		          <span class="bno" hidden="true">${hbdto.bno}</span>
-		      </div>
-		    </c:forEach>
-		  </div>
 		</section>
 	</main>
 	
