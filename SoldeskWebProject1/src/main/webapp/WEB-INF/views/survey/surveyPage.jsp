@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SeroFit 설문조사</title>
 </head>
 <body>
 	<jsp:include page="../layout/header.jsp" />

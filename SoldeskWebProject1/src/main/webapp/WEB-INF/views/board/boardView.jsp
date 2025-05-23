@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${bvDTO.title}</title>
 </head>
 <body>
 	<jsp:include page="../layout/header.jsp" />
