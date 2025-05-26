@@ -20,9 +20,9 @@
 		    </div>
 		    
 			<div class="search-box">
-				<div class="input-wrapper">
+				<div class="mail-search-wrapper">
 					<input type="text" class="search-input" placeholder="닉네임 or 내용 으로 검색..." />
-					<button class="search-btn">🔍</button>
+					<button type="button" class="clear-search-btn">×</button>
 				</div>
 			</div>
 			

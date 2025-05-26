@@ -262,3 +262,14 @@ function formatDateToYMD(input) {
 	const day = ('0' + date.getDate()).slice(-2);
 	return `${year}-${month}-${day}`;
 }
+
+const searchInput = document.querySelector('.search-input');
+const clearBtn = document.querySelector('.clear-search-btn');
+
+if (searchInput && clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input')); // 🔄 리스트 다시 렌더링
+    searchInput.focus();
+  });
+}
