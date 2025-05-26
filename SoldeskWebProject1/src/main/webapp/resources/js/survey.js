@@ -4,13 +4,13 @@ const linkEle1 = document.createElement('link');
 linkEle1.rel = 'stylesheet';
 linkEle1.href = CSS_FILE_PATH1;
 document.head.appendChild(linkEle1);
-//------모달 css 로딩------
+// ------모달 css 로딩------
 const CSS_FILE_PATH2 = '/resources/css/loadingModal.css';
 const linkEle2 = document.createElement('link');
 linkEle2.rel = 'stylesheet';
 linkEle2.href = CSS_FILE_PATH2;
 document.head.appendChild(linkEle2);
-//-----------------------
+// -----------------------
 
 document.getElementById("goalSelect").addEventListener("change", function () {
   const goal = this.value;
@@ -45,7 +45,7 @@ document.querySelector('select[name="cDTO.favSport"]').addEventListener('change'
 	  }
 });
 
-//프로득근러 하위 섹션 분기 처리
+// 프로득근러 하위 섹션 분기 처리
 document.getElementById("proGoalTypeSelect").addEventListener("change", function () {
   const type = this.value;
   document.getElementById("proStrengthSection").classList.add("hidden");
@@ -347,7 +347,7 @@ function setupLimitedCheckboxGroup(groupName, maxCount) {
 	  });
 }
 
-//로딩 모달 표시
+// 로딩 모달 표시
 function showLoadingModal() {
   document.getElementById("loadingModal").style.display = "block";
 }
@@ -376,6 +376,16 @@ function fetchFunc(f,param){
 	.then(res=>res.text())
 	.then(text=>{
 		hideLoadingModal();
+		if (typeof sessionStorage !== 'undefined') {
+			  try {
+			    sessionStorage.removeItem('surveySaved');
+			    console.log('sessionStorage: surveySaved 항목 제거 완료');
+			  } catch (e) {
+			    console.error('sessionStorage 사용 불가 또는 제거 중 오류:', e);
+			  }
+			} else {
+			  console.warn('이 브라우저는 sessionStorage를 지원하지 않습니다.');
+			}
 
 		location.replace('/survey/surveyResultPage');	
 	});	
