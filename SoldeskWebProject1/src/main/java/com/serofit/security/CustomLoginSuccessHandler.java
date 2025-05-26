@@ -18,29 +18,31 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Component
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
-	
+
 	private final RequestCache requestCache = new HttpSessionRequestCache();
-	
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
-		    SavedRequest savedRequest = requestCache.getRequest(request, response);
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
-		    if (savedRequest != null) {
-		        String redirectUrl = savedRequest.getRedirectUrl();
+		if (savedRequest != null) {
+			String redirectUrl = savedRequest.getRedirectUrl();
 
-		        if (redirectUrl != null) {
-		        	if(redirectUrl.contains("/header/data") || redirectUrl.contains("/updateMateVisibility?visible")
-		        		|| redirectUrl.contains("/login")) {
-			            response.sendRedirect("/");
-		        	}
-		        } else {
-		            response.sendRedirect(redirectUrl);
-		        }
+			if (redirectUrl != null) {
+				if (redirectUrl.contains("/header/data") || redirectUrl.contains("/updateMateVisibility?visible")
+						|| redirectUrl.contains("/login")) {
+					response.sendRedirect("/");
+				} else {
+					response.sendRedirect(redirectUrl);
+				}
+			} else {
+				response.sendRedirect("/");
+			}
 
-		    } else {
-		        response.sendRedirect("/");
-		    }
+		} else {
+			response.sendRedirect("/");
+		}
 	}
 }
