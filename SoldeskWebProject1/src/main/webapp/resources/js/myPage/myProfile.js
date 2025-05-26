@@ -133,6 +133,7 @@ function initialProfileTagSet(){       					// 초기셋팅 : input 태그들, �
 	    }
 	  });
 	  document.querySelector('#imgEditBtn').classList.add('hidden');
+	  document.querySelector('.charCountHidden').classList.add('hidden');
 	}
 function setToEdit(){             						// input 태그 및 이미지 버튼의 disabled를 풀어준다.
   getProfileFormElements().forEach(el => {
@@ -188,20 +189,22 @@ function initProfile() {
 }
 
 function profileEditToSubmit(){   						// 화면상 표시되는 '프로필 수정' 버튼을 '제출'버튼으로 스타일과 텍스트를 변경
-	  editProfile.innerText='제출';
+	  editProfile.innerText='수정';
 	  editProfile.classList.remove('edit-button');
 	  editProfile.classList.add('submit-button');
 	  cancelEdit.classList.remove('hidden');
 	  searchArea.classList.remove('hidden');
 	  updateCharCount();
+	  document.querySelector('.charCountHidden').classList.remove('hidden');
 	}
 
-	function submitToProfileEdit(){   					// '제출'버튼의 스타일을 다시 '프로필 수정' 버튼으로 변경
+function submitToProfileEdit(){   					// '제출'버튼의 스타일을 다시 '프로필 수정' 버튼으로 변경
 	  editProfile.innerText='프로필 수정';
 	  editProfile.classList.remove('submit-button');
 	  editProfile.classList.add('edit-button');
 	  cancelEdit.classList.add('hidden');
 	  searchArea.classList.add('hidden');
+	  document.querySelector('.charCountHidden').classList.add('hidden');
 	}
 	
 //-------------------------------------------------------------

@@ -76,7 +76,7 @@
 								<textarea rows="9" cols="30" name="upVO.self" maxlength="300"
 									placeholder="300자 이내 작성" id="self" oninput="updateCharCount()"></textarea>
 							</div>
-							<div style="text-align: right; font-size: 0.9em; color: #555;">
+							<div style="text-align: right; font-size: 0.9em; color: #555;" class="charCountHidden">
 								<span id="charCount">0</span>/300
 							</div>
 						</form>
