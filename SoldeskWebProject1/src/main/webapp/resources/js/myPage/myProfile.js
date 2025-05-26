@@ -99,7 +99,7 @@ document.querySelectorAll('.edit-button-wrapper button')
 })
 
 async function handleEditProfile(e) {
-    const res = await fetch('/getCountDite');
+    const res = await fetch('/getCountDiet');
     const result = await res.text();
 
     if (result === 'false') {
@@ -210,9 +210,7 @@ function submitForm(){            						// 폼을 동기 방식으로 제출하�
   let areaVal = showArea.textContent;
 
   if(!f.elements['upVO.fav'].value){
-    alert('좋아하는 운동을 입력해 주세요');
-    f.elements['upVO.fav'].focus();
-    return;
+	  f.elements['upVO.fav'].value = '';
   }
 
   if(areaVal=='::'){
@@ -226,9 +224,7 @@ function submitForm(){            						// 폼을 동기 방식으로 제출하�
   }
 
   if(!f.elements['upVO.self'].value){
-    alert('자기소개를 입력해 주세요');
-    f.elements['upVO.self'].focus();
-    return;
+	  f.elements['upVO.self'].value = '';
   }
   let formChildArea = document.createElement('input');
   formChildArea.setAttribute('type', 'hidden');
@@ -301,6 +297,7 @@ f.uploadFile.addEventListener('change', function(e) {
 	      myProfileImg.setAttribute("src", event.target.result); // 이미지 미리보기
 	    };
 	    reader.readAsDataURL(file);
+	    closeProfileImgModal();
 	  } else {
 	    alert("이미지 파일만 업로드할 수 있습니다.");
 	    e.target.value = ''; // 잘못된 파일일 경우 초기화

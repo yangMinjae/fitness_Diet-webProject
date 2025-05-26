@@ -720,3 +720,26 @@ textarea,
   opacity: 1;
   visibility: visible;
 }
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  color: #999;
+  display: none;
+}
+
+.search-wrapper input:not(:placeholder-shown) + .clear-btn {
+  display: inline;
+}
+
