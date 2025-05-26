@@ -125,8 +125,6 @@ function updateFollowOrFav(catcher, action) {		// 현재 로그인 중인 사람
 	  })
 	  .then(res => res.text())
 	  .then(text => {
-	    console.log(text);
-	    
 	    if (action === 'addFollow' && text === 'fail') {
 	      alert('이미 팔로우 중인 사람입니다.');
 	    }

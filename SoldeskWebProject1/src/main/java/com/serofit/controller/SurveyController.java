@@ -36,11 +36,10 @@ public class SurveyController {
 	@Autowired
 	SurveyService sService;
 	
-	@PostMapping(value = "/submitDiet", consumes = "application/json;charset=UTF-8",produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/submitDiet", consumes = "application/json;charset=UTF-8", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processDietResult(@RequestBody SubmitDietDTO dDTO, HttpSession session) {
 		boolean result = sService.updateTbl(dDTO);
-		System.out.println("테이블 수정 결과 : "+result);
 		Map<String,String> aiResult = sService.makeAiGeneratedData(dDTO);
 		session.setAttribute("result", aiResult);
 		session.setAttribute("goal", ValTagEnum.toLabel(dDTO.getcDTO().getGoal()));
@@ -54,22 +53,22 @@ public class SurveyController {
 	    return "/survey/surveyResultPage";
 	}
 
-	@PostMapping(value = "/submitGain", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/submitGain", consumes = "application/json", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processGainResult(@RequestBody SubmitGainDTO gDTO, HttpSession session) {
 		boolean result = sService.updateTbl(gDTO);
-		System.out.println("테이블 수정 결과 : "+result);
+		
 		Map<String,String> aiResult = sService.makeAiGeneratedData(gDTO);
 		session.setAttribute("result", aiResult);
 		session.setAttribute("goal", ValTagEnum.toLabel(gDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 
-	@PostMapping(value = "/submitHealth", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/submitHealth", consumes = "application/json", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processHealthResult(@RequestBody SubmitHealthDTO hDTO, HttpSession session) {
 		boolean result = sService.updateTbl(hDTO);
-		System.out.println("테이블 수정 결과 : "+result);
+		
 		Map<String,String> aiResult = sService.makeAiGeneratedData(hDTO);
 		session.setAttribute("result", aiResult);
 		session.setAttribute("goal", ValTagEnum.toLabel(hDTO.getcDTO().getGoal()));
@@ -80,29 +79,29 @@ public class SurveyController {
 	@ResponseBody
 	public String processMaintainResult(@RequestBody SubmitMaintainDTO mDTO, HttpSession session) {
 		boolean result = sService.updateTbl(mDTO);
-		System.out.println("테이블 수정 결과 : "+result);
+		
 		Map<String,String> aiResult = sService.makeAiGeneratedData(mDTO);
 		session.setAttribute("result", aiResult);
 		session.setAttribute("goal", ValTagEnum.toLabel(mDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 	
-	@PostMapping(value = "/submitStrength", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/submitStrength", consumes = "application/json", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processStrengthResult(@RequestBody SubmitStrengthDTO sDTO, HttpSession session) {
 		boolean result = sService.updateTbl(sDTO);
-		System.out.println("테이블 수정 결과 : "+result);
+		
 		Map<String,String> aiResult = sService.makeAiGeneratedData(sDTO);
 		session.setAttribute("result", aiResult);
 		session.setAttribute("goal", ValTagEnum.toLabel(sDTO.getcDTO().getGoal()));
 		return "ok";
 	}
 	
-	@PostMapping(value = "/submitMuscle", consumes = "application/json",produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/submitMuscle", consumes = "application/json", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String processMuscleResult(@RequestBody SubmitMuscleDTO mDTO, HttpSession session) {
 		boolean result = sService.updateTbl(mDTO);
-		System.out.println("테이블 수정 결과 : "+result);
+		
 		Map<String,String> aiResult = sService.makeAiGeneratedData(mDTO);
 		session.setAttribute("result", aiResult);
 		session.setAttribute("goal", ValTagEnum.toLabel(mDTO.getcDTO().getGoal()));
@@ -111,7 +110,6 @@ public class SurveyController {
 	@PutMapping(value = "/insertDiet", consumes = "application/json", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String insertDiet(@RequestBody DietVO dvo) {
-		log.warn(dvo);
 		sService.insertDiet(dvo);
 	    return "저장 완료";
 	}

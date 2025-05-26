@@ -85,7 +85,6 @@ public class FileUploadServiceImpl implements FileUploadService{
 		}
 		System.out.println(oFullFilePath);
 		if(!oUuid.contains("basic")) {
-			System.out.println("?????");
 			File existingFile = new File(oFullFilePath);
 			if(existingFile.exists()) {
 				if(!existingFile.delete()) {

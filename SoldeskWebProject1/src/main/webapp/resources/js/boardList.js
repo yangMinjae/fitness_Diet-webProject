@@ -153,7 +153,6 @@ function checkHasDiet() {
 
 // --------------------페이징 ----------------------------
 function movePageByNum(pageNum) {
-    console.log("비동기 페이지 번호:", pageNum);
     currentPage = pageNum;
     renderPage(currentPage);
     renderPagination(); // 버튼 갱신

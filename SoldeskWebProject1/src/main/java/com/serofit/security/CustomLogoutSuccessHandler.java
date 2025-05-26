@@ -16,9 +16,7 @@ import lombok.extern.log4j.Log4j;
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
-                                 Authentication authentication) throws IOException, ServletException {
-        log.info("👋 로그아웃 성공!");
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         // 로그아웃 후 리다이렉트
         response.sendRedirect("/");

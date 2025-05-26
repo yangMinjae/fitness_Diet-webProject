@@ -57,7 +57,6 @@ public class MainController {
 	// 서버 구동 시 mainPage
 	@GetMapping()
 	public String home(Locale locale, Model model) {
-		log.info("main!!!!!");
 		model.addAttribute("hbList", mpService.getHotPosts(4)); // 인기 게시글 갯수 4개로 고정		 
 		
 		return "main";
@@ -81,7 +80,6 @@ public class MainController {
 	// 로그인 페이지 이동
 	@GetMapping("/login")
 	public String showLoginPage() {
-		log.info("....forwarding to LoginPage....");
 		return "/sign/login";
 	}
 	
@@ -89,7 +87,6 @@ public class MainController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myPage")
 	public String showMyPage(Model model, Authentication authentication) {
-		log.info("....forwarding to myPage....");
 		CustomUser user = (CustomUser) authentication.getPrincipal();		
 		
 		model.addAttribute("dList", mypService.getDietList(user.getUno()));
@@ -110,7 +107,6 @@ public class MainController {
 	// 전체게시글 페이지로 이동 (동기)
 	@GetMapping("/boardList")
 	public String list(Model model) {			
-		log.info("boardList....");		
 		// 게시글 목록 가져오기
 		List<BoardListDTO> list = bService.getPostList(); 
 		
@@ -142,7 +138,6 @@ public class MainController {
 	// 로그아웃 시 메인페이지
 	@GetMapping("/customLogout")
 	public String logoutGET() {
-		log.info("custom Logout");
 		return "/";
 	}
 	

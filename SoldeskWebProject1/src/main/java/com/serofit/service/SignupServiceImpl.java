@@ -52,16 +52,13 @@ public class SignupServiceImpl implements SignupService {
 		UProfileVO upvo = new UProfileVO();
 		uvo.setPw(pwEncoder.encode(uvo.getPw()));
 		int result = uMapper.insertUser(uvo);
-		System.out.println("result : " + result);
 		uMapper.insertAuth(uvo.getUno());
-		// uuid 고정 값 변경!!!!!!!!!!!!!!!
 		
 		if(result >= 1) {
 			upvo.setUuid("basic0");
 			upvo.setUno(uvo.getUno());
 			result = upmapper.insertProfile(upvo);
 		}
-		System.out.println("result : " + result);
 		
 		return result;
 	}

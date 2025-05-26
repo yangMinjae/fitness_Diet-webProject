@@ -228,7 +228,6 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 				form.elements["cDTO.restDays"].value = data.sRestDays;
 				formData = new FormData(this);
 				for (const [k, v] of formData.entries()) {
-					  console.log(k, v); // 여기에서 cDTO.goal이 빠져 있으면 문제 발생
 					}
 				fetchFunc(formData,'submitStrength');
 			}else{

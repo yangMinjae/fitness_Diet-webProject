@@ -66,7 +66,6 @@ public class MailController {
 		CustomUser user = (CustomUser) authentication.getPrincipal();
 		
 	    mService.updateByReadMail(mno); // 읽음 처리
-	    System.out.println("original mno : "+ mno);
 	    int newCount = mService.selectMailCountByReceiver(user.getUno()); // 안 읽은 메일 수
 
 	    user.setMailCount(newCount); // 사용자 세션도 업데이트 (헤더에 반영될 수 있도록)

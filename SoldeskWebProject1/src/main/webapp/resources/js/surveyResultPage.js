@@ -10,8 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (numbers && numbers.length === 3) {
       const kcal = numbers[0] * 4 + numbers[1] * 4 + numbers[2] * 9;
       div.textContent = `${kcal}kcal ${text}`;
-    } else {
-      console.warn("⚠️ 탄단지 숫자 추출 실패:", text);
     }
   });
   
@@ -99,7 +97,7 @@ function fetchDiet(formA){
     }
   })
   .then(res=>res.text())
-  .then(text=>console.log(text))
+  .then(text=>)
   .catch(err=>console.log(err));
 }
 function initSurveyResult(){

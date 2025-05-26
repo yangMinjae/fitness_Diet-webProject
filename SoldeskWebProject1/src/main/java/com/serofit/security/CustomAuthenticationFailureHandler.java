@@ -19,7 +19,6 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			org.springframework.security.core.AuthenticationException exception) throws IOException, ServletException {
 		
-		System.out.println("falelakglearvadlsfvnaf");
 		request.getSession().setAttribute("LOGIN_FAIL_MESSAGE", "아이디 또는 비밀번호가 잘못되었습니다.");
         response.sendRedirect("/login");
 		

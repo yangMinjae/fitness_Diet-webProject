@@ -163,11 +163,9 @@ function readModal() {
 			const mno = item.dataset.mno;
 			const regdate = item.dataset.regdate;
 			const imgPath = item.dataset.photo;
-			console.log(imgPath);
 			fetch(`/mail/updateByReadMail?mno=${mno}`, { method: 'GET' })
 				.then(res => res.json())
 				.then(data => {
-					console.log(data);
 					if (data.status === 'success') {
 						document.getElementById('senderName').innerText = name;
 						document.getElementById('mailContent').innerText = content;

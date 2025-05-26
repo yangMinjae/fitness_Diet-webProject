@@ -37,7 +37,6 @@ document
     	
     	document.getElementById('findIdModal').classList.add('show');
     }else if(href == 'signup'){
-      console.log('회원가입');
       location.href='/sign/signUp';
     }
   })
@@ -51,7 +50,6 @@ document.querySelector('#findIdModal .close-btn').addEventListener('click', () =
 // 아이디 비번 결과창 모달 닫기
 document.querySelector('#resultModal .close-btn').addEventListener('click', () => {
 	resultModal.classList.remove('show');
-	console.log(inputFieldID.value);
 });
 
 document.getElementById('findIdSubmit').addEventListener('click', () => {

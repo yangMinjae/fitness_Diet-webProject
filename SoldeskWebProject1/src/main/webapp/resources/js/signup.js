@@ -118,7 +118,6 @@ function validateDuplicate(id, endpoint, label) {
   const url = id === 'mEmail' ? `/sign/validateEmail?email=${encodeURIComponent(value)}` 
 		  : `/sign/${endpoint}/${encodeURIComponent(value)}`;
   
-  console.log(value);
   if(id === 'mId' && !regExp.mId.test(f.mId.value)){
 	  alert('형식이 맞지 않습니다. (영어 소문자로 시작, 영어 + 숫자 조합 3~12 글자)');
 	  return;

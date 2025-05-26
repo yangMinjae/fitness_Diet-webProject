@@ -65,7 +65,6 @@ public class MyPageController {
 	@ResponseBody
 	@GetMapping(value = "/getFavList/{uno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProfileDTO> getFabList(@PathVariable int uno){
-		log.info("즐겨찾기 목록");
 		List<ProfileDTO> pDTOList = mService.getFavList(uno);
 		return pDTOList;
 	}
@@ -73,7 +72,6 @@ public class MyPageController {
 	@ResponseBody
 	@GetMapping(value = "/getFollowList/{uno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProfileDTO> getFollowList(@PathVariable int uno){
-		log.info("팔로우 목록");
 		List<ProfileDTO> pDTOList = mService.getFollowList(uno);
 		return pDTOList;
 	}
@@ -81,7 +79,6 @@ public class MyPageController {
 	@ResponseBody
 	@GetMapping(value = "/getFollowerList/{uno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ProfileDTO> getFollowerList(@PathVariable int uno){
-		log.info("팔로워 목록");
 		List<ProfileDTO> pDTOList = mService.getFollowerList(uno);
 		return pDTOList;
 	}
@@ -90,7 +87,6 @@ public class MyPageController {
 	@ResponseBody
 	@DeleteMapping(value = "/removeFav" ,produces = MediaType.TEXT_PLAIN_VALUE)
 	public String removeFav(@RequestBody FollowVO fvo) {
-		log.info("즐겨찾기 해제");
 		boolean result = mService.removeFromFav(fvo);
 		return result? "success" : "fail";
 	}
@@ -98,7 +94,6 @@ public class MyPageController {
 	@ResponseBody
 	@PutMapping(value = "/addFav", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String addFav(@RequestBody FollowVO fvo) {
-		log.info("즐겨찾기 추가");
 		boolean result = mService.addToFav(fvo);
 		return result? "success" : "fail";
 	}
@@ -106,7 +101,6 @@ public class MyPageController {
 	@ResponseBody
 	@DeleteMapping(value = "/cancelFollow", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String cancelFollow(@RequestBody FollowVO fvo) {
-		log.info("팔로우 취소");
 		boolean result = mService.unfollow(fvo);
 		return result? "success" : "fail";
 	}
@@ -114,7 +108,6 @@ public class MyPageController {
 	@ResponseBody
 	@PutMapping(value = "/addFollow", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String addFollow(@RequestBody FollowVO fvo) {
-		log.info("팔로우 하기");
 		boolean result = mService.follow(fvo);
 		return result? "success" : "fail";
 	}

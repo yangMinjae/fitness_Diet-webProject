@@ -40,7 +40,6 @@ dietBtn.addEventListener('click', () => {
             row.addEventListener('click', () => {
               const title = row.children[0]?.textContent || '제목 없음';
               const dno = row.querySelector('td[dno]')?.getAttribute('dno');
-              console.log(`선택한 식단: ${title}, ${dno}`);
               // 원하는 추가 동작 넣기 가능
             });
           });
@@ -260,8 +259,6 @@ document.querySelectorAll('.button-grid button, .modal-footer button').forEach(b
 	      case 'close':
 	    	  closeProfileImgModal(); // 닫기 버튼 클릭 시 모달 닫기
 	        break;
-	      default:
-	        console.warn('알 수 없는 버튼 ID:', id);
 	    }
 	  });
 	});

@@ -26,7 +26,6 @@ public class LoginServiceImpl implements LoginService{
 		if(uMapper.login(ldto)!=0) {
 			uno = uMapper.getUno(ldto)+"";
 		}
-		log.warn("login result uno : "+uno);
 		return uno;
 	}
 	

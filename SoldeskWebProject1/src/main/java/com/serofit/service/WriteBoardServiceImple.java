@@ -34,9 +34,7 @@ public class WriteBoardServiceImple implements WriteBoardService {
 	// 게시글 작성하기
 	@Override
 	public void register(BoardVO bvo) {
-		
 		bMapper.insertPost(bvo);
-
 	}
 	// 게시글 수정 시 기존 게시글 내용 가져오기
 	@Override
@@ -61,7 +59,6 @@ public class WriteBoardServiceImple implements WriteBoardService {
 	// 게시글 삽입시 dno로 식단내용 가져오기
 	@Override
 	public DietVO getDietByDno(int dno) {
-		
 		return dMapper.selectDietByDno(dno);
 	}
 }

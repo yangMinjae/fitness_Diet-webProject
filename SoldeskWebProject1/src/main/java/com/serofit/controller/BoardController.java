@@ -106,7 +106,6 @@ public class BoardController {
 	// 게시글 등록
 	@PostMapping("/writeBoard")
 	public String register(BoardVO bvo) {
-		log.info("Register...." + bvo);
 		wbService.register(bvo);
 		return "redirect:/boardList";
 	}
@@ -114,10 +113,8 @@ public class BoardController {
 
 	// 게시글 자세히 보기
 	@GetMapping("/boardView")
-	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response
-			, Authentication authentication) {
+	public String boardViewPage(Model model, int bno, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		
-		log.info("boradView...!!");
 		// dno로 식단정보 가져오기
 		BoardViewDTO bvDTO = bService.getPost(bno);
 	    model.addAttribute("bvDTO", bvDTO);
