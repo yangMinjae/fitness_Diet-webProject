@@ -1,3 +1,7 @@
+body {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+}
+
 /* 모달 외부 배경 */
 #findIdModal {
 	display: none;

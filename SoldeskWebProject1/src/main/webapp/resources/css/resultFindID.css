@@ -30,7 +30,7 @@
   animation: fadeSlideUp 0.3s ease;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
 }
 
 @keyframes fadeSlideUp {

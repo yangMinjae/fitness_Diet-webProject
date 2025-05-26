@@ -51,7 +51,6 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping(value ="/getAllBoardList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)	
 	public List<BoardListDTO> getAllList(){
-		log.info("getAllBoardList....");
 	
 		return bService.getPostList();
 	}
@@ -60,7 +59,6 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping(value = "/boardList/{tag}" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<BoardListDTO> getTagList(@PathVariable("tag") String tag){
-		log.info("getTagList by tag : " + tag);
 		
 		return bService.getPostsByTag(tag);
 	}
@@ -95,14 +93,12 @@ public class BoardController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/writeBoard")
 	public String writePost(Model model, Authentication authentication) {
-		log.info("writePost .... ");				
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		List<DietVO> dvoList = wbService.getDietTitle(customUser.getUno());
 		
 		model.addAttribute("dietList", dvoList);
 		// 식단 가지고 있는지 확인
 		model.addAttribute("hasDiet",!dvoList.isEmpty());
-		System.out.println(!dvoList.isEmpty());
 		return "/board/writeBoard";
 	}
 	
@@ -111,7 +107,6 @@ public class BoardController {
 	@PostMapping("/writeBoard")
 	public String register(BoardVO bvo) {
 		log.info("Register...." + bvo);
-		System.out.println("== 게시글 내용 (sysout): " + bvo.getContent());
 		wbService.register(bvo);
 		return "redirect:/boardList";
 	}
@@ -145,9 +140,7 @@ public class BoardController {
 	            dietDetailHtml = "<div id=\"dietDetail\">" + cleanedHtml + "</div>";
 	        }
 	    }
-	    System.out.println(dietDetailHtml);
 	    model.addAttribute("dietContent", dietDetailHtml);
-		
 		
 		// 1. 쿠키로 조회 체크
 	    String cookieName = "viewed_bno_" + bno;
@@ -194,7 +187,6 @@ public class BoardController {
 	// 게시글 수정
 	@PostMapping("/updateBoard")
 	public String updatePost(BoardVO bvo ) {
-		log.info("updatePost...." );
 		bService.updatePost(bvo);
 		return "redirect:/boardList";
 	}
@@ -204,7 +196,6 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("/boardView/love")
 	public int boardViewLove(Model model, @RequestBody LikeVO lvo) {	
-		System.out.println("love");
 		if(bService.increaseLove(lvo) > 0) {
 			model.addAttribute("isLike", true);
 			model.addAttribute("bvDTO",	bService.getPost(lvo.getBno())); 
@@ -218,7 +209,6 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("/boardView/unlove")
 	public int boardViewUnLove(Model model, @RequestBody LikeVO lvo) {	
-		System.out.println("unlove");
 		if(bService.decreaseLove(lvo) > 0) {	
 			model.addAttribute("isLike", false);
 			model.addAttribute("bvDTO",	bService.getPost(lvo.getBno())); 
@@ -229,7 +219,6 @@ public class BoardController {
 	
 	@GetMapping("/updateBoard")
 	public String updateBoard(Authentication authentication, int bno, Model model) {
-		log.info("writePost .... ");		
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		BoardViewDTO bvdto = wbService.getBoard(bno);
 		List<DietVO> dvoList = wbService.getDietTitle(customUser.getUno());

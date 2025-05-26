@@ -1,6 +1,6 @@
 /* 기본 설정 */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
   margin: 0;
   background-color: #f4f8f4;
   color: #333;
@@ -218,7 +218,6 @@ body {
   border: none;
   outline: none;
   font-size: 0.95rem;
-  font-family: inherit;
   height: 100%;
   padding: 0 12px;
   box-sizing: border-box;

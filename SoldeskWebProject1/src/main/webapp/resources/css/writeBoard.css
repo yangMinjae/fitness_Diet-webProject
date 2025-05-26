@@ -1,5 +1,12 @@
-.writeBoard-body {
+html, body {
+  margin: 0;
+  padding: 0;
+  min-width: 1280px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
   background-color: #f4f8f4;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
   color: #333;
 }
 
