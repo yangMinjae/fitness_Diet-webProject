@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   divs.forEach(div => {
 	  
 	const text = div.textContent.trim();  // 혹시 모를 공백 제거
-    const numbers = text.match(/\d+/g)?.map(Number);  // [45, 120, 39] 같은 숫자 배열 추출
+    const numbers = text.match(/\d+/g)?.map(Number);  // [45, 120, 39] 같은 숫자
+														// 배열 추출
     if (numbers && numbers.length === 3) {
       const kcal = numbers[0] * 4 + numbers[1] * 4 + numbers[2] * 9;
       div.textContent = `${kcal}kcal ${text}`;
@@ -97,7 +98,9 @@ function fetchDiet(formA){
     }
   })
   .then(res=>res.text())
-  .then(text=>)
+  .then(text => {
+    console.log("응답:", text);  // ✅ 이 부분에서 실제로 뭔가 처리하거나 콘솔로 출력
+  })
   .catch(err=>console.log(err));
 }
 function initSurveyResult(){
@@ -106,6 +109,10 @@ function initSurveyResult(){
 }
 
 function setDietTbl(){
-  initSurveyResult();
-  fetchDiet(f);
+	if (!sessionStorage.getItem('surveySaved')) {
+
+		  initSurveyResult();
+		  fetchDiet(f);
+		  sessionStorage.setItem('surveySaved', 'true');
+		}
 }

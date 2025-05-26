@@ -25,9 +25,9 @@
 				type="hidden" name="cDTO.nGoal" value="">
 			<section>
 				<label>키 (cm)  <input type="number" name="cDTO.height"
-					min="0" required />
+					min="120" max="250" required />
 				</label> <label>체중 (kg)  <input type="number" name="cDTO.weight"
-					min="0" required />
+					min="30" max="300" required />
 				</label> <label>나이  <input type="number" name="cDTO.age" min="15"
 					max="99" required />
 				</label> <label>성별  <select name="cDTO.gender">
