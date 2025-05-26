@@ -244,7 +244,6 @@ document.addEventListener('keydown', (e) => {
 			if (typeof initMailModalContent === 'function') {
 				initMailModalContent();
 			}
-			sendModal.classList.remove('show');
 		}
 	}
 });

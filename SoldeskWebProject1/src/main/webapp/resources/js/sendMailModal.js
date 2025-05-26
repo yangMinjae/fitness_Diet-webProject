@@ -1,10 +1,15 @@
 	document.addEventListener('click', (e) =>{
 			
 		// 닫기 버튼
-		if (e.target.classList.contains('close-btn')) {
-			initMailModalContent();
-			document.getElementById('sendmailModal').classList.remove('show');
-			document.body.classList.remove('modal-open'); // ✅ 스크롤 차단 해제
+		if (e.target.classList.contains('close-btn') && document.getElementById('sendmailModal').classList.contains('show')) {
+			if (confirm("작성 중인 내용은 저장되지 않습니다. 종료하시겠습니까?")) {
+				initMailModalContent();
+				document.getElementById('sendmailModal').classList.remove('show');
+				document.body.classList.remove('modal-open'); // ✅ 스크롤 차단 해제
+				return;
+			}else{
+				return;
+			}
 		};
 		
 		// 보내기 버튼
@@ -49,8 +54,13 @@
 
 //esc 누를 시 모달 스타일 제거 (sendmailModal이 열려 있을 시에만)
 document.addEventListener("keydown", (e) => {
-	if (e.key === "Escape"){
-	document.getElementById('sendmailModal').classList.remove('show')
+	if (e.key === "Escape" && document.getElementById('sendmailModal').classList.contains('show')){
+		if (confirm("작성 중인 내용은 저장되지 않습니다. 종료하시겠습니까?")) {
+			document.getElementById('sendmailModal').classList.remove('show');
+			return;
+		}else{
+			return;
+		}
 	}
 });
 
