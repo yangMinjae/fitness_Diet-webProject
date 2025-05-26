@@ -1,0 +1,240 @@
+/* 공통 폰트/배경 */
+body {
+  margin: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #f4f8f4;
+  color: #333;
+}
+
+html, body {
+  padding: 0;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* 전체 컨테이너 */
+#mainBlock {
+  width: 90%;
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* 상세 블록 */
+.details {
+  background-color: #f9fef9;
+  border: 2px solid #cceccc;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 36px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.details:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(100, 200, 140, 0.15);
+}
+
+.details * {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* 제목들 */
+.subheadings {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #4d5a63;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.partitionTitles {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #6ac56d;
+  margin: 10px 0;
+}
+
+/* 리스트 */
+.schedule {
+  list-style-type: "🏋️ ";
+  padding-left: 28px;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #444;
+}
+
+#advice {
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #e6f9ff;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 6px solid #00aaff;
+  color: #333;
+}
+
+/* 식단 관련 요소 */
+#dietTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff884d;
+  margin-bottom: 20px;
+}
+
+.dietName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e34f4f;
+  margin-top: 20px;
+}
+
+.dietNutrition {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.dietIngredient {
+  list-style-type: "🥗 ";
+  padding-left: 25px;
+  margin-bottom: 10px;
+}
+
+.dietRecipe {
+  list-style-type: decimal;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.cheatingMeal {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+div.reason {
+  margin-bottom: 20px;
+}
+
+/* PDF 출력용 숨김 */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .details {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .details * {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #printBtn, #homeBtn {
+    display: none !important;
+  }
+}
+
+/* ====================== */
+/* 🧩 모달 전용 스타일 */
+/* ====================== */
+
+#surveyModal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#surveyModal.show {
+  display: flex;
+}
+
+#surveyModal .surveyModal-content {
+  position: relative;
+  background-color: #f9fef9;
+  width: 90%;
+  max-width: 880px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 32px 24px 40px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+}
+
+/* 닫기 버튼 */
+#surveyModal .closeModal-button {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  z-index: 11;
+}
+
+/* 모달 내 버튼 */
+#surveyModal #printBtn{
+  position: absolute;
+  top: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #6ac56d;
+  color: white;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#surveyModal #printBtn { right: 72px; }
+
+#surveyModal #printBtn:hover {
+  background-color: #57a759;
+}
+
+/* 모달 외부에서는 fixed 버튼 */
+body #printBtn{
+  position: fixed;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #6ac56d;
+  color: white;
+  font-size: 22px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+body #printBtn {
+  right: 30px;
+}

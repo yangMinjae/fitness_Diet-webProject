@@ -35,15 +35,23 @@ dietBtn.addEventListener('click', () => {
         dietPanel.classList.add('show');
       }, 10);
       setTimeout(() => {
-          const rows = dietPanel.querySelectorAll('tbody#dietList tr:not(.empty)');
-          rows.forEach(row => {
-            row.addEventListener('click', () => {
-              const title = row.children[0]?.textContent || '제목 없음';
-              const dno = row.querySelector('td[dno]')?.getAttribute('dno');
-              // 원하는 추가 동작 넣기 가능
-            });
-          });
-        }, 50); // DOM 준비된 후 바인딩
+    	  const rows = dietPanel.querySelectorAll('tbody#dietList tr:not(.empty)');
+    	  rows.forEach(row => {
+    	    row.addEventListener('click', () => {
+    	      const title = row.children[0]?.textContent || '제목 없음';
+    	      const content = row.querySelector('td[content]')?.getAttribute('content') || '';
+    	      
+    	      // .content 내부에 값 채워넣기
+    	      const contentDiv = document.querySelector('.content');
+    	      contentDiv.innerHTML = `
+    	        <p>${content}</p>
+    	      `;
+
+    	      document.querySelector('#surveyModal').classList.add('show');
+    	      document.body.classList.add('modal-open'); // 스크롤 막기
+    	    });
+    	  });
+    	}, 50);
     } else {
       dietPanel.classList.remove('show');
       setTimeout(() => {

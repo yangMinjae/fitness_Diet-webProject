@@ -9,6 +9,7 @@
 </head>
 <body>
 	<jsp:include page="../layout/header.jsp" />
+	<jsp:include page="../survey/surveyPageModal.jsp" />
 	<div class="container">
 		<!-- 왼쪽 리모컨 스타일 사이드바 -->
 		<div class="floating-sidebar">
@@ -102,7 +103,7 @@
 								<tbody id="dietList">
 									<c:forEach var="diet" items="${dList}">
 										<tr class="myTooltip-wrapper" data-tooltip="${diet.title}">
-											<td dno="${diet.dno}">${diet.title}</td>
+											<td content='${diet.content}'>${diet.title}</td>
 											<td>${diet.tag}</td>
 											<td>${diet.regDate}</td>
 										</tr>
