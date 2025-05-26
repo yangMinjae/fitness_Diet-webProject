@@ -48,7 +48,15 @@
 		    <div class="mate-finding-item">
 		      <img src="/resources/img/matecat.jpg" alt="운동메이트 찾기 이미지" class="mate-image left">
 		      <div class="mate-text">
-		        <h3>운동메이트 찾기</h3>
+		        <h3 class="section-title-with-icon">운동메이트 찾기
+	         	 <span class="circle-icon tooltip-wrapper">
+				   <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+				     <circle cx="14" cy="14" r="14" fill="#a6e0a2" id="matePageGo"/>
+				     <path d="M12 9L17 14L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				   </svg>
+				 <span class="custom-tooltip">운동메이트 찾기 바로가기</span> <!-- 🟡 툴팁 요소 -->
+				 </span>
+				</h3>
 		        <p>이 기능은 사용자의 사는 지역, 선호하는 운동, 나이대에 맞춰 최적의 운동 메이트를 찾아주는 서비스입니다. <br>
 		        	운동을 함께 할 친구를 찾고 싶다면, 이 기능을 통해 적합한 파트너를 만날 수 있습니다.</p>
 		      </div>
@@ -60,7 +68,15 @@
 		  <!-- 게시판 설명 2열 레이아웃 -->
 		  <div class="board-layout">
 		    <div class="board-left">
-	          <h3>게시판</h3>
+	          <h3 class="section-title-with-icon">게시판
+	          	<span class="circle-icon tooltip-wrapper">
+				  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+				    <circle cx="14" cy="14" r="14" fill="#a6e0a2" id="boardPageGo"/>
+				    <path d="M12 9L17 14L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				  </svg>
+				  <span class="custom-tooltip">게시판 바로가기</span> <!-- 🟡 툴팁 요소 -->
+				</span>
+	          </h3>
 	          <p>게시판은 운동 목적에 따라 구분되어 있습니다.<br>
 			            각 게시글은 회원들이 제공받은 식단을 토대로 한 운동 결과나 반응을 공유하는 공간입니다.<br>
 			            여러분의 경험을 나누고 다른 사람들의 피드백을 받을 수 있습니다.</p>

@@ -40,3 +40,12 @@ thumbnails.forEach(thumb => {
     mainDesc.innerHTML = thumb.getAttribute('data-desc');
   });
 });
+
+document.getElementById("matePageGo").addEventListener("click", () => {
+	location.href = "/matePage";
+});
+
+document.getElementById("boardPageGo").addEventListener("click", () => {
+	location.href = "/boardList";
+});
+
