@@ -220,6 +220,9 @@ function init() {
 	document.querySelector('input[name="mPwRe"]').classList.remove("input-invalid");
 	document.querySelector('input[name="mPw"]').classList.remove("input-invalid");
 	document.querySelector('input[name="mPw"]').classList.remove("input-verified");
+	idCheckBtn.classList.toggle("show-btn", false);
+	nickCheckBtn.classList.toggle("show-btn", false);
+	emailCheckBtn.classList.toggle("show-btn", false);
 }
 
 // --- 초기화 ---
