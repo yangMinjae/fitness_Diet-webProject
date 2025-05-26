@@ -21,11 +21,21 @@ document.querySelectorAll('button').forEach(btn => {
         break;
       // 목록 페이지로 이동
       case 'boardList-btn':
-        location.href = '/boardList';
+    	  if (confirm("작성 중인 내용은 저장되지 않습니다. 목록으로 돌아가시겠습니까?")) {
+    		  location.href = '/boardList';
+    		  return;
+		}else{
+			return;
+		}
         break;
       // 작성완료
       case 'register-btn':
-        register();
+    	  if (confirm("게시글을 등록하시겠습니까?")) {
+    		  register();
+    		  return;
+		}else{
+			return;
+		}
         break;
     }
   })
@@ -70,7 +80,6 @@ document.getElementById("diet").addEventListener("change", function () {
 function register() {
   const userHtml = document.getElementById('content').innerHTML;
   document.getElementById('hiddenContent').value = userHtml;
-
   
   if (!f.diet.value) {
 	    alert("식단을 선택해주세요");
@@ -80,13 +89,16 @@ function register() {
 	  	alert("제목을 입력해주세요");
 	  	return;
   }
-  
+  if (!f.content.value) {
+	  alert("본문을 입력해주세요");
+	  return;
+  }
  if(f.bno != null){
 	 f.action = '/board/updateBoard';
  }else{
 	 f.action = '/board/writeBoard';
  }
-  f.submit();
+//  f.submit();
 }
 
 // 이미지 업로드 버튼 클릭시 파일 탐색기 연결

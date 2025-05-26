@@ -16,7 +16,7 @@
 				return;
 			}
 			
-			if (confirm("쪽지를 보내시겠습니까?")) {
+			if (confirm("메일을 보내시겠습니까?")) {
 				fetch(`/mail/sendMsg?selectUno=${sendSelectUno}&myUno=${snedMyUno}&content=${content}`, {
 					method : 'POST',
 					headers : {'Content-Type': ' application/json'}

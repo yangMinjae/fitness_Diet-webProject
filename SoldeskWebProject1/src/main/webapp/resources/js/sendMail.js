@@ -19,11 +19,21 @@ document.querySelectorAll('button').forEach(button=>{
 		switch(name){
 			// 전송 버튼
 			case 'btn send' :
-				sendMail();
+				if (confirm("메일을 보내시겠습니까?")) {
+					sendMail();
+					return;
+				}else{
+					return;
+				}
 				break;
 			// 목록 버튼
 			case 'btn close' :
-				location.href = '/mailList'
+				if (confirm("작성 중인 내용은 저장되지 않습니다. 목록으로 돌아가시겠습니까?")) {
+					location.href = '/mailList'
+					return;
+				}else {
+					return;
+				}
 				break;
 		}
 	});
