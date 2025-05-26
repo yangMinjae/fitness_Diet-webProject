@@ -27,7 +27,7 @@ html, body {
   margin-bottom: 32px;
 }
 
-label {
+.writeBoardLabel{
   display: block;
   margin-bottom: 12px;
   font-weight: 600;
