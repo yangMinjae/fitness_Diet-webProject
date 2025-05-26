@@ -27,10 +27,14 @@ function getList(type) { 					// 매개변수에 따라 즐겨찾기, follow, fo
 	  fetch(url)
 	    .then(res => res.json())
 	    .then(json => {
-	    	if(json.length == 0)
-	    		return;
-	    	
 	      let str = '';
+	      
+	    	if(json.length == 0){
+	    		str = `<tr><td colspan=4>대상이 없습니다.</td></tr>`;
+	    	}else{
+	  	      str = '';
+	    	}
+	    	
 	      json.forEach(ele => {
 			let result = ele.fvo.path.substring(ele.fvo.path.indexOf("\\profile"))+'\\'+ele.fvo.uuid+'_'+ele.fvo.fileName;
 			result = result.replace(/\\/g, "/");
@@ -211,3 +215,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	    });
 	  });
 });
+
+document.querySelectorAll('.clear-btn').forEach(button => {
+	  const targetInputId = button.dataset.target;
+	  const input = document.getElementById(targetInputId);
+
+	  if (input) {
+	    button.addEventListener('click', () => {
+	      input.value = '';
+	      input.dispatchEvent(new Event('input')); // 필터링 함수 재실행
+	      input.focus(); // UX: 커서 다시 표시
+	    });
+	  }
+	});
