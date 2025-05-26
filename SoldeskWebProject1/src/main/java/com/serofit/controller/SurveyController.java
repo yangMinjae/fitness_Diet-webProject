@@ -46,6 +46,7 @@ public class SurveyController {
 		session.setAttribute("goal", ValTagEnum.toLabel(dDTO.getcDTO().getGoal()));
 		return "ok";
 	}
+	
 	@GetMapping("/surveyResultPage")
 	public String gotoSurveyResultPage(HttpSession session, Model model) {
 		model.addAttribute("result",session.getAttribute("result"));

@@ -62,7 +62,7 @@ if (document.getElementById('mateToggle') !== null) {
         const self = this;
 
         if (isChecked) {
-            const res = await fetch('/getCountDite');
+            const res = await fetch('/getCountDiet');
             const result = await res.text();
 
             if (result === 'false') {

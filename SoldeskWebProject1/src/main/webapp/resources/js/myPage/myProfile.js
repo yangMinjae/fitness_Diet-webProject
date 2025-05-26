@@ -15,12 +15,62 @@ let editProfile = document.querySelector('#editProfile');
 let searchArea = document.querySelector('#searchArea');
 let f = document.forms[0];
 
-let firstPressed = true;       							// 프로필 수정 관련 제어를 위한 변수
+let firstPressed = true;   
 
 initProfile();                   						// 초기셋팅 : input 태그들, 이미지 버튼 비활성화
                           								// db에서 비동기로 유저프로필 및 메이트 데이터 가져와서 화면에 표시
 f.searchAreaBtn.addEventListener("click", function() {
 	openModal();
+});
+
+const dietBtn = document.getElementById('dietButton');
+const dietPanel = document.getElementById('dietPanel');
+
+dietBtn.addEventListener('click', () => {
+    const isOpen = dietPanel.classList.contains('show');
+
+    if (!isOpen) {
+      dietPanel.classList.remove('hidden');
+      setTimeout(() => {
+        dietPanel.classList.add('show');
+      }, 10);
+      setTimeout(() => {
+          const rows = dietPanel.querySelectorAll('tbody#dietList tr:not(.empty)');
+          rows.forEach(row => {
+            row.addEventListener('click', () => {
+              const title = row.children[0]?.textContent || '제목 없음';
+              const dno = row.querySelector('td[dno]')?.getAttribute('dno');
+              console.log(`선택한 식단: ${title}, ${dno}`);
+              // 원하는 추가 동작 넣기 가능
+            });
+          });
+        }, 50); // DOM 준비된 후 바인딩
+    } else {
+      dietPanel.classList.remove('show');
+      setTimeout(() => {
+        dietPanel.classList.add('hidden');
+      }, 300);
+    }
+ });
+
+document.addEventListener('DOMContentLoaded', () => {
+	  const tooltip = document.getElementById('global-tooltip');
+
+	  document.querySelectorAll('.myTooltip-wrapper').forEach(wrapper => {
+	    wrapper.addEventListener('mouseenter', (e) => {
+	      const rect = wrapper.getBoundingClientRect();
+	      tooltip.textContent = wrapper.dataset.tooltip;
+	      tooltip.style.top = `${rect.bottom + window.scrollY - 65}px`;
+	      tooltip.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
+	      tooltip.style.opacity = '1';
+	      tooltip.style.visibility = 'visible';
+	    });
+
+	    wrapper.addEventListener('mouseleave', () => {
+	      tooltip.style.opacity = '0';
+	      tooltip.style.visibility = 'hidden';
+	    });
+	  });
 });
 
 document.querySelectorAll('.edit-button-wrapper button')

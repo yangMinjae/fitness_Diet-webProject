@@ -76,6 +76,7 @@ body {
 
 /* 프로필 섹션 */
 .profile-section {
+  position: relative;
   background-color: #f2fdf2;
   padding: 40px;
   border-radius: 24px;
@@ -93,6 +94,124 @@ body {
   margin-bottom: 24px;
   border-left: 6px solid #a0d3a0;
   text-align: center;
+}
+
+.diet-button {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 6px 0 0 6px;
+    font-size: 14px;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    cursor: pointer;
+    z-index: 10;
+    line-height: 1.2;
+    height: 90px;
+}
+
+.diet-button:hover {
+  background-color: #45a049;
+  color: #000; /* ✅ 글자 색을 검정으로 */
+}
+
+.diet-panel {
+  position: absolute;
+  top: 20px;
+  left: 100%; /* 오른쪽 옆으로 붙이기 */
+  width: 400px;
+  height: 400px;
+  background-color: #f2fdf2;
+  padding: 28px 24px 28px 32px; /* ✔️ 패딩 여유 줘서 스크롤 튀어나오지 않도록 */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  overflow: hidden; /* 스크롤바가 테두리를 넘지 않도록 설정 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+  scrollbar-width: thin;
+  scrollbar-color: #90caa3 #e6f5ec;
+  border: 1px solid #a9d8b9;
+  clip-path: inset(0 round 0px 16px 16px 16px); /* 좌상 제외하고 라운드 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.diet-panel.show {
+  transform: scaleX(1);
+}
+
+/* 스크롤바 스타일 Webkit */
+.diet-panel::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.diet-panel::-webkit-scrollbar-track {
+  background: #e6f5ec;
+  border-radius: 10px;
+}
+
+.diet-panel::-webkit-scrollbar-thumb {
+  background-color: #90caa3;
+  border-radius: 10px;
+  border: 2px solid #e6f5ec;
+  min-height: 40px; /* thumb의 최소 높이 설정 */
+}
+
+.diet-panel::-webkit-scrollbar-thumb:hover {
+  background-color: #72b789;
+}
+
+.diet-panel h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.diet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 10px 0;
+  table-layout: fixed; /* ✅ column width 균일 & overflow 방지 */
+}
+
+.diet-table th,
+.diet-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td {
+  position: relative;
+}
+
+.diet-table th {
+  background-color: #d3f2d3;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.diet-table tr:hover:not(.empty) {
+  background-color: #e6f5ec;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.diet-table .empty {
+  text-align: center;
+  color: #888;
+  font-style: italic;
 }
 
 .profile-box {
@@ -559,4 +678,45 @@ textarea,
   color: #444;
   line-height: 1.5;
   box-sizing: border-box;
+}
+
+/* 툴팁 부모 셀 */
+.tooltip-cell {
+  position: relative;      /* 기준 요소로 만듦 */
+  overflow: visible;       /* 툴팁이 셀 밖으로 나올 수 있게 */
+  z-index: 1;              /* 다른 tr 요소 위에 오게 */
+}
+
+/* 툴팁 박스 */
+.myCustom-tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  z-index: 9999;
+}
+
+/* 툴팁 꼬리 */
+.myCustom-tooltip::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}
+
+/* 마우스 호버 시 보이기 */
+.tooltip-cell:hover .myCustom-tooltip {
+  opacity: 1;
+  visibility: visible;
 }

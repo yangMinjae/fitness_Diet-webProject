@@ -31,7 +31,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		        String redirectUrl = savedRequest.getRedirectUrl();
 
 		        if (redirectUrl != null) {
-		        	if(redirectUrl.contains("/header/data") || redirectUrl.contains("/updateMateVisibility?visible")) {
+		        	if(redirectUrl.contains("/header/data") || redirectUrl.contains("/updateMateVisibility?visible")
+		        		|| redirectUrl.contains("/login")) {
 			            response.sendRedirect("/");
 		        	}
 		        } else {

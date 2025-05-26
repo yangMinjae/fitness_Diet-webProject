@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.serofit.domain.DietVO;
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MypageProfileDTO;
 import com.serofit.domain.ProfileDTO;
@@ -58,5 +59,8 @@ public interface MyPageService {
 	
 	// 즐겨찾기 해제
 	public boolean removeFromFav(FollowVO fvo);
+	
+	// 식단 목록 가져오기
+	public List<DietVO> getDietList(int uno);
 	
 }

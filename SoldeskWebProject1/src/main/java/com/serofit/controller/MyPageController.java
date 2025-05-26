@@ -121,7 +121,6 @@ public class MyPageController {
 	
 	@GetMapping("/profileView")
 	public String getProfileView(int uno) {
-		System.out.println("ininin" + uno);
 		return "/user/profileView";
 	}
 }

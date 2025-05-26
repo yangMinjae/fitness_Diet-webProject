@@ -138,9 +138,7 @@ document.getElementById("surveyForm").addEventListener("submit", function (e) {
 	}
 	
 	const selectedSupplements = formData.getAll('cDTO.supplements');
-	selectedSupplements.forEach(function(supplement) {
-		console.log(supplement);
-	})
+	
 	switch(data['cDTO.goal']){
 		// 다이어터 데이터
 		case '다이어트' :
@@ -360,16 +358,7 @@ function hideLoadingModal() {
   document.getElementById("loadingModal").style.display = "none";
 }
 
-function fetchFunc(f,param){
-	const popup = window.open("/survey/surveyResultPage", "_blank");
-	
-	if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-		  alert("팝업이 차단되어 안내를 띄울 수 없습니다. 브라우저 설정을 확인해주세요.");		  
-		  return;
-	}else{
-		popup.close();
-	}
-	
+function fetchFunc(f,param){		
 	showLoadingModal();
 	
 	const sendData = Object.fromEntries(f.entries());

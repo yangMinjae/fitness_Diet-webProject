@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.serofit.domain.BoardVO;
+import com.serofit.domain.DietVO;
 import com.serofit.domain.FileVO;
 import com.serofit.domain.FollowVO;
 import com.serofit.domain.MateVO;
@@ -17,6 +18,7 @@ import com.serofit.domain.ProfileDTO;
 import com.serofit.domain.ProfileModalDTO;
 import com.serofit.domain.UProfileVO;
 import com.serofit.mapper.BoardMapper;
+import com.serofit.mapper.DietMapper;
 import com.serofit.mapper.FileMapper;
 import com.serofit.mapper.FollowMapper;
 import com.serofit.mapper.MateMapper;
@@ -46,6 +48,9 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Autowired
 	BoardMapper bMapper;
+	
+	@Autowired
+	DietMapper dMapper;
 	
 	// 유저 프로필 사진/닉네임 가져오기
 	@Override
@@ -217,4 +222,8 @@ public class MyPageServiceImpl implements MyPageService{
 		return result!=0 ? true : false;
 	}
 	
+	@Override
+	public List<DietVO> getDietList(int uno) {		
+		return dMapper.selectDietByUno(uno);
+	}
 }

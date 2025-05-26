@@ -88,9 +88,11 @@ public class MainController {
 	// 마이페이지 이동
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myPage")
-	public String showMyPage() {
+	public String showMyPage(Model model, Authentication authentication) {
 		log.info("....forwarding to myPage....");
+		CustomUser user = (CustomUser) authentication.getPrincipal();		
 		
+		model.addAttribute("dList", mypService.getDietList(user.getUno()));
 		return "/user/myPage";
 	}
 	
@@ -170,14 +172,13 @@ public class MainController {
 			}
 		}
 	}
-	
-	// 운동 메이트 동의
-		@PreAuthorize("isAuthenticated()")
-		@GetMapping("/getCountDite")
-		@ResponseBody
-		public String getCountDite(Authentication authentication) {
-			CustomUser customUser = (CustomUser) authentication.getPrincipal();
-			
-			return mpService.getCountDiet(customUser.getUno());
-		}
+
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/getCountDiet")
+	@ResponseBody
+	public String getCountDiet(Authentication authentication) {
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		
+		return mpService.getCountDiet(customUser.getUno());
+	}
 }
