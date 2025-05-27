@@ -98,7 +98,7 @@ function register() {
  }else{
 	 f.action = '/board/writeBoard';
  }
-//  f.submit();
+  f.submit();
 }
 
 // 이미지 업로드 버튼 클릭시 파일 탐색기 연결

@@ -23,6 +23,7 @@ import com.serofit.domain.ProfileDTO;
 import com.serofit.domain.ProfileModalDTO;
 import com.serofit.security.domain.CustomUser;
 import com.serofit.service.FileUploadService;
+import com.serofit.service.MatePageService;
 import com.serofit.service.MyPageService;
 
 import lombok.extern.log4j.Log4j;
@@ -33,6 +34,9 @@ import lombok.extern.log4j.Log4j;
 public class MyPageController {
 	@Autowired
 	MyPageService mService;
+	
+	@Autowired
+	MatePageService mpService;
 	
 	@Autowired
 	FileUploadService fService;
@@ -51,6 +55,13 @@ public class MyPageController {
 		ProfileModalDTO pmDTO = mService.getProfileModalInfo(uno);
 		
 		return pmDTO;
+	}
+	
+	@ResponseBody
+	@GetMapping(value = "/checkIfFollow", produces = MediaType.APPLICATION_JSON_VALUE)
+	public int checkIfFollow(@RequestParam("selectUno") int selectUno, @RequestParam("myUno") int uno) {
+		
+		return mpService.checkIfFollow(selectUno, uno);
 	}
 	
 	@PostMapping("/updateProfile")
