@@ -4,6 +4,7 @@ const profilemodal = document.getElementById("profileModal");
 //이전 class 상태 저장용
 let previousClassList = [...profilemodal.classList];
 let selectUno;
+let currentMyUno;
 
 // 게시글 클릭 시 해당 ID로 이동
 
@@ -20,6 +21,7 @@ const observer = new MutationObserver((mutationsList) => {
 
          if (added.includes("show")) {        	 
              getProfile();
+             getFollow()
          }         
          
          previousClassList = currentClassList;
@@ -36,6 +38,10 @@ function setSelectUno(uno) {
 	selectUno = uno;
 }
 
+function setCurrentMyUno(uno){
+	currentMyUno = uno;
+}
+
 function getProfile() {
 	if(!selectUno)
 		return;
@@ -47,6 +53,68 @@ function getProfile() {
 	  })
 	  .catch(err=>console.log(err));
 }
+
+function getFollow(){
+	if(!selectUno || !currentMyUno || selectUno == currentMyUno)
+		return;
+	
+	fetch(`/myPage/checkIfFollow?selectUno=${selectUno}&myUno=${currentMyUno}`)
+	  .then(res=>res.json())
+	  .then(json=>{		  
+		  const existingBtn = document.getElementById('customBtn');
+		  
+		  if (existingBtn) {
+		    existingBtn.remove(); // 중복 방지용
+		  }		  
+		  
+		  const profileImg = document.querySelector('.profile-photo');
+		  const customBtn = document.createElement('button');
+
+		  // 버튼 기본 속성 설정
+		  customBtn.type = 'button';
+		  customBtn.id = 'customBtn';
+		  customBtn.textContent = json > 0 ? '팔로잉' : '팔로우';
+		  customBtn.className = json > 0 ? 'following-btn' : 'follow-btn';
+
+		  // 삽입 위치: 이미지 바로 아래
+		  profileImg.insertAdjacentElement('afterend', customBtn);
+		  
+		  customBtn.onclick = () => {
+			  handleFollowToggle(customBtn.textContent, customBtn, currentMyUno, selectUno);
+		  };
+	  })
+	  .catch(err=>console.log(err));
+}
+
+function handleFollowToggle(status, buttonEl, myUno, targetUno) {
+	  const isFollowing = status === '팔로잉';
+	  const url = isFollowing ? '/mate/unfollow' : '/mate/follow';
+
+	  const formData = new URLSearchParams();
+	  formData.append('uno', targetUno);     // 상대방
+	  formData.append('userUno', myUno);     // 나
+
+	  fetch(url, {
+	    method: 'POST',
+	    headers: {
+	      'Content-Type': 'application/x-www-form-urlencoded'
+	    },
+	    body: formData
+	  })
+	    .then(res => res.text())
+	    .then(result => {
+	    	
+	      if (!result) return alert('요청 실패');
+
+	      // 상태 반전
+	      const nextStatus = isFollowing ? '팔로우' : '팔로잉';
+	      const nextClass = isFollowing ? 'follow-btn' : 'following-btn';
+
+	      buttonEl.textContent = nextStatus;
+	      buttonEl.className = nextClass;
+	    })
+	    .catch(err => console.error('요청 실패:', err));
+	}
 
 function renderProfileModalInfo(data) {
 	  // 프로필 이미지

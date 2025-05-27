@@ -112,7 +112,7 @@ function renderPage(page) {
 	      <div class="profile-icon"><img src="${mvo.imgPath}" alt="프로필" /></div>
 	      <div class="mail-info">
 	        <span class="sender">${mvo.nickname}</span>
-	        <span class="preview">${mvo.preview}</span>
+	        <span class="preview">${mvo.content}</span>
 	        <span class="regdate">${formatDateToYMD(mvo.regdate)}</span>
 	      </div>
 	    </li>
