@@ -64,37 +64,6 @@
   border: 2px solid #6ac56d;
 }
 
-/* 이미지를 감싸고 버튼을 아래로 배치할 수 있도록 세팅 */
-.photo-button-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px; /* 이미지와 버튼 사이 간격 */
-}
-
-/* 팔로우 버튼 공통 스타일 */
-.follow-btn,
-.following-btn {
-  padding: 6px 16px;
-  font-size: 0.95rem;
-  border-radius: 20px;
-  border: 1px solid #6ac56d;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-/* 팔로우 상태일 때 */
-.follow-btn {
-  background-color: white;
-  color: #6ac56d;
-}
-
-/* 팔로잉 상태일 때 */
-.following-btn {
-  background-color: #6ac56d;
-  color: white;
-}
-
 .profile-info {
   flex: 1;
 }

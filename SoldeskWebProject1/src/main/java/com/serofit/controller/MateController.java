@@ -43,7 +43,6 @@ public class MateController {
 	@PostMapping("/unfollow")
 	@ResponseBody
 	public boolean unfollow(int uno, int userUno) {
-		System.out.println("outoutout");
 		FollowVO fvo = new FollowVO(userUno, uno, false);
 		
 		return mpService.unfollow(fvo);
@@ -53,7 +52,6 @@ public class MateController {
 	@PostMapping("/follow")
 	@ResponseBody
 	public boolean follow(int uno, int userUno) {
-		System.out.println("ininin");
 		FollowVO fvo = new FollowVO(userUno, uno, false);
 		
 		return mpService.follow(fvo);

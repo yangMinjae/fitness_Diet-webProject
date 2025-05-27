@@ -46,7 +46,7 @@
 					    data-mno="${mvo.mno}">
 						<div class="mail-info">
 							<span class="sender">${mvo.nickname}</span> 
-							<span class="preview">${mvo.content}</span>
+							<span class="preview">${mvo.preview}</span>
 							<span class="regdate">${mvo.regdate}</span>
 						</div>
 					</li>

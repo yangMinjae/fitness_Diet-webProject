@@ -16,12 +16,12 @@
 			<span class="close">&times;</span>
 
 			<div class="profile-header">
-				<div class="photo-button-wrap"> 
-					<img src="" alt="프로필" class="profile-photo">
-				</div>
+				<img src="" alt="프로필" class="profile-photo">
+
 				<div class="profile-info">
 					<h2 class="up-nickname"></h2>
-					<div class="badges"></div>
+					<div class="badges">
+					</div>
 					<p class="bio"></p>
 					<p class="followers">
 						<i class="fa-solid fa-user-group"></i> 팔로워: <span></span>명

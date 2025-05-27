@@ -17,7 +17,7 @@
 		<!-- 카테고리 선택 -->
 		<form method="post">
 			<div class="form-group">
-				<label class="writeBoardLabel" for="category">식단 선택</label> 
+				<label for="category">식단 선택</label> 
 				<select id="diet" name="diet"
 					<c:if test="${not empty board}">disabled</c:if>>
 					<option value="">식단을 선택하세요</option>
@@ -32,21 +32,21 @@
 
 			<!--  태그 -->
 			<div class="form-group">
-				<label class="writeBoardLabel" for="tag">태그</label> <input type="text" id="tag" name="tag"
+				<label for="tag">태그</label> <input type="text" id="tag" name="tag"
 					placeholder="식단을 선택하면 태그가 정해집니다" readonly
 					value='${board.tag != null ? board.tag : "" }' />
 			</div>
 
 			<!-- 제목 입력 -->
 			<div class="form-group">
-				<label class="writeBoardLabel" for="title">제목 :  </label> <input type="text" id="title"
+				<label for="title">제목 :  </label> <input type="text" id="title"
 					name="title" placeholder="제목을 입력하세요"
 					value='${board.title != null ? board.title : "" }' />
 					<span id="titleCount">0 / 100</span>
 			</div>
 			<!-- 식단 내용 들어가는 곳 -->
 			<div class="form-group">
-				<label class="writeBoardLabel" for="dietContent">식단 내용</label>
+				<label for="dietContent">식단 내용</label>
 				<div class="form-group">
 					<div id="dietContent" name="dietContent" class="content-input" contenteditable="false">
 						<c:out value='${dietContent}' escapeXml="false" />
@@ -55,7 +55,7 @@
 			</div>
 			<!-- 유저가 직접 입력하는 영역 -->
 			<div class="input-group">
-				<label class="writeBoardLabel" for="content">본문 내용</label>
+				<label for="content">본문 내용</label>
 				<div class="form-group">
 					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value='${board.content}' escapeXml="false" /></div>
 				</div>
@@ -74,7 +74,7 @@
 			</div>
 			<!-- 사용법 및 주의사항 입력 -->
 			<div class="form-group">
-  				<label class="writeBoardLabel" for="descriptionBox">사용 방법 설명 및 주의 사항</label>
+  				<label for="descriptionBox">사용 방법 설명 및 주의 사항</label>
  				<div id="descriptionBox" class="readonly-box">☆ 이미지 파일만 업로드 할수 있습니다. <br>☆ 이미지 업로드 버튼 클릭  >  이미지 선택  >  생성된 이미지버튼 클릭<br>☆ 이미지는 키보드커서 위치에 삽입됩니다.<br>☆ 10MB 이상의 이미지를 삽입 시 이미지의 화질이 저하될수 있습니다.</div>
 			</div>
 

@@ -16,7 +16,6 @@ let searchArea = document.querySelector('#searchArea');
 let f = document.forms[0];
 
 let firstPressed = true;   
-let allowDietPanelToggle = true;
 
 initProfile();                   						// 초기셋팅 : input 태그들, 이미지 버튼 비활성화
                           								// db에서 비동기로 유저프로필 및 메이트 데이터 가져와서 화면에 표시
@@ -28,8 +27,6 @@ const dietBtn = document.getElementById('dietButton');
 const dietPanel = document.getElementById('dietPanel');
 
 dietBtn.addEventListener('click', () => {
-	if (!allowDietPanelToggle) return;
-	
     const isOpen = dietPanel.classList.contains('show');
 
     if (!isOpen) {
@@ -88,18 +85,9 @@ document.querySelectorAll('.edit-button-wrapper button')
   ele.addEventListener('click',(e)=>{
     let btnId = e.currentTarget.getAttribute('id');
     if(btnId=='editProfile'){
-    	allowDietPanelToggle = false;
-    	
-    	if(dietPanel.classList.contains('show')){
-    		dietPanel.classList.remove('show');
-            setTimeout(() => {
-              dietPanel.classList.add('hidden');
-            }, 300);
-    	}
-    	
     	handleEditProfile(e);
     }else if(btnId=='cancelEdit'){  					// 취소 버튼을 누를 시
-    	allowDietPanelToggle = true;
+
       initProfile();                       				// input 태그와 img 버튼을 비활성화 시키고
                                     					// 유저의 정보를 db에서 비동기 방식으로 가져와 다시 화면에 뿌려준다.
 

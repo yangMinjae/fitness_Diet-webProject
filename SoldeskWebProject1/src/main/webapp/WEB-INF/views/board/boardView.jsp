@@ -54,10 +54,10 @@
 					<div id="like-wrapper">
 					    <!-- 초기 버튼은 JSP에서 렌더링 -->
 					    <c:if test="${isLike == 'true'}">
-					        <button type="button" class="icon-btn" id="unlike-btn" title="싫어요">❤취소</button>
+					        <button type="button" class="icon-btn" id="unlike-btn" title="싫어요">❤싫어요</button>
 					    </c:if>
 					    <c:if test="${isLike == 'false'}">
-					        <button type="button" class="icon-btn" id="like-btn" title="좋아요">❤추천</button>	
+					        <button type="button" class="icon-btn" id="like-btn" title="좋아요">❤좋아요</button>	
 					    </c:if>
 					</div>	
 				</sec:authorize>			  				  		
