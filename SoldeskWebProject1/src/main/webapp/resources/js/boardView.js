@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	        switch(id){
 	        case "show-profile" :
 	        	setSelectUno(e.currentTarget.dataset.uno);
+	        	setCurrentMyUno(form.uno.value);
 	        	openProfileModal();
 	        	break;
 	        case "send-mail" :
