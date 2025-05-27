@@ -129,12 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	    if (isLiked) {
 	        button.id = 'unlike-btn';
 	        button.title = '싫어요';
-	        button.textContent = '❤싫어요';
+	        button.textContent = '❤취소';
 	        button.addEventListener('click', handleUnLike);
 	    } else {
 	        button.id = 'like-btn';
 	        button.title = '좋아요';
-	        button.textContent = '❤좋아요';
+	        button.textContent = '❤추천';
 	        button.addEventListener('click', handleLike);
 	    }
 	    return button;
