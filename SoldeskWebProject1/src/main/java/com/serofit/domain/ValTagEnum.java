@@ -3,7 +3,7 @@ package com.serofit.domain;
 public enum ValTagEnum {
 	DIET("다이어트", "다이어터"),
     BULK_UP("멸치 탈출", "멸치탈출"),
-    STRENGTH("프로 득근러", "프로 득근러"),
+    STRENGTH("프로 득근러", "프로득근러"),
     HEALTH("건강 유지", "헬스키퍼"),
     MAINTAIN("체중 유지", "유지어터");
 
