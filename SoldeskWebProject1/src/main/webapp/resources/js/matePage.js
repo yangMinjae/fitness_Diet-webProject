@@ -277,8 +277,6 @@ function closeScrollGuideOverlay() {
 			const delta = e.deltaY;
 			const step = scrollStep();
 
-			const isAtEnd = Math.ceil(section.scrollLeft + section.clientWidth) >= section.scrollWidth;
-
 			section.scrollBy({
 				left: delta > 0 ? step : -step,
 				behavior: "smooth"
