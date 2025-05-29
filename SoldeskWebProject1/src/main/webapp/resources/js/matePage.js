@@ -253,7 +253,6 @@ function closeScrollGuideOverlay() {
 
 //가로 스크롤 바인딩
 	const scrollSections = document.querySelectorAll(".mate-scroll-section");
-	const scrollEndOverlay = document.getElementById("scrollEndOverlay");
 
 	scrollSections.forEach(section => {
 		let lastWheelTime = 0;
@@ -284,28 +283,7 @@ function closeScrollGuideOverlay() {
 				left: delta > 0 ? step : -step,
 				behavior: "smooth"
 			});
-
-			// 끝에 도달하면 안내 표시
-			if (delta > 0 && isAtEnd && scrollEndOverlay) {
-				scrollEndOverlay.classList.remove("hide");
-				scrollEndOverlay.classList.add("show");
-
-				setTimeout(() => {
-					scrollEndOverlay.classList.remove("show");
-					scrollEndOverlay.classList.add("hide");
-				}, 1000);
-			}
 		}, { passive: false });
-
-		// 마우스 위치에 따라 방향 힌트 표시 (좌/우)
-		section.addEventListener("mousemove", (e) => {
-			const rect = section.getBoundingClientRect();
-			const x = e.clientX - rect.left;
-			const width = rect.width;
-
-			section.classList.toggle("scroll-left", x < width * 0.25);
-			section.classList.toggle("scroll-right", x > width * 0.75);
-		});
 	});
 
 
