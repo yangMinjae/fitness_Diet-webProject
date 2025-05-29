@@ -209,3 +209,15 @@ textarea:focus {
   background-color: #6ac56d;
   color: white;
 }
+.writeBoardLabel {
+  display: flex;
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center;            /* 수직 정렬 */
+  width: 100%;
+}
+/* 오른쪽 안내 문구 스타일 */
+.limitImageCount {
+  font-size: 0.85em;
+  color: #888;
+  white-space: nowrap; /* 줄바꿈 방지 */
+}

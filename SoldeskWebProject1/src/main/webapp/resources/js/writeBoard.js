@@ -199,9 +199,14 @@ function insertImgAtCursor(imgUrl) {
 
   const contentDiv = document.getElementById('content');
   const userInput = document.getElementById('userContent')
-  
   // content 안에만 이미지 삽입
   if (!contentDiv.contains(range.startContainer)) return;
+
+  const currentImages = contentDiv.querySelectorAll('img.uploadedImg');
+  if (currentImages.length >= 3) {
+    alert('이미지는 최대 3개까지만 삽입할 수 있습니다.');
+    return;
+  }
 
   const img = document.createElement("img");
   img.src = imgUrl;

@@ -39,7 +39,7 @@
 
 			<!-- 제목 입력 -->
 			<div class="form-group">
-				<label class="writeBoardLabel" for="title">제목 :  </label> <input type="text" id="title"
+				<label class="writeBoardLabel" for="title">제목</label> <input type="text" id="title"
 					name="title" placeholder="제목을 입력하세요"
 					value='${board.title != null ? board.title : "" }' />
 					<span id="titleCount">0 / 100</span>
@@ -55,7 +55,9 @@
 			</div>
 			<!-- 유저가 직접 입력하는 영역 -->
 			<div class="input-group">
-				<label class="writeBoardLabel" for="content">본문 내용</label>
+				<label class="writeBoardLabel" for="content">본문 내용
+					<span class="limitImageCount">이미지는 3개까지만 입력할 수 있습니다.</span>
+				</label>
 				<div class="form-group">
 					<div id="content" name="content" class="content-input" contenteditable="true"><c:out value='${board.content}' escapeXml="false" /></div>
 				</div>
